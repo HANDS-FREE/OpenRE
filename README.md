@@ -1,4 +1,4 @@
-# The Open Source Robot Embedded Librarys (OpenRE)  
+# The Open Source Robot Embedded Library (OpenRE)  
 # keywords: moblile robotics , STM32 , c++ , makefiles , ROS 
 ------------------------------------------------------------------------------
 ##1.Introduction
@@ -62,4 +62,4 @@ OpenRE is licensed generally under a permissive 3-clause BSD license. Contributi
             
 ##4. Contact    
 ------------------------------------------------------------------------------
-If you have any problem, or you have some suggestions for this code, please contact WenKe Ma by 315261982@qq.com, thank you very much!      
+If you have any problem, or you have some suggestions for this code, please contact WenKe Ma by 315261982@qq.com, thank you very much!  
