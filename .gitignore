@@ -26,5 +26,6 @@ JLinkLog.txt
 *.hex 
 *.uvguix.mawenke
 *.uvoptx
+*~
 /Tools/*
  
