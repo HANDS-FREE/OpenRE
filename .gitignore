@@ -1,6 +1,8 @@
+*o
+/Tools/*
+*.uvguix.mawenke
+*.uvoptx
 *~
-Tools/*
-*.o 
 *.bin
 *.elf
 *.map 
@@ -23,12 +25,8 @@ Tools/*
 *.d 
 *.axf   
 *.tra 
-*.dep            
+*.dep  
 JLinkLog.txt 
 *.iex 
 *.htm 
 *.sct 
-*.uvguix.mawenke
-*.uvoptx
-
- 
