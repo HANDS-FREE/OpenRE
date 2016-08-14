@@ -1,6 +1,6 @@
 ######################################define project name, board type, and path
 
-BOARD_TYPE		?= CONTROL_UNIT_V1
+BOARD_TYPE		?= CONTROL_UNIT_V2
 PROJECT			=  APP_HF_Wheel_Robot_Beta_$(BOARD_TYPE)
 #####FPU  : ENABLE DISABLE
 FPU_STATE       ?= ENABLE
