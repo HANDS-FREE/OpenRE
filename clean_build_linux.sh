@@ -23,6 +23,5 @@ find ./ -name "*.uvguix.mawenke" | xargs rm -f
 find ./ -name "*.iex" | xargs rm -f
 find ./ -name "*.htm" | xargs rm -f
 find ./ -name "*.sct" | xargs rm -f
-find ./ -name "*.map" | xargs rm -f
 find ./ -name "*~" | xargs rm -f
 
