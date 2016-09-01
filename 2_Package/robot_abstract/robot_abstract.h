@@ -9,7 +9,7 @@
 // 3: 3 universal wheel robot
 // 4: 4 mecanum wheels wheel robot
 
-#define  ROBOT_WHEEL_MODEL    3
+#define  ROBOT_WHEEL_MODEL    2
 
 #if ROBOT_WHEEL_MODEL == 2
 

@@ -45,8 +45,11 @@ OpenRE is licensed generally under a permissive 3-clause BSD license. Contributi
     * run command to install toolchain if you have not config your linux development environment    
       (arm-none-eabi-gcc , opencd , stlink)  : 
         
-            cd OpenRE/  
-            git clone https://github.com/HANDS-FREE/OpenRE-Tools    
+            cd OpenRE/ 
+            mkdir Tools
+            cd Tools/   
+            // clone https://github.com/HANDS-FREE/OpenRE-Tools
+            // get toolchain in baiduyun :   https://pan.baidu.com/s/1jI6TeJG
             sh setev.sh 
             
 ###2.2. A Simple Demo 
@@ -55,7 +58,13 @@ OpenRE is licensed generally under a permissive 3-clause BSD license. Contributi
             cd OpenRE/0_Project/STM32F4DEMO/Template_UCOSIII/linux  
             make    
             make burn   
- 
+
+###2.2. Robot_2WD Project
+    * 
+            cd OpenRE/0_Project/Application/Wheel_Robot_Beta/linux
+            make
+            make burn
+
 ##3. Usage and examples
 ------------------------------------------------------------------------------
  Lots of examples are provided in folder 0_Project and you cdan get some manuals in folder Documentation.s
