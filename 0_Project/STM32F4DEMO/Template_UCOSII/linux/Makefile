@@ -1,7 +1,7 @@
 ######################################define project name, board type, and path
 
 BOARD_TYPE		?= CONTROL_UNIT_V1
-PROJECT			=  stm32f4_Template_UCOSIII_$(BOARD_TYPE)
+PROJECT			=  stm32f4_Template_UCOSII_$(BOARD_TYPE)
 #####FPU  : ENABLE DISABLE
 FPU_STATE       ?= ENABLE
 TOP_PATH        =  ../../../..

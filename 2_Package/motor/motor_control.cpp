@@ -19,7 +19,6 @@
 
 #include "motor_control.h"
 
-
 /***********************************************************************************************************************
 * Function:     float MotorControl::dataLimit(float data , float range)
 *
@@ -146,8 +145,10 @@ void MotorControl::pidSeriesCall(float outside_expect , float outside_measure ,
 ***********************************************************************************************************************/
 float MotorControl::speedControl(float expect_speed , float unit_count)
 {
+    //0.3
+    float filter =  0.3 * (50 * pid_t);
 
-    expect_angle_speed = expect_speed;
+    expect_angle_speed = (1-filter) * measure_angle_speed + filter * expect_speed;
 
     if(motor_simulation_model == 1)
     {

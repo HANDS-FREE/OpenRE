@@ -129,7 +129,7 @@ void HF_PWMOut_Init(TIM_TypeDef* TIMx , uint16_t Prescaler
     else if(TIMx == TIM9)
     {
         pwm_out_data_r.TIM9_PWM_Period = Period;
-        RCC_APB1PeriphClockCmd(RCC_APB2Periph_TIM9,ENABLE);
+        RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM9,ENABLE);
 
         if( GPIO_AF == 0 )
         {

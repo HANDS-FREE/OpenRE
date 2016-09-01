@@ -89,7 +89,6 @@ void systemInit(void)
     printf("app start \r\n");
 }
 
-
 int main(void)
 {
     OS_ERR err;

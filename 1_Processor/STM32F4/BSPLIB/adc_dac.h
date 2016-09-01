@@ -7,7 +7,7 @@ extern "C" {
 
 #include "stm32f4xx.h"
 
-void HF_ADC_Moder_Init(uint16_t hf_adc_channel , uint8_t adc_num);
+void HF_ADC_Moder_Init(uint16_t hf_adc_channel , uint8_t adc_num , float Reference_Voltage_);
 float HF_Get_ADC_Output(uint8_t n);
 
 void HF_DAC_Init(uint8_t channel_x);

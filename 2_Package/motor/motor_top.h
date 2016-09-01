@@ -17,10 +17,10 @@ class MotorTop
 {
 public:
     MotorTop(){
-        motor[0]=MotorControl();
-        motor[1]=MotorControl();
-        motor[2]=MotorControl();
-        motor[3]=MotorControl();
+        motor1=MotorControl();
+        motor2=MotorControl();
+        motor3=MotorControl();
+        motor4=MotorControl();
         expect_angle_speed_m[0]=0;
         expect_angle_speed_m[1]=0;
         expect_angle_speed_m[2]=0;
@@ -37,12 +37,12 @@ public:
     void motorStateEnable(int8_t motor_id){ motor_enable[motor_id - 1] = 1 ; }  //motor_id = 1~N
     void motorStateDisable(int8_t motor_id){ motor_enable[motor_id - 1] = 0 ; }
     uint8_t getMotorState(int8_t motor_id) const{ return motor_enable[motor_id - 1];}
-    void setMotorAngleSpeed(int8_t motor_id , float speed){   //motor_id = 1~N degree/s
+    void setMotorAngleSpeed(int8_t motor_id , float speed){   //motor_id = 1~N  , degree/s
         expect_angle_speed_m[motor_id - 1] = speed ; }
     float getMotorAngleSpeed(int8_t motor_id) const{
         return expect_angle_speed_m[motor_id - 1]; }
 public:
-    MotorControl motor[4];
+    MotorControl motor1 , motor2 , motor3 ,motor4;
 
 private:
     uint8_t motor_enable_num; //the motor's num of yor need to control

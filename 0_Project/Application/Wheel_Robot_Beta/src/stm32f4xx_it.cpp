@@ -56,7 +56,7 @@ void USART2_IRQHandler(void)
     }
 #if SYSTEM_SUPPORT_OS == 1
     OSIntExit();
-#endif	
+#endif
 }
 
 void USART3_IRQHandler(void)
@@ -86,7 +86,7 @@ void USART3_IRQHandler(void)
 //    {
 //        data = USART_ReceiveData(UART4);
 //        USART_ClearITPendingBit(UART4, USART_IT_RXNE);     //clear interrupt flag
-//    }   
+//    }
 //#if SYSTEM_SUPPORT_OS == 1
 //    OSIntExit();
 //#endif
@@ -102,7 +102,7 @@ void USART3_IRQHandler(void)
 //    {
 //       data = USART_ReceiveData(UART5);
 //       USART_ClearITPendingBit(UART5 , USART_IT_RXNE);   //clear interrupt flag
-//    } 
+//    }
 //#if SYSTEM_SUPPORT_OS == 1
 //    OSIntExit();
 //#endif

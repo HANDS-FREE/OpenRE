@@ -143,25 +143,29 @@ void MotorTop::motorTopInit(float motor_enable_num_ , float motor_encoder_num_ ,
     motor_pid_t = motor_pid_t_;
 
     board.motorInterfaceInit(1, motor_pwm_max); //motor_x init
-    motor[0].motorControlInit(motor_pid_t_ , motor_encoder_num_ , motor_pwm_max , motor_simulation_model_);
+    motor1.motorControlInit(motor_pid_t_ , motor_encoder_num_ , motor_pwm_max , motor_simulation_model_);
     motor_enable[0]=1;  //enable motor control
+    motorPWMRenew(1,0);
 
     board.motorInterfaceInit(2, motor_pwm_max);
-    motor[1].motorControlInit(motor_pid_t_ , motor_encoder_num_ , motor_pwm_max , motor_simulation_model_);
+    motor2.motorControlInit(motor_pid_t_ , motor_encoder_num_ , motor_pwm_max , motor_simulation_model_);
     motor_enable[1]=1;
+    motorPWMRenew(2,0);
 
     if(motor_enable_num >= 3)
     {
         board.motorInterfaceInit(3, motor_pwm_max);
-        motor[2].motorControlInit(motor_pid_t_ , motor_encoder_num_ , motor_pwm_max , motor_simulation_model_);
+        motor3.motorControlInit(motor_pid_t_ , motor_encoder_num_ , motor_pwm_max , motor_simulation_model_);
         motor_enable[2]=1;
+        motorPWMRenew(3,0);
     }
 
     if(motor_enable_num >= 4)
     {
         board.motorInterfaceInit(4, motor_pwm_max);
-        motor[3].motorControlInit(motor_pid_t_ , motor_encoder_num_ , motor_pwm_max , motor_simulation_model_);
+        motor4.motorControlInit(motor_pid_t_ , motor_encoder_num_ , motor_pwm_max , motor_simulation_model_);
         motor_enable[3]=1;
+        motorPWMRenew(4,0);
     }
 }
 
@@ -183,18 +187,47 @@ void MotorTop::motorTopInit(float motor_enable_num_ , float motor_encoder_num_ ,
 
 void MotorTop::motorTopCall(void)
 {
+
+    /* here comments code is for motor test ，you do not include·it in normal unless you need to test the motor*/
+
+    //    static float cnt1 , cnt2 ,cnt3 ,cnt4;
+    //    cnt1 += board.getMotorEncoderCNT(1);
+    //    cnt2 += board.getMotorEncoderCNT(2);
+    //    cnt3 += board.getMotorEncoderCNT(3);
+    //    cnt4 += board.getMotorEncoderCNT(4);
+    //    printf(" cnt1 = %f cnt2 = %f cnt3 = %f cnt4 = %f \n" , cnt1 , cnt2 , cnt3 , cnt4 );
+
+    //    static unsigned short int i = 0;
+    //    i++;
+    //    if(i <= 250)
+    //    {
+    //        expect_angle_speed_m[0]=1000;
+    //        expect_angle_speed_m[1]=1000;
+    //        expect_angle_speed_m[2]=1000;
+    //        expect_angle_speed_m[3]=1000;
+    //    }
+    //    else if (i > 250 && i < 500)
+    //    {
+    //        expect_angle_speed_m[0]=-1000;
+    //        expect_angle_speed_m[1]=-1000;
+    //        expect_angle_speed_m[2]=-1000;
+    //        expect_angle_speed_m[3]=-1000;
+    //    }
+    //    else i = 0;
+
     // *Count--the address of encoder D_value   MAX_PWM_OUT--PWM max value
     // need time    stm32f4+nofpu 25us  stm32f4+fpu 5us
-    motorPWMRenew( 1 , motor[0].speedControl(expect_angle_speed_m[0] , board.getMotorEncoderCNT(1) ) );
-    motorPWMRenew( 2 , motor[1].speedControl(expect_angle_speed_m[1] , board.getMotorEncoderCNT(2) ) );
+    motorPWMRenew( 1 , motor1.speedControl(expect_angle_speed_m[0] , board.getMotorEncoderCNT(1) ) );
+    motorPWMRenew( 2 , motor2.speedControl(expect_angle_speed_m[1] , board.getMotorEncoderCNT(2) ) );
     if(motor_enable_num >= 3)
     {
-        motorPWMRenew( 3 , motor[2].speedControl(expect_angle_speed_m[2] , board.getMotorEncoderCNT(3) ) );
+        motorPWMRenew( 3 , motor3.speedControl(expect_angle_speed_m[2] , board.getMotorEncoderCNT(3) ) );
     }
     if(motor_enable_num >= 4)
     {
-        motorPWMRenew( 4 , motor[3].speedControl(expect_angle_speed_m[3] , board.getMotorEncoderCNT(4) ) );
+        motorPWMRenew( 4 , motor4.speedControl(expect_angle_speed_m[3] , board.getMotorEncoderCNT(4) ) );
     }
+
 }
 
 

@@ -60,17 +60,16 @@ void Board::boardBasicInit(void)
     int i;
     for(i=0;i<0x8fff;i++);
 
-    delay_init();
     HF_System_Timer_Init();         //Initialize the measurement systemm
     debugInterfaceInit();
 
     ledInit();
-    //keyInit();
+    keyInit();
     beepInit();
 
     //HF_RTC_Init();                //Initialize the RTC, if return 0:failed,else if return 1:succeeded
     //HF_IWDG_Init();               //Initialize the independed watch dog, system will reset if not feeding dog over 1s
-    HF_ADC_Moder_Init(0X3E00 , 5);  //ADC init
+    HF_ADC_Moder_Init(0X3E00 , 5 , 2.5f);  //ADC init
     HF_Timer_Init(TIM6 , 1000);     //timer6 init , 1000us
 
     setBeepState(1);
@@ -133,7 +132,6 @@ void Board::boardBasicCall(void)   //100HZ
         board_call_j=0;
         //HF_RTC_Time_Renew(); //updating time
     }
-
 
 }
 
@@ -215,7 +213,7 @@ void Board::ledInit(void)
     GPIO_Init(GPIOE , &GPIO_InitStruct);
 
     RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC,ENABLE);
-    GPIO_InitStruct.GPIO_Pin = GPIO_Pin_13|GPIO_Pin_14|GPIO_Pin_15 ;
+    GPIO_InitStruct.GPIO_Pin = GPIO_Pin_13;
     GPIO_Init(GPIOC , &GPIO_InitStruct);
 
 }
@@ -395,9 +393,9 @@ void Board::motorInterfaceInit(uint8_t motor_id , float motor_pwm_T)
     }
     else if(motor_id == 4){
         RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOE , ENABLE);
-        GPIO_InitStructure.GPIO_Pin = GPIO_Pin_14;
+        GPIO_InitStructure.GPIO_Pin = GPIO_Pin_15;
         GPIO_Init(GPIOE , &GPIO_InitStructure);
-        GPIO_ResetBits(GPIOE , GPIO_Pin_14);
+        GPIO_ResetBits(GPIOE , GPIO_Pin_15);
         HF_Encoder_Init(TIM5,0);
     }
 
@@ -438,7 +436,7 @@ void Board::motorEnable(uint8_t motor_id)
         GPIO_SetBits(GPIOE , GPIO_Pin_4);
     }
     else if(motor_id == 4){
-        GPIO_SetBits(GPIOE , GPIO_Pin_14);
+        GPIO_SetBits(GPIOE , GPIO_Pin_15);
     }
 }
 
@@ -469,7 +467,7 @@ void Board::motorDisable(uint8_t motor_id)
         GPIO_ResetBits(GPIOE , GPIO_Pin_4);
     }
     else if(motor_id == 4){
-        GPIO_ResetBits(GPIOE , GPIO_Pin_14);
+        GPIO_ResetBits(GPIOE , GPIO_Pin_15);
     }
 }
 
@@ -525,19 +523,19 @@ float Board::getMotorCurrent(uint8_t motor_id)
     float motor_current;
 
     if(motor_id == 1 ){
-        motor_current = HF_Get_ADC_Output(2);
+        motor_current = 2.94f * HF_Get_ADC_Output(2);
         return motor_current;
     }
     else if(motor_id == 2){
-        motor_current = HF_Get_ADC_Output(3);
+        motor_current = 2.94f * HF_Get_ADC_Output(3);
         return motor_current;
     }
     else if(motor_id == 3){
-        motor_current = HF_Get_ADC_Output(4);
+        motor_current = 2.94f * HF_Get_ADC_Output(4);
         return motor_current;
     }
     else if(motor_id == 4){
-        motor_current = HF_Get_ADC_Output(5);
+        motor_current = 2.94f * HF_Get_ADC_Output(5);
         return motor_current;
     }
 

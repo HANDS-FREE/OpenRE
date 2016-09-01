@@ -37,6 +37,21 @@ public:
         encoder_num = encoder_num_;
         pwm_max = pwm_max_;
         motor_simulation_model = motor_simulation_model_;
+        expect_angle_speed = 0;
+        expect_unit_encoder = 0 ;
+        expect_total_encoder = 0;
+        measure_unit_encoder = 0 ;
+        measure_total_encoder = 0;
+        d_past_angle = 0 ;
+        measure_angle_speed = 0;
+        past_total_angle = 0;
+        pid_parameters_.i_error_now = 0;
+        pid_parameters_.i_error_last = 0;
+        pid_parameters_.i_error_before_last = 0;
+        pid_parameters_.i_error_p = 0 ;
+        pid_parameters_.i_error_i = 0 ;
+        pid_parameters_.i_error_d = 0 ;
+        pid_parameters_.i_pidout = 0 ;
 
         if(motor_simulation_model_ == 1)
         {
@@ -93,6 +108,8 @@ public:
         return temp;
     }
     float get_measure_angle_speed(void) const {return measure_angle_speed;}
+    float get_expect_angle_speed(void) const {return expect_angle_speed;}
+
     float get_past_total_angle(void) const {return past_total_angle;}
     void  clear_past_total_angle(void){ past_total_angle = 0;}
 

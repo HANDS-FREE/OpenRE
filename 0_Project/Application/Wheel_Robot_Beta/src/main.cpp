@@ -36,11 +36,11 @@ void systemInit(void)
     //SCB->VTOR = FLASH_BASE | 0x10000;  //Bootloader
     //INTX_DISABLE();  //close all interruption
     board.boardBasicInit();
-    motor_top.motorTopInit(3 , 1560 , 0.02 , 0);
+    motor_top.motorTopInit(4 , 1560 , 0.02 , 0);
     robot_head.axServoInit();
     hands_free_robot.robotWheelTopInit();
     sbus.sbusInit();
-    imu.topInit(1,0,1,1,0,1);
+    imu.topInit(1,0,1,1,0,0);
     //INTX_ENABLE();	 //enable all interruption
     printf("app start \r\n");
 }
@@ -77,15 +77,13 @@ int main(void)
         if ( board.cnt_20ms >= 20 )    // 50hz
         {
             board.cnt_20ms = 0 ;
-//            board.motorEnable(0);
-//            board.motorSetPWM(1,2000);
             motor_top.motorTopCall();  //motor speed control
         }
         if ( board.cnt_50ms >= 50 )    // 20hz
         {
             board.cnt_50ms = 0 ;
             robot_head.headTopCall();
-            hands_free_robot.robotWheelTopCall(); //robot control interface
+            hands_free_robot.robotWheelTopCall();  //robot control interface
             board.setLedState(0,2);
         }
 

@@ -617,6 +617,7 @@ void ServoDigital::packageReplyToDebug(unsigned char command_type,unsigned char 
 
     board.debugPutChar(Check_Sum);
     Check_Sum = 0;
+
 #endif
 
     return;

@@ -31,6 +31,7 @@ private:
 
     unsigned short int read_pitch , read_yaw;
     unsigned short int set_pitch, set_yaw;
+    unsigned short int pitch_offset , pitch_range , yaw_offset , yaw_range;
 
 };
 

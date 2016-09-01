@@ -36,9 +36,10 @@ extern "C" {
 //#include "delay.h"
 
 volatile unsigned int ADC_Sample_Value[32];
+float Reference_Voltage;
 uint8_t ADC_EN_NUM;
 
-#define ADC1_DR_Address    ((u32)0x4001204c)
+#define ADC1_DR_Address   ((u32)0x4001204c)
 #define V25  0x6EE    //4.3mV every temperature degree, correspond 0x05 every temperture degree
 #define AVG_SLOPE 0x05 
 
@@ -59,7 +60,7 @@ uint8_t ADC_EN_NUM;
 *
 * History:
 ***********************************************************************************************************************/
-void HF_ADC_Moder_Init(uint16_t hf_adc_channel , uint8_t adc_num)
+void HF_ADC_Moder_Init(uint16_t hf_adc_channel , uint8_t adc_num , float Reference_Voltage_ )
 {
 
     DMA_InitTypeDef DMA_InitStructure;
@@ -76,6 +77,7 @@ void HF_ADC_Moder_Init(uint16_t hf_adc_channel , uint8_t adc_num)
     /**********************************************************************************************************************/
 
     ADC_EN_NUM = adc_num;
+    Reference_Voltage = Reference_Voltage_;
 
     RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_DMA2, ENABLE);
     DMA_DeInit(DMA2_Stream0);
@@ -267,7 +269,7 @@ float HF_Get_ADC_Output(uint8_t n)
     float ADC_Standard_Value = 0;
     if(n <= ADC_EN_NUM + 1)
     {
-        ADC_Standard_Value = ( (float)ADC_Sample_Value[n-1]/4096 ) * (float)3.3;
+        ADC_Standard_Value = ( (float)ADC_Sample_Value[n-1]/4096 ) * (float)Reference_Voltage;
     }
     return ADC_Standard_Value;
 }

@@ -141,9 +141,9 @@ void IMU::topCall(void)
         imu_call_5=0;
         if( debug_en == 1)
         {
-            printf("mpuaccx = %.4f  mpuaccy = %.4f mpuaccz = %.4f\r\n" , mpu6050.acc_normal.x , mpu6050.acc_normal.y,mpu6050.acc_normal.z);
-            printf("hmc_normalx = %.4f  hmc_normaly = %.4f hmc_normalz = %.4f\r\n" , hmc5883l.hmc_normal.x , hmc5883l.hmc_normal.y , hmc5883l.hmc_normal.z);
-            printf("temperature = %.4f pressure = %.4f altitude = %.4f altitude_offset = %.4f\r\n" , ms611.temperature , ms611.pressure , ms611.altitude , ms611.altitude_offset);
+//            printf("mpuaccx = %.4f  mpuaccy = %.4f mpuaccz = %.4f\r\n" , mpu6050.acc_normal.x , mpu6050.acc_normal.y,mpu6050.acc_normal.z);
+//            printf("hmc_normalx = %.4f  hmc_normaly = %.4f hmc_normalz = %.4f\r\n" , hmc5883l.hmc_normal.x , hmc5883l.hmc_normal.y , hmc5883l.hmc_normal.z);
+//            printf("temperature = %.4f pressure = %.4f altitude = %.4f altitude_offset = %.4f\r\n" , ms611.temperature , ms611.pressure , ms611.altitude , ms611.altitude_offset);
         }
     }
 

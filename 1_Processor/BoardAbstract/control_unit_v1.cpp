@@ -60,17 +60,16 @@ void Board::boardBasicInit(void)
     int i;
     for(i=0;i<0x8fff;i++);
 
-    delay_init();
     HF_System_Timer_Init();         //Initialize the measurement systemm
     debugInterfaceInit();
 
     ledInit();
-    //keyInit();
+    keyInit();
     beepInit();
 
     //HF_RTC_Init();                //Initialize the RTC, if return 0:failed,else if return 1:succeeded
     //HF_IWDG_Init();               //Initialize the independed watch dog, system will reset if not feeding dog over 1s
-    HF_ADC_Moder_Init(0X3C00 , 4);  //ADC init
+    HF_ADC_Moder_Init(0X3C00 , 4 , 3.3f);  //ADC init
     HF_Timer_Init(TIM6 , 1000);     //timer6 init , 1000us
 
     setBeepState(1);
@@ -504,15 +503,15 @@ float Board::getMotorCurrent(uint8_t motor_id)
     float motor_current;
 
     if(motor_id == 1 ){
-        motor_current = HF_Get_ADC_Output(2);
+        motor_current = 2.94f * HF_Get_ADC_Output(2);
         return motor_current;
     }
     else if(motor_id == 2){
-        motor_current = HF_Get_ADC_Output(3);
+        motor_current = 2.94f * HF_Get_ADC_Output(3);
         return motor_current;
     }
     else if(motor_id == 3){
-        motor_current = HF_Get_ADC_Output(4);
+        motor_current = 2.94f * HF_Get_ADC_Output(4);
         return motor_current;
     }
     else if(motor_id == 4){
