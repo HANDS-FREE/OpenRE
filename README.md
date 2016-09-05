@@ -48,7 +48,7 @@ OpenRE is licensed generally under a permissive 3-clause BSD license. Contributi
             cd OpenRE/ 
             mkdir Tools
             cd Tools/   
-            // clone https://github.com/HANDS-FREE/OpenRE-Tools
+            git clone https://github.com/HANDS-FREE/OpenRE-Tools
             // get toolchain in baiduyun :   https://pan.baidu.com/s/1jI6TeJG
             sh setev.sh 
             
