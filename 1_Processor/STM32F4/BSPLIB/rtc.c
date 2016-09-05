@@ -27,6 +27,12 @@ extern "C" {
 #include "delay.h"
 #include "usart.h"
 
+//RTOS
+#if SYSTEM_SUPPORT_OS==1
+#include "includes.h"
+#endif
+
+
 CALENDAR calendar_r;//clock structure
 
 /***********************************************************************************************************************

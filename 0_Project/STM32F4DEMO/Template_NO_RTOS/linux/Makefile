@@ -1,7 +1,11 @@
 ######################################define project name, board type, and path
 
-BOARD_TYPE		?= CONTROL_UNIT_V1
-PROJECT			=  stm32f4_Template_NO_RTOS_$(BOARD_TYPE)
+#ROBOT_MODEL : 2WD 3WD 4WD
+ROBOT_MODEL     ?= 2WD
+BOARD_TYPE		?= CONTROL_UNIT_V2
+#####BOOTLOADER  : ENABLE DISABLE
+BOOTLOADER_MODE ?= DISABLE
+PROJECT			=  Template_NO_RTOS_$(ROBOT_MODEL)_$(BOARD_TYPE)
 #####FPU  : ENABLE DISABLE
 FPU_STATE       ?= ENABLE
 TOP_PATH        =  ../../../..

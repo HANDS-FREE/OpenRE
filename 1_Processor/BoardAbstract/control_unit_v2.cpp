@@ -32,10 +32,10 @@ Board::Board(){
     board_call_j = 0 ;
     board_call_k = 0 ;
     battery_voltage_  = 0;
-    battery_voltage_alarm_ =0 ;
-    battery_proportion_ =0 ;
+    battery_voltage_alarm_ = 0 ;
+    battery_proportion_ = 0 ;
     temperature_ = 0;
-    uint16_t beep_alarm_cnt_ ;
+    beep_alarm_cnt_ = 0;
     battery_voltage_alarm_ = 10.00 ;
     battery_proportion_ = 11.00 ;
 }

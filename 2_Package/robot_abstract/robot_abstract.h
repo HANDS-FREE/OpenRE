@@ -9,18 +9,8 @@
 // 3: 3 universal wheel robot
 // 4: 4 mecanum wheels wheel robot
 
+#ifndef ROBOT_WHEEL_MODEL
 #define  ROBOT_WHEEL_MODEL    2
-
-#if ROBOT_WHEEL_MODEL == 2
-
-#endif
-
-#if ROBOT_WHEEL_MODEL == 3
-
-#endif
-
-#if ROBOT_WHEEL_MODEL == 4
-
 #endif
 
 //MSG struct is the  unit of communication , also is the unit of robot abstract

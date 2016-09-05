@@ -24,10 +24,7 @@
 
 #include "tf_2wd.h"
 
-#if ROBOT_WHEEL_MODEL == 2
-
 TF_2WD tf_2w;
-
 
 /***********************************************************************************************************************
 * Function:     void TF_3WD::robotToMotorTF(float* robot , float* motor , float robot_r)  
@@ -207,5 +204,3 @@ void TF_2WD::getGlobalSpeed(const float* measure_motor_speed , float* measure_gl
     measure_motor_line_speed[1]=*(measure_motor_speed+1) * robot_wheel_radius_;
     motorToGlobalTF(measure_motor_line_speed , measure_global_speed , global_coordinat_z , robot_body_radius_);
 }
-
-#endif   //#if ROBOT_WHEEL_MODEL == 2

@@ -33,7 +33,9 @@ void constructorInit(void)
 
 void systemInit(void)
 {
-    //SCB->VTOR = FLASH_BASE | 0x10000;  //Bootloader
+#ifdef BOOTLOADER_ENABLE
+    SCB->VTOR = FLASH_BASE | 0x4000;  //16k Bootloader
+#endif
     //INTX_DISABLE();  //close all interruption
     board.boardBasicInit();
     motor_top.motorTopInit(4 , 1560 , 0.02 , 0);

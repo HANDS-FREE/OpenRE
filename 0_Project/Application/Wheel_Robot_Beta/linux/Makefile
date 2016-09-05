@@ -1,7 +1,11 @@
 ######################################define project name, board type, and path
 
+#ROBOT_MODEL : 2WD 3WD 4WD
+ROBOT_MODEL     ?= 2WD
 BOARD_TYPE		?= CONTROL_UNIT_V2
-PROJECT			=  APP_HF_Wheel_Robot_Beta_$(BOARD_TYPE)
+#####BOOTLOADER  : ENABLE DISABLE
+BOOTLOADER_MODE ?= DISABLE
+PROJECT			=  HF_Wheel_Robot_Beta_$(ROBOT_MODEL)_$(BOARD_TYPE)
 #####FPU  : ENABLE DISABLE
 FPU_STATE       ?= ENABLE
 TOP_PATH        =  ../../../..

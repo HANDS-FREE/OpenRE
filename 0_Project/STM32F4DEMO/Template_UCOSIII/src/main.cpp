@@ -44,7 +44,9 @@ void float_task(void *p_arg);
 
 void systemInit(void)
 {
-    //SCB->VTOR = FLASH_BASE | 0x10000;  //Bootloader
+#ifdef BOOTLOADER_ENABLE
+    SCB->VTOR = FLASH_BASE | 0x4000;  //16k Bootloader
+#endif
     //INTX_DISABLE();  //close all interruption
     board.boardBasicInit();
     //INTX_ENABLE();   //enable all interruption

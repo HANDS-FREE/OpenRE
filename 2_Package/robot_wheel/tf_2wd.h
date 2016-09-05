@@ -4,8 +4,6 @@
 #include "robot_wheel_config.h"
 #include "math.h"
 
-#if ROBOT_WHEEL_MODEL == 2
-
 class TF_2WD
 {
 public:
@@ -47,8 +45,6 @@ private:
 };
 
 extern TF_2WD tf_2w;
-
-#endif
 
 #endif  // #ifndef TF_2WD_H
 

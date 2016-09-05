@@ -4,8 +4,6 @@
 #include "robot_wheel_config.h"
 #include "math.h"
 
-#if ROBOT_WHEEL_MODEL == 3
-
 class TF_3WD
 {
 public:
@@ -52,7 +50,5 @@ private:
 };
 
 extern TF_3WD tf_3wd;
-
-#endif
 
 #endif  // #ifndef TF_3WD_H

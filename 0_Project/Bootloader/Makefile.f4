@@ -1,0 +1,33 @@
+#
+# PX4 bootloader build rules for STM32F4 targets.
+#
+
+OPENOCD		?= openocd
+
+JTAGCONFIG ?= interface/olimex-jtag-tiny.cfg
+#JTAGCONFIG ?= interface/jtagkey-tiny.cfg
+
+# 5 seconds / 5000 ms default delay
+PX4_BOOTLOADER_DELAY	?= 5000
+
+SRCS		 = $(COMMON_SRCS) main_f4.c
+
+FLAGS		+= -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 \
+       -DTARGET_HW_$(TARGET_HW) \
+       -DSTM32F4 \
+       -T$(LINKER_FILE) \
+		   -L$(LIBOPENCM3)/lib \
+		   -lopencm3_stm32f4 \
+        $(EXTRAFLAGS)
+
+ELF		 = $(TARGET_FILE_NAME).elf
+BINARY		 = $(TARGET_FILE_NAME).bin
+
+all:		$(ELF) $(BINARY)
+
+$(ELF):		$(SRCS) $(MAKEFILE_LIST)
+	$(CC) -o $@ $(SRCS) $(FLAGS)
+
+$(BINARY):	$(ELF)
+	$(OBJCOPY) -O binary $(ELF) $(BINARY)
+

@@ -184,7 +184,6 @@ void RobotWheel::robotDataUpdate(void)
 #if ROBOT_WHEEL_MODEL >= 4
         motor_top.motor4.clear_past_total_angle();
 #endif   
-
     }
     if(hf_link_node_pointer->receive_package_renew[SET_ROBOY_PARAMETERS]==1)
     {
@@ -221,7 +220,6 @@ void RobotWheel::robotDataUpdate(void)
                                               my_robot.motor_parameters.i2 , my_robot.motor_parameters.d2
                                               );
 #endif
-
     }
     if(hf_link_node_pointer->receive_package_renew[SAVE_MOTOR_PARAMETERS]==1)
     {

@@ -20,8 +20,6 @@
 
 #define  PI_   3.141592653f
 
-#if ROBOT_WHEEL_MODEL == 3 
-
 TF_3WD tf_3wd;
 
 /***********************************************************************************************************************
@@ -256,5 +254,3 @@ void TF_3WD::getGlobalSpeed(const float* measure_motor_speed , float* measure_gl
     measure_motor_line_speed[2]=*(measure_motor_speed+2) * robot_wheel_radius_;
     motorToGlobalTF(measure_motor_line_speed , measure_global_speed , global_coordinat_z , robot_body_radius_);
 }
-
-#endif     //#if ROBOT_WHEEL_MODEL == 3 

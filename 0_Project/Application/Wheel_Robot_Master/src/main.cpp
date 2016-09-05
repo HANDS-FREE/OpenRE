@@ -77,14 +77,16 @@ void constructorInit(void)
 
 void systemInit(void)
 {
-    //SCB->VTOR = FLASH_BASE | 0x10000;  //Bootloader
+#ifdef BOOTLOADER_ENABLE
+    SCB->VTOR = FLASH_BASE | 0x4000;  //16k Bootloader
+#endif
     //INTX_DISABLE();  //close all interruption
     board.boardBasicInit();
     motor_top.motorTopInit(3 , 1560 , 0.02 , 0);
     robot_head.axServoInit();
     hands_free_robot.robotWheelTopInit();
     sbus.sbusInit();
-    imu.topInit();
+    imu.topInit(1,0,1,1,0,0);
     //INTX_ENABLE();	 //enable all interruption
     printf("app start \r\n");
 }
