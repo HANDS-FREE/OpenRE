@@ -1,11 +1,12 @@
 ######################################define project name, board type, and path
 
-#ROBOT_MODEL : 2WD 3WD 4WD
-ROBOT_MODEL     ?= 2WD
+#####ROBOT_MODEL : UGV_JILONG_2WD UGV_JILONG_3WD UGV_STONE_2WD UGV_STONE_2WD_PLUS
+ROBOT_MODEL     ?= UGV_STONE_2WD
+#####BOARD_TYPE: CONTROL_UNIT_V1 CONTROL_UNIT_V2
 BOARD_TYPE		?= CONTROL_UNIT_V2
 #####BOOTLOADER  : ENABLE DISABLE
 BOOTLOADER_MODE ?= DISABLE
-PROJECT			=  HF_Wheel_Robot_Master_$(ROBOT_MODEL)_$(BOARD_TYPE)
+PROJECT			=  $(ROBOT_MODEL)_$(BOARD_TYPE)_Master
 #####FPU  : ENABLE DISABLE
 FPU_STATE       ?= ENABLE
 TOP_PATH        =  ../../../..
@@ -25,6 +26,9 @@ PAKG        = common robot_abstract math imu motor sbus_ppm servo \
               
 #OS_MODULE: UCOSII UCOSIII GUI FAT
 OS_MODULE = UCOSIII            
+
+#LIB_MODULE: EIGEN MATRIX  etc
+LIB_MODULE =     
 
 ###################################################################include rules
 

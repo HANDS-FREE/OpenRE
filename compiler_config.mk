@@ -9,18 +9,23 @@ CXX_SRC         += $(foreach n,$(PAKG),$(wildcard $(PACKAGE_PATH)/$(n)/*.cpp))
 C_SRC           += $(foreach n,$(PAKG),$(wildcard $(PACKAGE_PATH)/$(n)/*.c))
 INCDIR          += $(foreach n,$(PAKG),-I$(PACKAGE_PATH)/$(n))
 
-ifeq "$(strip $(ROBOT_MODEL))" "2WD"
-DDEFS           += -DROBOT_WHEEL_MODEL=2
+ifeq "$(strip $(ROBOT_MODEL))" "UGV_JILONG_3WD"
+DDEFS           += -DHF_ROBOT_ID=1
 endif
-ifeq "$(strip $(ROBOT_MODEL))" "3WD"
-DDEFS           += -DROBOT_WHEEL_MODEL=3
+ifeq "$(strip $(ROBOT_MODEL))" "UGV_JILONG_2WD"
+DDEFS           += -DHF_ROBOT_ID=2
 endif
-ifeq "$(strip $(ROBOT_MODEL))" "4WD"
-DDEFS           += -DROBOT_WHEEL_MODEL=4
+ifeq "$(strip $(ROBOT_MODEL))" "UGV_STONE_2WD"
+DDEFS           += -DHF_ROBOT_ID=3
+endif
+ifeq "$(strip $(ROBOT_MODEL))" "UGV_STONE_2WD_PLUS"
+DDEFS           += -DHF_ROBOT_ID=4
 endif
 
 #OS
 include $(TOP_PATH)/3_OS/os.mk
+#LIBS
+include $(TOP_PATH)/4_LIBS/libs.mk
 
 #############################################################bootloader settings
 

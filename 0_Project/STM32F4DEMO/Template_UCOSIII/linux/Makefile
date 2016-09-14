@@ -1,7 +1,8 @@
 ######################################define project name, board type, and path
 
-#ROBOT_MODEL : 2WD 3WD 4WD
-ROBOT_MODEL     ?= 2WD
+#####ROBOT_MODEL : UGV_JILONG_2WD UGV_JILONG_3WD UGV_STONE_2WD UGV_STONE_2WD_PLUS   
+ROBOT_MODEL     ?= UGV_STONE_2WD
+#####BOARD_TYPE: CONTROL_UNIT_V1 CONTROL_UNIT_V2
 BOARD_TYPE		?= CONTROL_UNIT_V2
 #####BOOTLOADER  : ENABLE DISABLE
 BOOTLOADER_MODE ?= DISABLE
@@ -9,7 +10,6 @@ PROJECT			=  Template_UCOSIII_$(ROBOT_MODEL)_$(BOARD_TYPE)
 #####FPU  : ENABLE DISABLE
 FPU_STATE       ?= ENABLE
 TOP_PATH        =  ../../../..
-
 
 ##########################################################################source
 
@@ -21,8 +21,13 @@ INCDIR	+= -I. -I../src/
 #########################################################################package
 #PAKG: common robot_abstract math imu motor sbus_ppm servo robot_wheel hf_link
 PAKG    =
+
 #OS_MODULE: UCOSII UCOSIII GUI FAT
-OS_MODULE = UCOSIII           
+OS_MODULE = UCOSIII  
+
+#LIB_MODULE: EIGEN MATRIX  etc
+LIB_MODULE =     
+
 ###################################################################include rules
 
 include $(TOP_PATH)/compiler_config.mk

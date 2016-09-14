@@ -1,36 +1,42 @@
 ﻿#ifndef ROBOT_ABSTRACT_H
 #define ROBOT_ABSTRACT_H
 
-//robot type
-// 2: 2 wheel robot
-//    balance car
-//    differential car such as turtlebot
-//    raider
-// 3: 3 universal wheel robot
-// 4: 4 mecanum wheels wheel robot
+// ROBOT_WHEEL_MODEL : robot type
+// 2: 2 wheel robot  balance car  2WD
+// 3: 3 universal wheel robot 3WD
+// 4: 4 mecanum wheels wheel robot 4WD
 
-#ifndef ROBOT_WHEEL_MODEL
-#define  ROBOT_WHEEL_MODEL    2
+//UGV_JILONG_3WD  ID=1
+//UGV_JILONG_2WD  ID=2
+//UGV_STONE_2WD   ID=3
+//UGV_STONE_2WD_PLUS ID=4
+
+#ifndef HF_ROBOT_ID
+#define  HF_ROBOT_ID   3
+#endif
+
+#if HF_ROBOT_ID == 1
+#define ROBOT_WHEEL_MODEL 3
+#endif
+
+#if HF_ROBOT_ID == 2
+#define ROBOT_WHEEL_MODEL 2
+#endif
+
+#if HF_ROBOT_ID == 3
+#define ROBOT_WHEEL_MODEL 2
+#endif
+
+#if HF_ROBOT_ID == 4
+#define ROBOT_WHEEL_MODEL 2
 #endif
 
 //MSG struct is the  unit of communication , also is the unit of robot abstract
-struct MSGServo3{
-    float  servo1;
-    float  servo2;
-    float  servo3;};
-
 struct MSGServo4{
     float  servo1;
     float  servo2;
     float  servo3;
     float  servo4;};
-
-struct MSGServo5{
-    float  servo1;
-    float  servo2;
-    float  servo3;
-    float  servo4;
-    float  servo5;};
 
 struct MSGServo6{
     float  servo1;
@@ -161,14 +167,23 @@ public:
         robot_system_info.cpu_usage=0;
         robot_system_info.system_time=0;
 
-#if ROBOT_WHEEL_MODEL == 2
+#if HF_ROBOT_ID == 1
+        robot_parameters.robot_wheel_radius=0.0290;
+        robot_parameters.robot_body_radius=0.1610;
+#endif
+#if HF_ROBOT_ID == 2
         robot_parameters.robot_wheel_radius=0.03245;
-        robot_parameters.robot_body_radius=0.146;
+        robot_parameters.robot_body_radius=0.1460;
 #endif
-#if ROBOT_WHEEL_MODEL == 3
-        robot_parameters.robot_wheel_radius=0.029;
-        robot_parameters.robot_body_radius=0.161;
+#if HF_ROBOT_ID == 3
+        robot_parameters.robot_wheel_radius=0.0320;
+        robot_parameters.robot_body_radius=0.1592;
 #endif
+#if HF_ROBOT_ID == 4
+        robot_parameters.robot_wheel_radius=0.03245;
+        robot_parameters.robot_body_radius=0.1460;
+#endif
+
         robot_parameters.speed_low_filter=0.4;
     }
 
@@ -177,9 +192,9 @@ public:
     MSGCoord   measure_global_speed;
     MSGCoord   expect_robot_speed;   //(x,y,w)(meter/s,meter/s,radian/s) reference system:robot
     MSGCoord   measure_robot_speed;
-    MSGServo3  expect_motor_speed;   //(x1,x2,x3)(radian/s,radian/s,radian/s)
-    MSGServo3  measure_motor_speed;
-    MSGServo3  measure_motor_mileage; //(x1,x2,x3)(radian,radian,radian)
+    MSGServo4  expect_motor_speed;   //(x1,x2,x3)(radian/s,radian/s,radian/s)
+    MSGServo4  measure_motor_speed;
+    MSGServo4  measure_motor_mileage; //(x1,x2,x3)(radian,radian,radian)
     MSGCoord   measure_global_coordinate; //(x,y,w)(meter,meter,radian)
     MSGCoord   measure_robot_coordinate;
     /************************************arm***************************************/
@@ -192,7 +207,6 @@ public:
     MSGPose   measure_head1_state;
     MSGPose   expect_head2_state;
     MSGPose   measure_head2_state;
-
     /************************************IMU Sensors***************************************/
     MSGPose   measure_imu_euler_angle; //(pitch,roll,yaw)(radian,radian,radian)
 

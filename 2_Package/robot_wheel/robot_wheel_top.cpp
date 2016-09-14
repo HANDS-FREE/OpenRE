@@ -16,7 +16,7 @@
 ***********************************************************************************************************************/
 #include "robot_wheel_top.h"
 
-#ifndef PACK_ROBOT_WHEEL
+#ifndef PAKG_MOTOR
 #error "!!! the PACK_ROBOT_WHEEL package must dependent on PAKG_MOTOR package at least"
 #endif
 #ifdef  PAKG_SERVO
@@ -57,8 +57,10 @@ RobotWheel hands_free_robot;
 *
 * History:
 ***********************************************************************************************************************/
-void RobotWheel::robotWheelTopInit(void)          
+void RobotWheel::robotWheelTopInit(void)
 {
+    robot_wheel_model = ROBOT_WHEEL_MODEL;
+
     set_robot_wheel_radius(my_robot.robot_parameters.robot_wheel_radius);
     set_robot_body_radius(my_robot.robot_parameters.robot_body_radius);
     l_filter = my_robot.robot_parameters.speed_low_filter;
@@ -126,24 +128,24 @@ void RobotWheel::robotDataUpdate(void)
 
     my_robot.measure_motor_speed.servo1 = motor_top.motor1.get_measure_angle_speed() * degree_to_radian;
     my_robot.measure_motor_speed.servo2 = motor_top.motor2.get_measure_angle_speed() * degree_to_radian;
-#if ROBOT_WHEEL_MODEL >= 3
-    my_robot.measure_motor_speed.servo3 = motor_top.motor3.get_measure_angle_speed() * degree_to_radian;
-#endif
-#if ROBOT_WHEEL_MODEL >= 4
-    my_robot.measure_motor_speed.servo4 = motor_top.motor4.get_measure_angle_speed() * degree_to_radian;
-#endif
+    if(robot_wheel_model >= 3){
+        my_robot.measure_motor_speed.servo3 = motor_top.motor3.get_measure_angle_speed() * degree_to_radian;
+    }
+    if(robot_wheel_model >= 4){
+        my_robot.measure_motor_speed.servo4 = motor_top.motor4.get_measure_angle_speed() * degree_to_radian;
+    }
 
     getRobotSpeed((float* )&my_robot.measure_motor_speed , (float* )&my_robot.measure_robot_speed);
     getGlobalSpeed((float* )&my_robot.measure_motor_speed , (float* )&my_robot.measure_global_speed , my_robot.measure_global_coordinate.z);
 
     my_robot.measure_motor_mileage.servo1 = motor_top.motor1.get_past_total_angle() * degree_to_radian;
     my_robot.measure_motor_mileage.servo2 = motor_top.motor2.get_past_total_angle() * degree_to_radian;
-#if ROBOT_WHEEL_MODEL >= 3
-    my_robot.measure_motor_mileage.servo3 = motor_top.motor3.get_past_total_angle() * degree_to_radian;
-#endif
-#if ROBOT_WHEEL_MODEL >= 4
-    my_robot.measure_motor_mileage.servo4 = motor_top.motor4.get_past_total_angle() * degree_to_radian;
-#endif
+    if(robot_wheel_model >= 3){
+        my_robot.measure_motor_mileage.servo3 = motor_top.motor3.get_past_total_angle() * degree_to_radian;
+    }
+    if(robot_wheel_model >= 4){
+        my_robot.measure_motor_mileage.servo4 = motor_top.motor4.get_past_total_angle() * degree_to_radian;
+    }
 
     //coordinate data will be update by robotCoordCalc function , because this Typed data need a High Frequency
     //MSGCoord   measure_global_coordinate ;
@@ -162,9 +164,9 @@ void RobotWheel::robotDataUpdate(void)
     my_robot.robot_system_info.system_time=board.system_time;
 
 #ifdef PAKG_IMU
-//    my_robot.measure_imu_euler_angle.pitch = imu_arithmetic_model.Fus_Angle.pitch * degree_to_radian;
-//    my_robot.measure_imu_euler_angle.roll = imu_arithmetic_model.Fus_Angle.roll * degree_to_radian;
-//    my_robot.measure_imu_euler_angle.yaw = imu_arithmetic_model.Fus_Angle.yaw * degree_to_radian;
+    //    my_robot.measure_imu_euler_angle.pitch = imu_arithmetic_model.Fus_Angle.pitch * degree_to_radian;
+    //    my_robot.measure_imu_euler_angle.roll = imu_arithmetic_model.Fus_Angle.roll * degree_to_radian;
+    //    my_robot.measure_imu_euler_angle.yaw = imu_arithmetic_model.Fus_Angle.yaw * degree_to_radian;
 #endif
 
     if(hf_link_node_pointer->receive_package_renew[CLEAR_COORDINATE_DATA]==1)
@@ -178,12 +180,12 @@ void RobotWheel::robotDataUpdate(void)
         my_robot.measure_robot_coordinate.z=0;
         motor_top.motor1.clear_past_total_angle();
         motor_top.motor2.clear_past_total_angle();
-#if ROBOT_WHEEL_MODEL >= 3
-        motor_top.motor3.clear_past_total_angle();
-#endif
-#if ROBOT_WHEEL_MODEL >= 4
-        motor_top.motor4.clear_past_total_angle();
-#endif   
+        if(robot_wheel_model >= 3){
+            motor_top.motor3.clear_past_total_angle();
+        }
+        if(robot_wheel_model >= 4){
+            motor_top.motor4.clear_past_total_angle();
+        }
     }
     if(hf_link_node_pointer->receive_package_renew[SET_ROBOY_PARAMETERS]==1)
     {
@@ -201,25 +203,25 @@ void RobotWheel::robotDataUpdate(void)
         hf_link_node_pointer->receive_package_renew[SET_MOTOR_PARAMETERS]=0;
 
         motor_top.motor1.set_pid_parameters(my_robot.motor_parameters.p1 , my_robot.motor_parameters.i1,
-                                              my_robot.motor_parameters.d1 , my_robot.motor_parameters.p2,
-                                              my_robot.motor_parameters.i2 , my_robot.motor_parameters.d2
-                                              );
+                                            my_robot.motor_parameters.d1 , my_robot.motor_parameters.p2,
+                                            my_robot.motor_parameters.i2 , my_robot.motor_parameters.d2
+                                            );
         motor_top.motor2.set_pid_parameters(my_robot.motor_parameters.p1 , my_robot.motor_parameters.i1,
-                                              my_robot.motor_parameters.d1 , my_robot.motor_parameters.p2,
-                                              my_robot.motor_parameters.i2 , my_robot.motor_parameters.d2
-                                              );
-#if ROBOT_WHEEL_MODEL >= 3
-        motor_top.motor3.set_pid_parameters(my_robot.motor_parameters.p1 , my_robot.motor_parameters.i1,
-                                              my_robot.motor_parameters.d1 , my_robot.motor_parameters.p2,
-                                              my_robot.motor_parameters.i2 , my_robot.motor_parameters.d2
-                                              );
-#endif
-#if ROBOT_WHEEL_MODEL >= 4
-        motor_top.motor4.set_pid_parameters(my_robot.motor_parameters.p1 , my_robot.motor_parameters.i1,
-                                              my_robot.motor_parameters.d1 , my_robot.motor_parameters.p2,
-                                              my_robot.motor_parameters.i2 , my_robot.motor_parameters.d2
-                                              );
-#endif
+                                            my_robot.motor_parameters.d1 , my_robot.motor_parameters.p2,
+                                            my_robot.motor_parameters.i2 , my_robot.motor_parameters.d2
+                                            );
+        if(robot_wheel_model >= 3){
+            motor_top.motor3.set_pid_parameters(my_robot.motor_parameters.p1 , my_robot.motor_parameters.i1,
+                                                my_robot.motor_parameters.d1 , my_robot.motor_parameters.p2,
+                                                my_robot.motor_parameters.i2 , my_robot.motor_parameters.d2
+                                                );
+        }
+        if(robot_wheel_model >= 4){
+            motor_top.motor4.set_pid_parameters(my_robot.motor_parameters.p1 , my_robot.motor_parameters.i1,
+                                                my_robot.motor_parameters.d1 , my_robot.motor_parameters.p2,
+                                                my_robot.motor_parameters.i2 , my_robot.motor_parameters.d2
+                                                );
+        }
     }
     if(hf_link_node_pointer->receive_package_renew[SAVE_MOTOR_PARAMETERS]==1)
     {
@@ -248,7 +250,7 @@ void RobotWheel::chassisControl(void)
 
     if( hf_link_node_pointer->receive_package_renew[SET_GLOBAL_SPEED]==1 ){
         hf_link_node_pointer->receive_package_renew[SET_GLOBAL_SPEED]=0;
-        control_command_quality += 30;        //control_command_quality add 30
+        control_command_quality += 30;  //control_command_quality add 30
         globalSpeedSet( (float* )&my_robot.expect_global_speed , (float* )&my_robot.expect_motor_speed ,
                         my_robot.measure_global_coordinate.z);
     }
@@ -280,23 +282,23 @@ void RobotWheel::chassisControl(void)
     {
         motor_top.setMotorAngleSpeed(1,0);   //set motor Expect Speed 0
         motor_top.setMotorAngleSpeed(2,0);
-#if ROBOT_WHEEL_MODEL >= 3
-        motor_top.setMotorAngleSpeed(3,0);
-#endif
-#if ROBOT_WHEEL_MODEL >= 4
-        motor_top.setMotorAngleSpeed(4,0);
-#endif
+        if(robot_wheel_model >= 3){
+            motor_top.setMotorAngleSpeed(3,0);
+        }
+        if(robot_wheel_model >= 4){
+            motor_top.setMotorAngleSpeed(4,0);
+        }
     }
     else if(robot_control_en == 1)
     {
         motor_top.motorStateEnable(1);     //set motor enable
         motor_top.motorStateEnable(2);
-#if ROBOT_WHEEL_MODEL >= 3
-        motor_top.motorStateEnable(3);
-#endif
-#if ROBOT_WHEEL_MODEL >= 4
-        motor_top.motorStateEnable(4);
-#endif
+        if(robot_wheel_model >= 3){
+            motor_top.motorStateEnable(3);
+        }
+        if(robot_wheel_model >= 4){
+            motor_top.motorStateEnable(4);
+        }
 
         expect_angle_speed_.m1 = (1-l_filter) * expect_angle_speed_.m1 +
                 l_filter* my_robot.expect_motor_speed.servo1*radian_to_degree ;  //Speed Low-pass filter
@@ -306,16 +308,16 @@ void RobotWheel::chassisControl(void)
                 l_filter* my_robot.expect_motor_speed.servo2*radian_to_degree ;
         motor_top.setMotorAngleSpeed(2,expect_angle_speed_.m2);
 
-#if ROBOT_WHEEL_MODEL > 2
-        expect_angle_speed_.m3 = (1-l_filter) * expect_angle_speed_.m3 +
-                l_filter* my_robot.expect_motor_speed.servo3*radian_to_degree ;
-        motor_top.setMotorAngleSpeed(3,expect_angle_speed_.m3);
-#endif
-#if ROBOT_WHEEL_MODEL > 3
-        expect_angle_speed_.m4 = (1-l_filter) * expect_angle_speed_.m4 +
-                l_filter* my_robot.expect_motor_speed.servo4*radian_to_degree ;
-        motor_top.setMotorAngleSpeed(4,expect_angle_speed_.m4);
-#endif
+        if(robot_wheel_model >= 3){
+            expect_angle_speed_.m3 = (1-l_filter) * expect_angle_speed_.m3 +
+                    l_filter* my_robot.expect_motor_speed.servo3*radian_to_degree ;
+            motor_top.setMotorAngleSpeed(3,expect_angle_speed_.m3);
+        }
+        if(robot_wheel_model >= 4){
+            expect_angle_speed_.m4 = (1-l_filter) * expect_angle_speed_.m4 +
+                    l_filter* my_robot.expect_motor_speed.servo4*radian_to_degree ;
+            motor_top.setMotorAngleSpeed(4,expect_angle_speed_.m4);
+        }
     }
 
 }
@@ -393,16 +395,13 @@ void RobotWheel::robotCoordCalc(void)
 {
 
     d_motor_len_filter_.m1 = motor_top.motor1.get_d_past_angel() * degree_to_radian * get_robot_wheel_radius();
-
     d_motor_len_filter_.m2 = motor_top.motor2.get_d_past_angel() * degree_to_radian * get_robot_wheel_radius();
-
-#if ROBOT_WHEEL_MODEL > 2
-    d_motor_len_filter_.m3 = motor_top.motor3.get_d_past_angel() * degree_to_radian * get_robot_wheel_radius();
-#endif
-
-#if ROBOT_WHEEL_MODEL > 3
-    d_motor_len_filter_.m4 = motor_top.motor4.past_angle * degree_to_radian * WHEEL_R;
-#endif
+    if(robot_wheel_model >= 3){
+        d_motor_len_filter_.m3 = motor_top.motor3.get_d_past_angel() * degree_to_radian * get_robot_wheel_radius();
+    }
+    if(robot_wheel_model >= 4){
+        d_motor_len_filter_.m4 = motor_top.motor4.get_d_past_angel() * degree_to_radian * get_robot_wheel_radius();
+    }
 
 #if COORD_CALC_IMU_EN == 1 
     //measure_global_coordinate.Z=imu_arithmetic_model.Fus_Angle.yaw ;   //use the IMU data to calculating coordinates

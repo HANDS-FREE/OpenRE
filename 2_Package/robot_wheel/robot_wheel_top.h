@@ -37,6 +37,7 @@ private:
         float  m3;
         float  m4;};
     RobotMotor d_motor_len_filter_ , expect_angle_speed_;
+    unsigned char robot_wheel_model;
     unsigned char control_command_quality;  // 0~100  if<30 control_command_quality is bad and Control Disable  , otherwise control enable
     unsigned char robot_control_en;         // Whether or not enable motor control
     float call_frequency;
