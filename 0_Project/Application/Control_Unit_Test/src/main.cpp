@@ -79,16 +79,20 @@ int main(void)
         if ( board.cnt_20ms >= 20 )    // 50hz
         {
             board.cnt_20ms = 0 ;
+            motor_top.motorTest();
             motor_top.motorTopCall();  //motor speed control
         }
         if ( board.cnt_50ms >= 50 )    // 20hz
         {
             board.cnt_50ms = 0 ;
-            robot_head.headTopCall();
-            hands_free_robot.robotWheelTopCall();  //robot control interface
+            //robot_head.headTopCall();
+            //hands_free_robot.robotWheelTopCall();  //robot control interface
             board.setLedState(0,2);
+            board.setLedState(1,2);
+            board.setLedState(2,2);
+            board.setLedState(3,2);
+            board.setBeepState(2);
         }
-
     }
 
     return 0;

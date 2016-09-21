@@ -187,34 +187,6 @@ void MotorTop::motorTopInit(float motor_enable_num_ , float motor_encoder_num_ ,
 
 void MotorTop::motorTopCall(void)
 {
-
-    /* here comments code is for motor test ，you do not include·it in normal unless you need to test the motor*/
-
-    //    static float cnt1 , cnt2 ,cnt3 ,cnt4;
-    //    cnt1 += board.getMotorEncoderCNT(1);
-    //    cnt2 += board.getMotorEncoderCNT(2);
-    //    cnt3 += board.getMotorEncoderCNT(3);
-    //    cnt4 += board.getMotorEncoderCNT(4);
-    //    printf(" cnt1 = %f cnt2 = %f cnt3 = %f cnt4 = %f \n" , cnt1 , cnt2 , cnt3 , cnt4 );
-
-    //    static unsigned short int i = 0;
-    //    i++;
-    //    if(i <= 250)
-    //    {
-    //        expect_angle_speed_m[0]=1000;
-    //        expect_angle_speed_m[1]=1000;
-    //        expect_angle_speed_m[2]=1000;
-    //        expect_angle_speed_m[3]=1000;
-    //    }
-    //    else if (i > 250 && i < 500)
-    //    {
-    //        expect_angle_speed_m[0]=-1000;
-    //        expect_angle_speed_m[1]=-1000;
-    //        expect_angle_speed_m[2]=-1000;
-    //        expect_angle_speed_m[3]=-1000;
-    //    }
-    //    else i = 0;
-
     // *Count--the address of encoder D_value   MAX_PWM_OUT--PWM max value
     // need time    stm32f4+nofpu 25us  stm32f4+fpu 5us
     motorPWMRenew( 1 , motor1.speedControl(expect_angle_speed_m[0] , board.getMotorEncoderCNT(1) ) );
@@ -230,4 +202,34 @@ void MotorTop::motorTopCall(void)
 
 }
 
+
+void MotorTop::motorTest(void)
+{
+    /* here comments code is for motor test ，you do not include·it in normal unless you need to test the motor*/
+    static unsigned short int i = 0 , j = 0;
+    i++;
+    j++;
+
+    if(i <= 250)
+    {
+        expect_angle_speed_m[0]=1000;
+        expect_angle_speed_m[1]=1000;
+        expect_angle_speed_m[2]=1000;
+        expect_angle_speed_m[3]=1000;
+    }
+    else if (i > 250 && i < 500)
+    {
+        expect_angle_speed_m[0]=-1000;
+        expect_angle_speed_m[1]=-1000;
+        expect_angle_speed_m[2]=-1000;
+        expect_angle_speed_m[3]=-1000;
+    }
+    else i = 0;
+
+    if(j >= 35)
+    {
+        j = 0;
+        printf("measure motor speed:  motor1=%.4f  motor2=%.4f  motor3=%.4f  motor4=%.4f \r\n" , motor1.get_measure_angle_speed() , motor2.get_measure_angle_speed() , motor3.get_measure_angle_speed() , motor4.get_measure_angle_speed() );
+    }
+}
 

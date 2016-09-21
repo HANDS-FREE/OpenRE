@@ -418,7 +418,8 @@ void RobotWheel::robotCoordCalc(void)
 void RobotWheel::remoteAnalysis(void)
 {
 #ifdef PACK_SBUS_PPM
-    if ( sbus.sbus_state == 1){
+    if ( sbus.sbus_state == 1)
+    {
         if( sbus.sbus_channel[5] >= 1000 )
         {
             my_robot.expect_robot_speed.x = (-(sbus.sbus_channel[1] - 992)*0.001);

@@ -82,7 +82,7 @@ void systemInit(void)
 #endif
     //INTX_DISABLE();  //close all interruption
     board.boardBasicInit();
-    motor_top.motorTopInit(3 , 1560 , 0.02 , 0);
+    motor_top.motorTopInit(4 , 1560 , 0.02 , 0);
     robot_head.axServoInit();
     hands_free_robot.robotWheelTopInit();
     sbus.sbusInit();

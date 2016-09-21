@@ -180,7 +180,6 @@ void beep_task(void *p_arg)
     }
 }
 
-
 void float_task(void *p_arg)
 {
     OS_ERR err;

@@ -846,26 +846,17 @@ uint8_t Board::extendI2CReadBuf(uint8_t equipment_address,uint8_t reg_address,
 ***********************************************************************************************************************/
 void Board::pwmInterfaceInit(uint8_t mode , float pwm_t)
 {
-    if(mode == 1)
+    if(mode == 1) //motor mode
     {
-        //motor_pwm_T = 5000 , TIM1 motor pwm frequency  = (168M/4) / motor_pwm_T  = 16.8K
         HF_PWMOut_Init(TIM1 , 2-1 , pwm_t , 1);
-
-        //motor_pwm_T = 5000 , TIM9 motor pwm frequency  = (168M/4) / motor_pwm_T = 16.8K
         HF_PWMOut_Init(TIM9 , 2-1 , pwm_t , 0);
-
-        //motor_pwm_T = 5000 , TIM12 motor pwm frequency = (84M/2) / motor_pwm_T  = 16.8K
         HF_PWMOut_Init(TIM12 , 0 , pwm_t , 0);
     }
-    else if(mode == 2)
+    else if(mode == 2) //servo mode
     {
-        //motor_pwm_T = 5000 , TIM1 motor pwm frequency  = (168M/4) / motor_pwm_T  = 16.8K
+
         HF_PWMOut_Init(TIM1 , 168-1 , 20000 , 1);
-
-        //motor_pwm_T = 5000 , TIM9 motor pwm frequency  = (168M/4) / motor_pwm_T = 16.8K
         HF_PWMOut_Init(TIM9 , 168-1 , 20000 , 0);
-
-        //motor_pwm_T = 5000 , TIM12 motor pwm frequency = (84M/2) / motor_pwm_T  = 16.8K
         HF_PWMOut_Init(TIM12 , 84-1 , 20000 , 0);
     }
 }

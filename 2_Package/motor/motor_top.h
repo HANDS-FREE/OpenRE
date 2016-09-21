@@ -34,6 +34,7 @@ public:
     }
     void motorTopInit(float motor_enable_num_ , float motor_encoder_num_ , float motor_pid_t_  , unsigned char motor_simulation_model_);
     void motorTopCall(void);
+    void motorTest(void);
     void motorStateEnable(int8_t motor_id){ motor_enable[motor_id - 1] = 1 ; }  //motor_id = 1~N
     void motorStateDisable(int8_t motor_id){ motor_enable[motor_id - 1] = 0 ; }
     uint8_t getMotorState(int8_t motor_id) const{ return motor_enable[motor_id - 1];}

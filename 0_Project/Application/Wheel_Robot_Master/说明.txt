@@ -1,0 +1,2 @@
+在正式烧写前，请确保该工程的makefile符合你手上的控制器型号
+这是HANDSFREE的小车程序，UCOSIII操作系统版

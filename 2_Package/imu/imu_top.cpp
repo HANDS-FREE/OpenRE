@@ -115,7 +115,7 @@ void IMU::topCall(void)
     if( imu_call_1 >= 2 ) //500HZ
     {
         imu_call_1=0;
-        mpu6050.dataUpdate();   //stm32f4--280us(fcu)
+        mpu6050.dataUpdate();
     }
 
     if( imu_call_2 >= 5 ) //200HZ
@@ -133,7 +133,7 @@ void IMU::topCall(void)
     if( imu_call_4 >= 20 ) //50HZ
     {
         imu_call_4=0;
-        if(hmc085_en == 1) hmc5883l.dataUpdate();  // stm32f4--50us
+        if(hmc085_en == 1) hmc5883l.dataUpdate();
     }
 
     if( imu_call_5 >= 50 ) //20HZ
