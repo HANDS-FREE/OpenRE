@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# usage :  sh swd_upload.sh xxx.bin 0x08000000
+
 EXEDIR=`pwd`
 BASEDIR=$(dirname $0)
 ADDRESS=$2
