@@ -38,7 +38,7 @@ export COMMON_SRCS	 = bl.c cdcacm.c  usart.c
 # Bootloaders to build
 #
 
-TARGETS			 = handsfree_cu_v1 handsfree_cu_v2
+TARGETS			 = handsfree_cu_v1 handsfree_cu_v2 px4discovery_bl
 #TARGETS			 = px4fmu_bl px4fmuv2_bl px4fmuv4_bl px4flow_bl px4discovery_bl px4aerocore_bl px4io_bl px4mavstation_bl
 
 # px4io_bl px4flow_bl
@@ -102,8 +102,11 @@ $(LIBOPENCM3):
 	make -C $(LIBOPENCM3) lib
 	
 burn_handsfree_cu_v1: all	
-	make burn -f $(TOP_PATH)/flash.mk PROJECT=handsfree_cu_v1 
+	make swd_openocd_flash -f $(TOP_PATH)/flash.mk PROJECT=handsfree_cu_v1 
 
 burn_handsfree_cu_v2: all
-	make burn -f $(TOP_PATH)/flash.mk PROJECT=handsfree_cu_v2 
+	make swd_openocd_flash -f $(TOP_PATH)/flash.mk PROJECT=handsfree_cu_v2 
+	
+burn_px4discovery_bl: all	
+	make swd_openocd_flash -f $(TOP_PATH)/flash.mk PROJECT=px4discovery_bl
 

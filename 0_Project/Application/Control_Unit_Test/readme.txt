@@ -10,8 +10,8 @@
 OpenRE/0_Project/Application/Control_Unit_Test/linux
 
 测试现象：
-1. 4个io_led以20HZ频率在闪
-2. 蜂鸣器以20HZ频率在叫
+1. 程序启动时蜂鸣器叫了一声 
+2. 4个io_led以20HZ频率在闪
 3. 四个电机的现象是 
     while（1）
     {

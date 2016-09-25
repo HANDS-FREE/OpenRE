@@ -752,6 +752,8 @@ main(void)
 
 #endif
 
+    try_boot = false; // mawenke add
+
 	/* Try to boot the app if we think we should just go straight there */
 	if (try_boot) {
 
@@ -761,7 +763,7 @@ main(void)
 #endif
 
 		/* try to boot immediately */
-		jump_to_app();
+        jump_to_app();
 
 		// If it failed to boot, reset the boot signature and stay in bootloader
 		board_set_rtc_signature(BOOT_RTC_SIGNATURE);
@@ -814,7 +816,7 @@ main(void)
 #endif
 
 		/* look to see if we can boot the app */
-		jump_to_app();
+        jump_to_app();
 
 		/* launching the app failed - stay in the bootloader forever */
 		timeout = 0;

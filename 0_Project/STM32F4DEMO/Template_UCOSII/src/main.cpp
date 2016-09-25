@@ -88,9 +88,9 @@ void beep_task(void *pdata)
 {	  
     while(1)
     {
-        board.setBeepState(0);
+        //board.setBeepState(0);
         OSTimeDlyHMSM (0 , 0 , 0 , 500);
-        board.setBeepState(1);
+        //board.setBeepState(1);
         OSTimeDlyHMSM (0 , 0 , 0 , 500);
     };
 }

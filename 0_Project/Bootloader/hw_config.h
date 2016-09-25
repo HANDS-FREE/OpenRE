@@ -8,18 +8,18 @@
 #ifndef HW_CONFIG_H_
 #define HW_CONFIG_H_
 
-/****************************************************************************
- * TARGET_HW_HANDSFREE_CU_V1
- ****************************************************************************/
+
 #if  defined(TARGET_HW_HANDSFREE_CU_V1)
- 
+
 # define APP_LOAD_ADDRESS               0x08004000
 # define BOOTLOADER_DELAY               5000
-# define BOARD_HANDSFREE_CU_V1
-# define INTERFACE_USB                  1
-# define INTERFACE_USART                0
+# define BOARD_DISCOVERY
+# define INTERFACE_USB                  0
+# define INTERFACE_USART                1
 # define USBDEVICESTRING                "PX4 BL HANDSFREE_CU_V1"
-# define USBPRODUCTID                   0x0001
+//# define USBPRODUCTID                   0x0001
+//# define USBDEVICESTRING                ""
+# define USBPRODUCTID                   -1
 
 # define BOARD_TYPE                     201
 # define BOARD_FLASH_SECTORS            11
@@ -34,7 +34,16 @@
 # define BOARD_LED_ON                   gpio_set
 # define BOARD_LED_OFF                  gpio_clear
 
-  
+# define BOARD_USART  					USART1
+# define BOARD_USART_CLOCK_REGISTER 	RCC_APB2ENR
+# define BOARD_USART_CLOCK_BIT      	RCC_APB2ENR_USART1EN
+# define BOARD_PORT_USART   			GPIOA
+# define BOARD_PORT_USART_AF 			GPIO_AF7
+# define BOARD_PIN_TX     				GPIO9
+# define BOARD_PIN_RX		     		GPIO10
+# define BOARD_USART_PIN_CLOCK_REGISTER RCC_AHB1ENR
+# define BOARD_USART_PIN_CLOCK_BIT  	RCC_AHB1ENR_IOPAEN
+
 /****************************************************************************
 * TARGET_HW_HANDSFREE_CU_V2
 ****************************************************************************/
@@ -44,8 +53,8 @@
 # define APP_LOAD_ADDRESS               0x08004000
 # define BOOTLOADER_DELAY               5000
 # define BOARD_HANDSFREE_CU_V2
-# define INTERFACE_USB                  1
-# define INTERFACE_USART                0
+# define INTERFACE_USB                  0
+# define INTERFACE_USART                1
 # define USBDEVICESTRING                "PX4 BL PX4 BL HANDSFREE_CU_V2"
 # define USBPRODUCTID                   0x0001
 
@@ -61,6 +70,16 @@
 # define BOARD_CLOCK_LEDS               RCC_AHB1ENR_IOPEEN
 # define BOARD_LED_ON                   gpio_set
 # define BOARD_LED_OFF                  gpio_clear
+
+# define BOARD_USART  					USART1
+# define BOARD_USART_CLOCK_REGISTER 	RCC_APB2ENR
+# define BOARD_USART_CLOCK_BIT      	RCC_APB2ENR_USART1EN
+# define BOARD_PORT_USART   			GPIOA
+# define BOARD_PORT_USART_AF 			GPIO_AF7
+# define BOARD_PIN_TX     				GPIO9
+# define BOARD_PIN_RX		     		GPIO10
+# define BOARD_USART_PIN_CLOCK_REGISTER RCC_AHB1ENR
+# define BOARD_USART_PIN_CLOCK_BIT  	RCC_AHB1ENR_IOPAEN
  
 /****************************************************************************
  * TARGET_HW_PX4_FMU_V1
@@ -270,13 +289,19 @@
 
 # define OSC_FREQ                       8
 
-# define BOARD_PIN_LED_ACTIVITY         GPIO12
-# define BOARD_PIN_LED_BOOTLOADER       GPIO13
-# define BOARD_PORT_LEDS                GPIOD
-# define BOARD_CLOCK_LEDS               RCC_AHB1ENR_IOPDEN
+//# define BOARD_PIN_LED_ACTIVITY         GPIO12
+//# define BOARD_PIN_LED_BOOTLOADER       GPIO13
+//# define BOARD_PORT_LEDS                GPIOD
+//# define BOARD_CLOCK_LEDS               RCC_AHB1ENR_IOPDEN
+//# define BOARD_LED_ON                   gpio_set
+//# define BOARD_LED_OFF                  gpio_clear
+
+# define BOARD_PIN_LED_ACTIVITY         GPIO2
+# define BOARD_PIN_LED_BOOTLOADER       GPIO3
+# define BOARD_PORT_LEDS                GPIOE
+# define BOARD_CLOCK_LEDS               RCC_AHB1ENR_IOPEEN
 # define BOARD_LED_ON                   gpio_set
 # define BOARD_LED_OFF                  gpio_clear
-
 /****************************************************************************
  * TARGET_HW_PX4_PIO_V1 or TARGET_HW_PX4_PIO_V2
  ****************************************************************************/

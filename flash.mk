@@ -44,6 +44,6 @@ stlink_stlink_erase:
 
 ##################################################################
 usbttl_bootloader_upload: 
-	python $(BOOT_PATH)/px_uploader.py --port dev/ttyUSB0 $(PROJECT).px4
+	sh $(BOOT_PATH)/upload.sh $(PROJECT).px4	
 ##################################################################
 

@@ -91,7 +91,6 @@ int main(void)
             board.setLedState(1,2);
             board.setLedState(2,2);
             board.setLedState(3,2);
-            board.setBeepState(2);
         }
     }
 

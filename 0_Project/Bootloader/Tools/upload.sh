@@ -17,7 +17,8 @@ fi
 
 if [ $SYSTYPE = "Linux" ];
 then
-SERIAL_PORTS="/dev/serial/by-id/usb-3D_Robotics*"
+#SERIAL_PORTS="/dev/serial/by-id/usb-3D_Robotics*"
+SERIAL_PORTS="/dev/ttyUSB0"
 fi
 
 if [ $SYSTYPE = "" ];
