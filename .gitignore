@@ -1,6 +1,7 @@
 *o
-/Tools/*
-/OpenRE_Tools/*
+/Tools/gcc-arm-none-eabi-5_4-2016q2/*
+/Tools/openocd/*
+/Tools/stlink/*
 *.uvguix.mawenke
 *.uvoptx
 *~
