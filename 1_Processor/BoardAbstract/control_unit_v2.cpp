@@ -710,7 +710,7 @@ uint8_t Board::imuI2CReadByte(uint8_t equipment_address , uint8_t reg_address , 
 }
 
 uint8_t Board::imuI2CWriteBuf(uint8_t equipment_address,uint8_t reg_address,
-                           uint8_t* pt_char , uint8_t size , uint8_t fastmode)
+                              uint8_t* pt_char , uint8_t size , uint8_t fastmode)
 {
     uint8_t temp;
     temp = HF_Simulat_I2C_Write_Buf( 1 , equipment_address , reg_address , pt_char , size , fastmode);
@@ -718,7 +718,7 @@ uint8_t Board::imuI2CWriteBuf(uint8_t equipment_address,uint8_t reg_address,
 }
 
 uint8_t Board::imuI2CReadBuf(uint8_t equipment_address,uint8_t reg_address,
-                          uint8_t * pt_char , uint8_t size , uint8_t fastmode)
+                             uint8_t * pt_char , uint8_t size , uint8_t fastmode)
 {
     uint8_t temp;
     temp = HF_Simulat_I2C_Read_Buf( 1 , equipment_address , reg_address , pt_char , size , fastmode);
@@ -767,7 +767,7 @@ uint8_t Board::eepromI2CReadByte(uint8_t equipment_address , uint8_t reg_address
 }
 
 uint8_t Board::eepromI2CWriteBuf(uint8_t equipment_address,uint8_t reg_address,
-                              uint8_t* pt_char , uint8_t size , uint8_t fastmode)
+                                 uint8_t* pt_char , uint8_t size , uint8_t fastmode)
 {
     uint8_t temp;
     temp = HF_Simulat_I2C_Write_Buf( 1 , equipment_address , reg_address , pt_char , size , fastmode);
@@ -775,7 +775,7 @@ uint8_t Board::eepromI2CWriteBuf(uint8_t equipment_address,uint8_t reg_address,
 }
 
 uint8_t Board::eepromI2CReadBuf(uint8_t equipment_address,uint8_t reg_address,
-                             uint8_t * pt_char , uint8_t size , uint8_t fastmode)
+                                uint8_t * pt_char , uint8_t size , uint8_t fastmode)
 {
     uint8_t temp;
     temp = HF_Simulat_I2C_Read_Buf( 1 , equipment_address , reg_address , pt_char , size , fastmode);
@@ -814,7 +814,7 @@ uint8_t Board::extendI2CReadByte(uint8_t equipment_address , uint8_t reg_address
 }
 
 uint8_t Board::extendI2CWriteBuf(uint8_t equipment_address,uint8_t reg_address,
-                              uint8_t* pt_char , uint8_t size , uint8_t fastmode)
+                                 uint8_t* pt_char , uint8_t size , uint8_t fastmode)
 {
     uint8_t temp;
     temp = HF_Simulat_I2C_Write_Buf( 2 , equipment_address , reg_address , pt_char , size , fastmode);
@@ -822,7 +822,7 @@ uint8_t Board::extendI2CWriteBuf(uint8_t equipment_address,uint8_t reg_address,
 }
 
 uint8_t Board::extendI2CReadBuf(uint8_t equipment_address,uint8_t reg_address,
-                             uint8_t * pt_char , uint8_t size , uint8_t fastmode)
+                                uint8_t * pt_char , uint8_t size , uint8_t fastmode)
 {
     uint8_t temp;
     temp = HF_Simulat_I2C_Read_Buf( 2 , equipment_address , reg_address , pt_char , size , fastmode);
@@ -844,20 +844,29 @@ uint8_t Board::extendI2CReadBuf(uint8_t equipment_address,uint8_t reg_address,
 *
 * History:
 ***********************************************************************************************************************/
-void Board::pwmInterfaceInit(uint8_t mode , float pwm_t)
+void Board::pwmInterfaceInit(TIM_TypeDef* TIMx , uint8_t mode)
 {
-    if(mode == 1) //motor mode
+    if(mode == 0)     //motor mode
     {
-        HF_PWMOut_Init(TIM1 , 2-1 , pwm_t , 1);
-        HF_PWMOut_Init(TIM9 , 2-1 , pwm_t , 0);
-        HF_PWMOut_Init(TIM12 , 0 , pwm_t , 0);
+        if(TIMx == TIM1 || TIMx == TIM8 || TIMx == TIM9)
+        {
+            HF_PWMOut_Init(TIMx , 2-1 , 5000 , 1);
+        }
+        else
+        {
+            HF_PWMOut_Init(TIMx , 0 , 5000 , 0);
+        }
     }
-    else if(mode == 2) //servo mode
+    else if(mode == 1)  //analog servo mode
     {
-
-        HF_PWMOut_Init(TIM1 , 168-1 , 20000 , 1);
-        HF_PWMOut_Init(TIM9 , 168-1 , 20000 , 0);
-        HF_PWMOut_Init(TIM12 , 84-1 , 20000 , 0);
+        if(TIMx == TIM1 || TIMx == TIM8 || TIMx == TIM9)
+        {
+            HF_PWMOut_Init(TIMx , 168-1 , 20000 , 1);
+        }
+        else
+        {
+            HF_PWMOut_Init(TIMx  , 84-1 , 20000 , 0);
+        }
     }
 }
 

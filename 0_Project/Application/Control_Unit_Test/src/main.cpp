@@ -17,12 +17,14 @@
 
 #include "main_includes.h"
 
+const unsigned char enable_head = 0;
+
 void constructorInit(void)
 {
     board = Board();
     my_robot = RobotAbstract();
     motor_top = MotorTop();
-    robot_head = HeadAX();
+    robot_head = RobotHead();
     hands_free_robot = RobotWheel();
     sbus = SBUS();
     imu = IMU();
@@ -38,8 +40,14 @@ void systemInit(void)
 #endif
     //INTX_DISABLE();  //close all interruption
     board.boardBasicInit();
-    motor_top.motorTopInit(4 , 1560 , 0.02 , 0);
-    robot_head.axServoInit();
+    if(enable_head != 1 ){
+        motor_top.motorTopInit(4 , 1560 , 0.02 , 0);
+    }
+    else
+    {
+        motor_top.motorTopInit(3 , 1560 , 0.02 , 0);
+        robot_head.init();
+    }
     hands_free_robot.robotWheelTopInit();
     sbus.sbusInit();
     imu.topInit(1,0,1,1,0,0);
@@ -85,8 +93,10 @@ int main(void)
         if ( board.cnt_50ms >= 50 )    // 20hz
         {
             board.cnt_50ms = 0 ;
-            //robot_head.headTopCall();
-            //hands_free_robot.robotWheelTopCall();  //robot control interface
+            if(enable_head == 1 )
+            {
+                robot_head.topCall();
+            }
             board.setLedState(0,2);
             board.setLedState(1,2);
             board.setLedState(2,2);

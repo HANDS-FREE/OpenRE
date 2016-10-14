@@ -22,6 +22,10 @@ ifeq "$(strip $(ROBOT_MODEL))" "UGV_STONE_2WD_PLUS"
 DDEFS           += -DHF_ROBOT_ID=4
 endif
 
+ifeq "$(strip $(ROBOT_SIMULATION_MODE))" "ENABLE"
+DDEFS           += -DROBOT_SIMULATION
+endif
+
 #OS
 include $(TOP_PATH)/3_OS/os.mk
 #LIBS

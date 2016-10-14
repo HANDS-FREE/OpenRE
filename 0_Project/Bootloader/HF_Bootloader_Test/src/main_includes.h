@@ -14,8 +14,8 @@
 *
 * Description:   syetem include  file
 ***********************************************************************************************************************/
-#ifndef MAIN_INCLUDES_H
-#define MAIN_INCLUDES_H
+#ifndef __main_includes_H__
+#define __main_includes_H__
 
 /*******************************************************processor.h****************************************************/
 #include "board.h"
@@ -24,42 +24,6 @@
 /******************************************************package.h*******************************************************/
 
 
-/******************************************************package.h*******************************************************/
-#ifdef PAKG_COMMON
-#include "queue.h"
-#endif
-
-#ifdef PAKG_ROBOT_ABSTRACT
-#include "robot_abstract.h"
-#endif
-
-#ifdef PAKG_MATH
-#include "base_math_top.h"
-#endif
-
-#ifdef PAKG_IMU
-#include "imu_top.h"
-#endif
-
-#ifdef PAKG_MOTOR
-#include "motor_top.h"
-#endif
-
-#ifdef PAKG_SERVO
-#include "robot_head.h"
-#endif
-
-#ifdef PACK_ROBOT_WHEEL
-#include "robot_wheel_top.h"
-#endif
-
-#ifdef PACK_HF_LINK
-#include "hf_link.h"
-#endif
-
-#ifdef PACK_SBUS_PPM
-#include "sbus_ppm.h"
-#endif
 /**********************************************************************************************************************/
 
 
@@ -85,7 +49,7 @@
 /**********************************************************************************************************************/
 
 
-#endif // #ifndef MAIN_INCLUDES_H
+#endif
 
 
 

@@ -24,7 +24,7 @@
 //the AX digital servo pose be divided into 1024 unit 0~0X3FF
 //counterclockwise is positive
 //HEAD  Pitch>0 Look up  ; Pitch<0 Look down ; YAW>0 Look left  ; YAW<0 Look right
-#define SERVO_DEBUG_EN     0u      // printf debug info
+#define SERVO_DEBUG_EN   0u      // printf debug info
 
 #endif   // #ifndef SERVO_CONFIG_H
 

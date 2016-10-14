@@ -168,7 +168,7 @@ HEADERS += 0_Project/Application/HF_Bootloader/src/main_config.h \
            2_Package/sd_card/sdio_driver_f1.h \
            2_Package/sd_card/sdio_driver_f4.h \
            2_Package/sd_card/sdio_top.h \
-           2_Package/servo/pan_tilt_head_ax.h \
+	  2_Package/servo/robot_head.h \
            2_Package/servo/servo_config.h \
            2_Package/servo/servo_digital.h \
            2_Package/touch_screen/ctiic.h \
@@ -304,7 +304,7 @@ SOURCES += 0_Project/Application/HF_Bootloader/src/main.cpp \
            2_Package/sd_card/sdio_driver_f1.c \
            2_Package/sd_card/sdio_driver_f4.c \
            2_Package/sd_card/sdio_top.c \
-           2_Package/servo/pan_tilt_head_ax.cpp \
+	   2_Package/servo/robot_head.cpp \
            2_Package/servo/servo_digital.cpp \
            2_Package/touch_screen/ctiic.c \
            2_Package/touch_screen/ft5206.c \
@@ -352,6 +352,7 @@ SOURCES += 0_Project/Application/HF_Bootloader/src/main.cpp \
            3_OS/STM32F4/RTOS/uCOS-III/uCOS-III/Source/os_var.c \
            3_OS/STM32F4/RTOS/uCOS-III/uC-CPU/ARM-Cortex-M4/GNU/cpu_c.c \
            3_OS/STM32F4/RTOS/uCOS-III/uCOS-III/Ports/ARM-Cortex-M4/Generic/GNU/os_cpu_c.c \
-    2_Package/imu/imu_ms611.cpp
+
+
 
 

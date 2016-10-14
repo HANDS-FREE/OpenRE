@@ -533,7 +533,7 @@ else:
 parser = argparse.ArgumentParser(description="Firmware uploader for the PX autopilot system.")
 parser.add_argument('--port', action="store", required=True, help="Serial port(s) to which the FMU may be attached")
 parser.add_argument('--baud', action="store", type=int, default=115200, help="Baud rate of the serial port (default is 115200), only required for true serial ports.")
-parser.add_argument('--force', action='store_true', default=False, help='Override board type check and continue loading')
+parser.add_argument('--force', action='store_true', default=True, help='Override board type check and continue loading')
 parser.add_argument('--boot-delay', type=int, default=None, help='minimum boot delay to store in flash')
 parser.add_argument('firmware', action="store", help="Firmware file to be uploaded")
 args = parser.parse_args()

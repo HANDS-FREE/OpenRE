@@ -31,6 +31,12 @@
 #define ROBOT_WHEEL_MODEL 2
 #endif
 
+#ifndef ROBOT_SIMULATION
+#define  ROBOT_SIMULATION_MODE   0
+#else
+#define  ROBOT_SIMULATION_MODE   1
+#endif
+
 //MSG struct is the  unit of communication , also is the unit of robot abstract
 struct MSGServo4{
     float  servo1;

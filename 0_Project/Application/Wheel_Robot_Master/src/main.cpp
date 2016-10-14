@@ -66,7 +66,7 @@ void constructorInit(void)
     board = Board();
     my_robot = RobotAbstract();
     motor_top = MotorTop();
-    robot_head = HeadAX();
+    robot_head = RobotHead();
     hands_free_robot = RobotWheel();
     sbus = SBUS();
     imu = IMU();
@@ -82,8 +82,8 @@ void systemInit(void)
 #endif
     //INTX_DISABLE();  //close all interruption
     board.boardBasicInit();
-    motor_top.motorTopInit(4 , 1560 , 0.02 , 0);
-    robot_head.axServoInit();
+    motor_top.motorTopInit(4, 1560, 0.02, ROBOT_SIMULATION_MODE);
+    robot_head.init();
     hands_free_robot.robotWheelTopInit();
     sbus.sbusInit();
     imu.topInit(1,0,1,1,0,0);
@@ -269,7 +269,7 @@ void head_task(void *p_arg)
     p_arg = p_arg;
     while(1)
     {
-        robot_head.headTopCall();
+          robot_head.topCall();
         OSTimeDlyHMSM(0,0,0,50,OS_OPT_TIME_HMSM_STRICT,&err); //delay 50ms  20hz
     }
 }

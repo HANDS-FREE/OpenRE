@@ -28,4 +28,7 @@ OpenRE/0_Project/Application/Control_Unit_Test/linux
 以上的测试都成功后就可以烧写固件了，出厂预烧固件是   
 OpenRE/0_Project/Application/Wheel_Robot_Beta/linux
 
-
+云台测试;
+由于云台和电机4共用控制接口，所以当机器人有四个电机时不能同时使能云台，此时需要修改源码，把云台控制接口映射到TIM8上
+测试云台时，先把main.cpp里面的全局变量 enable_head 赋值为1 ，然后编译烧写看现象。现象几乎和上面差不多，只是电机4不动。
+另外就是云台 pitch 和 yaw复位到零点。也就是使xtion朝着水平正前方的位置。

@@ -20,7 +20,6 @@ public:
         axOlineNum=0;
         delayCount=0;
     }
-
     volatile uint8_t gbpParameter[128];				//数据包缓存
     volatile uint8_t gbRxBufferReadPointer;
     volatile uint8_t gbpRxBuffer[128];				//经过处理的缓冲数据
@@ -61,7 +60,6 @@ private:
     void moveServoPosWithSpeed(uint8_t *p, uint8_t num);
 
     void packageReplyToDebug(unsigned char command_type,unsigned char * data, unsigned int length); //length只包含data的长度
-
 };
 
 #endif  // #ifndef SERVO_DIGITAL_H

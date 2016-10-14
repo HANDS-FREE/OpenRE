@@ -47,9 +47,9 @@
 /****************************************************************************
 * TARGET_HW_HANDSFREE_CU_V2
 ****************************************************************************/
- 
+
 #elif  defined(TARGET_HW_HANDSFREE_CU_V2) 
- 
+
 # define APP_LOAD_ADDRESS               0x08004000
 # define BOOTLOADER_DELAY               5000
 # define BOARD_HANDSFREE_CU_V2
@@ -80,7 +80,7 @@
 # define BOARD_PIN_RX		     		GPIO10
 # define BOARD_USART_PIN_CLOCK_REGISTER RCC_AHB1ENR
 # define BOARD_USART_PIN_CLOCK_BIT  	RCC_AHB1ENR_IOPAEN
- 
+
 /****************************************************************************
  * TARGET_HW_PX4_FMU_V1
  ****************************************************************************/

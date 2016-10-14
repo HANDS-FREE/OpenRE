@@ -46,7 +46,7 @@
 #endif
 
 #ifdef PAKG_SERVO
-#include "pan_tilt_head_ax.h"
+#include "robot_head.h"
 #endif
 
 #ifdef PACK_ROBOT_WHEEL

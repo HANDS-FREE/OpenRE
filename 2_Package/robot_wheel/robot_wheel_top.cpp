@@ -20,7 +20,7 @@
 #error "!!! the PACK_ROBOT_WHEEL package must dependent on PAKG_MOTOR package at least"
 #endif
 #ifdef  PAKG_SERVO
-#include "pan_tilt_head_ax.h"
+#include "robot_head.h"
 #endif
 #ifdef PAKG_MOTOR
 #include "motor_top.h"

@@ -72,9 +72,9 @@ public:
                          uint8_t reg_data , uint8_t fastmode);
     uint8_t imuI2CReadByte(uint8_t equipment_address , uint8_t reg_address , uint8_t fastmode);
     uint8_t imuI2CWriteBuf(uint8_t equipment_address,uint8_t reg_address,
-                        uint8_t* pt_char , uint8_t size , uint8_t fastmode);
+                           uint8_t* pt_char , uint8_t size , uint8_t fastmode);
     uint8_t imuI2CReadBuf(uint8_t equipment_address,uint8_t reg_address,
-                       uint8_t * pt_char , uint8_t size , uint8_t fastmode);
+                          uint8_t * pt_char , uint8_t size , uint8_t fastmode);
 
     void gpsInterfaceInit(void);
     void gpsSendTxByte(uint8_t tx_byte);
@@ -84,9 +84,9 @@ public:
                             uint8_t reg_data , uint8_t fastmode);
     uint8_t eepromI2CReadByte(uint8_t equipment_address , uint8_t reg_address , uint8_t fastmode);
     uint8_t eepromI2CWriteBuf(uint8_t equipment_address,uint8_t reg_address,
-                           uint8_t* pt_char , uint8_t size , uint8_t fastmode);
+                              uint8_t* pt_char , uint8_t size , uint8_t fastmode);
     uint8_t eepromI2CReadBuf(uint8_t equipment_address,uint8_t reg_address,
-                          uint8_t * pt_char , uint8_t size , uint8_t fastmode);
+                             uint8_t * pt_char , uint8_t size , uint8_t fastmode);
     /**********************************************************************************************************************/
     //extend interface support functions
     void extendI2CInit(void);   // extend iic interface is using for extend other sensors
@@ -94,15 +94,17 @@ public:
                             uint8_t reg_data , uint8_t fastmode);
     uint8_t extendI2CReadByte(uint8_t equipment_address , uint8_t reg_address , uint8_t fastmode);
     uint8_t extendI2CWriteBuf(uint8_t equipment_address,uint8_t reg_address,
-                           uint8_t* pt_char , uint8_t size , uint8_t fastmode);
+                              uint8_t* pt_char , uint8_t size , uint8_t fastmode);
     uint8_t extendI2CReadBuf(uint8_t equipment_address,uint8_t reg_address,
-                          uint8_t* pt_char , uint8_t size , uint8_t fastmode);
+                             uint8_t* pt_char , uint8_t size , uint8_t fastmode);
 
     //extend spi interface
     //extend can interface
+    /**********************************************************************************************************************/
     //extend PWM interface
-    //mode=1 high frequency control   ; mode = 2 for  electric modulation
-    void pwmInterfaceInit(uint8_t mode , float pwm_t);
+    //mode=0 high frequency control motor mode
+    //mode = 1 for  electric modulation analog servo mode
+    void pwmInterfaceInit(TIM_TypeDef* TIMx , uint8_t mode);
     void setPWMValue(uint8_t channel_x , float pwm_value);  //channel_x 1~6
     /**********************************************************************************************************************/\
 

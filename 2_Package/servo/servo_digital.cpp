@@ -110,6 +110,7 @@
 
 void ServoDigital::axServoInit(void)
 {
+    ServoDigital();
     board.axServoInterfaceInit();
 }
 
@@ -419,7 +420,7 @@ void ServoDigital::getServoPosition(uint8_t *p, uint8_t num)
             retdata[i*3+2] = (tmp & 0xff00) >> 8;
         }
         packageReplyToDebug( ResServoPosInfo, (uint8_t *) &retdata,
-                            num * 3);
+                             num * 3);
         break;
     }
 }
