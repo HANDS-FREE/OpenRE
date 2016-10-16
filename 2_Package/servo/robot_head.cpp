@@ -39,18 +39,18 @@ void RobotHead::init(void)
     if (servo_type == 1)
     {
         axServoInit();
-        pitch_range = 30;
-        yaw_range = 80;
-        pitch_offset = 150;
-        yaw_offset = 150;
+        pitch_range = 30 * angletorad;
+        yaw_range = 80 * angletorad;
+        pitch_offset = 150 * angletorad;
+        yaw_offset = 150 * angletorad;
     }
     else
     {
         board.pwmInterfaceInit(TIM12 , 1);
-        pitch_range = 100;
-        yaw_range = 100;
-        pitch_offset =  5;
-        yaw_offset = 60;
+        pitch_range = 50 * angletorad;
+        yaw_range = 70 * angletorad;
+        pitch_offset =  - 5 * angletorad;
+        yaw_offset = 60  * angletorad;
     }
 }
 
@@ -138,14 +138,14 @@ void RobotHead::set_head_state(void)
     expect_head_yaw_filter_  = expect_head_yaw_filter + yaw_offset;
 
     if(servo_type == 1){
-        set_pitch=-(expect_head_pitch_filter_/300)*1024;
-        set_yaw=(expect_head_yaw_filter_/300)*1024;
+        set_pitch=-(expect_head_pitch_filter_ * radtoangle/300)*1024;
+        set_yaw=(expect_head_yaw_filter_ * radtoangle/300)*1024;
         axSendPosition(1, set_pitch , 0x50);
         axSendPosition(2, set_yaw , 0x50);
     }
     else {
-        set_pitch = 1500 + expect_head_pitch_filter_ * 11.111f;
-        set_yaw = 1500 + expect_head_yaw_filter_ * 11.111f;
+        set_pitch = 1500 - expect_head_pitch_filter_ * radtoangle * 11.111f;
+        set_yaw = 1500 + expect_head_yaw_filter_ * radtoangle * 11.111f;
         board.setPWMValue(9 , set_pitch);
         board.setPWMValue(10, set_yaw);
     }
@@ -168,15 +168,17 @@ void RobotHead::set_head_state(void)
 ***********************************************************************************************************************/
 void RobotHead::read_head_state(void)
 {
-    unsigned short int read_pitch , read_yaw;
+    short int read_pitch , read_yaw;
     if(servo_type == 1){
-        read_pitch = axReadPosition(1);
-        read_yaw = axReadPosition(2);
-        measure_head_pitch = ((float)read_pitch*300) / 1024 - pitch_offset;
-        measure_head_yaw = ((float)read_yaw *300) / 1024 - yaw_offset;
+        read_pitch = axReadPosition(1) ;
+        read_yaw = axReadPosition(2) ;
+        measure_head_pitch =  angletorad * (float)read_pitch * 300 / 1024 - pitch_offset;
+        measure_head_yaw = angletorad * (float)read_yaw * 300 / 1024 - yaw_offset;
     }
     else {
-        measure_head_pitch = (TIM12->CCR1 -1500)/11.111f - pitch_offset ;
-        measure_head_yaw =  (TIM12->CCR2 -1500)/11.111f  - yaw_offset  ;
+        read_pitch = TIM12->CCR1;
+        read_yaw = TIM12->CCR2;
+        measure_head_pitch =  angletorad * (float)(1500 - read_pitch)/11.111f - pitch_offset ;
+        measure_head_yaw =   angletorad * (float)(read_yaw -1500)/11.111f  - yaw_offset  ;
     }
 }

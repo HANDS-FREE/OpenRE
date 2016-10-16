@@ -343,8 +343,10 @@ void RobotWheel::headControl(void)
     float measure_head1_pitch , measure_head1_yaw;
     robot_head.getState(&measure_head1_pitch , &measure_head1_yaw);
     my_robot.measure_head1_state.pitch = measure_head1_pitch;
+    my_robot.measure_head1_state.roll = 0;
     my_robot.measure_head1_state.yaw = measure_head1_yaw;
     my_robot.measure_head2_state.pitch = 0;
+    my_robot.measure_head2_state.roll = 0;
     my_robot.measure_head2_state.yaw =0;
 
     if( hf_link_node_pointer->receive_package_renew[SET_HEAD_1]==1 ){
