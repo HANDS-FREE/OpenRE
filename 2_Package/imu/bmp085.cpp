@@ -19,7 +19,6 @@
 #include "bmp085.h"
 #include "math.h"		
 
-
 #define BMP085_ADDRESS  0xee
 #define OSS 0
 
@@ -27,19 +26,24 @@ BMP085 bmp085;
 
 void BMP085::readBuffer(void)
 {
-    //    unsigned char fastmode = 1; //1 : i2c high speed mode  0 : low speed mode
-    //    board.imuI2CReadBuf(BMP085_ADDRESS , BMP58X3_R_XM , BMP_Rx_Buf , 6 , fastmode);
+
 }
 void BMP085::writeByte(unsigned char reg_address,unsigned char reg_data)
 {
     unsigned char fastmode = 1;
-    board.imuI2CWriteByte(BMP085_ADDRESS, reg_address, reg_data, fastmode);
+    board.iicDeviceWriteByte(IIC_IMU ,  BMP085_ADDRESS, reg_address, reg_data, fastmode);
 }  
 unsigned char BMP085::readByte(unsigned char reg_address)
 {
     unsigned char fastmode = 1;
-    return( board.imuI2CReadByte(BMP085_ADDRESS, reg_address, fastmode) );
+    return( board.iicDeviceReadByte(IIC_IMU , BMP085_ADDRESS, reg_address, fastmode) );
 }
+
+/***********************************************************************************************************************
+*
+*
+*
+***********************************************************************************************************************/
 
 //滑动平均滤波  算术平均滤波算法 输入最近采样值，返回最近NUM个值的平均值   NUM < 30 
 #define AAF_NUM_MAX 30   

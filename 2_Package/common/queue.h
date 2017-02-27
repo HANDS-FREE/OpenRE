@@ -17,7 +17,5 @@ public:
 private:
 };
 
-extern Queue usart1_queue;
-
 #endif // #ifndef QUEUE_H
 

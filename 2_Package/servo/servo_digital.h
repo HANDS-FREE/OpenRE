@@ -1,7 +1,9 @@
 #ifndef SERVO_DIGITAL_H
 #define SERVO_DIGITAL_H
 
-#include "servo_config.h"
+#include "board.h"
+
+#define SERVO_DEBUG_EN   0u      // printf debug info
 
 #define AX_MAX_NUM   20      //最大舵机编号,检测舵机号只检测从0到AX_MAX_NUM-1.
 
@@ -20,6 +22,18 @@ public:
         axOlineNum=0;
         delayCount=0;
     }
+
+public:
+    void axServoInit(void)
+    {
+        board.usartDeviceInit(USART_DIGITAL_SERVO , 1000000);
+    }
+
+    void axServoSendTxByte(uint8_t tx_byte)
+    {
+        board.usartDeviceWriteByte(USART_DIGITAL_SERVO , tx_byte);
+    }
+
     volatile uint8_t gbpParameter[128];				//数据包缓存
     volatile uint8_t gbRxBufferReadPointer;
     volatile uint8_t gbpRxBuffer[128];				//经过处理的缓冲数据
@@ -31,7 +45,6 @@ public:
     volatile uint8_t axOlineNum;
     volatile uint8_t delayCount;
 
-    void axServoInit(void);
     void getServoConnective(void);
     void disableServo(uint8_t *p, uint8_t num);
     void enableServo(uint8_t *p, uint8_t num);

@@ -51,20 +51,25 @@ MPU6050 mpu6050;
 void MPU6050::readBuffer(void)
 {
     unsigned char fastmode = 1;	//1 : i2c high speed mode  0 : low speed mode
-    board.imuI2CReadBuf(MPU6050_ADDRESS , ACCEL_XOUT_H , read_buffer , 14, fastmode);
+    board.iicDeviceReadBuf(IIC_IMU , MPU6050_ADDRESS , ACCEL_XOUT_H , read_buffer , 14, fastmode);
 }
-
 void MPU6050::writeByte(unsigned char reg_address,unsigned char reg_data)
 {
     unsigned char fastmode = 1;
-    board.imuI2CWriteByte(MPU6050_ADDRESS , reg_address , reg_data, fastmode);
+    board.iicDeviceWriteByte(IIC_IMU , MPU6050_ADDRESS , reg_address , reg_data, fastmode);
 }
-
 unsigned char MPU6050::readByte(unsigned char reg_address)
 {
     unsigned char fastmode = 1;
-    return(  board.imuI2CReadByte( MPU6050_ADDRESS , reg_address , fastmode) );
+    return( board.iicDeviceReadByte(IIC_IMU , MPU6050_ADDRESS , reg_address , fastmode) );
 }
+
+/***********************************************************************************************************************
+*
+*
+*
+***********************************************************************************************************************/
+
 /***********************************************************************************************************************
 * Function:    		void MPU6050::deviceCheck(void)
 *

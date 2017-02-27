@@ -15,7 +15,6 @@
 *
 *Description: This file defines system clock
 ***********************************************************************************************************************/
-
 #ifdef __cplusplus
 extern "C" {
 #endif

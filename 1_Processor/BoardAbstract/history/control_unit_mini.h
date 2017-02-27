@@ -1,0 +1,4 @@
+#ifndef CONTROL_UNIT_MINI_H
+#define CONTROL_UNIT_MINI_H
+
+#endif // CONTROL_UNIT_MINI_H

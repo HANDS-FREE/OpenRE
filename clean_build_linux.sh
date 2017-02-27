@@ -14,7 +14,6 @@ find ./ -name "*.tmp" | xargs rm -f
 find ./ -name "*.__i" | xargs rm -f
 find ./ -name "*.crf" | xargs rm -f
 find ./ -name "*.o"   | xargs rm -f
-find ./ -name "*.d"   | xargs rm -f
 find ./ -name "*.axf" | xargs rm -f
 find ./ -name "*.tra" | xargs rm -f
 find ./ -name "*.dep" | xargs rm -f           

@@ -1,7 +1,6 @@
 *o
-/Tools/gcc-arm-none-eabi-5_4-2016q2/*
-/Tools/openocd/*
-/Tools/stlink/*
+/5_Development_Toolchain/*
+/6_Tools/0_private_data/*
 *.uvguix.mawenke
 *.uvoptx
 *~

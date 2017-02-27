@@ -1,63 +1,130 @@
 #ifndef MOTOR_TOP_H
 #define MOTOR_TOP_H
 
-#include "motor_config.h"
+#include "board.h"
+#include "virtual_motor.h"
 #include "motor_control.h"
 
-/***********************************************************************************************************************
-motor_simulation_model_ : this is a motor simulator of handsfree ,if you don't have real robot or real motor
-you can use it and you an use it for :
-: practice motor pid control , validation your control algorithm
-: established virtual robot model , and connect to ROS, you can see the virtual robot run in the RVIZ
-this means you only need a stm32 board like handsfreecontrolunit for practice ros
-: use it for establish PC software,debug communications
-***********************************************************************************************************************/
+class DCMotor : public MotorControl
+{
+public:
+    DCMotor(MotorDriverType motor_driver_type_ = MotorDriver_PWM12_AND_IO , uint8_t motor_simulation_model_ = 0)
+    {
+        motor_driver_type = motor_driver_type_;
+        motor_simulation_model = motor_simulation_model_;
+    }
+    void setSimulationModel(uint8_t motor_simulation_model_ ){
+        motor_simulation_model =  motor_simulation_model_ ;
+    }
+
+public:
+    void interfaceInit(unsigned char motor_id_  , float pwm_max){
+        if(motor_simulation_model == 0){
+            board.motorInterfaceInit((uint8_t)motor_driver_type , motor_id_ , pwm_max);
+        }
+        else{
+            virtual_motor.init();
+        }
+    }
+
+    void IOEnable(unsigned char motor_id_ )
+    {
+        if(motor_simulation_model == 0){
+            board.motorEnable((uint8_t)motor_driver_type , motor_id_);
+        }
+        else{
+            virtual_motor.enable();
+        }
+    }
+
+    void IODisable(unsigned char motor_id_ )
+    {
+        if(motor_simulation_model == 0){
+            board.motorDisable((uint8_t)motor_driver_type , motor_id_);
+        }
+        else{
+            virtual_motor.disable();
+        }
+    }
+
+    void setPWM(unsigned char motor_id_  , float pwm)
+    {
+        if(motor_simulation_model == 0){
+            board.motorSetPWM((uint8_t)motor_driver_type , motor_id_ , pwm);
+        }
+        else{
+            virtual_motor.setPWM(pwm);
+        }
+    }
+
+    float getEncoderdata(unsigned char motor_id_ )
+    {
+        if(motor_simulation_model == 0){
+            return board.getMotorEncoderCNT(motor_id_) ;
+        }
+        else{
+            return virtual_motor.getEncoder();
+        }
+    }
+
+    float getCurrent(unsigned char motor_id_)
+    {
+        if(motor_simulation_model == 0){
+            return board.getMotorCurrent(motor_id_);
+        }
+        else{
+            return virtual_motor.getCurrent();
+        }
+    }
+
+private:
+    VirtualMotor virtual_motor;
+    uint8_t motor_simulation_model;
+    MotorDriverType motor_driver_type;
+};
 
 class MotorTop
 {
 public:
-    MotorTop(){
-        motor1=MotorControl();
-        motor2=MotorControl();
-        motor3=MotorControl();
-        motor4=MotorControl();
-        expect_angle_speed_m[0]=0;
-        expect_angle_speed_m[1]=0;
-        expect_angle_speed_m[2]=0;
-        expect_angle_speed_m[3]=0;
-        motor_enable[0]=0;
-        motor_enable[1]=0;
-        motor_enable[2]=0;
-        motor_enable[3]=0;
-        motor_pwm_max = 5000;
-        motor_dead_zone = 10 ;
-    }
-    void motorTopInit(float motor_enable_num_ , float motor_encoder_num_ , float motor_pid_t_  , unsigned char motor_simulation_model_);
+    MotorTop() { }
+
+    void motorTopInit(uint8_t motor_enable_num_   ,  float pid_t_ ,
+                      const MotorParameters*  motor_init_structure , uint8_t simulation_model_ = 0 );
     void motorTopCall(void);
+    void setParameters(const MotorParameters*  motor_para)
+    {
+        if(motor_para->motor_id == 0) //set all motor
+        {
+            motorTopInit(motor_enable_num  ,  pid_t  , motor_para , simulation_model);
+        }
+        if(motor_para->motor_id == 1)
+        {
+            motor1.setParameters(motor_para);
+        }
+        if(motor_para->motor_id == 2)
+        {
+            motor2.setParameters(motor_para);
+        }
+        if(motor_para->motor_id == 3)
+        {
+            motor3.setParameters(motor_para);
+        }
+        if(motor_para->motor_id == 4)
+        {
+            motor4.setParameters(motor_para);
+        }
+    }
     void motorTest(void);
-    void motorStateEnable(int8_t motor_id){ motor_enable[motor_id - 1] = 1 ; }  //motor_id = 1~N
-    void motorStateDisable(int8_t motor_id){ motor_enable[motor_id - 1] = 0 ; }
-    uint8_t getMotorState(int8_t motor_id) const{ return motor_enable[motor_id - 1];}
-    void setMotorAngleSpeed(int8_t motor_id , float speed){   //motor_id = 1~N  , degree/s
-        expect_angle_speed_m[motor_id - 1] = speed ; }
-    float getMotorAngleSpeed(int8_t motor_id) const{
-        return expect_angle_speed_m[motor_id - 1]; }
+
 public:
-    MotorControl motor1 , motor2 , motor3 ,motor4;
+    DCMotor motor1 , motor2 , motor3 ,motor4;
 
 private:
-    uint8_t motor_enable_num; //the motor's num of yor need to control
-    float motor_encoder_num;  //the encoder sensor count when the  motor turning one circle
-    float motor_pid_t;        //the interval time of  motor pid control  the unit is second
-    float motor_pwm_max;      //set the max value for pwm
-    float motor_dead_zone;    //when the pwm in this zone , the motor disable
-    uint8_t motor_enable[4];  //Whether or not enable motor control
-
-    float expect_angle_speed_m[4];
-    void motorPWMRenew(uint8_t motor_id , float pwm_value);
+    MotorPID default_pid;
+    uint8_t motor_enable_num;
+    uint8_t simulation_model;
+    float  pid_t;
 };
-
-extern MotorTop motor_top;
 
 #endif // #ifndef MOTOR_TOP_H
 

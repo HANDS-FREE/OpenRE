@@ -23,7 +23,7 @@ GPS_NMEA gps_nmea;
 
 void GPS_NMEA::GPS_Hands_Free_Usart_Init(unsigned int baudrate)
 {
-    board.gpsInterfaceInit();
+    board.usartDeviceInit(USART_GPS , 9600);
 }
 
 void GPS_NMEA::GPS_Usart_Send_Data(unsigned char* dbuf,unsigned short int len)
@@ -31,9 +31,15 @@ void GPS_NMEA::GPS_Usart_Send_Data(unsigned char* dbuf,unsigned short int len)
     unsigned short int j;
     for(j=0;j<len;j++)  //循环发送数据
     {
-        board.gpsSendTxByte(dbuf[j]);
+        board.usartDeviceWriteByte(USART_GPS , dbuf[j]);
     }
 }
+
+/***********************************************************************************************************************
+*
+*
+*
+***********************************************************************************************************************/
 
 enum Recstate  //状态机
 {

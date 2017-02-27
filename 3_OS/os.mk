@@ -5,6 +5,8 @@
 #
 ################################################################################  
 
+INCDIR          +=-I$(TOP_PATH)/3_OS/
+
 USE_UCOSII   = $(strip $(filter UCOSII , $(OS_MODULE)))
 USE_UCOSIII  = $(strip $(filter UCOSIII, $(OS_MODULE)))
 USE_GUI      = $(strip $(filter GUI , $(OS_MODULE)))
@@ -31,7 +33,7 @@ ifeq "$(USE_UCOSII)" "UCOSII"
 UCOSII_PATH     = $(TOP_PATH)/3_OS/$(CPU_TYPE)/RTOS/uCOS-II
 DDEFS           += -DUSE_UCOSII
 
-ifeq "$(strip $(FPU_STATE))" "ENABLE"	
+ifeq "$(strip $(FPU_STATE))" "enable"	
 ASM_SRC     += $(UCOSII_PATH)/PORT/gnu_os_cpu_a_fpu.s
 else
 ASM_SRC     += $(UCOSII_PATH)/PORT/gnu_os_cpu_a.s
@@ -69,7 +71,7 @@ C_SRC     	+= $(UCOSIII_PATH)/uC-LIB/lib_ascii.c \
 C_SRC       += $(wildcard $(UCOSIII_PATH)/uCOS-III/Source/*.c) 
 
 
-ifeq "$(strip $(FPU_STATE))" "ENABLE"	
+ifeq "$(strip $(FPU_STATE))" "enable"	
 ASM_SRC     += $(UCOSIII_PATH)/uCOS-III/Ports/ARM-Cortex-M4/Generic/GNU/gnu_os_cpu_a_fpu.s
 else
 ASM_SRC     += $(UCOSIII_PATH)/uCOS-III/Ports/ARM-Cortex-M4/Generic/GNU/gnu_os_cpu_a.s

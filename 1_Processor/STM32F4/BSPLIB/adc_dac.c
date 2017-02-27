@@ -274,6 +274,12 @@ float HF_Get_ADC_Output(uint8_t n)
     return ADC_Standard_Value;
 }
 
+// °C
+float HF_Get_CPU_Temperature(void)
+{
+    return (HF_Get_ADC_Output(6) - 0.76f ) / 0.0025f +25 ;
+}
+
 /***********************************************************************************************************************
 * Function:     void Dac_Init(unsigned int DAC_Channel_x)
 *

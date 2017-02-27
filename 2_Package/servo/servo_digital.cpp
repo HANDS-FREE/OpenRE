@@ -108,12 +108,6 @@
 #define RX_TIMEOUT_COUNT2   500L
 #define RX_TIMEOUT_COUNT1  (RX_TIMEOUT_COUNT2*10L)
 
-void ServoDigital::axServoInit(void)
-{
-    ServoDigital();
-    board.axServoInterfaceInit();
-}
-
 uint8_t ServoDigital::TxPacket(uint8_t bID, uint8_t bInstruction, uint8_t bParameterLength)
 {
     //bParameterLength为参数PARAMETER长度，返回数据包长信息(除掉指令等)
@@ -144,7 +138,7 @@ uint8_t ServoDigital::TxPacket(uint8_t bID, uint8_t bInstruction, uint8_t bParam
 
     for (bCount = 0; bCount < bPacketLength; bCount++)
     {
-        board.axServoSendTxByte(gbpTxBuffer[bCount]);
+        axServoSendTxByte(gbpTxBuffer[bCount]);
     }
 
     board.axServoRxModel();
@@ -485,7 +479,7 @@ void ServoDigital::executeInstruction(uint8_t *p, uint8_t num)
     board.axServoTxModel();  //Send
     for (i = 0; i < num; i++)
     {
-        board.axServoSendTxByte(*p++);
+        axServoSendTxByte(*p++);
     }
 
     board.axServoRxModel(); //Rec
@@ -522,19 +516,19 @@ void ServoDigital::executeInstruction(uint8_t *p, uint8_t num)
     packageLength = (uint16_t)(*(p+1)+(uint16_t)*(p+2)*256);		//可能有问题 （必须滴）
     packageNum = (poolSize-3)/ packageLength;
     p = p+3;
-    board.axServoTxModel();;
+   board.axServoTxModel();;
     for (i = 0; i < packageNum; i++) {
         //启动延时函数
         MiniActionBeginFlag = 1;
         while(NewKeyActionFlag != 1)
             ;
         for (j = 0; j <packageLength; j++) {
-board.axServoSendTxByte(*p++);
+axServoSendTxByte(*p++);
         }
 
         NewKeyActionFlag = 0;
     }
-    board.axServoRxModel();
+   board.axServoRxModel();
 }  
 *********************/
 
@@ -554,7 +548,7 @@ void ServoDigital::TxPacketBroadSynWrite(uint8_t bInstruction, uint8_t bParamete
 
     board.axServoTxModel();
     for (bCount = 0; bCount < bPacketLength; bCount++) {
-        board.axServoSendTxByte(gbpTxBuffer[bCount]);
+        axServoSendTxByte(gbpTxBuffer[bCount]);
     }
 
     board.axServoRxModel();

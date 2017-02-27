@@ -19,7 +19,7 @@
 #define SBUS_PPM_CONFIG_H
 
 #include "main_config.h"
-#include "board.h"
+
 
 #endif // #ifndef SBUS_PPM_CONFIG_H
 

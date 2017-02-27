@@ -22,7 +22,7 @@
 MS611 ms611;
 
 
-#define CMD_RESET               0x1E  // ADC reset command
+#define CMD_RESET                    0x1E  // ADC reset command
 #define CMD_ADC_READ            0x00  // ADC read command
 #define CMD_ADC_CONV            0x40  // ADC translate command
 
@@ -30,30 +30,30 @@ MS611 ms611;
 #define CMD_ADC_D2              0x10  // ADC D2 conversion
 #define CMD_ADC_256             0x00  // ADC OSR=256
 #define CMD_ADC_512             0x02  // ADC OSR=512
-#define CMD_ADC_1024            0x04  // ADC OSR=1024
-#define CMD_ADC_2048            0x06  // ADC OSR=2048
-#define CMD_ADC_4096            0x08  // ADC OSR=4096
+#define CMD_ADC_1024           0x04  // ADC OSR=1024
+#define CMD_ADC_2048           0x06  // ADC OSR=2048
+#define CMD_ADC_4096           0x08  // ADC OSR=4096
 
-#define CMD_PROM_RD             0xA0  // Prom read command
-#define PROM_NB                 8
-#define MS5611_OSR				0x08  //CMD_ADC_4096
+#define CMD_PROM_RD          0xA0  // Prom read command
+#define PROM_NB                   8
+#define MS5611_OSR			   0x08  //CMD_ADC_4096
 
-#define MS_ADDR             	0xee  // 0x77
+#define MS_ADDR             	  0xee  // 0x77
 
 void MS611::readBuffer(void)
 {
     unsigned char fastmode = 0; //1 : i2c high speed mode  0 : low speed mode
-    board.imuI2CReadBuf(MS_ADDR , CMD_ADC_READ , read_buffer , 3 , fastmode);
+    board.iicDeviceReadBuf(IIC_IMU ,  MS_ADDR , CMD_ADC_READ , read_buffer , 3 , fastmode);
 }
 void MS611::writeByte(unsigned char reg_address , unsigned char reg_data)
 {
     unsigned char fastmode = 0;
-    board.imuI2CWriteByte(MS_ADDR, reg_address, reg_data, fastmode);
+    board.iicDeviceWriteByte(IIC_IMU , MS_ADDR, reg_address, reg_data, fastmode);
 }
 unsigned char MS611::readByte(unsigned char reg_address)
 {
     unsigned char fastmode = 0;
-    return( board.imuI2CReadByte(MS_ADDR, reg_address, fastmode) );
+    return( board.iicDeviceReadByte(IIC_IMU , MS_ADDR, reg_address, fastmode) );
 }
 
 void MS611::start_t(void)
@@ -171,7 +171,7 @@ unsigned char MS611::deviceInit(void)
     delay_ms(10);
     for (i = 0; i < PROM_NB; i++)
     {
-        sta &= board.imuI2CReadBuf(MS_ADDR , CMD_PROM_RD + i*2 , rxbuf , 2 , 0);
+        sta &= board.iicDeviceReadBuf(IIC_IMU , MS_ADDR , CMD_PROM_RD + i*2 , rxbuf , 2 , 0);
         ms5611_prom[i] = rxbuf[0] << 8 | rxbuf[1];
     }
     if(sta){
@@ -183,6 +183,12 @@ unsigned char MS611::deviceInit(void)
     //checkDeviceState();
     return device_state;
 }
+
+/***********************************************************************************************************************
+*
+*
+*
+***********************************************************************************************************************/
 
 /***********************************************************************************************************************
 * Function:      void MS611::dataUpdate(void)

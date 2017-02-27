@@ -1,15 +1,17 @@
 #ifndef SBUS_PPM_H
 #define SBUS_PPM_H
 
-#include "sbus_ppm_config.h"
+#include "board.h"
 
 #define   SBUS_D_TIME		    3000	  //us Sbus message Time interval
 
 class SBUS
 {
 public:
-    SBUS()
+    SBUS(DeviceType device_)
     {
+        device = device_;
+
         sbus_rx_update=0;
         sbus_channel[0]=0;
         sbus_state=0;
@@ -26,11 +28,12 @@ public:
         d_time_=0;
         sbus_bufi_=0;
         sbus_mes_i_=0;
+
+        board.usartDeviceInit(device , 100000);
     }
-    void sbusInit(void){
-        board.sbusInterfaceInit();
-    }
+
     void receiveByteAnl(unsigned char receive_byte);  //put this function in serial port interrupt
+    DeviceType device;
     float sbus_frequency;
     unsigned char   sbus_rx_update;
     unsigned short int  sbus_channel[16];     //temp sbus decode channel data
@@ -58,7 +61,6 @@ public:
 private:
     uint8_t ch_;
 };
-extern PPM ppm ;
 
 #endif // #ifndef SBUS_PPM_H
 

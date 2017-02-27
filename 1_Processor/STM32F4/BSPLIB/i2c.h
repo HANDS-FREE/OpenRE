@@ -39,54 +39,54 @@ int HF_Hardware_I2C_Read_Buf(I2C_TypeDef *I2Cx , uint8_t Equipment_Address
                           ,uint8_t REG_Address,uint8_t * ptChar,uint8_t size);
 
 /*************************HF_Simulation_I2C1**************************************************************************/
-#define RCC_I2C1_SCL          RCC_AHB1Periph_GPIOB
-#define GPIO_I2C1_SCL         GPIOB
-#define I2C1_Pin_SCL          GPIO_Pin_6
+#define RCC_I2C1_SCL        RCC_AHB1Periph_GPIOB
+#define GPIO_I2C1_SCL      GPIOB
+#define I2C1_PIN_SCL          GPIO_Pin_6
 
-#define RCC_I2C1_SDA          RCC_AHB1Periph_GPIOB
-#define GPIO_I2C1_SDA         GPIOB
-#define I2C1_Pin_SDA          GPIO_Pin_7
+#define RCC_I2C1_SDA        RCC_AHB1Periph_GPIOB
+#define GPIO_I2C1_SDA       GPIOB
+#define I2C1_PIN_SDA        GPIO_Pin_7
 
-#define SCL1_H         GPIO_I2C1_SCL->BSRRL  = I2C1_Pin_SCL
-#define SCL1_L         GPIO_I2C1_SCL->BSRRH  = I2C1_Pin_SCL
-#define SDA1_H         GPIO_I2C1_SDA->BSRRL  = I2C1_Pin_SDA
-#define SDA1_L         GPIO_I2C1_SDA->BSRRH  = I2C1_Pin_SDA
-#define SCL1_Read      GPIO_I2C1_SCL->IDR  & I2C1_Pin_SCL
-#define SDA1_Read      GPIO_I2C1_SDA->IDR  & I2C1_Pin_SDA
+#define SCL1_H           GPIO_I2C1_SCL->BSRRL  = I2C1_PIN_SCL
+#define SCL1_L            GPIO_I2C1_SCL->BSRRH  = I2C1_PIN_SCL
+#define SDA1_H           GPIO_I2C1_SDA->BSRRL  = I2C1_PIN_SDA
+#define SDA1_L            GPIO_I2C1_SDA->BSRRH  = I2C1_PIN_SDA
+#define SCL1_READ      GPIO_I2C1_SCL->IDR  & I2C1_PIN_SCL
+#define SDA1_READ     GPIO_I2C1_SDA->IDR  & I2C1_PIN_SDA
 /*********************************************************************************************************************/
 
 /*************************HF_Simulation_I2C2**************************************************************************/
 #define RCC_I2C2_SCL          RCC_AHB1Periph_GPIOB
-#define GPIO_I2C2_SCL         GPIOB
-#define I2C2_Pin_SCL          GPIO_Pin_10
+#define GPIO_I2C2_SCL        GPIOB
+#define I2C2_PIN_SCL           GPIO_Pin_10
 
-#define RCC_I2C2_SDA          RCC_AHB1Periph_GPIOB
-#define GPIO_I2C2_SDA         GPIOB
-#define I2C2_Pin_SDA          GPIO_Pin_11
+#define RCC_I2C2_SDA         RCC_AHB1Periph_GPIOB
+#define GPIO_I2C2_SDA       GPIOB
+#define I2C2_PIN_SDA          GPIO_Pin_11
 
-#define SCL2_H         GPIO_I2C2_SCL->BSRRL  = I2C2_Pin_SCL
-#define SCL2_L         GPIO_I2C2_SCL->BSRRH  = I2C2_Pin_SCL
-#define SDA2_H         GPIO_I2C2_SDA->BSRRL  = I2C2_Pin_SDA
-#define SDA2_L         GPIO_I2C2_SDA->BSRRH  = I2C2_Pin_SDA
-#define SCL2_Read      GPIO_I2C2_SCL->IDR  & I2C2_Pin_SCL
-#define SDA2_Read      GPIO_I2C2_SDA->IDR  & I2C2_Pin_SDA
+#define SCL2_H         GPIO_I2C2_SCL->BSRRL  = I2C2_PIN_SCL
+#define SCL2_L          GPIO_I2C2_SCL->BSRRH  = I2C2_PIN_SCL
+#define SDA2_H         GPIO_I2C2_SDA->BSRRL  = I2C2_PIN_SDA
+#define SDA2_L          GPIO_I2C2_SDA->BSRRH  = I2C2_PIN_SDA
+#define SCL2_READ      GPIO_I2C2_SCL->IDR  & I2C2_PIN_SCL
+#define SDA2_READ      GPIO_I2C2_SDA->IDR  & I2C2_PIN_SDA
 /*********************************************************************************************************************/
 
 /*************************HF_Simulation_I2C3**************************************************************************/
-#define RCC_I2C3_SCL        RCC_AHB1Periph_GPIOA
-#define GPIO_I2C3_SCL       GPIOA
-#define I2C3_Pin_SCL        GPIO_Pin_8
+#define RCC_I2C3_SCL       RCC_AHB1Periph_GPIOA
+#define GPIO_I2C3_SCL     GPIOA
+#define I2C3_PIN_SCL        GPIO_Pin_8
 
-#define RCC_I2C3_SDA        RCC_AHB1Periph_GPIOC
-#define GPIO_I2C3_SDA       GPIOC
-#define I2C3_Pin_SDA        GPIO_Pin_9
+#define RCC_I2C3_SDA       RCC_AHB1Periph_GPIOC
+#define GPIO_I2C3_SDA     GPIOC
+#define I2C3_PIN_SDA        GPIO_Pin_9
 
-#define SCL3_H         GPIO_I2C3_SCL->BSRRL  = I2C3_Pin_SCL
-#define SCL3_L         GPIO_I2C3_SCL->BSRRH  = I2C3_Pin_SCL
-#define SDA3_H         GPIO_I2C3_SDA->BSRRL  = I2C3_Pin_SDA
-#define SDA3_L         GPIO_I2C3_SDA->BSRRH  = I2C3_Pin_SDA
-#define SCL3_Read      GPIO_I2C3_SCL->IDR  & I2C3_Pin_SCL
-#define SDA3_Read      GPIO_I2C3_SDA->IDR  & I2C3_Pin_SDA
+#define SCL3_H           GPIO_I2C3_SCL->BSRRL  = I2C3_PIN_SCL
+#define SCL3_L            GPIO_I2C3_SCL->BSRRH  = I2C3_PIN_SCL
+#define SDA3_H           GPIO_I2C3_SDA->BSRRL  = I2C3_PIN_SDA
+#define SDA3_L            GPIO_I2C3_SDA->BSRRH  = I2C3_PIN_SDA
+#define SCL3_READ      GPIO_I2C3_SCL->IDR  & I2C3_PIN_SCL
+#define SDA3_READ      GPIO_I2C3_SDA->IDR  & I2C3_PIN_SDA
 /*********************************************************************************************************************/
 
 void HF_Simulat_I2C_Init(uint8_t HF_I2Cx);

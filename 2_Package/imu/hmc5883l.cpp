@@ -79,19 +79,24 @@ HMC5883L hmc5883l;
 void HMC5883L::readBuffer(void)
 {
     unsigned char fastmode = 1;	 //1 : i2c high speed mode  0 : low speed mode
-    board.imuI2CReadBuf(HMC5883L_ADDRESS , HMC58X3_R_XM , read_buffer , 6 , fastmode);
+    board.iicDeviceReadBuf(IIC_IMU , HMC5883L_ADDRESS , HMC58X3_R_XM , read_buffer , 6 , fastmode);
 }
 void HMC5883L::writeByte(unsigned char reg_address,unsigned char reg_data)
 {
     unsigned char fastmode = 1;
-    board.imuI2CWriteByte(HMC5883L_ADDRESS , reg_address , reg_data , fastmode);
+    board.iicDeviceWriteByte(IIC_IMU , HMC5883L_ADDRESS , reg_address , reg_data , fastmode);
 }
-
 unsigned char HMC5883L::readByte(unsigned char reg_address)
 {
     unsigned char fastmode = 1;
-    return(  board.imuI2CReadByte(HMC5883L_ADDRESS , reg_address , fastmode) );
+    return( board.iicDeviceReadByte(IIC_IMU , HMC5883L_ADDRESS , reg_address , fastmode) );
 }
+
+/***********************************************************************************************************************
+*
+*
+*
+***********************************************************************************************************************/
 
 /***********************************************************************************************************************
 * Function:    	void HMC5883L::deviceCheck(void)

@@ -1,67 +1,129 @@
+#######################################################system parameters
+
+ifeq "$(strip $(ROBOT_SIMULATION_MODE))" "enable"
+DDEFS           += -DROBOT_SIMULATION_MODE=1
+else
+DDEFS           += -DROBOT_SIMULATION_MODE=0
+endif
+
+ifeq "$(strip $(DEBUG_PRINTF_INTERFACE))" "usart_interface_1"
+DDEFS           += -DDEBUG_PRINTF_INTERFACE=1
+endif
+ifeq "$(strip $(DEBUG_PRINTF_INTERFACE))" "usart_interface_2"
+DDEFS           += -DDEBUG_PRINTF_INTERFACE=2
+endif
+ifeq "$(strip $(DEBUG_PRINTF_INTERFACE))" "usart_interface_3"
+DDEFS           += -DDEBUG_PRINTF_INTERFACE=3
+endif
+ifeq "$(strip $(DEBUG_PRINTF_INTERFACE))" "usart_interface_4"
+DDEFS           += -DDEBUG_PRINTF_INTERFACE=4
+endif
+ifeq "$(strip $(DEBUG_PRINTF_INTERFACE))" "usart_interface_5"
+DDEFS           += -DDEBUG_PRINTF_INTERFACE=5
+endif
+ifeq "$(strip $(DEBUG_PRINTF_INTERFACE))" "usart_interface_6"
+DDEFS           += -DDEBUG_PRINTF_INTERFACE=6
+endif
+ifeq "$(strip $(DEBUG_PRINTF_INTERFACE))" "usb_slave"
+DDEFS           += -DDEBUG_PRINTF_INTERFACE=10
+endif
+
+ifeq "$(strip $(PC_INTERFACE))" "usart_interface_1"
+DDEFS           += -DPC_INTERFACE=1
+endif
+ifeq "$(strip $(PC_INTERFACE))" "usart_interface_2"
+DDEFS           += -DPC_INTERFACE=2
+endif
+ifeq "$(strip $(PC_INTERFACE))" "usart_interface_3"
+DDEFS           += -DPC_INTERFACE=3
+endif
+ifeq "$(strip $(PC_INTERFACE))" "usart_interface_4"
+DDEFS           += -DPC_INTERFACE=4
+endif
+ifeq "$(strip $(PC_INTERFACE))" "usart_interface_5"
+DDEFS           += -DPC_INTERFACE=5
+endif
+ifeq "$(strip $(PC_INTERFACE))" "usart_interface_6"
+DDEFS           += -DPC_INTERFACE=6
+endif
+ifeq "$(strip $(PC_INTERFACE))" "usb_slave"
+DDEFS           += -DPC_INTERFACE=10
+endif
+
+ifeq "$(strip $(RADIO_INTERFACE))" "usart_interface_1"
+DDEFS           += -DRADIO_INTERFACE=1
+endif
+ifeq "$(strip $(RADIO_INTERFACE))" "usart_interface_2"
+DDEFS           += -DRADIO_INTERFACE=2
+endif
+ifeq "$(strip $(RADIO_INTERFACE))" "usart_interface_3"
+DDEFS           += -DRADIO_INTERFACE=3
+endif
+ifeq "$(strip $(RADIO_INTERFACE))" "usart_interface_4"
+DDEFS           += -DRADIO_INTERFACE=4
+endif
+ifeq "$(strip $(RADIO_INTERFACE))" "usart_interface_5"
+DDEFS           += -DRADIO_INTERFACE=5
+endif
+ifeq "$(strip $(RADIO_INTERFACE))" "usart_interface_6"
+DDEFS           += -DRADIO_INTERFACE=6
+endif
+
+
+
 #############################################################packages, board, os
+# Project
+include	$(TOP_PATH)/0_Project/project.mk
 
 # Board
 include	$(TOP_PATH)/1_Processor/board.mk
 
-#package
-PACKAGE_PATH 	= $(TOP_PATH)/2_Package
-CXX_SRC         += $(foreach n,$(PAKG),$(wildcard $(PACKAGE_PATH)/$(n)/*.cpp))
-C_SRC           += $(foreach n,$(PAKG),$(wildcard $(PACKAGE_PATH)/$(n)/*.c))
-INCDIR          += $(foreach n,$(PAKG),-I$(PACKAGE_PATH)/$(n))
-
-ifeq "$(strip $(ROBOT_MODEL))" "UGV_JILONG_3WD"
-DDEFS           += -DHF_ROBOT_ID=1
-endif
-ifeq "$(strip $(ROBOT_MODEL))" "UGV_JILONG_2WD"
-DDEFS           += -DHF_ROBOT_ID=2
-endif
-ifeq "$(strip $(ROBOT_MODEL))" "UGV_STONE_2WD"
-DDEFS           += -DHF_ROBOT_ID=3
-endif
-ifeq "$(strip $(ROBOT_MODEL))" "UGV_STONE_2WD_PLUS"
-DDEFS           += -DHF_ROBOT_ID=4
-endif
-
-ifeq "$(strip $(ROBOT_SIMULATION_MODE))" "ENABLE"
-DDEFS           += -DROBOT_SIMULATION
-endif
+#packages
+include	$(TOP_PATH)/2_Package/package.mk
 
 #OS
 include $(TOP_PATH)/3_OS/os.mk
+
 #LIBS
 include $(TOP_PATH)/4_LIBS/libs.mk
 
+TOOLS_PATH       = $(TOP_PATH)/0_Project/6_Tools
+
 #############################################################bootloader settings
 
-ifeq "$(strip $(BOOTLOADER_MODE))" "ENABLE"
-BOOT_PATH       = $(TOP_PATH)/0_Project/Bootloader/Tools
+ifeq "$(strip $(BOOTLOADER_MODE))" "enable"
 DDEFS           += -DBOOTLOADER_ENABLE
 endif
 
 ###############################################################compiler settings
 
-CCPREFIX	?= $(TOP_PATH)/Tools/gcc-arm-none-eabi-5_4-2016q2/bin/arm-none-eabi-
+CCPREFIX	?= $(TOP_PATH)/5_Development_Toolchain/gcc-arm-none-eabi-5_4-2016q2/bin/arm-none-eabi-
 #CCPREFIX	?= arm-none-eabi-
 CC   		= $(CCPREFIX)gcc
 CXX         = $(CCPREFIX)g++
 CP   		= $(CCPREFIX)objcopy
 AS   		= $(CCPREFIX)gcc -x assembler-with-cpp
-GDBTUI      = $(CCPREFIX)gdbtui
+GDB		    = $(CCPREFIX)gdb
 HEX  		= $(CP) -O ihex
 BIN  		= $(CP) -O binary -S
 
 # Define optimisation level here
 OPT += -Os
+OPT += -fsingle-precision-constant
+OPT += -fno-common
 
-#IF FPU ENABLE 
-ifeq "$(strip $(FPU_STATE))" "ENABLE"	
+#fpu config
+ifeq "$(strip $(CPU_TYPE))" "STM32F1"	
+FPU_STATE       == disable
+endif
+ifeq "$(strip $(CPU_TYPE))" "STM32F4"	
+FPU_STATE       == enable
+endif
+
+ifeq "$(strip $(FPU_STATE))" "enable"	
 OPT     += -mfloat-abi=hard
 OPT     += -mfpu=fpv4-sp-d16
 endif
-
-#
-OPT += -fsingle-precision-constant
-OPT += -fno-common
 
 #run from Flash
 DEFS    += $(DDEFS) -DRUN_FROM_FLASH=1 
@@ -74,7 +136,9 @@ CFLAGS   += $(MCFLAGS) $(OPT) -g -gdwarf-2 -mthumb \
 	         -fomit-frame-pointer -Wall -fverbose-asm  \
 	         $(DEFS)	 
 	         
-CXXFLAGS += $(MCFLAGS) $(OPT) -g -gdwarf-2 -mthumb -std=gnu++0x\
+#-std=gnu++0x
+
+CXXFLAGS += $(MCFLAGS) $(OPT) -g -gdwarf-2 -mthumb -std=c++11\
            -fomit-frame-pointer -Wall -fverbose-asm \
            -fno-exceptions -fno-rtti -fno-threadsafe-statics -fvisibility=hidden \
            $(DEFS)	         
@@ -89,7 +153,7 @@ LDFLAGS += $(MCFLAGS) $(OPT) -lm -g -gdwarf-2 -mthumb -nostartfiles -Xlinker --g
 OBJS  	= $(filter %.o , $(ASM_SRC:.s=.o)) $(filter %.o , $(ASM_SRC:.asm=.o)) \
           $(C_SRC:.c=.o) $(CXX_SRC:.cpp=.o)
 
-ifeq "$(strip $(BOOTLOADER_MODE))" "ENABLE"
+ifeq "$(strip $(BOOTLOADER_MODE))" "enable"
 
 all: $(OBJS) $(PROJECT).elf  $(PROJECT).hex $(PROJECT).bin $(PROJECT).px4
 	$(CCPREFIX)size $(PROJECT).elf 
@@ -123,7 +187,7 @@ endif
 	$(BIN)  $< $@
 	
 %px4: %bin
-	python $(BOOT_PATH)/px_mkfw.py --prototype $(BOOT_PATH)/Images/HANDSFREE_$(BOARD_TYPE).prototype --image $(PROJECT).bin > $(PROJECT).px4
+	python $(TOOLS_PATH)/px_mkfw.py --prototype $(TOOLS_PATH)/Images/HANDSFREE_$(BOARD_TYPE).prototype --image $(PROJECT).bin > $(PROJECT).px4
 	
 ##################################################################makefile clean 
 clean:
@@ -133,8 +197,8 @@ clean:
 	-rm -rf $(PROJECT).hex
 	-rm -rf $(PROJECT).bin
 	-rm -rf $(PROJECT).px4
-	
+
 ###########################################################################flash
  	
-include	$(TOP_PATH)/flash.mk 	
+include	$(TOP_PATH)/flash.mk
      

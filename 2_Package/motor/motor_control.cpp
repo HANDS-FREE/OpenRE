@@ -19,26 +19,18 @@
 
 #include "motor_control.h"
 
-/***********************************************************************************************************************
-* Function:     float MotorControl::dataLimit(float data , float range)
-*
-* Scope:        private
-*
-* Description:  data limited
-*
-* Arguments:
-*
-* Return:
-*
-* Cpu_Time:  
-*
-* History:
-***********************************************************************************************************************/
 float MotorControl::dataLimit(float data , float range)
 {
     if( data > range ) return range;
     else  if( data <-range ) return -range;
     else return data;
+}
+
+float MotorControl::deadZoneLimit(float data , float dead_zone)
+{
+    if( data > dead_zone ) return data;
+    else  if( data <-dead_zone ) return data;
+    else return 0;
 }
 
 /***********************************************************************************************************************
@@ -60,23 +52,23 @@ float MotorControl::dataLimit(float data , float range)
 void MotorControl::pidOrdinaryCall(float outside_expect , float outside_measure
                                    , float inside_expect , float inside_measure , float pwm_range)
 {
-    pid_parameters_.i_error_before_last = pid_parameters_.i_error_last;
-    pid_parameters_.i_error_last = pid_parameters_.i_error_now;
-    pid_parameters_.i_error_now = inside_expect - inside_measure;
+    pid_data.i_error_before_last = pid_data.i_error_last;
+    pid_data.i_error_last = pid_data.i_error_now;
+    pid_data.i_error_now = inside_expect - inside_measure;
 
-    pid_parameters_.i_error_p = pid_parameters_.p2 * pid_parameters_.i_error_now;
-    pid_parameters_.i_error_p = dataLimit( pid_parameters_.i_error_p , pwm_range ) ;   //limit the output data ,this is very importan
-    if(pid_parameters_.i_flag == 1 && (inside_expect > 1 || inside_expect < -1) )
-        pid_parameters_.i_error_i += pid_parameters_.i2*pid_parameters_.i_error_now * pid_t;
-    else  pid_parameters_.i_error_i = 0;
-    pid_parameters_.i_error_i = dataLimit( pid_parameters_.i_error_i , pwm_range) ;
-    pid_parameters_.i_error_d = pid_parameters_.d2*(pid_parameters_.i_error_now-pid_parameters_.i_error_last) * (1/pid_t);
-    //pid_parameters_.i_error_d = pid_parameters_.d2*(pid_parameters_.i_error_now-2*pid_parameters_.i_error_last+pid_parameters_.i_error_before_last) * (1/pid_t);
-    pid_parameters_.i_error_d = dataLimit( pid_parameters_.i_error_d , pwm_range ) ;
+    pid_data.i_error_p = parameter.pid.p2 * pid_data.i_error_now;
+    pid_data.i_error_p = dataLimit( pid_data.i_error_p , pwm_range ) ;   //limit the output data ,this is very importan
+    if(i_flag == 1 && (inside_expect > 1 || inside_expect < -1) ){
+        pid_data.i_error_i += parameter.pid.i2*pid_data.i_error_now * pid_t;
+    }
+    else  pid_data.i_error_i = 0;
+    pid_data.i_error_i = dataLimit( pid_data.i_error_i , pwm_range) ;
+    pid_data.i_error_d = parameter.pid.d2*(pid_data.i_error_now-pid_data.i_error_last) * (1/pid_t);
+    //pid_data.i_error_d = parameter.pid.d2*(pid_data.i_error_now-2*pid_data.i_error_last+pid_data.i_error_before_last) * (1/pid_t);
+    pid_data.i_error_d = dataLimit( pid_data.i_error_d , pwm_range ) ;
 
-    pid_parameters_.i_pidout = pid_parameters_.i_error_p +  pid_parameters_.i_error_i + pid_parameters_.i_error_d;
-    pid_parameters_.i_pidout = dataLimit( pid_parameters_.i_pidout , pwm_range ) ;
-
+    pid_data.i_pidout = pid_data.i_error_p +  pid_data.i_error_i + pid_data.i_error_d;
+    pid_data.i_pidout = dataLimit( pid_data.i_pidout , pwm_range ) ;
 }
 
 /***********************************************************************************************************************
@@ -98,33 +90,33 @@ void MotorControl::pidOrdinaryCall(float outside_expect , float outside_measure
 void MotorControl::pidSeriesCall(float outside_expect , float outside_measure ,
                                  float inside_expect , float inside_measure , float pwm_range)
 {
+    pid_data.o_error_before_last = pid_data.o_error_last;
+    pid_data.o_error_last = pid_data.o_error_now;
+    pid_data.o_error_now = outside_expect - outside_measure;
 
-    pid_parameters_.o_error_before_last = pid_parameters_.o_error_last;
-    pid_parameters_.o_error_last = pid_parameters_.o_error_now;
-    pid_parameters_.o_error_now = outside_expect - outside_measure;
-
-    pid_parameters_.o_error_p = pid_parameters_.p1 * pid_parameters_.o_error_now;
-    if(pid_parameters_.i_flag == 1 && (inside_expect > 1 || inside_expect < -1)) 	pid_parameters_.o_error_i += pid_parameters_.i1 * pid_parameters_.o_error_now * pid_t;
-    else  pid_parameters_.o_error_i = 0;
-    pid_parameters_.o_error_i = dataLimit( pid_parameters_.o_error_i , pwm_range/2 ) ;
-    pid_parameters_.o_error_d = pid_parameters_.d1*(pid_parameters_.o_error_now-pid_parameters_.o_error_last) * (1/pid_t);
+    pid_data.o_error_p = parameter.pid.p1 * pid_data.o_error_now;
+    if(i_flag == 1 && (inside_expect > 1 || inside_expect < -1)) 	{
+        pid_data.o_error_i += parameter.pid.i1 * pid_data.o_error_now * pid_t;
+    }
+    else  pid_data.o_error_i = 0;
+    pid_data.o_error_i = dataLimit( pid_data.o_error_i , pwm_range/2 ) ;
+    pid_data.o_error_d = parameter.pid.d1*(pid_data.o_error_now-pid_data.o_error_last) * (1/pid_t);
     // get the outside ring output,and this is inside ring input
-    pid_parameters_.o_pidout = pid_parameters_.o_error_p +  pid_parameters_.o_error_i + pid_parameters_.o_error_d;
+    pid_data.o_pidout = pid_data.o_error_p +  pid_data.o_error_i + pid_data.o_error_d;
 
-    pid_parameters_.i_error_before_last = pid_parameters_.i_error_last;
-    pid_parameters_.i_error_last = pid_parameters_.i_error_now;
-    pid_parameters_.i_error_now = pid_parameters_.o_pidout- inside_measure ;
+    pid_data.i_error_before_last = pid_data.i_error_last;
+    pid_data.i_error_last = pid_data.i_error_now;
+    pid_data.i_error_now = pid_data.o_pidout- inside_measure ;
 
-    pid_parameters_.i_error_p = pid_parameters_.p2 * pid_parameters_.i_error_now;
-    pid_parameters_.i_error_p = dataLimit( pid_parameters_.i_error_p , pwm_range ) ;   //limit the output data ,this is very importan
-    pid_parameters_.i_error_i += pid_parameters_.i2*pid_parameters_.i_error_now * pid_t;
-    pid_parameters_.i_error_i = dataLimit( pid_parameters_.i_error_i , pwm_range/2) ;
-    pid_parameters_.i_error_d = pid_parameters_.d2*(pid_parameters_.i_error_now-pid_parameters_.i_error_last) * (1/pid_t);
-    pid_parameters_.i_error_d = dataLimit( pid_parameters_.i_error_d , pwm_range ) ;
+    pid_data.i_error_p = parameter.pid.p2 * pid_data.i_error_now;
+    pid_data.i_error_p = dataLimit( pid_data.i_error_p , pwm_range ) ;   //limit the output data ,this is very importan
+    pid_data.i_error_i += parameter.pid.i2*pid_data.i_error_now * pid_t;
+    pid_data.i_error_i = dataLimit( pid_data.i_error_i , pwm_range/2) ;
+    pid_data.i_error_d = parameter.pid.d2*(pid_data.i_error_now-pid_data.i_error_last) * (1/pid_t);
+    pid_data.i_error_d = dataLimit( pid_data.i_error_d , pwm_range ) ;
 
-    pid_parameters_.i_pidout = pid_parameters_.i_error_p +  pid_parameters_.i_error_i + pid_parameters_.i_error_d;
-    pid_parameters_.i_pidout = dataLimit( pid_parameters_.i_pidout , pwm_range ) ;
-
+    pid_data.i_pidout = pid_data.i_error_p +  pid_data.i_error_i + pid_data.i_error_d;
+    pid_data.i_pidout = dataLimit( pid_data.i_pidout , pwm_range ) ;
 }
 
 /***********************************************************************************************************************
@@ -138,43 +130,49 @@ void MotorControl::pidSeriesCall(float outside_expect , float outside_measure ,
 * float  expect_speed  ; motor degree/s
 * float unit_count ; the count of encoder sensor in one control cycle
 * Return:
-* float pid_parameters_.i_pidout ;  this is motor control pwm
+* float pid_data.i_pidout ;  this is motor control pwm
 * Cpu_Time:  
 *
 * History:
 ***********************************************************************************************************************/
-float MotorControl::speedControl(float expect_speed , float unit_count)
+void MotorControl::speedControlCall(void)
 {
-    //0.3
-    float filter =  0.3 * (50 * pid_t);
-
-    expect_angle_speed = (1-filter) * measure_angle_speed + filter * expect_speed;
-
-    if(motor_simulation_model == 1)
-    {
-        measure_unit_encoder = (simulation_max_angel_speed/360.0f)
-                *( pid_parameters_.i_pidout/pwm_max ) * encoder_num * pid_t;
-    }
-    else
-    {
-        measure_unit_encoder =  unit_count;  //if you using real motor
-    }
+    control_data.expect_angle_speed = (1 - parameter.speed_low_filter) * control_data.measure_angle_speed +
+            parameter.speed_low_filter * expect_angle_speed;
+    control_data.measure_unit_encoder =  getEncoderdata(parameter.motor_id);
 
     //expect unit encoder num in one cycle to pid
-    expect_unit_encoder = ( expect_angle_speed / 360 ) * encoder_num * pid_t;
-    expect_total_encoder += expect_unit_encoder ;   //recording total encoder
-    measure_total_encoder += measure_unit_encoder ;
+    control_data.expect_unit_encoder = ( control_data.expect_angle_speed / 360 ) * parameter.encoder_num * pid_t;
+    control_data.expect_total_encoder += control_data.expect_unit_encoder ;   //recording total encoder
+    control_data.measure_total_encoder += control_data.measure_unit_encoder ;
     //recording total angle for robot coordinate calculation
-    d_past_angle += (measure_unit_encoder/encoder_num)*360;
-    past_total_angle+=(measure_unit_encoder/encoder_num)*360;
+    control_data.d_past_angle += (control_data.measure_unit_encoder/parameter.encoder_num)*360;
+    control_data.past_total_angle+= (control_data.measure_unit_encoder/parameter.encoder_num)*360;
 
     //calc motor speed  degree/s
-    measure_angle_speed  = measure_unit_encoder * 360 / ( encoder_num*pid_t);
+    control_data.measure_angle_speed  = control_data.measure_unit_encoder * 360 / ( parameter.encoder_num*pid_t );
 
     //motor speed pid control function
-    pidOrdinaryCall(expect_total_encoder , measure_total_encoder
-                    , expect_unit_encoder , measure_unit_encoder , pwm_max);
+    pidOrdinaryCall(control_data.expect_total_encoder , control_data.measure_total_encoder
+                    , control_data.expect_unit_encoder , control_data.measure_unit_encoder , parameter.pwm_max);
 
-    return  pid_parameters_.i_pidout;
+    control_data.motor_current= getCurrent(parameter.motor_id);
+    if(control_data.motor_current > parameter.protect_current){
+        IODisable(parameter.motor_id);
+        return;
+    }
+    else if(control_data.motor_current < 0.8*parameter.protect_current){
+        IOEnable(parameter.motor_id);
+    }
+
+    if( control_enable_flag ==1 ){
+        control_data.pwm_output = deadZoneLimit(pid_data.i_pidout , parameter.pwm_dead_zone);
+    }
+    else if(control_enable_flag == 0){
+        control_data.pwm_output = 0;
+    }
+
+    setPWM(parameter.motor_id , control_data.pwm_output );
+
 }
 

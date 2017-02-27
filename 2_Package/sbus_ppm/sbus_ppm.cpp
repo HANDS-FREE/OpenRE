@@ -21,28 +21,8 @@
 
 #include "sbus_ppm.h"
 
-SBUS sbus ;
-PPM ppm ;
-
-//extern "C" void USART2_IRQHandler(void)
-//{
-//    unsigned char data;
-//#if SYSTEM_SUPPORT_OS == 1
-//    OSIntEnter();
-//#endif
-//    if(USART_GetITStatus(USART2, USART_IT_RXNE) != RESET)
-//    {
-//        data = USART_ReceiveData(USART2);
-//        sbus.receiveByteAnl(data);
-//        USART_ClearITPendingBit(USART2, USART_IT_RXNE);  // clear interrupt flag
-//    }
-//#if SYSTEM_SUPPORT_OS == 1
-//    OSIntExit();
-//#endif
-//}
-
 /***********************************************************************************************************************
-* Function:    void SBUS::Sbus_IRQ(unsigned int Data)    put this function in serial port interrupt func
+* Function:
 *
 * Scope:       public
 *
@@ -88,7 +68,7 @@ void SBUS::receiveByteAnl(unsigned char receive_byte)
 }
 
 /***********************************************************************************************************************
-* Function:    void SBUS::sbusDataAnl(void)
+* Function:
 *
 * Scope:       private  
 *
@@ -121,11 +101,11 @@ void SBUS::sbusDataAnl(void)
     sbus_channel[7] = sbus_rx_buffer_[11] << 3 | sbus_rx_buffer_[10] >> 5;
     sbus_channel[15] = sbus_rx_buffer_[22] << 3 | sbus_rx_buffer_[21] >> 5;
     sbus_flag = sbus_rx_buffer_[23];
-    if( sbus_flag == 0 ) sbus_state = 1;    
+    if( sbus_flag == 0 ) sbus_state = 1;
 }
 
 /***********************************************************************************************************************
-* Function:    float SBUS::sbusFrequencyMeasure(void)
+* Function:
 *
 * Scope:       private  
 *
@@ -149,7 +129,7 @@ float SBUS::sbusFrequencyMeasure(void)
 }	
 
 /***********************************************************************************************************************
-* Function:      void PPM::PPM_IRQ(float pwm_value)
+* Function:
 *
 * Scope:         public
 *
