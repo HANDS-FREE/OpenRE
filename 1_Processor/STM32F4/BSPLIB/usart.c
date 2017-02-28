@@ -254,8 +254,6 @@ void HF_USART_Put_Char(uint8_t USART_Channel , uint8_t Tx_Byte)
     USART_SendData(USARTx , Tx_Byte);
 }
 
-
-
 /***********************************************************************************************************************
 * Function:     static char *itoa(int value, char *string, int radix)
 *

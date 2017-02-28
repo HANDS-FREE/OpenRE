@@ -34,7 +34,7 @@ public:
         friend_id = friend_id_;   // 0x01 means master
         port_num = port_num_;
 #if HF_LINK_NODE_MODEL==0
-        board.usartDeviceInit((DeviceType) port_num , 921600);
+        Board::getInstance()->usartDeviceInit((DeviceType) port_num , 921600);
 #endif
     }
     inline unsigned char* getSerializedData(void)

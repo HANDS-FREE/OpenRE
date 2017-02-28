@@ -61,8 +61,8 @@ int main(void)
     OS_ERR err;
     CPU_SR_ALLOC();
 
-    board = Board();
-    board.boardBasicInit();
+    Board *board = Board::getInstance();
+    board->boardBasicInit();
 
     RobotModel robot_model;
     RobotAbstract robot;
@@ -204,15 +204,16 @@ void bsp_task(void *p_arg)
     OS_ERR err;
     p_arg = p_arg;
     float bsp_task_i=0;
+    Board *board = Board::getInstance();
 
     while(1)
     {
         bsp_task_i++;
-        board.boardBasicCall();            // need time stm32f1  35us
+        board->boardBasicCall();            // need time stm32f1  35us
         if(bsp_task_i >= 5)
         {
             bsp_task_i=0;
-            board.setLedState(0,2);
+            board->setLedState(0,2);
         }
         OSTimeDlyHMSM(0,0,0,10,OS_OPT_TIME_HMSM_STRICT,&err); //delay 10ms   100hz
     }
@@ -235,7 +236,7 @@ void robot_wheel_task(void *p_arg)
 {
 
     OS_ERR err;
-    CPU_SR_ALLOC();
+    //CPU_SR_ALLOC();
     p_arg = p_arg;
     RobotControl *robot_control_p = RobotControl::getInstance();
 
@@ -243,11 +244,11 @@ void robot_wheel_task(void *p_arg)
     {
         robot_control_p->call();
 
-//       OS_CRITICAL_ENTER();
-//        printf("battery_voltage = %.4f  cpu_usage = %.4f cpu_temperature = %.4f\r\n",
-//               board.battery_voltage , board.cpu_usage , board.cpu_temperature
-//               );
-//        OS_CRITICAL_EXIT();
+        //       OS_CRITICAL_ENTER();
+        //        printf("battery_voltage = %.4f  cpu_usage = %.4f cpu_temperature = %.4f\r\n",
+        //               board.battery_voltage , board.cpu_usage , board.cpu_temperature
+        //               );
+        //        OS_CRITICAL_EXIT();
 
         OSTimeDlyHMSM(0,0,0,50,OS_OPT_TIME_HMSM_STRICT,&err); //delay 50ms  20hz
     }
@@ -272,12 +273,13 @@ void hf_link_task(void *p_arg)
     OS_ERR err;
     p_arg = p_arg;
     RobotControl *robot_control_p = RobotControl::getInstance();
+    Board *board = Board::getInstance();
 
     while(1)
     {
-        if(board.usartDeviceReadData(robot_control_p->hf_link_node_device)->emptyCheck() == 0){
+        if(board->usartDeviceReadData(robot_control_p->hf_link_node_device)->emptyCheck() == 0){
             robot_control_p->hf_link_node->byteAnalysisCall(
-                        board.usartDeviceReadData(
+                        board->usartDeviceReadData(
                             robot_control_p->hf_link_node_device)->getData() );
         }
         else {

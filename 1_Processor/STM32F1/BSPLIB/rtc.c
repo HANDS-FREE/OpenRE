@@ -11,7 +11,6 @@
 * History:  
 * History: 
 * <author>    <time>      <version >       <desc>
-* ALIENTEK Mini STM32开发板 Copyright(C) 正点原子 
 * LiuDong    2016.1.8       V1.57       update the name of function
 * Lidexin    2016.1.11      V1.58       change the function RTC_Get_Week() and the function HF_RTC_Init()
 *
@@ -28,6 +27,19 @@ extern "C" {
 #include "delay.h"
 #include "usart.h"
 	
+//time structure
+typedef struct
+{
+    volatile  unsigned char hour;
+    volatile  unsigned char min;
+    volatile  unsigned char sec;
+    //Gregorian calendar
+    volatile  unsigned short int w_year;
+    volatile  unsigned char  w_month;
+    volatile  unsigned char  w_date;
+    volatile  unsigned char  week;
+}CALENDAR;
+
 CALENDAR calendar_r;//clock structure
 
 //month data table											 
@@ -51,9 +63,7 @@ const unsigned char mon_table[12]={31,28,31,30,31,30,31,31,30,31,30,31};
 * 				0,not is leap year
 * Cpu_Time:
 * 
-* History:
-* ALIENTEK Mini STM32开发板 Copyright(C) 正点原子
-* by   mawenke   2015.12.1     
+* History: 
 ************************************************************************************************************************/
 static unsigned char Is_Leap_Year(unsigned short int year)
 {			  
@@ -83,8 +93,6 @@ static unsigned char Is_Leap_Year(unsigned short int year)
 * Cpu_Time:
 * 
 * History:  
-* ALIENTEK Mini STM32开发板 Copyright(C) 正点原子
-* by   mawenke   2015.12.1  
 *************************************************************************************************************************/
 unsigned char RTC_Get_Week(unsigned short int year,unsigned char month,unsigned char day)
 {	
@@ -120,8 +128,6 @@ unsigned char RTC_Get_Week(unsigned short int year,unsigned char month,unsigned 
 * Cpu_Time:
 * 
 * History:  
-* ALIENTEK Mini STM32开发板 Copyright(C) 正点原子
-* by   mawenke   2015.12.1  
 **************************************************************************************************************************/
 static unsigned char RTC_Get(void)
 {
@@ -186,8 +192,6 @@ static unsigned char RTC_Get(void)
 * Cpu_Time:
 *
 * History:
-* ALIENTEK Mini STM32开发板 Copyright(C) 正点原子
-* by   mawenke   2015.12.1
 **************************************************************************************************************************/
 static void RTC_NVIC_Config(void)
 {	
@@ -213,8 +217,6 @@ static void RTC_NVIC_Config(void)
 * Cpu_Time:
 *
 * History:
-* ALIENTEK Mini STM32开发板 Copyright(C) 正点原子
-* by   mawenke   2015.12.1
 **************************************************************************************************************************/
 void RTC_IRQHandler(void)
 {		 
@@ -266,9 +268,6 @@ void RTC_IRQHandler(void)
 * Cpu_Time:
 *
 * History:
-* ALIENTEK Mini STM32开发板 Copyright(C) 正点原子
-* by   mawenke    2015.12.1                          creat
-* by   LiuDong    2016.1.8       V1.57       update the name of function
 **************************************************************************************************************************/
 unsigned char HF_RTC_Init(void)
 {
@@ -330,8 +329,6 @@ unsigned char HF_RTC_Init(void)
 * Cpu_Time:
 *
 * History:
-* ALIENTEK Mini STM32开发板 Copyright(C) 正点原子
-* by   mawenke   2015.12.1
 **************************************************************************************************************************/
 unsigned char RTC_Set(unsigned short int syear,unsigned char smon,unsigned char sday,unsigned char hour,unsigned char min,unsigned char sec)
 {
@@ -379,8 +376,6 @@ unsigned char RTC_Set(unsigned short int syear,unsigned char smon,unsigned char 
 * Cpu_Time:
 *
 * History:
-* ALIENTEK Mini STM32开发板 Copyright(C) 正点原子
-* by   mawenke   2015.12.1
 **************************************************************************************************************************/
 void RTC_Alarm_Set(unsigned short int syear,unsigned char smon,unsigned char sday,unsigned char hour,unsigned char min,unsigned char sec)
 {
@@ -414,10 +409,10 @@ void RTC_Alarm_Set(unsigned short int syear,unsigned char smon,unsigned char sda
     return ;
 }
 
-/*************************************************************************************************************************
-* Function:    void HF_RTC_Time_Renew(void)
+/***********************************************************************************************************************
+* Function:    void HF_Get_RTC_Time(void)
 *
-* Scope:       public
+* Scope:
 *
 * Description: RTC time update function
 *
@@ -428,12 +423,19 @@ void RTC_Alarm_Set(unsigned short int syear,unsigned char smon,unsigned char sda
 * Cpu_Time:
 *
 * History:
-* ALIENTEK Mini STM32开发板 Copyright(C) 正点原子
-* by   mawenke   2015.12.1
-**************************************************************************************************************************/
-void HF_RTC_Time_Renew(void)   //update time structure
+***********************************************************************************************************************/
+void HF_Get_RTC_Time(uint8_t* year , uint8_t* month , uint8_t* date , uint8_t* week
+                     ,uint8_t* hour , uint8_t* min , uint8_t* sec , uint8_t* ampm)
 {
     RTC_Get();
+    *year = calendar_r.w_year;
+    *month = calendar_r.w_month;
+    *date = calendar_r.w_date;
+    *week = calendar_r.week;
+    *hour = calendar_r.hour;
+    *min = calendar_r.min;
+    *sec = calendar_r.sec;
+    *ampm = 0;
 }
 
 #ifdef __cplusplus

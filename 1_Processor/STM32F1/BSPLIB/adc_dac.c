@@ -263,10 +263,13 @@ float HF_Get_ADC_Output(uint8_t n)
     return ADC_Standard_Value;
 }
 
-// °C
+#define ADC1_DR_Address    ((u32)0x40012400+0x4c)
+#define V25  0x6EE
+#define AVG_SLOPE 0x05
+
 float HF_Get_CPU_Temperature(void)
 {
-    cpu_temperature = 0.8f*cpu_temperature + 0.2f*( (HF_Get_ADC_Output(6) - 0.76f ) / 0.0025f +25 ) ;
+    cpu_temperature = 0.8f*cpu_temperature + 0.2f*(((float)V25- HF_Get_ADC_Output(ADC_EN_NUM + 1)) / (float)AVG_SLOPE+25) ;
     return cpu_temperature;
 }
 
@@ -331,7 +334,6 @@ void HF_DAC_Init(uint8_t channel_x)
 
     }
 }
-
 
 /***********************************************************************************************************************
 * Function:     void Dac_Set_Vol(unsigned int DAC_Channel_x , unsigned  short int  vol)

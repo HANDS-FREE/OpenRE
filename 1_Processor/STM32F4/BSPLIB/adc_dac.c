@@ -277,7 +277,7 @@ float HF_Get_ADC_Output(uint8_t n)
 // °C
 float HF_Get_CPU_Temperature(void)
 {
-    return (HF_Get_ADC_Output(6) - 0.76f ) / 0.0025f +25 ;
+    return (HF_Get_ADC_Output( ADC_EN_NUM + 1) - 0.76f ) / 0.0025f +25 ;
 }
 
 /***********************************************************************************************************************

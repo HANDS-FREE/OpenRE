@@ -43,17 +43,17 @@ MS611 ms611;
 void MS611::readBuffer(void)
 {
     unsigned char fastmode = 0; //1 : i2c high speed mode  0 : low speed mode
-    board.iicDeviceReadBuf(IIC_IMU ,  MS_ADDR , CMD_ADC_READ , read_buffer , 3 , fastmode);
+    Board::getInstance()->iicDeviceReadBuf(IIC_IMU ,  MS_ADDR , CMD_ADC_READ , read_buffer , 3 , fastmode);
 }
 void MS611::writeByte(unsigned char reg_address , unsigned char reg_data)
 {
     unsigned char fastmode = 0;
-    board.iicDeviceWriteByte(IIC_IMU , MS_ADDR, reg_address, reg_data, fastmode);
+    Board::getInstance()->iicDeviceWriteByte(IIC_IMU , MS_ADDR, reg_address, reg_data, fastmode);
 }
 unsigned char MS611::readByte(unsigned char reg_address)
 {
     unsigned char fastmode = 0;
-    return( board.iicDeviceReadByte(IIC_IMU , MS_ADDR, reg_address, fastmode) );
+    return(Board::getInstance()->iicDeviceReadByte(IIC_IMU , MS_ADDR, reg_address, fastmode) );
 }
 
 void MS611::start_t(void)
@@ -171,7 +171,7 @@ unsigned char MS611::deviceInit(void)
     delay_ms(10);
     for (i = 0; i < PROM_NB; i++)
     {
-        sta &= board.iicDeviceReadBuf(IIC_IMU , MS_ADDR , CMD_PROM_RD + i*2 , rxbuf , 2 , 0);
+        sta &=Board::getInstance()->iicDeviceReadBuf(IIC_IMU , MS_ADDR , CMD_PROM_RD + i*2 , rxbuf , 2 , 0);
         ms5611_prom[i] = rxbuf[0] << 8 | rxbuf[1];
     }
     if(sta){

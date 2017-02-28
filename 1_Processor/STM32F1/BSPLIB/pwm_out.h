@@ -7,7 +7,6 @@ extern "C" {
 
 #include "stm32f10x.h"
 
-
 //PWM initialization, parameter TIMx=TIM1~8  Channel=1,2,3,4
 //default Prescaler :72-1  frequency:1MHZ
 

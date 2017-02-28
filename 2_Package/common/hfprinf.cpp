@@ -32,6 +32,8 @@ extern "C" {
 #undef errno
 extern int errno;
 
+void __cxa_pure_virtual() { while (1); }
+
 /*
  environ
  A pointer to a list of environment variables and their values.
@@ -43,7 +45,7 @@ char **environ = __env;
 int _write(int file, char *ptr, int len);
 
 void _exit(int status) {
-    _write(1, "exit", 4);
+    _write(1, (char*)"exit", 4);
     while (1) {
         ;
     }
@@ -153,7 +155,7 @@ caddr_t _sbrk(int incr) {
     char * stack = (char*) __get_MSP();
     if (heap_end + incr >  stack)
     {
-        _write (STDERR_FILENO, "Heap and stack collision\n", 25);
+        _write (STDERR_FILENO, (char*)"Heap and stack collision\n", 25);
         errno = ENOMEM;
         return  (caddr_t) -1;
         //abort ();
@@ -175,10 +177,10 @@ int _read(int file, char *ptr, int len) {
     switch (file) {
     case STDIN_FILENO:
         for (n = 0; n < len; n++) {
-            char c ;
-            if(board.usartDeviceReadData(USART_DEBUG)->emptyCheck() == 0)
+            char c = 0;
+            if(Board::getInstance()->usartDeviceReadData(USART_DEBUG)->emptyCheck() == 0)
             {
-                c = board.usartDeviceReadData(USART_DEBUG)->getData();
+                c = Board::getInstance()->usartDeviceReadData(USART_DEBUG)->getData();
             }
             *ptr++ = c;
             num++;
@@ -237,12 +239,12 @@ int _write(int file, char *ptr, int len) {
     switch (file) {
     case STDOUT_FILENO: /*stdout*/
         for (n = 0; n < len; n++) {
-            board.debugPutChar(*ptr++);
+            Board::getInstance()->debugPutChar(*ptr++);
         }
         break;
     case STDERR_FILENO: /* stderr */
         for (n = 0; n < len; n++) {
-            board.debugPutChar(*ptr++);
+            Board::getInstance()->debugPutChar(*ptr++);
         }
         break;
     default:
@@ -251,59 +253,6 @@ int _write(int file, char *ptr, int len) {
     }
     return len;
 }
-
-//#else
-
-//#ifdef __cplusplus                      //if use C++ compiler
-
-//#pragma import(__use_no_semihosting)    //add this line and you do not need to tick use micro lib
-
-////support function that standard library  need
-//struct std::__FILE
-//{
-//    int handle;
-//};
-
-//__FILE __stdout;
-
-////define sys_exit() to avoid half-master mode
-//void _sys_exit(int x)
-//{
-//    x = x;
-//}
-
-//int std::fputc(int ch, std::FILE *f)
-//{
-//      board.debugPutChar((uint8_t)ch);
-//}
-
-//#else                                   //if use C compiler
-
-//#pragma import(__use_no_semihosting)    //add this line and you do not need to tick use micro lib
-////support function that standard library  need
-//struct __FILE
-//{
-//    int handle;
-//};
-
-//FILE __stdout;
-
-////define sys_exit() to avoid half-master mode
-//void _sys_exit(int x)
-//{
-//    x = x;
-//}
-
-////Redirect fput
-//int fputc(int ch, FILE *f)
-//{
-//    HF_USART_Put_Char(DEBUG_PRINTF_INTERFACE , (uint8_t)ch);
-//    //    while((USART1->SR&0X40)==0);//cycle send until succeed
-//    //    USART1->DR = (uint8_t) ch;
-//    return ch;
-//}
-
-//#endif
 
 #endif
 

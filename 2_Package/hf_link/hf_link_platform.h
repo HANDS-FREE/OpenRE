@@ -10,7 +10,7 @@
 inline unsigned char HFLinkSendBuffer(unsigned char port_num , unsigned char* buffer, unsigned short int size)
 {
 
-    while(size--)  board.usartDeviceWriteByte((DeviceType)port_num , *buffer++);
+    while(size--)  Board::getInstance()->usartDeviceWriteByte((DeviceType)port_num , *buffer++);
     return 1;
 
     //    if(port_num == 1){

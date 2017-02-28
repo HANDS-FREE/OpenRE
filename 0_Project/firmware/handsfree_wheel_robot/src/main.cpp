@@ -12,7 +12,7 @@
 * <author>      <time>      <version>      <desc>
 * mawenke      2015.10.1    V1.0          creat this file
 *
-* Description:   
+* Description:
 ***********************************************************************************************************************/
 
 #include "main_config.h"
@@ -23,8 +23,8 @@
 int main(void)
 {
 
-    board = Board();
-    board.boardBasicInit();
+    Board *board = Board::getInstance();
+    board->boardBasicInit();
 
     RobotModel robot_model;
     RobotAbstract robot;
@@ -42,39 +42,39 @@ int main(void)
     while(1)
     {
 
-        if(board.usartDeviceReadData(robot_control_p->hf_link_node_device)->emptyCheck() == 0){
+        if(board->usartDeviceReadData(robot_control_p->hf_link_node_device)->emptyCheck() == 0){
             robot_control_p->hf_link_node->byteAnalysisCall(
-                        board.usartDeviceReadData(
+                        board->usartDeviceReadData(
                             robot_control_p->hf_link_node_device)->getData() );
         }
-        if ( board.cnt_1ms >= 1 )      // 1000hz
+        if ( board->cnt_1ms >= 1 )      // 1000hz
         {
-            board.cnt_1ms=0;
+            board->cnt_1ms=0;
             // imu.topCall();
         }
-        if ( board.cnt_2ms >= 2 )      // 500hz
+        if ( board->cnt_2ms >= 2 )      // 500hz
         {
-            board.cnt_2ms=0;
+            board->cnt_2ms=0;
         }
-        if ( board.cnt_5ms >= 5 )      // 200hz
+        if ( board->cnt_5ms >= 5 )      // 200hz
         {
-            board.cnt_5ms=0;
+            board->cnt_5ms=0;
         }
-        if ( board.cnt_10ms >= 10 )    // 100hz
+        if ( board->cnt_10ms >= 10 )    // 100hz
         {
-            board.cnt_10ms=0;
-            board.boardBasicCall();    // need time stm32f1  35us
+            board->cnt_10ms=0;
+            board->boardBasicCall();    // need time stm32f1  35us
         }
-        if ( board.cnt_20ms >= 20 )    // 50hz
+        if ( board->cnt_20ms >= 20 )    // 50hz
         {
-            board.cnt_20ms = 0 ;
+            board->cnt_20ms = 0 ;
             robot_control_p->motor_top.motorTopCall(); //motor speed control
         }
-        if ( board.cnt_50ms >= 50 )    // 20hz
+        if ( board->cnt_50ms >= 50 )    // 20hz
         {
-            board.cnt_50ms = 0 ;
+            board->cnt_50ms = 0 ;
             robot_control_p->call();
-            board.setLedState(0,2);
+            board->setLedState(0,2);
         }
     }
 

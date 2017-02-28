@@ -49,8 +49,8 @@ int main(void)
     OS_ERR err;
     CPU_SR_ALLOC();
 
-    board = Board();
-    board.boardBasicInit();
+    Board *board = Board::getInstance();
+    board->boardBasicInit();
 
     printf("app start \r\n");
 
@@ -151,11 +151,13 @@ void led0_task(void *p_arg)
 {
     OS_ERR err;
     p_arg = p_arg;
+    Board *board = Board::getInstance();
+
     while(1)
     {
-        board.setLedState(0,0);
+        board->setLedState(0,0);
         OSTimeDlyHMSM(0,0,0,200,OS_OPT_TIME_HMSM_STRICT,&err); //delay 200ms
-        board.setLedState(0,1);
+        board->setLedState(0,1);
         OSTimeDlyHMSM(0,0,0,500,OS_OPT_TIME_HMSM_STRICT,&err); //delay 500ms
     }
 }
@@ -164,11 +166,13 @@ void beep_task(void *p_arg)
 {
     OS_ERR err;
     p_arg = p_arg;
+    Board *board = Board::getInstance();
+
     while(1)
     {
-        board.setBeepState(0);
+        board->setBeepState(0);
         OSTimeDlyHMSM(0,0,0,500,OS_OPT_TIME_HMSM_STRICT,&err); //delay 500ms
-        board.setBeepState(1);
+        board->setBeepState(1);
         OSTimeDlyHMSM(0,0,0,500,OS_OPT_TIME_HMSM_STRICT,&err); //delay 500ms
     }
 }
@@ -179,6 +183,7 @@ void float_task(void *p_arg)
     p_arg = p_arg;
     static float float_num=0.01;
     CPU_SR_ALLOC();
+
     while(1)
     {
         float_num+=0.01f;

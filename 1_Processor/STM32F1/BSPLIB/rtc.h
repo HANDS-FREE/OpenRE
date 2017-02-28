@@ -1,44 +1,27 @@
-#ifndef __rtc_H__
-#define __rtc_H__
+#ifndef RTC_H
+#define RTC_H
 
 #ifdef __cplusplus
 extern "C" {
 #endif 
 
 #include "stm32f10x.h"
-#include "main_config.h"
 
-//time structure
-typedef struct
-{
-    volatile  unsigned char hour;
-    volatile  unsigned char min;
-    volatile  unsigned char sec;
-    //Gregorian calendar
-    volatile  unsigned short int w_year;
-    volatile  unsigned char  w_month;
-    volatile  unsigned char  w_date;
-    volatile  unsigned char  week;
-}CALENDAR;
-
-
-extern CALENDAR calendar_r;	//calendar strcuture
-
-//////
-unsigned char HF_RTC_Init(void);						//RTC initialization
-void HF_RTC_Time_Renew(void);	  //renew time structure
+unsigned char HF_RTC_Init(void); //RTC initialization
+void HF_Get_RTC_Time(uint8_t* year , uint8_t* month , uint8_t* date , uint8_t* week,
+                     uint8_t* hour , uint8_t* min , uint8_t* sec , uint8_t* ampm);
 
 unsigned char RTC_Get_Week(unsigned short int year, unsigned char month, unsigned char day);
 
-//unsigned char RTC_Init(void);        //Initialize RTC,return 0-->failed,retuen 1-->succeeded.
-void RTC_Alarm_Set(unsigned short int syear, unsigned char smon, unsigned char sday, unsigned char hour, unsigned char min, unsigned char sec);
-unsigned char RTC_Set(unsigned short int syear, unsigned char smon, unsigned char sday, unsigned char hour, unsigned char min, unsigned char sec);//set time
-
+void RTC_Alarm_Set(unsigned short int syear, unsigned char smon, unsigned char sday,
+                   unsigned char hour, unsigned char min, unsigned char sec);
+unsigned char RTC_Set(unsigned short int syear, unsigned char smon, unsigned char sday,
+                      unsigned char hour, unsigned char min, unsigned char sec);//set time
 
 #ifdef __cplusplus
 }
 #endif 
 
-#endif //__rtc_H__
+#endif // RTC_H
 
 

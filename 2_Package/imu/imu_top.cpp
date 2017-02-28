@@ -43,7 +43,7 @@ void IMU::topInit(uint8_t mpu , uint8_t bmp , uint8_t hmc ,
 
     uint8_t temp;
 
-    board.iicDeviceInit(IIC_IMU);
+    Board::getInstance()->iicDeviceInit(IIC_IMU);
     debug_en = debug;
 
     if(mpu == 1)

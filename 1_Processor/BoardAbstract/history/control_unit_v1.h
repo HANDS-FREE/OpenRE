@@ -1,4 +1,0 @@
-#ifndef CONTROL_UNIT_V1_H
-#define CONTROL_UNIT_V1_H
-
-#endif // CONTROL_UNIT_V1_H

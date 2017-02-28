@@ -16,115 +16,112 @@
 
 #include "board.h"
 
-Board board;
-
 Board::Board() : BoardAbstract()
 {
     battery_voltage_alarm_ = 10.50 ;
     battery_proportion_ = 11.00 ;
 
 #ifndef DEBUG_PRINTF_INTERFACE
-    usart_debug = 0x10;
+    device_type[USART_DEBUG] = 0x10;
 #else
     if(DEBUG_PRINTF_INTERFACE == 1){
-        usart_debug = 0x10;
+        device_type[USART_DEBUG] = 0x10;
     }
     else if(DEBUG_PRINTF_INTERFACE == 2){
-        usart_debug = 0x20;
+        device_type[USART_DEBUG] = 0x20;
     }
     else if(DEBUG_PRINTF_INTERFACE == 3){
-        usart_debug = 0x30;
+        device_type[USART_DEBUG] = 0x30;
     }
-    else { usart_debug = 0x10;}
+    else if(DEBUG_PRINTF_INTERFACE == 4){
+        device_type[USART_DEBUG] = 0x40;
+    }
+    else if(DEBUG_PRINTF_INTERFACE == 5){
+        device_type[USART_DEBUG] = 0x50;
+    }
+    else if(DEBUG_PRINTF_INTERFACE == 6){
+        device_type[USART_DEBUG] = 0x60;
+    }
+    else { device_type[USART_DEBUG] = 0x10;}
 #endif
 
 #ifndef PC_INTERFACE
-    usart_pc = 0x10;
+    device_type[USART_PC] = 0x10;
 #else
     if(PC_INTERFACE == 1){
-        usart_pc = 0x10;
+        device_type[USART_PC] = 0x10;
     }
     else if(PC_INTERFACE == 2){
-        usart_pc = 0x20;
+        device_type[USART_PC] = 0x20;
     }
     else if(PC_INTERFACE == 3){
-        usart_pc = 0x30;
+        device_type[USART_PC] = 0x30;
     }
     if(PC_INTERFACE == 4){
-        usart_pc = 0x40;
+        device_type[USART_PC] = 0x40;
     }
     else if(PC_INTERFACE == 5){
-        usart_pc = 0x50;
+        device_type[USART_PC] = 0x50;
     }
     else if(PC_INTERFACE == 6){
-        usart_pc = 0x60;
+        device_type[USART_PC] = 0x60;
     }
-    else { usart_pc = 0x10;}
+    else { device_type[USART_PC] = 0x10;}
 #endif
 
 #ifndef RADIO_INTERFACE
-    usart_radio = 0x40;
+    device_type[USART_RADIO] = 0x40;
 #else
     if(RADIO_INTERFACE == 1){
-        usart_radio = 0x10;
+        device_type[USART_RADIO] = 0x10;
     }
     else if(RADIO_INTERFACE == 2){
-        usart_radio = 0x20;
+        device_type[USART_RADIO] = 0x20;
     }
     else if(RADIO_INTERFACE == 3){
-        usart_radio = 0x30;
+        device_type[USART_RADIO] = 0x30;
     }
     else if(RADIO_INTERFACE == 4){
-        usart_radio = 0x40;
+        device_type[USART_RADIO] = 0x40;
     }
     else if(RADIO_INTERFACE == 5){
-        usart_radio = 0x50;
+        device_type[USART_RADIO] = 0x50;
     }
     else if(RADIO_INTERFACE == 6){
-        usart_radio = 0x60;
+        device_type[USART_RADIO] = 0x60;
     }
-    else { usart_radio = 0x40;}
+    else { device_type[USART_RADIO] = 0x40;}
 #endif
 
-    usart_gps = 0x32;
-    usart_sbus = 0x21;
-    usart_digital_servo = 0x32;
-    usart_imu = 0x60;
-    iic_dev_imu = 0x10;
-    iic_dev_at24cxx = 0x10;
-    iic_dev_oled = 0x00;
-    spi_dev_imu = 0x00;
-    spi_dev_nrf24l01 = 0x00;
-    spi_dev_lcd = 0x00;
-    can_dev_imu = 0x00;
-    can_dev_pan_and_tilt = 0x00;
+    device_type[USART_GPS] = 0x32;
+    device_type[USART_SBUS] = 0x21;
+    device_type[USART_DIGITAL_SERVO] = 0x32;
+    device_type[USART_IMU] = 0x60;
+    device_type[IIC_IMU] = 0x10;
+    device_type[IIC_AT24CXX] = 0x10;
+    device_type[IIC_OLED] = 0x00;
+    device_type[SPI_IMU] = 0x00;
+    device_type[SPI_NRF24L01] = 0x00;
+    device_type[SPI_LCD] = 0x00;
+    device_type[CAN_IMU] = 0x00;
+    device_type[CAN_PAN_AND_TILT] = 0x00;
 }
 
-float Board::getBatteryVoltage(void)
-{
-    //0.33 is the loss voltage of diode
-    battery_voltage_ = 0.8f * battery_voltage_+ 0.2f*(float)( 0.33f + HF_Get_ADC_Output(1) * battery_proportion_ ) ;
-    return battery_voltage_ ;
-}
-
-void Board::getCPUInfo(void)
-{   //get ID of CPU and capacity of Flash
-    chipUniqueID[0] = *(__IO u32 *)(0x1FFF7A10); // MSB
-    chipUniqueID[1] = *(__IO u32 *)(0x1FFF7A14); //
-    chipUniqueID[2] = *(__IO u32 *)(0x1FFF7A18); // LSB
-    flashSize =  *(__IO u16 *)(0x1FFF7A22);      //Unit:KB
-}
-
-void Board::adcInit(void)
-{
-    HF_ADC_Moder_Init(0X3E00 , 5 , 2.5f);   //ADC init
-}
-
-void Board::timerInit(void)
-{
-    HF_Timer_Init(TIM6 , 1000);  //timer6 init , 1000us
-}
-
+/***********************************************************************************************************************
+* Function:
+*
+* Scope:
+*
+* Description:
+*
+* Arguments:
+*
+* Return:
+*
+* Cpu_Time:
+*
+* History:
+***********************************************************************************************************************/
 void Board::ledInit(void)
 {
     GPIO_InitTypeDef  GPIO_InitStruct;
@@ -165,21 +162,6 @@ void Board::setLedState(uint8_t led_id, uint8_t operation){
     }
 }
 
-/***********************************************************************************************************************
-* Function:
-*
-* Scope:
-*
-* Description:
-*
-* Arguments:
-*
-* Return:
-*
-* Cpu_Time:
-*
-* History:
-***********************************************************************************************************************/
 void Board::beepInit(void)
 {
     GPIO_InitTypeDef  GPIO_InitStruct;
@@ -199,30 +181,15 @@ void Board::setBeepState(uint8_t operation)
     else if(operation == 2) { GPIO_ToggleBits(GPIOE , GPIO_Pin_1); }
 }
 
-/***********************************************************************************************************************
-* Function:
-*
-* Scope:
-*
-* Description:
-*
-* Arguments:
-*
-* Return:
-*
-* Cpu_Time:
-*
-* History:
-***********************************************************************************************************************/
 void Board::keyInit(void)
 {
 
 }
 
-void Board::keyStateRenew(void){
+void Board::keyStateRenew(void)
+{
 
 }
-
 
 
 /***********************************************************************************************************************
@@ -341,6 +308,7 @@ void Board::motorInterfaceInit(uint8_t mode , uint8_t motor_id , float motor_pwm
 
 }
 
+
 /***********************************************************************************************************************
 * Function:
 *
@@ -396,7 +364,7 @@ void Board::motorDisable(uint8_t mode , uint8_t motor_id)
             GPIO_ResetBits(GPIOE , GPIO_Pin_15);
         }
     }
-   else if(mode == 1)
+    else if(mode == 1)
     {
         if(motor_id == 1 ){
             GPIO_ResetBits(GPIOE , GPIO_Pin_8);
@@ -416,6 +384,7 @@ void Board::motorDisable(uint8_t mode , uint8_t motor_id)
         }
     }
 }
+
 
 /***********************************************************************************************************************
 * Function:
@@ -470,7 +439,6 @@ void Board::motorSetPWM(uint8_t mode , uint8_t motor_id , int pwm_value)
                 return;
             }
         }
-
         else if(motor_id ==3 ){
             if( pwm_value > 5) {
                 HF_Set_PWM(TIM9 , 1 , (uint16_t)pwm_value);
@@ -506,7 +474,8 @@ void Board::motorSetPWM(uint8_t mode , uint8_t motor_id , int pwm_value)
             }
         }
     }
-    else if (mode == 1) {
+    else if (mode == 1)
+    {
         if( motor_id ==1 ){
             if( pwm_value > 5) {
                 GPIO_SetBits(GPIOE , GPIO_Pin_11);
@@ -582,6 +551,8 @@ void Board::motorSetPWM(uint8_t mode , uint8_t motor_id , int pwm_value)
         }
     }
 }
+
+
 /***********************************************************************************************************************
 * Function:
 *
@@ -634,10 +605,8 @@ float Board::getMotorCurrent(uint8_t motor_id)
         motor_current = 2.94f * HF_Get_ADC_Output(5);
         return motor_current;
     }
-
     return 0;
 }
-
 
 
 /***********************************************************************************************************************
@@ -671,10 +640,12 @@ void Board::axServoTxModel(void)
 {
     GPIO_SetBits(GPIOD , GPIO_Pin_10);
 }
+
 void Board::axServoRxModel(void)
 {
     GPIO_ResetBits(GPIOD , GPIO_Pin_10);
 }
+
 
 /***********************************************************************************************************************
 * Function:
@@ -777,7 +748,7 @@ void Board::pwmInterfaceInit(uint8_t channel_x , uint8_t mode)
 void Board::setPWMInterfaceValue(uint8_t channel_x , uint16_t pwm_value)
 {
     if(pwm_value <0) return;
-    else if(channel_x == 1){
+    if(channel_x == 1){
         HF_Set_PWM(TIM1 , 1 ,  pwm_value);
     }
     else if(channel_x == 2){
@@ -813,7 +784,7 @@ void Board::setPWMInterfaceValue(uint8_t channel_x , uint16_t pwm_value)
 
 uint16_t Board::readPWMInterfaceValue(uint8_t channel_x)
 {
-    uint16_t pwm_value;
+    uint16_t pwm_value = 0;
 
     if(channel_x == 1){
         pwm_value = TIM1->CCR1;
@@ -848,4 +819,45 @@ uint16_t Board::readPWMInterfaceValue(uint8_t channel_x)
     else return 0;
 
     return pwm_value;
+}
+
+
+/***********************************************************************************************************************
+* Function:
+*
+* Scope:
+*
+* Description:
+*
+* Arguments:
+*
+* Return:
+*
+* Cpu_Time:
+*
+* History:
+***********************************************************************************************************************/
+void Board::adcInit(void)
+{
+    HF_ADC_Moder_Init(0X3E00 , 5 , 2.5f);   //ADC init
+}
+
+void Board::timerInit(void)
+{
+    HF_Timer_Init(TIM6 , 1000);  //timer6 init , 1000us
+}
+
+float Board::getBatteryVoltage(void)
+{
+    //0.33 is the loss voltage of diode
+    battery_voltage_ = 0.8f * battery_voltage_+ 0.2f*(float)(0.33f + HF_Get_ADC_Output(1) * battery_proportion_);
+    return battery_voltage_ ;
+}
+
+void Board::getCPUInfo(void)
+{   //get ID of CPU and capacity of Flash
+    chipUniqueID[0] = *(__IO u32 *)(0x1FFF7A10); // MSB
+    chipUniqueID[1] = *(__IO u32 *)(0x1FFF7A14); //
+    chipUniqueID[2] = *(__IO u32 *)(0x1FFF7A18); // LSB
+    flashSize =  *(__IO u16 *)(0x1FFF7A22);      //Unit:KB
 }

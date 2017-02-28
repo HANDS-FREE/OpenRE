@@ -9,6 +9,7 @@ extern "C" {
 }
 #endif
 
+#include "string.h"
 #include "queue.h"
 #include "os_include.h"
 
@@ -28,7 +29,8 @@ enum DeviceType{
     SPI_NRF24L01,
     SPI_LCD,
     CAN_IMU,
-    CAN_PAN_AND_TILT
+    CAN_PAN_AND_TILT,
+    LAST_DEVICE_FLAG
 };
 
 class BoardAbstract
@@ -50,16 +52,18 @@ public:
 
 public:
     /*****system support functions*********************************************************************************************/
-    virtual void setLedState(uint8_t led_id, uint8_t operation) = 0; //operation: 0 off , 1 on , 2 toggle
-    virtual void setBeepState(uint8_t operation) =0 ;  //operation: 0 off , 1 on , 2 toggle
+    //operation: 0 off , 1 on , 2 toggle
+    virtual void setLedState(uint8_t led_id, uint8_t operation) = 0;
+    //operation: 0 off , 1 on , 2 toggle
+    virtual void setBeepState(uint8_t operation) = 0 ;
     /****hardwareinterface -- motor********************************************************************************************/
     //mode = 1 (enable pwm1 pwm2)  ; mode = 2 (pwm , IOA , IOB)
     virtual void motorInterfaceInit(uint8_t mode , uint8_t motor_id , float motor_pwm_t) = 0;
     virtual void motorEnable(uint8_t mode , uint8_t motor_id ) = 0;
     virtual void motorDisable(uint8_t mode , uint8_t motor_id ) = 0;
-    virtual void motorSetPWM(uint8_t mode , uint8_t motor_id , int pwm_value) =0 ;
-    virtual float getMotorEncoderCNT(uint8_t motor_id) = 0;
-    virtual float getMotorCurrent(uint8_t motor_id) = 0;
+    virtual void motorSetPWM(uint8_t mode , uint8_t motor_id , int pwm_value) = 0;
+    virtual float getMotorEncoderCNT(uint8_t motor_id) {return 0;}
+    virtual float getMotorCurrent(uint8_t motor_id) {return 0;}
     /*****hardwareinterface -- digital servo**************************************************************************************/
     virtual void axServoInterfaceInit(void) = 0;
     virtual void axServoTxModel(void) = 0;
@@ -78,12 +82,6 @@ public:
     {
         return HF_Get_System_Time();
     }
-    void updateLocalTime()
-    {
-        //updating time
-        HF_Get_RTC_Time(&date_year , &date_month , &date_day , &date_week,
-                        &time_hour , &time_min , &time_sec , &time_ampm);
-    }
     void debugInterfaceInit(void)
     {
         usartDeviceInit(USART_DEBUG , 921600);  //debug USART init
@@ -96,7 +94,6 @@ public:
     void setBeepModel(uint8_t model){ beep_model = model;}
 
     uint8_t getKeyState(uint8_t key_id){ return key_state[key_id];}  //state=1 press
-
 
     /******device -- for usart device or interface***********************************************************************************/
     Queue* getUsartQueue(uint8_t channel);
@@ -126,8 +123,8 @@ public:
     /***********************************************************************************************************************/
 
     /******device -- for io device or interface************************************************************************************/
-    void ioDeviceInit(DeviceType io_device_type){}
-    float getIODeviceData(DeviceType io_device_type){}
+    virtual void ioDeviceInit(DeviceType io_device_type) = 0;
+    virtual float getIODeviceData(DeviceType io_device_type) = 0;
 
 protected:
     float battery_voltage_;
@@ -143,11 +140,7 @@ protected:
     uint8_t key_state[5];
     //the device id 's high 4 bit means which channel , low 4 bit means the channel mapping interface
     // 0x00 means this device does not support
-    uint8_t usart_debug , usart_pc , usart_radio , usart_gps , usart_sbus , usart_digital_servo , usart_imu;
-    uint8_t iic_dev_imu , iic_dev_at24cxx , iic_dev_oled;
-    uint8_t spi_dev_imu , spi_dev_nrf24l01 , spi_dev_lcd ;
-    uint8_t can_dev_imu , can_dev_pan_and_tilt;
-
+    uint8_t device_type[LAST_DEVICE_FLAG];
     Queue usart1_queue ,  usart2_queue , usart3_queue , usart4_queue , usart5_queue , usart6_queue;
 
 
@@ -161,17 +154,12 @@ private:
     virtual void keyStateRenew(void) = 0;  //100HZ
     virtual void beepInit(void) = 0;
 
-    /******device -- for all device ***********************************************************************************/
-    void deviceAnaly(DeviceType device_type_ , uint8_t* device_channel_,
-                     uint8_t* device_mapping_);
-    // //Initialize the measurement systemm
-    void systemClockInit(void) {
-        HF_System_Timer_Init();
-    }
+    void beepStateRenew(void); //100HZ
+    //Initialize the measurement systemm
+    void systemClockInit(void);
+    void updateLocalTime(void);
     float getCPUUsage(void);
     float getCPUTemperature(void);
-    void beepStateRenew(void); //100HZ
-
 
     uint8_t getByteHighFourBit(uint8_t data){ return (data&0xf0)>>4;}
     uint8_t getByteLowFourBit(uint8_t data){ return data&0x0f;}

@@ -361,7 +361,7 @@ void HF_PWMChannel_Init(TIM_TypeDef* TIMx, uint8_t Channel , uint16_t Prescaler,
             }
             else return;
         }
-else if( GPIO_AF == 1 )
+        else if( GPIO_AF == 1 )
         {
             RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);
 
@@ -424,7 +424,6 @@ else if( GPIO_AF == 1 )
             }
             else return;
         }
-
     }
 
     TIM_TimeBaseStructure.TIM_Prescaler = Prescaler;    //Prescaler

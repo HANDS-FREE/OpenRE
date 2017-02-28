@@ -422,6 +422,21 @@ void GPIO_Write(GPIO_TypeDef* GPIOx, uint16_t PortVal)
   GPIOx->ODR = PortVal;
 }
 
+//add by mawenke
+/**
+  * @brief  Toggles the specified GPIO pins..
+  * @param  GPIOx: where x can be (A..I) to select the GPIO peripheral.
+  * @param  GPIO_Pin: Specifies the pins to be toggled.
+  * @retval None
+  */
+void GPIO_ToggleBits(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
+{
+  /* Check the parameters */
+  assert_param(IS_GPIO_ALL_PERIPH(GPIOx));
+
+  GPIOx->ODR ^= GPIO_Pin;
+}
+
 /**
   * @brief  Locks GPIO Pins configuration registers.
   * @param  GPIOx: where x can be (A..G) to select the GPIO peripheral.

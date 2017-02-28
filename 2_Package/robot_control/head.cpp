@@ -26,8 +26,8 @@ void Head::setParameters(HeadParameters* para_)
     pose.yaw = 0;
     if(para->type ==  HFANALOG)
     {
-        board.pwmInterfaceInit((unsigned char)para->id.pitch , 1);
-        board.pwmInterfaceInit((unsigned char)para->id.yaw , 1);
+       Board::getInstance()->pwmInterfaceInit((unsigned char)para->id.pitch , 1);
+       Board::getInstance()->pwmInterfaceInit((unsigned char)para->id.yaw , 1);
     }
     else if(para->type == HFDIGITAL)
     {
@@ -60,7 +60,7 @@ void Head::call(void)
 
     set_head_pose(expect_head_offset);
 
-    // printf(" pitch = %f  yaw=%f  \n " , robot->measure_head_state.pitch * 57.2958f  ,  robot->measure_head_state.yaw * 57.2958f);
+   // printf(" pitch = %f  yaw=%f  \n " , robot->measure_head_state.pitch * 57.2958f  ,  robot->measure_head_state.yaw * 57.2958f);
 }
 
 
@@ -71,8 +71,8 @@ void Head::set_head_pose(HeadPose pose)
     {
         value.pitch = 1500 - pose.pitch * radian_to_degree * 11.111f;
         value.yaw = 1500 + pose.yaw * radian_to_degree * 11.111f;
-        board.setPWMInterfaceValue((unsigned char)para->id.pitch , value.pitch);
-        board.setPWMInterfaceValue((unsigned char)para->id.yaw , value.yaw);
+       Board::getInstance()->setPWMInterfaceValue((unsigned char)para->id.pitch , value.pitch);
+       Board::getInstance()->setPWMInterfaceValue((unsigned char)para->id.yaw , value.yaw);
 
     }
     else if(para->type == HFDIGITAL)
@@ -90,8 +90,8 @@ void Head::datatUpdate(void)
     HeadPose  value;
     if(para->type ==  HFANALOG)
     {
-        value.pitch = board.readPWMInterfaceValue((unsigned char)para->id.pitch);
-        value.yaw = board.readPWMInterfaceValue((unsigned char)para->id.yaw);
+        value.pitch =Board::getInstance()->readPWMInterfaceValue((unsigned char)para->id.pitch);
+        value.yaw =Board::getInstance()->readPWMInterfaceValue((unsigned char)para->id.yaw);
         robot->measure_head_state.pitch  =  degree_to_radian * (float)(1500 - value.pitch)/11.111f - para->offset.pitch;
         robot->measure_head_state.yaw =   degree_to_radian * (float)(value.yaw -1500)/11.111f  - para->offset.yaw;
     }

@@ -30,7 +30,7 @@ DDEFS           += -DHSE_VALUE=8000000 -DUSE_STDPERIPH_DRIVER
 DDEFS           += -DSTM32F4XX 
 MCU             ?= cortex-m4  
 CPU_TYPE        ?= STM32F4
-BOARD_ABSTRACT  ?= $(TOP_PATH)/1_Processor/BoardAbstract/control_unit_v2.cpp
+BOARD_ABSTRACT  += $(TOP_PATH)/1_Processor/BoardAbstract/control_unit_v2.cpp
 
 endif
 
@@ -40,20 +40,26 @@ endif
 #   
 #   
 ################################################################################  
-ifeq "$(strip $(BOARD_TYPE))" "control_unit_v3"
+ifeq "$(strip $(BOARD_TYPE))" "control_unit_mini"
 
 DDEFS           += -DCONTROL_UNIT_V3 -DHARDWARE_PLATFORM=1 
 DDEFS           += -DHSE_VALUE=8000000 -DUSE_STDPERIPH_DRIVER 
 DDEFS           += -DSTM32F10X 
 MCU             ?= cortex-m3 
 CPU_TYPE        ?= STM32F1
-BOARD_ABSTRACT  ?= $(TOP_PATH)/1_Processor/BoardAbstract/control_unit_mini.cpp
+BOARD_ABSTRACT  += $(TOP_PATH)/1_Processor/BoardAbstract/control_unit_mini.cpp
 
 endif
 
 
 ################################################################################  
+# :
+#   
+#   
+#   
+################################################################################  
 
+BOARD_ABSTRACT += $(TOP_PATH)/1_Processor/BoardAbstract/board_abstract.cpp
 CXX_SRC   	+= $(BOARD_ABSTRACT) 
 INCDIR    	+= -I$(TOP_PATH)/1_Processor/BoardAbstract/ 
 
@@ -64,14 +70,12 @@ ifeq "$(strip $(CPU_TYPE))" "STM32F1"
 include	  	$(TOP_PATH)/1_Processor/STM32F1/bsplib.mk
 CXX_SRC		+=$(TOP_PATH)/1_Processor/Interrupt/stm32f10x_it.cpp
 
-
 endif
 
 ifeq "$(strip $(CPU_TYPE))" "STM32F4"
 
 include	  	$(TOP_PATH)/1_Processor/STM32F4/bsplib.mk
 CXX_SRC		+=$(TOP_PATH)/1_Processor/Interrupt/stm32f4xx_it.cpp
-CXX_SRC		+=$(TOP_PATH)/1_Processor/BoardAbstract/board_abstract.cpp
 
 endif
 

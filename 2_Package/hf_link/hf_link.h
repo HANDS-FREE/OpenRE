@@ -33,7 +33,8 @@ enum Command{
     READ_IMU_BASE_DATA,
     READ_IMU_FUSION_DATA,
     READ_GPS_DATA,
-    LAST_COMMAND_FLAG};
+    LAST_COMMAND_FLAG
+};
 
 class HFLink : public StateMachine
 {

@@ -134,14 +134,14 @@ uint8_t ServoDigital::TxPacket(uint8_t bID, uint8_t bInstruction, uint8_t bParam
     //USART_ITConfig(SERVO_CONTROL_USART, USART_IT_RXNE, ENABLE);
     CLEAR_BUFFER;
 
-    board.axServoTxModel();
+   Board::getInstance()->axServoTxModel();
 
     for (bCount = 0; bCount < bPacketLength; bCount++)
     {
         axServoSendTxByte(gbpTxBuffer[bCount]);
     }
 
-    board.axServoRxModel();
+   Board::getInstance()->axServoRxModel();
     //for(i=0;i<0x8fff;i++);
     return (bPacketLength);		   //返回发送的所有数据长度
 }
@@ -476,13 +476,13 @@ void ServoDigital::executeInstruction(uint8_t *p, uint8_t num)
     uint8_t err;
     uint8_t i;
 
-    board.axServoTxModel();  //Send
+   Board::getInstance()->axServoTxModel();  //Send
     for (i = 0; i < num; i++)
     {
         axServoSendTxByte(*p++);
     }
 
-    board.axServoRxModel(); //Rec
+   Board::getInstance()->axServoRxModel(); //Rec
     //for(i=0;i<0x8fff;i++);
     if (RxPacket(DEFAULT_RETURN_PACKET_SIZE) == DEFAULT_RETURN_PACKET_SIZE)
         err = OK;
@@ -516,7 +516,7 @@ void ServoDigital::executeInstruction(uint8_t *p, uint8_t num)
     packageLength = (uint16_t)(*(p+1)+(uint16_t)*(p+2)*256);		//可能有问题 （必须滴）
     packageNum = (poolSize-3)/ packageLength;
     p = p+3;
-   board.axServoTxModel();;
+   Board::getInstance()->axServoTxModel();;
     for (i = 0; i < packageNum; i++) {
         //启动延时函数
         MiniActionBeginFlag = 1;
@@ -528,7 +528,7 @@ axServoSendTxByte(*p++);
 
         NewKeyActionFlag = 0;
     }
-   board.axServoRxModel();
+   Board::getInstance()->axServoRxModel();
 }  
 *********************/
 
@@ -546,12 +546,12 @@ void ServoDigital::TxPacketBroadSynWrite(uint8_t bInstruction, uint8_t bParamete
     }
     bPacketLength = bParameterLength + 5;	//可能有问题
 
-    board.axServoTxModel();
+   Board::getInstance()->axServoTxModel();
     for (bCount = 0; bCount < bPacketLength; bCount++) {
         axServoSendTxByte(gbpTxBuffer[bCount]);
     }
 
-    board.axServoRxModel();
+   Board::getInstance()->axServoRxModel();
 }
 
 void ServoDigital::changeServoID(uint8_t *p, uint8_t num)
@@ -592,25 +592,25 @@ void ServoDigital::packageReplyToDebug(unsigned char command_type,unsigned char 
     Length_H = (length + 6) >> 8;
     Length_L = (length + 6);
 
-    board.debugPutChar(0XFF); //包头
-    board.debugPutChar(Length_L); //长度1
+   Board::getInstance()->debugPutChar(0XFF); //包头
+   Board::getInstance()->debugPutChar(Length_L); //长度1
     Check_Sum = Check_Sum + Length_L;
-    board.debugPutChar(Length_H); //长度2
+   Board::getInstance()->debugPutChar(Length_H); //长度2
     Check_Sum = Check_Sum + Length_H;
-    board.debugPutChar(0); //ID =0,代表数字舵机
-    board.debugPutChar(2); //代表这是回复信息
+   Board::getInstance()->debugPutChar(0); //ID =0,代表数字舵机
+   Board::getInstance()->debugPutChar(2); //代表这是回复信息
     Check_Sum = Check_Sum + 2; //代表指令类型
-    board.debugPutChar(command_type);
+   Board::getInstance()->debugPutChar(command_type);
     Check_Sum = Check_Sum + command_type;
     //发送有效数据
     for (j = 0; j < length; j++)
     {
-        board.debugPutChar(*(data + j));
+       Board::getInstance()->debugPutChar(*(data + j));
         Check_Sum = Check_Sum + *(data + j);
     }
     Check_Sum = ~Check_Sum; //计算校验和
 
-    board.debugPutChar(Check_Sum);
+   Board::getInstance()->debugPutChar(Check_Sum);
     Check_Sum = 0;
 
 #endif

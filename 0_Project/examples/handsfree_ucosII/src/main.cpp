@@ -43,8 +43,8 @@ void float_task(void *pdata);
 
 int main(void)
 {
-    board = Board();
-    board.boardBasicInit();
+    Board *board = Board::getInstance();
+    board->boardBasicInit();
 
     printf("app start \r\n");
 
@@ -69,22 +69,26 @@ void start_task(void *pdata)
 
 void led0_task(void *pdata)
 {	 	
+    Board *board = Board::getInstance();
+
     while(1)
     {
-        board.setLedState(0,0);
+        board->setLedState(0,0);
         OSTimeDlyHMSM (0 , 0 , 0 , 80);
-        board.setLedState(0,1);
+        board->setLedState(0,1);
         OSTimeDlyHMSM (0 , 0 , 0 , 150);
     };
 }
 
 void beep_task(void *pdata)
 {	  
+    Board *board = Board::getInstance();
+
     while(1)
     {
-        board.setBeepState(0);
+        board->setBeepState(0);
         OSTimeDlyHMSM (0 , 0 , 0 , 500);
-        board.setBeepState(1);
+        board->setBeepState(1);
         OSTimeDlyHMSM (0 , 0 , 0 , 500);
     };
 }

@@ -138,10 +138,10 @@ void RobotControl::hfLinkNodeEvent(HFLink* hf_link_node_)
 void RobotControl::datatUpdate(void)
 {
     //system info
-    robot->system_info.battery_voltage = board.battery_voltage;
-    robot->system_info.cpu_temperature = board.cpu_temperature;
-    robot->system_info.cpu_usage = board.cpu_usage;
-    robot->system_info.system_time = board.system_time;
+    robot->system_info.battery_voltage = Board::getInstance()->battery_voltage;
+    robot->system_info.cpu_temperature = Board::getInstance()->cpu_temperature;
+    robot->system_info.cpu_usage = Board::getInstance()->cpu_usage;
+    robot->system_info.system_time = Board::getInstance()->system_time;
     robot->system_info.power_remain = 1;
 
     //    //IMU

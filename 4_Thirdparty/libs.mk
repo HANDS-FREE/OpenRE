@@ -9,11 +9,11 @@ INCDIR          +=-I$(TOP_PATH)/3_OS/
 
 USE_EIGEN   = $(strip $(filter EIGEN , $(LIB_MODULE)))
 USE_MATRIX  = $(strip $(filter MATRIX , $(LIB_MODULE)))
-INCDIR          +=-I$(TOP_PATH)/4_LIBS/
+INCDIR          +=-I$(TOP_PATH)/4_Thirdparty/
 
 ifeq "$(USE_EIGEN)" "EIGEN"
 
-EIGEN_PATH      = $(TOP_PATH)/4_LIBS/Eigen3
+EIGEN_PATH      = $(TOP_PATH)/4_Thirdparty/Eigen3
 DDEFS           += 
 ASM_SRC         += 
 C_SRC     	    += 
@@ -27,7 +27,7 @@ endif
 
 ifeq "$(USE_MATRIX)" "MATRIX"
 
-MATRIX_PATH     = $(TOP_PATH)/4_LIBS/Matrix
+MATRIX_PATH     = $(TOP_PATH)/4_Thirdparty/Matrix
 DDEFS           += 
 ASM_SRC         += 
 C_SRC     	    += 

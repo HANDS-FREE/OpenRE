@@ -6,13 +6,21 @@
 class Board : public BoardAbstract
 {
 
-public:
+private:
     Board();
 
 public:
+    static Board* getInstance()
+    {
+       static Board instance;
+       return &instance;
+    }
+
     /*****system support functions*********************************************************************************************/
-    void setLedState(uint8_t led_id, uint8_t operation); //operation: 0 off , 1 on , 2 toggle
-    void setBeepState(uint8_t operation);  //operation: 0 off , 1 on , 2 toggle
+    //operation: 0 off , 1 on , 2 toggle
+    void setLedState(uint8_t led_id, uint8_t operation);
+    //operation: 0 off , 1 on , 2 toggle
+    void setBeepState(uint8_t operation);
     /****hardwareinterface -- motor********************************************************************************************/
     //mode = 0 (enable pwm1 pwm2)  ; mode = 1 (pwm , IOA , IOB)
     void motorInterfaceInit(uint8_t mode , uint8_t motor_id , float motor_pwm_t);
@@ -22,6 +30,7 @@ public:
     float getMotorEncoderCNT(uint8_t motor_id);
     float getMotorCurrent(uint8_t motor_id);
     /*****hardwareinterface -- digital servo**************************************************************************************/
+    void axServoInterfaceInit(void);
     void axServoTxModel(void);
     void axServoRxModel(void);
     /******hardwareinterface -- pwmoutput**************************************************************************************/
@@ -31,6 +40,9 @@ public:
     void setPWMInterfaceValue(uint8_t channel_x , uint16_t pwm_value);
     uint16_t readPWMInterfaceValue(uint8_t channel_x);
 
+public:
+    void ioDeviceInit(DeviceType io_device_type) {return;}
+    float getIODeviceData(DeviceType io_device_type) {return 0;}
 
 private:
     float getBatteryVoltage(void);
@@ -44,7 +56,6 @@ private:
 
 };
 
-extern Board board;
 
 #endif // #ifndef BOARD_H
 

@@ -29,7 +29,7 @@ public:
         sbus_bufi_=0;
         sbus_mes_i_=0;
 
-        board.usartDeviceInit(device , 100000);
+       Board::getInstance()->usartDeviceInit(device , 100000);
     }
 
     void receiveByteAnl(unsigned char receive_byte);  //put this function in serial port interrupt

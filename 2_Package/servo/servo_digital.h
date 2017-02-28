@@ -26,12 +26,12 @@ public:
 public:
     void axServoInit(void)
     {
-        board.usartDeviceInit(USART_DIGITAL_SERVO , 1000000);
+       Board::getInstance()->usartDeviceInit(USART_DIGITAL_SERVO , 1000000);
     }
 
     void axServoSendTxByte(uint8_t tx_byte)
     {
-        board.usartDeviceWriteByte(USART_DIGITAL_SERVO , tx_byte);
+       Board::getInstance()->usartDeviceWriteByte(USART_DIGITAL_SERVO , tx_byte);
     }
 
     volatile uint8_t gbpParameter[128];				//数据包缓存
