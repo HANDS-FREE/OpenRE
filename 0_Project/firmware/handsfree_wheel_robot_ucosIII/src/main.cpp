@@ -16,8 +16,10 @@
 ***********************************************************************************************************************/
 
 #include "board.h"
+#include "os_include.h"
 #include "robot_control.h"
 #include "robot_model.h"
+
 
 #define START_TASK_PRIO		3
 #define START_TASK_STK_SIZE 		512

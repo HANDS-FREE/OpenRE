@@ -1,4 +1,5 @@
 #include "board_abstract.h"
+#include "os_include.h"
 
 BoardAbstract::BoardAbstract()
 {
@@ -130,7 +131,7 @@ void BoardAbstract::boardBasicCall(void)   //100HZ
                setBeepModel(4);
             }
         }
-        else if( battery_voltage > (battery_voltage_alarm_+0.2f) )
+        else
         {
             if(beep_model == 4)  setBeepModel(0);
         }

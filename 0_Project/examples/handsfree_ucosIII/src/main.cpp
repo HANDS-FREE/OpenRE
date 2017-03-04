@@ -170,10 +170,14 @@ void beep_task(void *p_arg)
 
     while(1)
     {
-        board->setBeepState(0);
-        OSTimeDlyHMSM(0,0,0,500,OS_OPT_TIME_HMSM_STRICT,&err); //delay 500ms
         board->setBeepState(1);
-        OSTimeDlyHMSM(0,0,0,500,OS_OPT_TIME_HMSM_STRICT,&err); //delay 500ms
+        OSTimeDlyHMSM(0,0,0,200,OS_OPT_TIME_HMSM_STRICT,&err);
+        board->setBeepState(0);
+        OSTimeDlyHMSM(0,0,0,800,OS_OPT_TIME_HMSM_STRICT,&err);
+        board->setBeepState(1);
+        OSTimeDlyHMSM(0,0,0,800,OS_OPT_TIME_HMSM_STRICT,&err);
+        board->setBeepState(0);
+        OSTimeDlyHMSM(0,0,0,800,OS_OPT_TIME_HMSM_STRICT,&err);
     }
 }
 

@@ -77,7 +77,6 @@ int main(void)
         {
             board->cnt_50ms = 0 ;
             board->setLedState(0,2);
-            printf("battery_v = %.4f , temperature = %.4f \n" , board->battery_voltage , board->cpu_temperature);
         }
     }
 

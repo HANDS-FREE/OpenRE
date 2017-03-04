@@ -6,6 +6,7 @@ extern "C" {
 #endif
 
 #include "stm32f10x.h"
+#include "main_config.h"
 
 #define PWM_Input_CH0_ENABLE 1    // if use this channel to capture PWM  PC0
 #define PWM_Input_CH1_ENABLE 0    // if use this channel to capture PWM  PC1

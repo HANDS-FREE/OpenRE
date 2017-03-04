@@ -77,7 +77,7 @@ public:
 
 private:
     unsigned char hf_link_node_model;      // 0 slave , 1 master
-    unsigned char hf_link_ack_en;                //enable hflink ack
+    unsigned char hf_link_ack_en;          //enable hflink ack
     unsigned char shaking_hands_state;     //1 Success   0 Failed
     float analysis_package_count;
     RobotAbstract* robot;      //robot abstract pointer to hflink

@@ -31,7 +31,7 @@ PAKG        = common
 OS_MODULE = UCOSIII          
 
 #LIB_MODULE: EIGEN MATRIX  etc
-LIB_MODULE =     
+THIRDPARTY_MODULE =     
 
 ###################################################################include rules
 

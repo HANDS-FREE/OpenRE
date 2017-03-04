@@ -9,8 +9,8 @@
 //    OTHERS };
 
 enum MotorDriverType{
-    MotorDriver_PWM12_AND_IO,
-    MotorDriver_PWM_AND_IOAB,
+    MotorDriver_PWM12_AND_IO = 0,
+    MotorDriver_PWM_AND_IOAB = 1,
 };
 
 typedef struct{

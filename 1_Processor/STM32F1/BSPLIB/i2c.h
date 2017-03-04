@@ -1,12 +1,12 @@
-#ifndef I2C_H
-#define I2C_H
+#ifndef __i2c_H__
+#define __i2c_H__
 
 #ifdef __cplusplus
 extern "C" {
 #endif 
 
 #include "stm32f10x.h"              
-
+#include "main_config.h"
 
 void HF_Hardware_I2C_Init(I2C_TypeDef *I2Cx, unsigned char GPIO_AF);
 
@@ -104,6 +104,6 @@ int HF_Simulat_I2C_Read_Buf(uint8_t HF_I2Cx , uint8_t Equipment_Address,uint8_t 
 }
 #endif 
 
-#endif // #ifndef I2C_H
+#endif //__i2c_H__
 
 

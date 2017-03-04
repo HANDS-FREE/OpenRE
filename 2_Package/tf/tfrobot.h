@@ -106,7 +106,7 @@ private:
     * History:
     * by   mawenke   2015.10.1   creat
     ***********************************************************************************************************************/
-    virtual void robotToMotorTF(const float* robot , float* motor );
+    virtual void robotToMotorTF(const float* robot , float* motor ) = 0;
 
     /***********************************************************************************************************************
     * Function:     void MotorToRobotTF(const float* motor , float* global)

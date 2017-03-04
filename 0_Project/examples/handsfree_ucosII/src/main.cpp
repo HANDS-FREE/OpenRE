@@ -74,9 +74,9 @@ void led0_task(void *pdata)
     while(1)
     {
         board->setLedState(0,0);
-        OSTimeDlyHMSM (0 , 0 , 0 , 80);
+        OSTimeDlyHMSM (0 , 0 , 0 , 200);
         board->setLedState(0,1);
-        OSTimeDlyHMSM (0 , 0 , 0 , 150);
+        OSTimeDlyHMSM (0 , 0 , 0 , 500);
     };
 }
 
@@ -86,10 +86,14 @@ void beep_task(void *pdata)
 
     while(1)
     {
-        board->setBeepState(0);
-        OSTimeDlyHMSM (0 , 0 , 0 , 500);
         board->setBeepState(1);
-        OSTimeDlyHMSM (0 , 0 , 0 , 500);
+        OSTimeDlyHMSM (0 , 0 , 0 , 200);
+        board->setBeepState(0);
+        OSTimeDlyHMSM (0 , 0 , 0 , 800);
+        board->setBeepState(1);
+        OSTimeDlyHMSM (0 , 0 , 0 , 800);
+        board->setBeepState(0);
+        OSTimeDlyHMSM (0 , 0 , 0 , 800);
     };
 }
 

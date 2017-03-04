@@ -11,7 +11,6 @@ extern "C" {
 
 #include "string.h"
 #include "queue.h"
-#include "os_include.h"
 
 //device type
 enum DeviceType{

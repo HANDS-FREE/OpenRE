@@ -16,7 +16,7 @@ include	$(TOP_PATH)/2_Package/package.mk
 include $(TOP_PATH)/3_OS/os.mk
 
 #LIBS
-include $(TOP_PATH)/4_Thirdparty/libs.mk
+include $(TOP_PATH)/4_Thirdparty/thirdparty.mk
 
 TOOLS_PATH       = $(TOP_PATH)/0_Project/6_Tools
 
@@ -34,7 +34,7 @@ CCPREFIX	?= $(TOP_PATH)/5_Development_Toolchain/gcc-arm-none-eabi-5_4-2016q2/bin
 else
 CCPREFIX	?= arm-none-eabi-
 endif
-CCPREFIX	?= arm-none-eabi-
+
 CC   		= $(CCPREFIX)gcc
 CXX         = $(CCPREFIX)g++
 CP   		= $(CCPREFIX)objcopy

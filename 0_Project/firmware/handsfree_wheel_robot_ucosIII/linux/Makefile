@@ -32,7 +32,7 @@ PAKG        = common robot_abstract math imu motor sbus_ppm servo \
 OS_MODULE = UCOSIII            
 
 #LIB_MODULE: EIGEN MATRIX  etc
-LIB_MODULE =     
+THIRDPARTY_MODULE = 
 
 ###################################################################include rules
 

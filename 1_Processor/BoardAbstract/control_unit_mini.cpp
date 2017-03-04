@@ -140,35 +140,22 @@ void Board::ledInit(void)
 
 void Board::setLedState(uint8_t led_id, uint8_t operation)
 {
-    static uint8_t flag1 = 0 , flag2 = 0 ;
     if ( led_id == 0){
-        if(operation == 0) { GPIO_SetBits(GPIOA , GPIO_Pin_2);flag1 = 0;}
-        if(operation == 1) { GPIO_ResetBits(GPIOA , GPIO_Pin_2);flag1 = 1;}
-        else if(operation == 2) {
-            flag1 = ! flag1 ;
-            if (flag1 == 0)   GPIO_SetBits(GPIOA , GPIO_Pin_2);
-            if (flag1 == 1)   GPIO_ResetBits(GPIOA , GPIO_Pin_2);
-        }
+        if(operation == 0) { GPIO_SetBits(GPIOA , GPIO_Pin_2);}
+        else if(operation == 1) { GPIO_ResetBits(GPIOA , GPIO_Pin_2);}
+        else if(operation == 2){GPIO_ToggleBits(GPIOA , GPIO_Pin_2);}
     }
 
     if ( led_id == 1){
-        if(operation == 0) { GPIO_SetBits(GPIOC , GPIO_Pin_13);flag2 = 0;}
-        if(operation == 1) { GPIO_ResetBits(GPIOC , GPIO_Pin_13);flag2 = 1;}
-        else if(operation == 2) {
-            flag2 = ! flag2 ;
-            if (flag2 == 0)   GPIO_SetBits(GPIOC , GPIO_Pin_13);
-            if (flag2 == 1)   GPIO_ResetBits(GPIOC, GPIO_Pin_13);
-        }
+        if(operation == 0) { GPIO_SetBits(GPIOC , GPIO_Pin_13);}
+        else if(operation == 1) { GPIO_ResetBits(GPIOC , GPIO_Pin_13);}
+        else if(operation == 2) { GPIO_ToggleBits(GPIOC , GPIO_Pin_13);}
     }
 
     if ( led_id == 2){
-        if(operation == 0) { GPIO_SetBits(GPIOC , GPIO_Pin_14);flag2 = 0;}
-        if(operation == 1) { GPIO_ResetBits(GPIOC , GPIO_Pin_14);flag2 = 1;}
-        else if(operation == 2) {
-            flag2 = ! flag2 ;
-            if (flag2 == 0)   GPIO_SetBits(GPIOC , GPIO_Pin_14);
-            if (flag2 == 1)   GPIO_ResetBits(GPIOC, GPIO_Pin_14);
-        }
+        if(operation == 0) { GPIO_SetBits(GPIOC , GPIO_Pin_14);}
+        if(operation == 1) { GPIO_ResetBits(GPIOC , GPIO_Pin_14);}
+        else if(operation == 2) { GPIO_ToggleBits(GPIOC , GPIO_Pin_14);}
     }
 }
 
@@ -184,25 +171,14 @@ void Board::beepInit(void)
 
 void Board::setBeepState(uint8_t operation)
 {
-    static uint8_t flag = 0 ;
-    if(operation == 0) { GPIO_ResetBits(GPIOA , GPIO_Pin_12);flag = 0;}
-    if(operation == 1) { GPIO_SetBits(GPIOA , GPIO_Pin_12);flag = 1;}
-    else if(operation == 2) {
-        flag = ! flag ;
-        if (flag == 0)   GPIO_ResetBits(GPIOA , GPIO_Pin_12);
-        if (flag == 1)   GPIO_SetBits(GPIOA , GPIO_Pin_12);
-    }
+    if(operation == 0) { GPIO_ResetBits(GPIOA , GPIO_Pin_12);}
+    else if(operation == 1) { GPIO_SetBits(GPIOA , GPIO_Pin_12);}
+    else if(operation == 2) { GPIO_SetBits(GPIOA , GPIO_Pin_12);}
 }
 
 void Board::keyInit(void)
 {
-    GPIO_InitTypeDef  GPIO_InitStruct;
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA |RCC_APB2Periph_GPIOA, ENABLE);
 
-    GPIO_InitStruct.GPIO_Pin = GPIO_Pin_15 ;   //key1
-    GPIO_InitStruct.GPIO_Mode = GPIO_Mode_IPU;
-    GPIO_InitStruct.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_Init(GPIOA , &GPIO_InitStruct);
 }
 
 void Board::keyStateRenew(void)

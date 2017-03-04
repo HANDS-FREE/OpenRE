@@ -17,6 +17,16 @@ typedef  struct{
     float  servo8;
 }ArmDOFVector;
 
+
+typedef  struct{
+    float  x;
+    float  y;
+    float  z;
+    float  pitch;
+    float  roll;
+    float  yaw;
+}ArmPose;
+
 typedef  struct{
     ArmType type;
     float speed_low_filter;
