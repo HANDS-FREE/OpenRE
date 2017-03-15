@@ -101,28 +101,28 @@ all: $(OBJS) $(PROJECT).elf  $(PROJECT).hex $(PROJECT).bin
  
 endif
  
-%o: %c
+%.o: %.c
 	$(CC) -c $(CFLAGS) -I . $(INCDIR) $< -o $@
 
-%o: %cpp
+%.o: %.cpp
 	$(CXX) -c $(CXXFLAGS) -I . $(INCDIR) $< -o $@
 
-%o: %s
+%.o: %.s
 	$(AS) -c $(ASFLAGS) $< -o $@
 
-%o: %asm
+%.o: %.asm
 	$(AS) -c $(ASFLAGS) $< -o $@	
 
-%elf: $(OBJS)
+%.elf: $(OBJS)
 	$(CC) $(OBJS) $(LDFLAGS) $(LIBS) -o $@
 
-%hex: %elf
+%.hex: %.elf
 	$(HEX) $< $@
     
-%bin: %elf
+%.bin: %.elf
 	$(BIN)  $< $@
 	
-%px4: %bin
+%.px4: %.bin
 	python $(TOOLS_PATH)/px_mkfw.py --prototype $(TOOLS_PATH)/Images/HANDSFREE_$(BOARD_TYPE).prototype --image $(PROJECT).bin > $(PROJECT).px4
 	
 ##################################################################makefile clean 

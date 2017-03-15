@@ -4,7 +4,7 @@
 ------------------------------------------------------------------------------
 ## Description
 
-This is a C++ embedded librarys for robotics base on STM32 and intended to provide GNU Makefiles.
+This is a C++ embedded library for robotics base on STM32 and intended to provide GNU Makefiles.
     
 ###  Website: 
 - [HandsFree](http://www.rosclub.cn/post-14.html)
