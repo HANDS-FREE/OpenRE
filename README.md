@@ -7,8 +7,12 @@
 This is a C++ embedded library for robotics base on STM32 and intended to provide GNU Makefiles.
     
 ###  Website: 
-- [HandsFree](http://www.rosclub.cn/post-14.html)
 - QQ Group: 521037187（Hands Free Community）
+- [HandsFree baiduyun](https://pan.baidu.com/s/1nuSvs7Z#list) 
+- [HandsFree Website](https://hands-free.github.io/)
+- [Introduction](http://www.rosclub.cn/post-14.html)
+- [Robot Navigation Show ](http://v.youku.com/v_show/id_XMTUyODk4NTUzNg==.htm)    
+- [HandsFree Highlight Show](http://v.youku.com/v_show/id_XMTU0NzgwNzc3Mg==.html?from=y1.7-1.2) 
 
 ###  Folder structure
 - ├── ** 0_Project **   ----  some demos base on this library  
@@ -61,13 +65,13 @@ This is a C++ embedded library for robotics base on STM32 and intended to provid
             sh env_config.sh       
 
 ### OpenRE  Toolchain         
+#### Method1: (recommended)
+            sudo add-apt-repository ppa:terry.guo/gcc-arm-embedded  
+            sudo apt-get update          
+            sudo apt-get install openocd  gcc-arm-none-eabi 
 
-follow  5_Development_Toolchain/README.md , config your linux development environment.  
-(gcc-arm-none-eabi-5_4-2016q2.zip ,  openocd.zip  , stlink.zip )     
-
-#### step1:
+#### Method2:
 - get toolchain it in [Development_Toolchain](https://pan.baidu.com/s/1nuSvs7Z#list/path=%2FHANDSFREE%2FHands_Free_Release%2F3_Software%2FEmbedded_Development_Toolchain&parentPath=%2FHANDSFREE)
-#### step2:
 - put these softwares in OpenRE/5_Development_Toolchain 
 - open a terminal and run:  ** sh install.sh **     
 
@@ -77,7 +81,7 @@ follow  5_Development_Toolchain/README.md , config your linux development enviro
     * Led toggle:     
             cd 0_Project/examples/handsfree_simple_app/linux    
             
- **check the makefile matching your main control board **      
+ **check the makefile config matching your main control board **      
              
             make clean
             make    
@@ -87,14 +91,14 @@ follow  5_Development_Toolchain/README.md , config your linux development enviro
 
             cd 0_Project/firmware/handsfree_wheel_robot/linux
 
- ** check the makefile matching your main control board **      
+ ** check the makefile config  matching your main control board **      
              
             make clean
             make
             make burn
 
 ------------------------------------------------------------------------------
- Lots of examples are provided in folder 0_Project and you can get some manuals in folder 7_Documentation
+ Lots of examples are provided in folder 0_Project and you can get some manuals in folder 7_Documentation.
 
 ## License
 ------------------------------------------------------------------------------            
