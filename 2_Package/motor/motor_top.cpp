@@ -116,17 +116,17 @@ void MotorTop::motorTest(void)
 
     if(i <= 250)
     {
-        motor1.setAngleSpeed(1000);
-        motor2.setAngleSpeed(1000);
-        motor3.setAngleSpeed(1000);
-        motor4.setAngleSpeed(1000);
+        motor1.setAngleSpeed(500);
+        motor2.setAngleSpeed(500);
+        motor3.setAngleSpeed(500);
+        motor4.setAngleSpeed(500);
     }
     else if (i > 250 && i < 500)
     {
-        motor1.setAngleSpeed(-1000);
-        motor2.setAngleSpeed(-1000);
-        motor3.setAngleSpeed(-1000);
-        motor4.setAngleSpeed(-1000);
+        motor1.setAngleSpeed(-500);
+        motor2.setAngleSpeed(-500);
+        motor3.setAngleSpeed(-500);
+        motor4.setAngleSpeed(-500);
     }
     else i = 0;
 

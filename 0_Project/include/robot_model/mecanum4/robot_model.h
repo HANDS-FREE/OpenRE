@@ -13,12 +13,13 @@ public:
 
         motor_para.motor_id = 0;
         motor_para.driver_type = MotorDriver_PWM12_AND_IO;
-        motor_para.encoder_num  = 28000 ;
+        motor_para.encoder_num  = 1560 ;//28000
         motor_para.pwm_max = 5000;
         motor_para.pwm_dead_zone = 10;
         motor_para.speed_low_filter = 0.3;
         motor_para.protect_current = 200;  // 200A means disable current  protect
-        motor_para.pid =  {0.0f  , 0.0f , 0.0f , 6.0f , 3.0f ,0.01f};
+        motor_para.pid =  {0.0f  , 0.0f , 0.0f , 60.0f , 500.0f ,0.2f};
+        //motor_para.pid =  {0.0f  , 0.0f , 0.0f , 6.0f , 3.0f ,0.01f};
 
         chassis_para.type =  MECANUM4;
         chassis_para.wheel_radius = 0.0320;

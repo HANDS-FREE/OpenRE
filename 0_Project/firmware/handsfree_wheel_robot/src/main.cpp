@@ -41,7 +41,6 @@ int main(void)
 
     while(1)
     {
-
         if(board->usartDeviceReadData(robot_control_p->hf_link_node_device)->emptyCheck() == 0){
             robot_control_p->hf_link_node->byteAnalysisCall(
                         board->usartDeviceReadData(
@@ -68,6 +67,7 @@ int main(void)
         if ( board->cnt_20ms >= 20 )    // 50hz
         {
             board->cnt_20ms = 0 ;
+            //robot_control_p->motor_top.motorTest();
             robot_control_p->motor_top.motorTopCall(); //motor speed control
         }
         if ( board->cnt_50ms >= 50 )    // 20hz

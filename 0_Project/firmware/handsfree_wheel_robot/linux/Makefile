@@ -2,7 +2,7 @@
 
 #####BOARD_TYPE: control_unit_mini control_unit_v1 control_unit_v2
 BOARD_TYPE		?= control_unit_v2
-#####ROBOT_MODEL : null jilong jilong_omni3 stone    
+#####ROBOT_MODEL : null jilong jilong_omni3 stone mecanum4    
 ROBOT_MODEL     ?= stone
 #####project name
 PROJECT			=  robot_$(ROBOT_MODEL)_$(BOARD_TYPE)
