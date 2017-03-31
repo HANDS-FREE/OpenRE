@@ -68,12 +68,21 @@ This is a C++ embedded library for robotics base on STM32 and intended to provid
 #### Method1: (recommended)
             sudo add-apt-repository ppa:terry.guo/gcc-arm-embedded  
             sudo apt-get update          
-            sudo apt-get install openocd  gcc-arm-none-eabi 
+            sudo apt-get install openocd  gcc-arm-none-eabi    
+            sudo usermod -a -G dialout $USER    
+            sudo apt-get install lib32ncurses5 libtool libusb-1.0 libftdi-dev python python-serial python-empy libpython2.7:i386    
+            sudo apt-get remove modemmanager    
+
+
+            
 
 #### Method2:
 - get toolchain it in [Development_Toolchain](https://pan.baidu.com/s/1nuSvs7Z#list/path=%2FHANDSFREE%2FHands_Free_Release%2F3_Software%2FEmbedded_Development_Toolchain&parentPath=%2FHANDSFREE)
-- put these softwares in OpenRE/5_Development_Toolchain 
+- put these softwares in OpenRE/5_Development_Toolchain     
 - open a terminal and run:  ** sh install.sh **     
+- sudo usermod -a -G dialout $USER      
+- sudo apt-get install lib32ncurses5 libtool libusb-1.0 libftdi-dev python python-serial python-empy libpython2.7:i386     
+- sudo apt-get remove modemmanager    
 
 ## Usage and Examples
 ------------------------------------------------------------------------------
