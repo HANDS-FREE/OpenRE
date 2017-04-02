@@ -1,4 +1,4 @@
-*o
+*.o
 /OpenRE.wiki/*
 /5_Development_Toolchain/gcc-arm-none-eabi*/*
 /5_Development_Toolchain/openocd/*
