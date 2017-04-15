@@ -4,7 +4,9 @@
 ------------------------------------------------------------------------------
 ## Description
 
-This is a C++ embedded library for robotics base on STM32 and intended to provide GNU Makefiles.
+This is a C++ embedded library for robotics base on STM32 and intended to provide GNU Makefiles.    
+
+### [OpenRE Tutorial](https://github.com/HANDS-FREE/HANDS-FREE.github.io/wiki/7.-OpenRE-Tutorial)
     
 ###  Website: 
 - QQ Group: 521037187（Hands Free Community）
@@ -72,10 +74,7 @@ This is a C++ embedded library for robotics base on STM32 and intended to provid
             sudo usermod -a -G dialout $USER    
             sudo apt-get install lib32ncurses5 libtool libusb-1.0 libftdi-dev python python-serial python-empy libpython2.7:i386    
             sudo apt-get remove modemmanager    
-
-
             
-
 #### Method2:
 - get toolchain it in [Development_Toolchain](https://pan.baidu.com/s/1nuSvs7Z#list/path=%2FHANDSFREE%2FHands_Free_Release%2F3_Software%2FEmbedded_Development_Toolchain&parentPath=%2FHANDSFREE)
 - put these softwares in OpenRE/5_Development_Toolchain     
@@ -85,7 +84,8 @@ This is a C++ embedded library for robotics base on STM32 and intended to provid
 - sudo apt-get remove modemmanager    
 
 ## Usage and Examples
-------------------------------------------------------------------------------
+---
+
 ### A Simple Demo 
     * Led toggle:     
             cd 0_Project/examples/handsfree_simple_app/linux    
@@ -106,13 +106,15 @@ This is a C++ embedded library for robotics base on STM32 and intended to provid
             make
             make burn
 
-------------------------------------------------------------------------------
+---
  Lots of examples are provided in folder 0_Project and you can get some manuals in folder 7_Documentation.
 
 ## License
-------------------------------------------------------------------------------            
+
+--- 
 OpenRE is licensed generally under a permissive 3-clause BSD license. Contributions are required to be made under the same license.            
             
 ## Contact    
-------------------------------------------------------------------------------
+
+---
 If you have any problem, or you have some suggestions for this code, please contact WenKe Ma by 315261982@qq.com, thank you very much!  
