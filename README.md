@@ -61,27 +61,41 @@ This is a C++ embedded library for robotics base on STM32 and intended to provid
 ------------------------------------------------------------------------------
 ### Resources   
   * Download the latest code with:      
-  
-            git clone https://github.com/HANDS-FREE/OpenRE      
-            cd 6_Tools      
-            sh env_config.sh       
+ 
+ git clone https://github.com/HANDS-FREE/OpenRE      
 
 ### OpenRE  Toolchain         
-#### Method1: (recommended)
-            sudo add-apt-repository ppa:terry.guo/gcc-arm-embedded  
-            sudo apt-get update          
-            sudo apt-get install openocd  gcc-arm-none-eabi    
-            sudo usermod -a -G dialout $USER    
-            sudo apt-get install lib32ncurses5 libtool libusb-1.0 libftdi-dev python python-serial python-empy libpython2.7:i386    
-            sudo apt-get remove modemmanager    
-            
-#### Method2:
+#### Method1:  installation by deb  (recommended) 
+```
+$ sudo add-apt-repository ppa:terry.guo/gcc-arm-embedded  
+$ sudo apt-get update          
+$ sudo apt-get install openocd  gcc-arm-none-eabi    
+$ sudo usermod -a -G dialout $USER    
+$ sudo apt-get install lib32ncurses5 libtool libusb-1.0 libftdi-dev python python-serial python-empy libpython2.7:i386    
+$ sudo apt-get remove modemmanager    
+```
+
+#### Method2:  source installation
 - get toolchain it in [Development_Toolchain](https://pan.baidu.com/s/1nuSvs7Z#list/path=%2FHANDSFREE%2FHands_Free_Release%2F3_Software%2FEmbedded_Development_Toolchain&parentPath=%2FHANDSFREE)
 - put these softwares in OpenRE/5_Development_Toolchain     
-- open a terminal and run:  ** sh install.sh **     
-- sudo usermod -a -G dialout $USER      
-- sudo apt-get install lib32ncurses5 libtool libusb-1.0 libftdi-dev python python-serial python-empy libpython2.7:i386     
-- sudo apt-get remove modemmanager    
+
+```
+$ cd 5_Development_Toolchain 
+$ tar -jxvf gcc-arm-none-eabi-5_4-2016q2.tar.bz2
+$ tar -jxvf openocd.tar.bz2
+$ tar -jxvf stlink.tar.bz2
+$ cd openocd/
+$ ./configure
+$ make clean
+$ make
+$ cd ../stlink/
+$ make clean
+$ make
+$ cd ../
+$ sudo usermod -a -G dialout $USER      
+$ sudo apt-get install lib32ncurses5 libtool libusb-1.0 libftdi-dev python python-serial python-empy libpython2.7:i386     
+$ sudo apt-get remove modemmanager    
+```
 
 ## Usage and Examples
 ---

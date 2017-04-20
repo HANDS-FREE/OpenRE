@@ -24,12 +24,9 @@
 - └── ** stlink **
 
 
-### step1:
-- OpenRE  Toolchain (gcc-arm-none-eabi-5_4-2016q2.zip ,  openocd.zip  , stlink.zip )
 - get toolchain it in [Development_Toolchain](https://pan.baidu.com/s/1nuSvs7Z#list/path=%2FHANDSFREE%2FHands_Free_Release%2F3_Software%2FEmbedded_Development_Toolchain&parentPath=%2FHANDSFREE)
+- put these softwares in OpenRE/5_Development_Toolchain   
+- see /readme.md
 
-### step2:
-- put these softwares in OpenRE/5_Development_Toolchain 
-- open a terminal and run:  ** sh install.sh **     
 
 
