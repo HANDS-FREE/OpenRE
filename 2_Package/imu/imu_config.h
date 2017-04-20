@@ -46,12 +46,6 @@
 
 #endif
 
-
-#define K_Amplify_AccCov	     300.0f 	//ACC协方差增益
-#define K_Amplify_GyroCov 		 0.1f	  	//GYRO协方差增益
-
-typedef float IPType;
-
 typedef struct INT16_XYZ{
 	short int  x;
 	short int  y;
@@ -64,18 +58,9 @@ typedef struct FLOAT_XYZ{
 
 typedef struct FLOAT_PRY{
     float pitch;
-    float rool;
+    float roll;
     float yaw;}FLOAT_PRY;
 
-typedef struct IMU_QUATERNION{
-    IPType  q0;
-    IPType  q1;
-    IPType  q2;
-    IPType  q3;} IMU_QUATERNION;
-typedef struct FUSION_IPType_PRY_DGREE{
-    IPType pitch;
-    IPType roll;
-    IPType yaw;} FUSION_DOUBLE_PRY;
 
 #endif  //#ifndef IMU_CONFIG_H
 

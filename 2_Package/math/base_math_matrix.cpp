@@ -11,17 +11,62 @@
 * History:
 * <author>      <time>      <version>      <desc>
 * chenyingbing  2015.12.1   V1.6           creat this file
+* chenyingbing  2017.4.16   V1.7           all of these is replaced by Eigen3... ahahhaa.
 * Description:  本文件封装了基本的数学矩阵函数
 *
+*  Matrix_Cb2n: body frame to reference frame.
+*
+*  c(pitch)c(yaw)  s(pitch)s(roll)c(yaw)-c(roll)s(yaw)     s(pitch)c(roll)c(yaw)+s(roll)s(yaw)     px
+*  c(pitch)s(yaw)  s(pitch)s(roll)s(yaw)+c(roll)c(yaw)     s(pitch)c(roll)s(yaw)-s(roll)c(yaw)     py
+*  -s(pitch)       c(pitch)s(roll)                         c(pitch)c(roll)                         pz
+*  0               0                                       0                                       1.0
+*
+*  qw*qw + qx*qx - qy*qy - qz*qz   2*qx*qy - 2*qw*qz               2*qx*qz + 2*qw*qy               px
+*  2*qx*qy + 2*qw*qz               qw*qw - qx*qx + qy*qy - qz*qz   2*qy*qz - 2*qw*qx               py
+*  2*qx*qz - 2*qw*qy               2*qy*qz + 2*qw*qx               qw*qw - qx*qx - qy*qy + qz*qz   pz
+*  0                               0                               0                               1.0
+*
+*  c(yaw)  -s(yaw)     0     px
+*  s(yaw)  c(yaw)      0     py
+*  0       0           1     pz
+*  0       0           0     1.0
 ***********************************************************************************************************************/
 
 #include "base_math_matrix.h"
 
+void BMATH_RMAT::fufill_Cb2n(Eigen::Quaternionf &in_q)
+{
+    #define qw      in_q.coeffs()[3]
+    #define qx      in_q.coeffs()[0]
+    #define qy      in_q.coeffs()[1]
+    #define qz      in_q.coeffs()[2]
+
+    mat.data()[0] = 1 - (qy*qy + qz*qz)*2,      mat.data()[3] = 2*qx*qy - 2*qw*qz,          mat.data()[6] = 2*qx*qz + 2*qw*qy,
+     mat.data()[1] = 2*qx*qy + 2*qw*qz,         mat.data()[4] = 1 - (qx*qx + qz*qz)*2,      mat.data()[7] = 2*qy*qz - 2*qw*qx,
+      mat.data()[2] = 2*qx*qz - 2*qw*qy,        mat.data()[5] = 2*qy*qz + 2*qw*qx,          mat.data()[8] = 1 - (qx*qx + qy*qy)*2;
+}
+
+void BMATH_RMAT::fufill_Cn2b(Eigen::Quaternionf &in_q)
+{
+    #define qw      in_q.coeffs()[3]
+    #define qx      in_q.coeffs()[0]
+    #define qy      in_q.coeffs()[1]
+    #define qz      in_q.coeffs()[2]
+
+    mat.data()[0] = 1 - (qy*qy + qz*qz)*2,      mat.data()[1] = 2*qx*qy - 2*qw*qz,          mat.data()[2] = 2*qx*qz + 2*qw*qy,
+     mat.data()[3] = 2*qx*qy + 2*qw*qz,         mat.data()[4] = 1 - (qx*qx + qz*qz)*2,      mat.data()[5] = 2*qy*qz - 2*qw*qx,
+      mat.data()[6] = 2*qx*qz - 2*qw*qy,        mat.data()[7] = 2*qy*qz + 2*qw*qx,          mat.data()[8] = 1 - (qx*qx + qy*qy)*2;
+}
+
+/// old remained function:
+
+/*
 BASE_MATH_MATRIX base_math_matrix;
 
 BASE_MATH_MATRIX::BASE_MATH_MATRIX(void)
 {
 }
+*/
 
 
 /***********************************************************************************************************************
@@ -41,6 +86,7 @@ BASE_MATH_MATRIX::BASE_MATH_MATRIX(void)
 * History:
 * by   chenyingbing  2015.12.1   creat
 ***********************************************************************************************************************/
+/*
 void BASE_MATH_MATRIX::MatrixAdd( float* fMatrixA,float* fMatrixB,float* Result,
                                   unsigned int m,unsigned int n )
 {
@@ -55,6 +101,7 @@ void BASE_MATH_MATRIX::MatrixAdd( float* fMatrixA,float* fMatrixB,float* Result,
             *(Result+itemp) = *(fMatrixA+itemp) + *(fMatrixB+itemp);
         }
 } 
+*/
 
 /***********************************************************************************************************************
 * Function:    void BASE_MATH_MATRIX::MatrixSub( double *fMatrixA,double *fMatrixB,double *Result,
@@ -73,6 +120,7 @@ void BASE_MATH_MATRIX::MatrixAdd( float* fMatrixA,float* fMatrixB,float* Result,
 * History:
 * by   chenyingbing  2015.12.1   creat
 ***********************************************************************************************************************/
+/*
 void BASE_MATH_MATRIX::MatrixSub( float* fMatrixA,float* fMatrixB,float* Result,
                                   unsigned int m,unsigned int n )
 {
@@ -86,6 +134,7 @@ void BASE_MATH_MATRIX::MatrixSub( float* fMatrixA,float* fMatrixB,float* Result,
             *(Result+itemp) = *(fMatrixA+itemp) - *(fMatrixB+itemp);
         }
 }	
+*/
 
 /***********************************************************************************************************************
 * Function:    void BASE_MATH_MATRIX::MatrixMultiply( 	double* fMatrixA,unsigned int uRowA,unsigned int uColA,
@@ -105,6 +154,8 @@ void BASE_MATH_MATRIX::MatrixSub( float* fMatrixA,float* fMatrixB,float* Result,
 * History:
 * by   chenyingbing  2015.12.1   creat
 ***********************************************************************************************************************/
+
+/*
 void BASE_MATH_MATRIX::MatrixMultiply(float* fMatrixA,unsigned int uRowA,unsigned int uColA,
                                       float* fMatrixB,unsigned int uRowB,unsigned int uColB,
                                       float* MatrixResult )
@@ -133,7 +184,8 @@ void BASE_MATH_MATRIX::MatrixMultiply(float* fMatrixA,unsigned int uRowA,unsigne
                 }
             }
     }
-}	
+}
+*/
 
 /***********************************************************************************************************************
 * Function:    void BASE_MATH_MATRIX::MatrixTranspose(double* fMatrixA,unsigned int m,unsigned n,double* fMatrixB)
@@ -152,6 +204,8 @@ void BASE_MATH_MATRIX::MatrixMultiply(float* fMatrixA,unsigned int uRowA,unsigne
 * History:
 * by   chenyingbing  2015.12.1   creat
 ***********************************************************************************************************************/
+
+/*
 void BASE_MATH_MATRIX::MatrixTranspose(float* fMatrixA,unsigned int m,unsigned n,float* fMatrixB)
 {
     unsigned int index_i = 0;
@@ -167,6 +221,7 @@ void BASE_MATH_MATRIX::MatrixTranspose(float* fMatrixA,unsigned int m,unsigned n
             fMatrixB[index_u] = fMatrixA[index_v];
         }
 }
+*/
 
 /***********************************************************************************************************************
 * Function:     double BASE_MATH_MATRIX::Matrix_Getdet(double *matrix_calculate, double *matrix_copyspace,int n)
@@ -186,6 +241,8 @@ void BASE_MATH_MATRIX::MatrixTranspose(float* fMatrixA,unsigned int m,unsigned n
 * History:
 * by   chenyingbing  2015.12.1   creat
 ***********************************************************************************************************************/
+
+/*
 float BASE_MATH_MATRIX::Matrix_Getdet(float* matrix_calculate, float* matrix_copyspace,int n)
 {
     int i,j,k,is,js,l,u,v;
@@ -253,6 +310,7 @@ float BASE_MATH_MATRIX::Matrix_Getdet(float* matrix_calculate, float* matrix_cop
 
     return det;
 } 
+*/
 
 /***********************************************************************************************************************
 * Function:     void BASE_MATH_MATRIX::Matrix_Inverse(double *matrix_in,double *matrix_inverse,int n)
@@ -270,6 +328,7 @@ float BASE_MATH_MATRIX::Matrix_Getdet(float* matrix_calculate, float* matrix_cop
 * History:
 * by   chenyingbing  2015.12.1   creat
 ***********************************************************************************************************************/
+/*
 void BASE_MATH_MATRIX::Matrix_Inverse(float* matrix_in,float* matrix_inverse,int n)
 {
     int i = 0;
@@ -401,4 +460,4 @@ void BASE_MATH_MATRIX::Matrix_Inverse(float* matrix_in,float* matrix_inverse,int
         }
     }
 }
-
+*/

@@ -1,5 +1,5 @@
-#ifndef HMC5883L_H
-#define HMC5883L_H
+#ifndef DEV_HMC5883L_H
+#define DEV_HMC5883L_H
 
 #include "imu_config.h"
 
@@ -11,9 +11,9 @@ public:
     HMC5883L(void){
         device_state = 0;
         data_update_i = 0;
-        hmc_normal_offset.x = -0.11f ;
-        hmc_normal_offset.y = 0.08f;
-        hmc_normal_offset.z = -0.48f;
+        hmc_normal_offset.x = -0.06f ;
+        hmc_normal_offset.y = 0.1f;
+        hmc_normal_offset.z = 0.53f;
     }
     unsigned char deviceInit(void);
     void dataUpdate(void);  //50HZ , need time stm32f1 260us

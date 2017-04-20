@@ -105,6 +105,7 @@ void IMU::topInit(uint8_t mpu , uint8_t bmp , uint8_t hmc ,
 ***********************************************************************************************************************/
 void IMU::topCall(void)
 {
+    static IMU_MODEL imu_fmodel_frame;
 
     imu_call_1++;
     imu_call_2++;
@@ -112,14 +113,15 @@ void IMU::topCall(void)
     imu_call_4++;
     imu_call_5++;
 
-    if( imu_call_1 >= 2 ) //500HZ
-    {
+    if( imu_call_1 >= 4 ) //250HZ
+    {   // mup6050 filters require sample_acc_hz, sample_gyro_hz <= 256hz.
         imu_call_1=0;
         mpu6050.dataUpdate();
     }
 
     if( imu_call_2 >= 5 ) //200HZ
     {
+        if(hmc085_en == 1) hmc5883l.dataUpdate();
         imu_call_2=0;
     }
 
@@ -128,114 +130,43 @@ void IMU::topCall(void)
         imu_call_3 = 0;
         if(bmp085_en == 1) bmp085.dataUpdate();
         if(ms611_en == 1) ms611.dataUpdate();
+
+        imu_fmodel_frame.model_data_update(mpu6050.mpu_data_ready,
+                                           mpu6050.acc_normal_long_filter, mpu6050.acc_covariance_long_fliter,
+                                           mpu6050.gyro_normal, mpu6050.gyro_covariance,
+                                           hmc5883l.hmc_normal);
+
+        imu_fmodel_frame.model_updates(0.01);
+
     }
 
     if( imu_call_4 >= 20 ) //50HZ
     {
         imu_call_4=0;
-        if(hmc085_en == 1) hmc5883l.dataUpdate();
+
     }
 
     if( imu_call_5 >= 50 ) //20HZ
     {
         imu_call_5=0;
-        if( debug_en == 1)
+        if( debug_en )
         {
-            //            printf("mpuaccx = %.4f  mpuaccy = %.4f mpuaccz = %.4f\r\n" , mpu6050.acc_normal.x , mpu6050.acc_normal.y,mpu6050.acc_normal.z);
-            //            printf("hmc_normalx = %.4f  hmc_normaly = %.4f hmc_normalz = %.4f\r\n" , hmc5883l.hmc_normal.x , hmc5883l.hmc_normal.y , hmc5883l.hmc_normal.z);
-            //            printf("temperature = %.4f pressure = %.4f altitude = %.4f altitude_offset = %.4f\r\n" , ms611.temperature , ms611.pressure , ms611.altitude , ms611.altitude_offset);
+            /*
+            printf("cov: %f, %f, %f ", mpu6050.acc_covariance_long_fliter.x,
+                                      mpu6050.acc_covariance_long_fliter.y,
+                                      mpu6050.acc_covariance_long_fliter.z);    */
+
+            printf("pitch: %f roll: %f yaw: %f \r\n", imu_fmodel_frame.s_pryaw.pitch,
+                                                      imu_fmodel_frame.s_pryaw.roll,
+                                                      imu_fmodel_frame.s_pryaw.yaw);
+
+            // imu_fmodel_frame.test();
+            // printf("mpuaccx = %f  mpuaccy = %f mpuaccz = %f \r\n" , mpu6050.acc_normal.x , mpu6050.acc_normal.y,mpu6050.acc_normal.z);
+            // printf("mpugyrox = %.4f  mpugyroy = %.4f mpugyroz = %.4f\r\n" , mpu6050.gyro_normal.x , mpu6050.gyro_normal.y,mpu6050.gyro_normal.z);
+            // printf("hmc_normalx = %.4f  hmc_normaly = %.4f hmc_normalz = %.4f\r\n" , hmc5883l.hmc_normal.x , hmc5883l.hmc_normal.y , hmc5883l.hmc_normal.z);
+            // printf("temperature = %.4f pressure = %.4f altitude = %.4f altitude_offset = %.4f\r\n" , ms611.temperature , ms611.pressure , ms611.altitude , ms611.altitude_offset);
         }
     }
 
 }
-
-//void IMU::topCall(void)
-//{
-
-//    imu_call_1++;
-//    imu_call_2++;
-//    imu_call_3++;
-//    imu_call_4++;
-//    imu_call_5++;
-//    if( imu_call_1 >= 2 ) //T=2ms
-//    {
-//        imu_call_1=0;
-
-//        mpu6050.dataUpdate();  // stm32f4--280us(fcu)
-
-//#if SYSTEM_SUPPROT_FUSION_ARITHMETIC > 0u
-
-//        // 通用	更新
-//        imu_arithmetic_model.Set_ModelInitial();	 							// stm32f4--2us(fcu) instantly > 45us
-//        imu_arithmetic_model.ModelCommanState_Update();							// stm32f4--35us(fpu)
-
-//        if(imu_arithmetic_model.Imu_Top_fusion_HavingInitial == 1)	  // 已初始化条件
-//        {
-//            imu_arithmetic_model.XState1_Predict(0.002f);							// stm32f4--54us(fpu)
-//            imu_arithmetic_model.XState2_Predict(0.002f);							// stm32f4--54us(fpu)
-
-//#if ARITHMETIC_MPU6050_EXTENDEDKALMAN > 0u
-//            // 算法1
-//            imu_arithmetic_model.ExtendedKalman_State_Update1();			// stm32f4--37us(fpu)
-//            imu_arithmetic_model.XState_KalmanFusionCall_Process1();	    // stm32f4--55us(fpu)
-
-//#endif
-
-//#if ARITHMETIC_MPUHMC5883_EGyroCorrect > 0u
-//            // 算法2
-//            imu_arithmetic_model.YawError_Correct_State_Update2();	// stm32f4--37us(fpu)
-//            imu_arithmetic_model.YawError_Correct_Process2();  // stm32f4--3us(fpu)
-
-//#endif
-
-//            // 接口变量更新
-//            imu_arithmetic_model.UpdateState_to_PortVariable();	// stm32f4--35us(fpu)
-
-//        }
-//#endif
-
-//    }
-
-//    if( imu_call_2 >= 5 ) //T=5ms
-//    {
-//        imu_call_2=0;
-//        if(hmc085_en == 1) hmc5883l.dataUpdate();  // stm32f4--50us
-//        if(bmp085_en == 1) bmp085.dataUpdate();
-//        if(ms611_en == 1) ms611.dataUpdate();
-//    }
-
-//    if( imu_call_3 >= 10 ) //T=10ms
-//    {
-//        imu_call_3 = 0;
-//    }
-
-//    if( imu_call_4 >= 25 ) //T=25ms
-//    {
-//        imu_call_4=0;
-//        if( mpu6050.getDeviceState() && hmc5883l.getDeviceState() ){
-//            imu_arithmetic_model.Fusion_State = 1;
-//        }else{
-//            imu_arithmetic_model.Fusion_State = 0;
-//        }
-//#if SYSTEM_SUPPROT_FUSION_ARITHMETIC > 0u
-//        //普通量测
-//#if ACTIVE_CALCULATE_MESANGLE > 0u
-//        imu_arithmetic_model.GetAccHmc_MesAngle_dgree(2);	// stm32f4--9us(fcu)
-//#endif
-
-//#endif
-//    }
-
-//    if( imu_call_5 >= 50 ) //T=50ms
-//    {
-//        imu_call_5=0;
-//        if( debug_en == 1)
-//        {
-////            printf("mpustate=%d  hmcstate=%d \r\n" , mpu6050.getDeviceState() , hmc5883l.getDeviceState());
-////            printf("%lf %lf %lf \r\n",imu_arithmetic_model.Fus_Angle.pitch
-////                   ,imu_arithmetic_model.Fus_Angle.roll,imu_arithmetic_model.Fus_Angle.yaw);
-//        }
-//    }
-
-//}
 

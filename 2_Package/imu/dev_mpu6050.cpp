@@ -16,7 +16,7 @@
 *
 ***********************************************************************************************************************/
 
-#include "mpu6050.h"
+#include "dev_mpu6050.h"
 #include "math.h"
 
 #define pi            3.1415926f
@@ -26,7 +26,7 @@
 #define MPU6050_ADDRESS 0xD0    //mpu6050 address
 
 #define	SMPLRT_DIV		0x19
-#define	CONFIG	      0x1A
+#define	CONFIG          0x1A
 #define	GYRO_CONFIG		0x1B
 #define	ACCEL_CONFIG	0x1C
 #define	ACCEL_XOUT_H	0x3B
@@ -224,12 +224,13 @@ void MPU6050::renewLastDate(void)
 {
     readBuffer();
 
-    //read acceleration values
+    // read acceleration values
     acc_last.x=((((int16_t)read_buffer[0]) << 8) | read_buffer[1]) - acc_offset.x;
     acc_last.y=((((int16_t)read_buffer[2]) << 8) | read_buffer[3]) - acc_offset.y;
     acc_last.z=((((int16_t)read_buffer[4]) << 8) | read_buffer[5]) - acc_offset.z;
-    //skip the temperature ADC
-    //read gyroscope values
+
+    // skip the temperature ADC
+    // read gyroscope values
     gyro_last.x=((((int16_t)read_buffer[8]) << 8) | read_buffer[9]) - gyro_offset.x;
     gyro_last.y=((((int16_t)read_buffer[10]) << 8) | read_buffer[11]) - gyro_offset.y;
     gyro_last.z=((((int16_t)read_buffer[12]) << 8) | read_buffer[13]) - gyro_offset.z;
@@ -255,11 +256,10 @@ void MPU6050::renewLastDate(void)
 void MPU6050::gyroDateNormalize(void)
 {
     // 250deg/s--131   500deg/s--65.5 1000deg/s--32.8 2000deg/s--16.4
-    gyro_normal.x = (float)gyro_last.x *0.061f;// /16.4f;
-    gyro_normal.y = (float)gyro_last.y *0.061f;// /16.4f;
-    gyro_normal.z = (float)gyro_last.z *0.061f;// /16.4f;
+    gyro_normal.x = (float)gyro_last.x * 0.00106f;// /16.4 * 57.3f;
+    gyro_normal.y = (float)gyro_last.y * 0.00106f;// /16.4 * 57.3f;
+    gyro_normal.z = (float)gyro_last.z * 0.00106f;// /16.4 * 57.3f;
 
-    //printf(" gyro_normal.x = %f \n" , gyro_normal.x);
 }
 
 /***********************************************************************************************************************
@@ -300,71 +300,16 @@ void MPU6050::accDateNormalize(void)
 * Cpu_Time:
 *
 * History:
-* mawenke  2015.10.1   V1.0      creat
+* mawenke       2015.10.1   V1.0      creat
 * chenyingbing  2015.12.1   V1.6      update
+* chenyingbing  2017.04.18  V1.7      update: remove the gyro_normal_filter data
 ***********************************************************************************************************************/
 void MPU6050::gyroDateNormalizeFilter(void)
 {
-    static 	unsigned char filter_cnt=0;
-    static float GYRO_X_BUF[FILTER_GYRO_LONG],GYRO_Y_BUF[FILTER_GYRO_LONG],GYRO_Z_BUF[FILTER_GYRO_LONG];
-
-    static unsigned char i;
-    static float temp_l1,temp_l2,temp_l3;
-    static float temp_s1,temp_s2,temp_s3;
-
-    temp_l1 = 0; temp_l2 = 0; temp_l3 = 0;
-    temp_s1 = 0; temp_s2 = 0; temp_s3 = 0;
-
-    //FIFO
-    for(i=0;i<(FILTER_GYRO_LONG-1);i++)
-    {
-        GYRO_X_BUF[i] = GYRO_X_BUF[i+1];
-        GYRO_Y_BUF[i] = GYRO_Y_BUF[i+1];
-        GYRO_Z_BUF[i] = GYRO_Z_BUF[i+1];
-
-        //Long_Avr_Process
-        temp_l1 += GYRO_X_BUF[i] * FILTER_GYRO_LONG_AVR;
-        temp_l2 += GYRO_Y_BUF[i] * FILTER_GYRO_LONG_AVR;
-        temp_l3 += GYRO_Z_BUF[i] * FILTER_GYRO_LONG_AVR;
-
-        //Short_Avr_Process
-        if(i > (FILTER_GYRO_LONG-FILTER_GYRO_SHORT)){
-            temp_s1 += GYRO_X_BUF[i] * FILTER_GYRO_SHORT_AVR;
-            temp_s2 += GYRO_Y_BUF[i] * FILTER_GYRO_SHORT_AVR;
-            temp_s3 += GYRO_Z_BUF[i] * FILTER_GYRO_SHORT_AVR;
-        }
-    }
-
-    //The New
-    GYRO_X_BUF[FILTER_GYRO_LONG-1] = gyro_normal.x;
-    GYRO_Y_BUF[FILTER_GYRO_LONG-1] = gyro_normal.y;
-    GYRO_Z_BUF[FILTER_GYRO_LONG-1] = gyro_normal.z;
-
-    //Replenish the New
-    temp_l1 += GYRO_X_BUF[FILTER_GYRO_LONG-1] * FILTER_GYRO_LONG_AVR;
-    temp_l2 += GYRO_Y_BUF[FILTER_GYRO_LONG-1] * FILTER_GYRO_LONG_AVR;
-    temp_l3 += GYRO_Z_BUF[FILTER_GYRO_LONG-1] * FILTER_GYRO_LONG_AVR;
-
-    temp_s1 += GYRO_X_BUF[FILTER_GYRO_LONG-1] * FILTER_GYRO_SHORT_AVR;
-    temp_s2 += GYRO_Y_BUF[FILTER_GYRO_LONG-1] * FILTER_GYRO_SHORT_AVR;
-    temp_s3 += GYRO_Z_BUF[FILTER_GYRO_LONG-1] * FILTER_GYRO_SHORT_AVR;
-
-    //Get Avr
-    gyro_normal_long_filter.x = temp_l1;
-    gyro_normal_long_filter.y = temp_l2;
-    gyro_normal_long_filter.z = temp_l3;
-
-    gyro_normal_short_filter.x = temp_s1;
-    gyro_normal_short_filter.y = temp_s2;
-    gyro_normal_short_filter.z = temp_s3;
-
-    filter_cnt++;
-    if(filter_cnt==FILTER_GYRO_LONG)	filter_cnt=0;
-
     //由于gyro误差很小，也没必要去计算，赋予常值即可。单位化 1,1，1
-    gyro_covariance.x = 1;
-    gyro_covariance.y = 1;
-    gyro_covariance.z = 1;
+    gyro_covariance.x = K_Amplify_GyroCov;
+    gyro_covariance.y = K_Amplify_GyroCov;
+    gyro_covariance.z = K_Amplify_GyroCov;
 }
 
 /***********************************************************************************************************************
@@ -381,12 +326,12 @@ void MPU6050::gyroDateNormalizeFilter(void)
 * Cpu_Time:
 *
 * History:
-* mawenke  2015.10.1   V1.0      creat
+* mawenke       2015.10.1   V1.0      creat
 * chenyingbing  2015.12.1   V1.6      update
+* chenyingbing  2017.04.18  V1.7      update the debug of short part : >=
 ***********************************************************************************************************************/
 void MPU6050::accDateNormalizeFilter(void)
 {
-    static 	unsigned char filter_cnt=0;
     static float	ACC_X_BUF[FILTER_ACC_LONG],ACC_Y_BUF[FILTER_ACC_LONG],ACC_Z_BUF[FILTER_ACC_LONG];
 
     static unsigned char i;
@@ -399,6 +344,8 @@ void MPU6050::accDateNormalizeFilter(void)
 
     temp_l1 = 0; temp_l2 = 0; temp_l3 = 0;
     temp_s1 = 0; temp_s2 = 0; temp_s3 = 0;
+
+    static int FILTER_DLEN = FILTER_ACC_LONG - FILTER_ACC_SHORT;
 
     //FIFO
     for(i=0;i<(FILTER_ACC_LONG-1);i++)
@@ -413,7 +360,7 @@ void MPU6050::accDateNormalizeFilter(void)
         temp_l3 += ACC_Z_BUF[i] * FILTER_ACC_LONG_AVR;
 
         //Short_Avr_Process
-        if(i > (FILTER_ACC_LONG-FILTER_ACC_SHORT)){
+        if(i >= (FILTER_DLEN)){
             temp_s1 += ACC_X_BUF[i] * FILTER_ACC_SHORT_AVR;
             temp_s2 += ACC_Y_BUF[i] * FILTER_ACC_SHORT_AVR;
             temp_s3 += ACC_Z_BUF[i] * FILTER_ACC_SHORT_AVR;
@@ -443,9 +390,6 @@ void MPU6050::accDateNormalizeFilter(void)
     acc_normal_short_filter.y = temp_s2;
     acc_normal_short_filter.z = temp_s3;
 
-    filter_cnt++;
-    if(filter_cnt==FILTER_ACC_LONG)	filter_cnt=0;
-
     //计算方差
     cova_l1 = 0; cova_l2 = 0; cova_l3 = 0;
     cova_s1 = 0; cova_s2 = 0; cova_s3 = 0;
@@ -460,7 +404,7 @@ void MPU6050::accDateNormalizeFilter(void)
         cova_l3 += cova_deal*cova_deal * FILTER_ACC_LONG_AVR;
 
         //Short_Avr_Process
-        if(i > (FILTER_ACC_LONG-FILTER_ACC_SHORT)){
+        if(i >= (FILTER_DLEN)){
             cova_deal = (ACC_X_BUF[i]-acc_normal_short_filter.x);
             cova_s1 += cova_deal*cova_deal * FILTER_ACC_SHORT_AVR;
             cova_deal = (ACC_Y_BUF[i]-acc_normal_short_filter.y);
@@ -470,19 +414,13 @@ void MPU6050::accDateNormalizeFilter(void)
         }
     }
 
-    cova_l1 = cova_l1;
-    cova_l2 = cova_l2;
-    cova_l3 = cova_l3;
-    cova_s1 = cova_s1;
-    cova_s2 = cova_s2;
-    cova_s3 = cova_s3;
+    acc_covariance_long_fliter.x = cova_l1 * K_Amplify_AccCov;
+    acc_covariance_long_fliter.y = cova_l2 * K_Amplify_AccCov;
+    acc_covariance_long_fliter.z = cova_l3 * K_Amplify_AccCov;
 
-    acc_covariance_long_fliter.x = cova_l1;
-    acc_covariance_long_fliter.y = cova_l2;
-    acc_covariance_long_fliter.z = cova_l3;
-    acc_covariance_short_fliter.x = cova_s1;
-    acc_covariance_short_fliter.y = cova_s2;
-    acc_covariance_short_fliter.z = cova_s3;
+    acc_covariance_short_fliter.x = cova_s1 * K_Amplify_AccCov;
+    acc_covariance_short_fliter.y = cova_s2 * K_Amplify_AccCov;
+    acc_covariance_short_fliter.z = cova_s3 * K_Amplify_AccCov;
 }
 
 /***********************************************************************************************************************
@@ -509,7 +447,7 @@ unsigned char MPU6050::deviceInit(void)
     delay_ms(5);
     writeByte(PWR_MGMT_1, 0x01); //设置设备时钟源
     delay_ms(5);
-    writeByte(CONFIG , 0x03);    //低通滤波 42hz
+    writeByte(CONFIG , 0x03);    //低通滤波 acc: 260hz, gyro: 42hz
     delay_ms(5);
     writeByte(SMPLRT_DIV, 0x00);//1KHz sample rate,acc output rate is 1KHz,so is the gyro
     delay_ms(5);
@@ -552,25 +490,27 @@ unsigned char MPU6050::deviceInit(void)
 void MPU6050::dataUpdate(void)
 {
 
-    if( data_update_j <= 500)  //上电开始前500次读的数据无效
+    if( data_update_i <= 500)  //上电开始前500次读的数据无效
     {
-        data_update_j++;
+        data_update_i++;
         renewLastDate();
         return;
     }
     if(gyro_offset_read_enable == 1)
     {
-        if(gyro_offset_flag != 1) { readGyroDrift(200);  return;}
+        if(gyro_offset_flag != 1) { readGyroDrift(250);  return;}
     }
     if(acc_offset_read_enable == 1)
     {
-        if(acc_offset_flag != 1) { readAccDrift(200); return;}
+        if(acc_offset_flag != 1) { readAccDrift(250); return;}
     }
 
     renewLastDate();            //stm32f1 170us	stm32f4 78us
     gyroDateNormalize();        //stm32f1 20us stm32f4 1us
     accDateNormalize();         //stm32f1 20us stm32f4 1us
+
     accDateNormalizeFilter();   //stm32f4 2us/16us
     gyroDateNormalizeFilter();  //stm32f4 2us
 
+    mpu_data_ready = true;
 }

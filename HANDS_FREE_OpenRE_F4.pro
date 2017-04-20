@@ -140,18 +140,22 @@ HEADERS += 0_Project/examples/handsfree_simple_app/src/main_config.h \
 		2_Package/hf_link/hf_link_state_machine.h \
 		2_Package/iap/hf_HF_Bootloader.h \
 		2_Package/imu/imu_config.h \
-		2_Package/imu/mpu6050.h \
-		2_Package/imu/bmp085.h \
-		2_Package/imu/ms611.h  \
-		2_Package/imu/hmc5883l.h \
-		2_Package/imu/gps.h \
-		2_Package/imu/imu_top.h \
+                2_Package/imu/dev_mpu6050.h \
+                2_Package/imu/dev_bmp085.h \
+                2_Package/imu/dev_ms611.h  \
+                2_Package/imu/dev_hmc5883l.h \
+                2_Package/imu/dev_gps.h \
+		2_Package/imu/al_fmodel_frame.h \
+                2_Package/imu/al_model_ekf.h \
+                2_Package/imu/al_model_typicalcorrect.h \
 		2_Package/lcd/font.h \
 		2_Package/lcd/fsmc_lcd_driver.h \
 		2_Package/math/base_math_config.h \
-		2_Package/math/base_math_matrix.h \
-		2_Package/math/base_math_top.h \
-		2_Package/math/base_math_trigonometric.h \
+                2_Package/math/base_math_top.h \
+                2_Package/math/base_math_func.h \
+                2_Package/math/base_math_matrix.h \
+                2_Package/math/base_math_trigonometric.h \
+                2_Package/math/base_math_quaternion.h \
 		2_Package/motor/motor_control.h \
 		2_Package/motor/motor_top.h \
 		2_Package/motor/virtual_motor.h \
@@ -292,16 +296,21 @@ SOURCES += 0_Project/examples/handsfree_simple_app/src/main.cpp \
 		2_Package/hf_link/hf_link_state_machine.cpp \
 		2_Package/hf_link/hf_link.cpp \
 		2_Package/iap/hf_HF_Bootloader.c \
-		2_Package/imu/mpu6050.cpp \
-		2_Package/imu/bmp085.cpp \
-		2_Package/imu/ms611.cpp  \
-		2_Package/imu/hmc5883l.cpp \
-		2_Package/imu/gps.cpp \
+		2_Package/imu/dev_mpu6050.cpp \
+                2_Package/imu/dev_bmp085.cpp \
+                2_Package/imu/dev_ms611.cpp  \
+                2_Package/imu/dev_hmc5883l.cpp \
+                2_Package/imu/dev_gps.cpp \
+                2_Package/imu/al_fmodel_frame.cpp \
+                2_Package/imu/al_model_ekf.cpp \
+                2_Package/imu/al_model_typicalcorrect.cpp \
 		2_Package/imu/imu_top.cpp \
 		2_Package/lcd/fsmc_lcd_driver.c \
-		2_Package/math/base_math_matrix.cpp \
 		2_Package/math/base_math_top.cpp \
+                2_Package/math/base_math_func.cpp \
+                2_Package/math/base_math_matrix.cpp \
 		2_Package/math/base_math_trigonometric.cpp \
+                2_Package/math/base_math_quaternion.cpp \
 		2_Package/motor/motor_control.cpp \
 		2_Package/motor/motor_top.cpp \
 		2_Package/nrf24l01/nrf24l01_driver.cpp \
