@@ -5,7 +5,7 @@ BOARD_TYPE		?= control_unit_v2
 #####ROBOT_MODEL : null jilong jilong_omni3 stone  ...  
 ROBOT_MODEL     ?= null
 #####project name
-PROJECT			=  yb_app_$(ROBOT_MODEL)_$(BOARD_TYPE)
+PROJECT			=  imu_test_$(ROBOT_MODEL)_$(BOARD_TYPE)
 TOP_PATH        =  ../../../..
 
 #############################################################parameters
@@ -31,7 +31,7 @@ PAKG        = common math imu
 OS_MODULE =           
 
 #LIB_MODULE: EIGEN MATRIX  etc
-THIRDPARTY_MODULE = Dobot Eigen3
+THIRDPARTY_MODULE = Eigen3
 
 ###################################################################include rules
 

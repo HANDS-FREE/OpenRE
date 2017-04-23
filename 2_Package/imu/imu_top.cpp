@@ -19,8 +19,6 @@
 
 #include "imu_top.h"
 
-IMU imu;
-
 /***********************************************************************************************************************
 * Function:      void IMU::topInit(uint8_t mpu , uint8_t bmp , uint8_t hmc ,
                   uint8_t ms6 , uint8_t gps)

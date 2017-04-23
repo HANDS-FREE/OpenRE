@@ -29,7 +29,6 @@ private:
     uint8_t imu_call_1 , imu_call_2 , imu_call_3 , imu_call_4 , imu_call_5;
 
 };
-extern IMU imu;
 
 #endif  //#ifndef IMU_TOP_H
 

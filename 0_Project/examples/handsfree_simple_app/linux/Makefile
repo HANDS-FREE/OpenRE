@@ -31,7 +31,7 @@ PAKG        = common
 OS_MODULE =           
 
 #LIB_MODULE: EIGEN MATRIX  etc
-THIRDPARTY_MODULE = Dobot
+THIRDPARTY_MODULE = 
 
 ###################################################################include rules
 
