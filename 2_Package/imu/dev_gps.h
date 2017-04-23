@@ -1,5 +1,5 @@
-#ifndef GPS_H
-#define GPS_H
+#ifndef DEV_GPS_H
+#define DEV_GPS_H
 
 #include "imu_config.h"
 

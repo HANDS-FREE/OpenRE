@@ -1,5 +1,5 @@
-#ifndef  MS611_H
-#define  MS611_H
+#ifndef  DEV_MS611_H
+#define  DEV_MS611_H
 
 #include "imu_config.h"
 

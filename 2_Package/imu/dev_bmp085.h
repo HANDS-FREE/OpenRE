@@ -1,5 +1,5 @@
-#ifndef BMP085_H
-#define BMP085_H
+#ifndef DEV_BMP085_H
+#define DEV_BMP085_H
 
 #include "imu_config.h"
 

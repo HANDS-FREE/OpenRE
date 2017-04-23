@@ -20,10 +20,13 @@
 
 #include "main_config.h"
 
-//是否使用ARM的数学库，如果使用，则数学计算尽可能使用ARM的数学库，若不使能，则使用math.h库
-#define  USE_ARM_MATH_LIB     				  0u      
-#define  BASE_MATH_MATRIX_EN     				1u      //是否编译math_matrix
-#define  BASE_MATH_TRIGONOMETRIC_EN			1u			//是否编译math_trigonometric
+#define  BASE_MATH_FUNC_EN                  1u          //是否编译 math_func            :   some quick caculational function, such as smart_sqrt and so on..
+
+#define  BASE_MATH_MATRIX_EN                1u          //是否编译 math_matrix          :   Eigen + self-defined class/function
+
+#define  BASE_MATH_TRIGONOMETRIC_EN			1u			//是否编译 math_trigonometric   :   Look-up table if USE_ARM_MATH_LIB == 0
+
+#define  BASE_MATH_QUATERNION_EN            1u          //是否编译 math_quaternion      :   Eigen + self-defined class/function
 
 #endif // #ifndef BASE_MATH_CONFIG_H
 
