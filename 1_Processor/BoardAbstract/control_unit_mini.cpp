@@ -380,7 +380,7 @@ void Board::motorSetPWM(uint8_t mode , uint8_t motor_id , int pwm_value)
             else if(pwm_value < -5){
                 GPIO_ResetBits(GPIOC , GPIO_Pin_7);
                 GPIO_SetBits(GPIOC , GPIO_Pin_6);
-                HF_Set_PWM(TIM1 , 3 , (uint16_t)pwm_value);
+                HF_Set_PWM(TIM1 , 3 , (uint16_t)-pwm_value);
                 return;
             }
             else{
@@ -398,7 +398,7 @@ void Board::motorSetPWM(uint8_t mode , uint8_t motor_id , int pwm_value)
             else if(pwm_value < -5){
                 GPIO_SetBits(GPIOC , GPIO_Pin_8);
                 GPIO_ResetBits(GPIOC , GPIO_Pin_9);
-                HF_Set_PWM(TIM1 , 4 , (uint16_t)pwm_value);
+                HF_Set_PWM(TIM1 , 4 , (uint16_t)-pwm_value);
                 return;
             }
             else{

@@ -16,7 +16,7 @@ INCLUDEPATH += . \
 		0_Project/include/robot_model/differential \
 		0_Project/include/robot_model/mecanum4 \
 		0_Project/include/robot_model/omni3 \
-		0_Project/include/robot_model/stone \
+		0_Project/include/robot_model/mini \
 		1_Processor/Interrupt \
 		1_Processor/BoardAbstract \
 		1_Processor/STM32F1 \
@@ -69,7 +69,7 @@ HEADERS += 0_Project/examples/handsfree_simple_app/src/main_config.h \
 		0_Project/firmware/handsfree_wheel_robot/src/main_config.h  \
 		0_Project/firmware/handsfree_wheel_robot_ucosIII/src/main_config.h \
 		0_Project/include/robot_model/omni3/robot_model.h \
-		0_Project/include/robot_model/stone/robot_model.h \
+		0_Project/include/robot_model/mini/robot_model.h \
 		0_Project/include/robot_model/mecanum4/robot_model.h \
 		0_Project/include/robot_model/differential/robot_model.h \
 		1_Processor/Interrupt/stm32f10x_it.h \
