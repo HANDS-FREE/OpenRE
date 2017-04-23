@@ -2,11 +2,14 @@
 #define IMU_TOP_H
 
 #include "imu_config.h"
-#include "mpu6050.h"
-#include "bmp085.h"
-#include "ms611.h"
-#include "hmc5883l.h"
-#include "gps.h"
+
+#include "dev_mpu6050.h"
+#include "dev_bmp085.h"
+#include "dev_ms611.h"
+#include "dev_hmc5883l.h"
+#include "dev_gps.h"
+
+#include "al_fmodel_frame.h"
 
 class IMU
 {
@@ -24,6 +27,7 @@ public:
 private:
     uint8_t mpu6050_en , bmp085_en , ms611_en , hmc085_en , gps_en , debug_en ;
     uint8_t imu_call_1 , imu_call_2 , imu_call_3 , imu_call_4 , imu_call_5;
+
 };
 extern IMU imu;
 

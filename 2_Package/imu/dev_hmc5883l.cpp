@@ -16,40 +16,7 @@
 *
 ***********************************************************************************************************************/
 
-/***********************************************************************************************************************
-
-  Refer the following application note for heading calculation.
-  http://www.ssec.honeywell.com/magnetic/datasheets/lowcost.pdf
-  ----------------------------------------------------------------------------------------
-  atan2(y, x) is the angle in radians between the positive x-axis of a plane and the point
-  given by the coordinates (x, y) on it.
-  ----------------------------------------------------------------------------------------
-
-  This sketch does not utilize the magnetic component Z as tilt compensation can not be done without an Accelerometer
-
-  ----------------->y
-  |
-  |
-  |
-  |
-  |
-  |
- \/
-  x
-
-
-
-                     N 180
-     125 NW  |  NE 180+45
-                     |
-    90  W----------E 270
-                     |
-     45  SW  |  SE 270+45
-                     S 0
-
-***********************************************************************************************************************/
-
-#include "hmc5883l.h"
+#include "dev_hmc5883l.h"
 #include "math.h"
 
 #define HMC5883L_ADDRESS  0x3C
@@ -147,13 +114,15 @@ void HMC5883L::renewLastDate(void)
     hmc_original.x = read_buffer[0] << 8 | read_buffer[1]; //Combine MSB and LSB of X Data output register  -2048~~2047
     hmc_original.z = read_buffer[2] << 8 | read_buffer[3];
     hmc_original.y = read_buffer[4] << 8 | read_buffer[5];
+
 }
 
 void HMC5883L::hmcDateNormalize(void)
 {
-    hmc_normal.x = (float)(hmc_original.x*0.00435f);// /230;
-    hmc_normal.z = (float)(hmc_original.z*0.00435f);// /230;
-    hmc_normal.y = (float)(hmc_original.y*0.00435f);// /230;
+    hmc_normal.x = (float)(hmc_original.x*0.00435f);    // /230;
+    hmc_normal.z = (float)(hmc_original.z*0.00435f);    // /230;
+    hmc_normal.y = (float)(hmc_original.y*0.00435f);    // /230;
+
     hmc_normal.x += hmc_normal_offset.x;
     hmc_normal.y += hmc_normal_offset.y;
     hmc_normal.z += hmc_normal_offset.z;
