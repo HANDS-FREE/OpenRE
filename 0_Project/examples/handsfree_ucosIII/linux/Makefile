@@ -2,7 +2,7 @@
 
 #####BOARD_TYPE: control_unit_mini control_unit_v1 control_unit_v2
 BOARD_TYPE		?= control_unit_v2
-#####ROBOT_MODEL : null jilong jilong_omni3 stone  ...  
+#####ROBOT_MODEL :  
 ROBOT_MODEL     ?= null
 #####project name
 PROJECT			=  ucosIII_$(ROBOT_MODEL)_$(BOARD_TYPE)

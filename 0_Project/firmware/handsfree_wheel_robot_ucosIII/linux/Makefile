@@ -1,8 +1,8 @@
 ######################################define project name, board type, and path
 
-#####BOARD_TYPE: control_unit_mini control_unit_v1 control_unit_v2
+#####BOARD_TYPE: control_unit_mini control_unit_v2
 BOARD_TYPE		?= control_unit_v2
-#####ROBOT_MODEL : null jilong jilong_omni3 stone    
+#####ROBOT_MODEL : null stone stone_omni3 giraffe    
 ROBOT_MODEL     ?= stone
 #####project name
 PROJECT			=  robot_ucosIII_$(ROBOT_MODEL)_$(BOARD_TYPE)
