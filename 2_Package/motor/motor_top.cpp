@@ -44,28 +44,28 @@ void MotorTop::motorTopInit(uint8_t motor_enable_num_   ,  float pid_t_ ,
 
     if(motor_enable_num >= 1)
     {
-        para.motor_id = 1;
+        para.motor_id = (unsigned char)MOTOR1;
         motor1 = DCMotor(para.driver_type , simulation_model_);
         motor1.controlInit(pid_t_ , &para);
         motor1.setAngleSpeed(0);
     }
     if(motor_enable_num >= 2)
     {
-        para.motor_id = 2;
+        para.motor_id = (unsigned char)MOTOR2;
         motor2 = DCMotor(para.driver_type , simulation_model_);
         motor2.controlInit(pid_t_ , &para);
         motor2.setAngleSpeed(0);
     }
     if(motor_enable_num >= 3)
     {
-        para.motor_id = 3;
+        para.motor_id = (unsigned char)MOTOR3;
         motor3 = DCMotor(para.driver_type , simulation_model_);
         motor3.controlInit(pid_t_ , &para);
         motor3.setAngleSpeed(0);
     }
     if(motor_enable_num >= 4)
     {
-        para.motor_id = 4;
+        para.motor_id = (unsigned char)MOTOR4;
         motor4 = DCMotor(para.driver_type , simulation_model_);
         motor4.controlInit(pid_t_ , &para);
         motor4.setAngleSpeed(0);

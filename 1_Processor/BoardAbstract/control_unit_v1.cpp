@@ -94,6 +94,78 @@ Board::Board() : BoardAbstract()
     else { device_type[USART_RADIO] = 0x40;}
 #endif
 
+#ifndef MOTOR_INTERFACE_1
+    device_type[MOTOR_INTERFACE_1] = 0x10;
+#else
+    if(MOTOR_INTERFACE_1 == 1){
+        device_type[MOTOR1] = 0x10;
+    }
+    else if(MOTOR_INTERFACE_1 == 2){
+        device_type[MOTOR1] = 0x20;
+    }
+    else if(MOTOR_INTERFACE_1 == 3){
+        device_type[MOTOR1] = 0x30;
+    }
+    else if(MOTOR_INTERFACE_1 == 4){
+        device_type[MOTOR1] = 0x40;
+    }
+    else { device_type[MOTOR1] = 0x10;}
+#endif
+
+#ifndef MOTOR_INTERFACE_2
+    device_type[MOTOR2] = 0x20;
+#else
+    if(MOTOR_INTERFACE_2 == 1){
+        device_type[MOTOR2] = 0x10;
+    }
+    else if(MOTOR_INTERFACE_2 == 2){
+        device_type[MOTOR2] = 0x20;
+    }
+    else if(MOTOR_INTERFACE_2 == 3){
+        device_type[MOTOR2] = 0x30;
+    }
+    else if(MOTOR_INTERFACE_2 == 4){
+        device_type[MOTOR2] = 0x40;
+    }
+    else { device_type[MOTOR2] = 0x20;}
+#endif
+
+#ifndef MOTOR_INTERFACE_3
+    device_type[MOTOR3] = 0x30;
+#else
+    if(MOTOR_INTERFACE_3 == 1){
+        device_type[MOTOR3] = 0x10;
+    }
+    else if(MOTOR_INTERFACE_3 == 2){
+        device_type[MOTOR3] = 0x20;
+    }
+    else if(MOTOR_INTERFACE_3 == 3){
+        device_type[MOTOR3] = 0x30;
+    }
+    else if(MOTOR_INTERFACE_3 == 4){
+        device_type[MOTOR3] = 0x40;
+    }
+    else { device_type[MOTOR3] = 0x30;}
+#endif
+
+#ifndef MOTOR_INTERFACE_4
+    device_type[MOTOR4] = 0x40;
+#else
+    if(MOTOR_INTERFACE_4 == 1){
+        device_type[MOTOR4] = 0x10;
+    }
+    else if(MOTOR_INTERFACE_4 == 2){
+        device_type[MOTOR4] = 0x20;
+    }
+    else if(MOTOR_INTERFACE_4 == 3){
+        device_type[MOTOR4] = 0x30;
+    }
+    else if(MOTOR_INTERFACE_4 == 4){
+        device_type[MOTOR4] = 0x40;
+    }
+    else { device_type[MOTOR4] = 0x40;}
+#endif
+
     device_type[USART_GPS] = 0x32;
     device_type[USART_SBUS] = 0x21;
     device_type[USART_DIGITAL_SERVO] = 0x32;

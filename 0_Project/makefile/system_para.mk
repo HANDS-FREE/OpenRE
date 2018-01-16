@@ -27,6 +27,25 @@ PC_INTERFACE ?= usart_interface_4
 RADIO_INTERFACE ?= usart_interface_5
 endif
 
+ifeq "$(strip $(ROBOT_MODEL))" "stone"
+####select the motor interface for motor : motor1, motor2, motor3, motor4  
+MOTOR_INTERFACE_1 ?= motor1
+MOTOR_INTERFACE_2 ?= motor2
+endif
+
+ifeq "$(strip $(ROBOT_MODEL))" "stone_omni3"
+####select the motor interface for motor : motor1, motor2, motor3, motor4  
+MOTOR_INTERFACE_1 ?= motor1
+MOTOR_INTERFACE_2 ?= motor2
+MOTOR_INTERFACE_3 ?= motor3
+endif
+
+ifeq "$(strip $(ROBOT_MODEL))" "giraffe"
+####select the motor interface for motor : motor1, motor2, motor3, motor4  
+MOTOR_INTERFACE_1 ?= motor1
+MOTOR_INTERFACE_2 ?= motor2
+endif
+
 ifeq "$(strip $(ROBOT_SIMULATION_MODE))" "enable"
 DDEFS           += -DROBOT_SIMULATION_MODE=1
 else
@@ -94,5 +113,57 @@ DDEFS           += -DRADIO_INTERFACE=5
 endif
 ifeq "$(strip $(RADIO_INTERFACE))" "usart_interface_6"
 DDEFS           += -DRADIO_INTERFACE=6
+endif
+
+ifeq "$(strip $(MOTOR_INTERFACE_1))" "motor1"
+DDEFS           += -DMOTOR_INTERFACE_1=1
+endif
+ifeq "$(strip $(MOTOR_INTERFACE_1))" "motor2"
+DDEFS           += -DMOTOR_INTERFACE_1=2
+endif
+ifeq "$(strip $(MOTOR_INTERFACE_1))" "motor3"
+DDEFS           += -DMOTOR_INTERFACE_1=3
+endif
+ifeq "$(strip $(MOTOR_INTERFACE_1))" "motor4"
+DDEFS           += -DMOTOR_INTERFACE_1=4
+endif
+
+ifeq "$(strip $(MOTOR_INTERFACE_2))" "motor1"
+DDEFS           += -DMOTOR_INTERFACE_2=1
+endif
+ifeq "$(strip $(MOTOR_INTERFACE_2))" "motor2"
+DDEFS           += -DMOTOR_INTERFACE_2=2
+endif
+ifeq "$(strip $(MOTOR_INTERFACE_2))" "motor3"
+DDEFS           += -DMOTOR_INTERFACE_2=3
+endif
+ifeq "$(strip $(MOTOR_INTERFACE_2))" "motor4"
+DDEFS           += -DMOTOR_INTERFACE_2=4
+endif
+
+ifeq "$(strip $(MOTOR_INTERFACE_3))" "motor1"
+DDEFS           += -DMOTOR_INTERFACE_3=1
+endif
+ifeq "$(strip $(MOTOR_INTERFACE_3))" "motor2"
+DDEFS           += -DMOTOR_INTERFACE_3=2
+endif
+ifeq "$(strip $(MOTOR_INTERFACE_3))" "motor3"
+DDEFS           += -DMOTOR_INTERFACE_3=3
+endif
+ifeq "$(strip $(MOTOR_INTERFACE_3))" "motor4"
+DDEFS           += -DMOTOR_INTERFACE_3=4
+endif
+
+ifeq "$(strip $(MOTOR_INTERFACE_4))" "motor1"
+DDEFS           += -DMOTOR_INTERFACE_4=1
+endif
+ifeq "$(strip $(MOTOR_INTERFACE_4))" "motor2"
+DDEFS           += -DMOTOR_INTERFACE_4=2
+endif
+ifeq "$(strip $(MOTOR_INTERFACE_4))" "motor3"
+DDEFS           += -DMOTOR_INTERFACE_4=3
+endif
+ifeq "$(strip $(MOTOR_INTERFACE_4))" "motor4"
+DDEFS           += -DMOTOR_INTERFACE_4=4
 endif
 
