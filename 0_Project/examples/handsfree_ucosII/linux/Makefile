@@ -35,5 +35,5 @@ THIRDPARTY_MODULE =
 
 ###################################################################include rules
 
-include $(TOP_PATH)/0_Project/makefile/compiler_config.mk
+include $(TOP_PATH)/0_Project/makefile/compiler.mk
 

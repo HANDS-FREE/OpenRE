@@ -23,6 +23,7 @@
 int main(void)
 {
     Board *board = Board::getInstance();
+
     board->boardBasicInit();
 
     RobotModel robot_model;

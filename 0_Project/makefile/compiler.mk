@@ -1,8 +1,9 @@
-#######################################################system parameters
-#
-include	$(TOP_PATH)/0_Project/makefile/system_para.mk
+####################################################### system parameters
 
-#############################################################packages, board, os
+include	$(TOP_PATH)/0_Project/makefile/configuration.mk
+include	$(TOP_PATH)/0_Project/makefile/definition.mk
+
+############################################################# packages, board, os
 # Project
 include	$(TOP_PATH)/0_Project/project.mk
 
@@ -20,13 +21,13 @@ include $(TOP_PATH)/4_Thirdparty/thirdparty.mk
 
 TOOLS_PATH       = $(TOP_PATH)/0_Project/6_Tools
 
-#############################################################bootloader settings
+############################################################# bootloader settings
 
 ifeq "$(strip $(BOOTLOADER_MODE))" "enable"
 DDEFS           += -DBOOTLOADER_ENABLE
 endif
 
-###############################################################compiler settings
+############################################################### compiler settings
 ARMGCC		= $(TOP_PATH)/5_Development_Toolchain/gcc-arm-none-eabi-5_4-2016q2/bin/arm-none-eabi-gcc
 
 ifeq ($(ARMGCC),$(wildcard $(ARMGCC)))
@@ -84,7 +85,7 @@ LDFLAGS += $(MCFLAGS) $(OPT) -lm -g -gdwarf-2 -mthumb -nostartfiles -Xlinker --g
         -Wl,-Map=$(PROJECT).map,--cref,--no-warn-mismatch \
         $(LIBDIR) $(LIB)
 
-##################################################################makefile rules
+################################################################## makefile rules
 
 OBJS  	= $(filter %.o , $(ASM_SRC:.s=.o)) $(filter %.o , $(ASM_SRC:.asm=.o)) \
           $(C_SRC:.c=.o) $(CXX_SRC:.cpp=.o)
@@ -125,7 +126,7 @@ endif
 %.px4: %.bin
 	python $(TOOLS_PATH)/px_mkfw.py --prototype $(TOOLS_PATH)/Images/HANDSFREE_$(BOARD_TYPE).prototype --image $(PROJECT).bin > $(PROJECT).px4
 	
-##################################################################makefile clean 
+################################################################## makefile clean 
 clean:
 	-rm -rf $(OBJS)
 	-rm -rf $(PROJECT).elf
@@ -134,7 +135,7 @@ clean:
 	-rm -rf $(PROJECT).bin
 	-rm -rf $(PROJECT).px4
 
-###########################################################################flash
+########################################################################### flash
 
 include	$(TOP_PATH)/0_Project/makefile/flash.mk
      

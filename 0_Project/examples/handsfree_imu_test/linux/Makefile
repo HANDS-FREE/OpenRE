@@ -35,6 +35,6 @@ THIRDPARTY_MODULE = Eigen3
 
 ###################################################################include rules
 
-include $(TOP_PATH)/0_Project/makefile/compiler_config.mk
+include $(TOP_PATH)/0_Project/makefile/compiler.mk
 
 
