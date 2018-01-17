@@ -65,7 +65,7 @@ This is a C++ embedded library for robotics base on STM32 and intended to provid
  git clone https://github.com/HANDS-FREE/OpenRE      
 
 ### OpenRE  Toolchain         
-#### Method1:  installation by deb  (recommended) 
+#### Method1:  installation by deb  
 ```
 $ sudo add-apt-repository ppa:terry.guo/gcc-arm-embedded  
 $ sudo apt-get update          
@@ -75,9 +75,8 @@ $ sudo apt-get install lib32ncurses5 libtool libusb-1.0 libftdi-dev python pytho
 $ sudo apt-get remove modemmanager    
 ```
 
-#### Method2:  source installation
-- get toolchain it in [Development_Toolchain](https://pan.baidu.com/s/1nuSvs7Z#list/path=%2FHANDSFREE%2FHands_Free_Release%2F3_Software%2FEmbedded_Development_Toolchain&parentPath=%2FHANDSFREE)
-- put these softwares in OpenRE/5_Development_Toolchain     
+#### Method2:  source installation (recommended) 
+- get toolchain it in [Development_Toolchain](https://pan.baidu.com/s/1mjJOcIW#list/path=%2FHANDSFREE%2FHands_Free_Release%2F3_Software%2FEmbedded_Development_Toolchain&parentPath=%2FHANDSFREE) ，put these softwares in OpenRE/5_Development_Toolchain.  or  **cd OpenRE & git clone git@github.com:HANDS-FREE/5_Development_Toolchain.git**
 
 ```
 $ cd 5_Development_Toolchain 
