@@ -21,7 +21,7 @@ public:
 public:
     void interfaceInit(unsigned char motor_id_  , float pwm_max){
         if(motor_simulation_model == 0){
-            board->motorInterfaceInit((uint8_t)motor_driver_type , motor_id_ , pwm_max);
+            board->motorInterfaceInit((uint8_t)motor_driver_type , board->getByteHighFourBit(board->device_type[motor_id_]) , pwm_max);
         }
         else{
             virtual_motor.init();
@@ -31,7 +31,7 @@ public:
     void IOEnable(unsigned char motor_id_ )
     {
         if(motor_simulation_model == 0){
-            board->motorEnable((uint8_t)motor_driver_type , motor_id_);
+            board->motorEnable((uint8_t)motor_driver_type , board->getByteHighFourBit(board->device_type[motor_id_]));
         }
         else{
             virtual_motor.enable();
@@ -41,7 +41,7 @@ public:
     void IODisable(unsigned char motor_id_ )
     {
         if(motor_simulation_model == 0){
-            board->motorDisable((uint8_t)motor_driver_type , motor_id_);
+            board->motorDisable((uint8_t)motor_driver_type , board->getByteHighFourBit(board->device_type[motor_id_]));
         }
         else{
             virtual_motor.disable();
@@ -51,7 +51,7 @@ public:
     void setPWM(unsigned char motor_id_  , float pwm)
     {
         if(motor_simulation_model == 0){
-            board->motorSetPWM((uint8_t)motor_driver_type , motor_id_ , pwm);
+            board->motorSetPWM((uint8_t)motor_driver_type , board->getByteHighFourBit(board->device_type[motor_id_]) , pwm);
         }
         else{
             virtual_motor.setPWM(pwm);
@@ -61,7 +61,7 @@ public:
     float getEncoderdata(unsigned char motor_id_ )
     {
         if(motor_simulation_model == 0){
-            return board->getMotorEncoderCNT(motor_id_) ;
+            return board->getMotorEncoderCNT(board->getByteHighFourBit(board->device_type[motor_id_])) ;
         }
         else{
             return virtual_motor.getEncoder();
@@ -71,7 +71,7 @@ public:
     float getCurrent(unsigned char motor_id_)
     {
         if(motor_simulation_model == 0){
-            return board->getMotorCurrent(motor_id_);
+            return board->getMotorCurrent(board->getByteHighFourBit(board->device_type[motor_id_]));
         }
         else{
             return virtual_motor.getCurrent();

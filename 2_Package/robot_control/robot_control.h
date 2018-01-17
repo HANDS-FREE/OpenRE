@@ -40,14 +40,12 @@ public:
     }
     void call(void);
 
-
     void setSBUSRemotePointer(SBUS* sbus_) { sbus = sbus_ ; }
     void setHFLinkNodePointer(HFLink* hf_link_node_)
     {
         hf_link_node_device = (DeviceType)hf_link_node_->port_num;
         hf_link_node = hf_link_node_ ;
     }
-
 
 public:
     MotorTop motor_top;

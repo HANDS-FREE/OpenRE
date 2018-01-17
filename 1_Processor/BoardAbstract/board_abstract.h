@@ -29,6 +29,10 @@ enum DeviceType{
     SPI_LCD,
     CAN_IMU,
     CAN_PAN_AND_TILT,
+    MOTOR1,
+    MOTOR2,
+    MOTOR3,
+    MOTOR4,
     LAST_DEVICE_FLAG
 };
 
@@ -48,6 +52,9 @@ public:
     uint16_t cnt_1ms , cnt_2ms ,  cnt_5ms , cnt_10ms , cnt_20ms , cnt_50ms , cnt_500ms;
     uint32_t chipUniqueID[3];
     uint16_t flashSize;    //Unit: KB
+    //the device id 's high 4 bit means which channel , low 4 bit means the channel mapping interface
+    // 0x00 means this device does not support
+    uint8_t device_type[LAST_DEVICE_FLAG];
 
 public:
     /*****system support functions*********************************************************************************************/
@@ -125,6 +132,10 @@ public:
     virtual void ioDeviceInit(DeviceType io_device_type) = 0;
     virtual float getIODeviceData(DeviceType io_device_type) = 0;
 
+    /******common***********************************************************************************************************/
+    uint8_t getByteHighFourBit(uint8_t data){ return (data&0xf0)>>4;}
+    uint8_t getByteLowFourBit(uint8_t data){ return data&0x0f;}
+
 protected:
     float battery_voltage_;
     float battery_voltage_alarm_ ;
@@ -137,11 +148,7 @@ protected:
 
     uint16_t board_call_5ms , board_call_20ms , board_call_1s , board_call_2s;
     uint8_t key_state[5];
-    //the device id 's high 4 bit means which channel , low 4 bit means the channel mapping interface
-    // 0x00 means this device does not support
-    uint8_t device_type[LAST_DEVICE_FLAG];
     Queue usart1_queue ,  usart2_queue , usart3_queue , usart4_queue , usart5_queue , usart6_queue;
-
 
 private:
     virtual float getBatteryVoltage(void) = 0;
@@ -159,9 +166,6 @@ private:
     void updateLocalTime(void);
     float getCPUUsage(void);
     float getCPUTemperature(void);
-
-    uint8_t getByteHighFourBit(uint8_t data){ return (data&0xf0)>>4;}
-    uint8_t getByteLowFourBit(uint8_t data){ return data&0x0f;}
 };
 
 #endif // BOARD_ABSTRACT_H
