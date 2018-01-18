@@ -96,7 +96,7 @@ private:
     RobotAbstract* robot;
     ChassisParameters* para;
     MotorTop* motor_top;
-    float degree_to_radian ,  radian_to_degree;
+    float degree_to_radian , radian_to_degree;
     float call_frequency;
     float control_quality;
     float speed_filter[4];
