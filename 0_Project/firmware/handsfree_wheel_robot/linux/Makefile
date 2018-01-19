@@ -3,7 +3,7 @@
 #####BOARD_TYPE: control_unit_mini control_unit_v2
 BOARD_TYPE		?= control_unit_v2
 #####ROBOT_MODEL : null stone stone_omni3 giraffe   
-ROBOT_MODEL     ?= stone
+ROBOT_MODEL     ?= giraffe
 #####project name
 PROJECT			=  robot_$(ROBOT_MODEL)_$(BOARD_TYPE)
 TOP_PATH        =  ../../../..

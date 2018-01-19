@@ -16,7 +16,7 @@ ifeq "$(strip $(BOARD_TYPE))" "control_unit_v2"
 ####select the usartx for board debug info printf : usart_interface_x,usb_slave  
 DEBUG_PRINTF_INTERFACE ?= usart_interface_1
 ####select the usartxfor pc communications (hf_link) : usart_interface_x,usb_slave 
-PC_INTERFACE ?= usart_interface_1
+PC_INTERFACE ?= usart_interface_4
 ####select the usartx for remote control (hf_link) : usart_interface_x  
 RADIO_INTERFACE ?= usart_interface_4
 endif
