@@ -39,8 +39,8 @@ enum Command{
 class HFLink : public StateMachine
 {
 public:
-    HFLink(RobotAbstract* robot_  , unsigned char my_id_= 0x11 , unsigned char friend_id_= 0x01 , unsigned char port_num_ = 0x10) :
-        StateMachine(my_id_ , friend_id_ , port_num_)
+    HFLink(RobotAbstract* robot_  , unsigned char my_id_= 0x11 , unsigned char friend_id_= 0x01 , unsigned char port_num_ = 0x10 ,uint32_t baudrate=921600) :
+        StateMachine(my_id_ , friend_id_ , port_num_, baudrate)
     {
         hf_link_node_model = HF_LINK_NODE_MODEL ;
         //enable hflink ack , generally, master disable and slave enable

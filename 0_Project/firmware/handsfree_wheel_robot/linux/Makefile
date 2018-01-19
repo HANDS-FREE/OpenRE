@@ -1,9 +1,9 @@
 ######################################define project name, board type, and path
 
+#####ROBOT_MODEL : null mini stone stone_omni3 giraffe   
+ROBOT_MODEL     ?= mini
 #####BOARD_TYPE: control_unit_mini control_unit_v2
-BOARD_TYPE		?= control_unit_v2
-#####ROBOT_MODEL : null stone stone_omni3 giraffe   
-ROBOT_MODEL     ?= stone
+BOARD_TYPE		?= control_unit_mini
 #####project name
 PROJECT			=  robot_$(ROBOT_MODEL)_$(BOARD_TYPE)
 TOP_PATH        =  ../../../..
@@ -37,5 +37,4 @@ THIRDPARTY_MODULE =
 ###################################################################include rules
 
 include $(TOP_PATH)/0_Project/makefile/compiler.mk
-
 

@@ -36,9 +36,8 @@
 *
 * History:
 ***********************************************************************************************************************/
-void SBUS::receiveByteAnl(unsigned char receive_byte)
+void SBUS::receiveByteAnlInterrupt(unsigned char receive_byte)
 {
-
     this_time_ = HF_Get_System_Time();
     d_time_ = this_time_ - last_time_ ;
     last_time_ = this_time_ ;
@@ -67,12 +66,61 @@ void SBUS::receiveByteAnl(unsigned char receive_byte)
     }
 }
 
+void SBUS::receiveByteAnlState(unsigned char receive_byte)
+{
+    static unsigned char first_receive_byte=1;
+    static unsigned char last_receive_byte=0xff;
+    static unsigned char receive_flag=0;
+
+    if(receive_byte==0x0f)
+    {
+        if(first_receive_byte==1)
+        {
+            first_receive_byte=0;
+            receive_flag=1;
+            sbus_bufi_=0;
+        }
+        else if(last_receive_byte==0x00)
+        {
+            receive_flag=1;
+            sbus_bufi_=0;
+        }
+    }
+    if(receive_flag==1)
+    {
+        if( sbus_bufi_ < 25){
+            sbus_rx_buffer_[sbus_bufi_]  = receive_byte ;
+            if( sbus_bufi_ == 24 && ( sbus_rx_buffer_[24] == 0x00 ) )
+            {
+                sbus_mes_count_++;
+                sbus_bufi_=0;
+                receive_flag=0;
+                sbus_frequency=sbusFrequencyMeasure();   //Measure the sbus message's Frequency , about 100hz
+                sbus_rx_update = 1 ;                      //renew a sbus message and wait main func to use
+                sbus_mes_i_++;
+                if(sbus_mes_i_ >= 20)
+                {
+                    sbus_mes_i_=0;
+                    sbusDataAnl();
+                }
+            }
+        }
+        else {
+            receive_flag=0;
+            sbus_bufi_=0;
+        }
+    }
+
+    sbus_bufi_++;
+    last_receive_byte=receive_byte;
+}
+
 /***********************************************************************************************************************
 * Function:
 *
-* Scope:       private  
+* Scope:       private
 *
-* Description: 
+* Description:
 *
 * Arguments:
 *
@@ -102,12 +150,14 @@ void SBUS::sbusDataAnl(void)
     sbus_channel[15] = sbus_rx_buffer_[22] << 3 | sbus_rx_buffer_[21] >> 5;
     sbus_flag = sbus_rx_buffer_[23];
     if( sbus_flag == 0 ) sbus_state = 1;
+
+    //printf("ch0=%d,ch1=%d,ch2=%d,ch3=%d,ch4=%d,ch5=%d,ch6=%d \n",sbus_channel[0],sbus_channel[1],sbus_channel[2],sbus_channel[3],sbus_channel[4],sbus_channel[5],sbus_channel[6]);
 }
 
 /***********************************************************************************************************************
 * Function:
 *
-* Scope:       private  
+* Scope:       private
 *
 * Description: Measure the sbus message's Frequency , about 100hz
 *
@@ -126,7 +176,7 @@ float SBUS::sbusFrequencyMeasure(void)
     last_time = this_time ;
     d_time = 0.9f*d_time+0.1f*d_time_new  ;   //Low pass filter
     return (1000000/d_time);
-}	
+}
 
 /***********************************************************************************************************************
 * Function:
@@ -139,7 +189,7 @@ float SBUS::sbusFrequencyMeasure(void)
 *
 * Return:
 *
-* Cpu_Time:  
+* Cpu_Time:
 *
 * History:
 ***********************************************************************************************************************/

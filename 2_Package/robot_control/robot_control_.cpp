@@ -35,9 +35,13 @@
 void RobotControl::call(void)
 {
     datatUpdate();
-    if(sbus != NULL)
+    if(sbus_node != NULL)
     {
-        sbusEvent();
+        sbusEvent(sbus_node);
+    }
+    if(hf_link_radio_node != NULL)
+    {
+        hfLinkNodeEvent(hf_link_radio_node);
     }
     if(hf_link_node != NULL)
     {
@@ -173,21 +177,22 @@ void RobotControl::datatUpdate(void)
 *
 * History:
 ***********************************************************************************************************************/
-void RobotControl::sbusEvent(void)
+void RobotControl::sbusEvent(SBUS *sbus_)
 {
-    if ( sbus->sbus_state == 1)
+    if ( sbus_->sbus_state == 1)
     {
-        if( sbus->sbus_channel[5] >= 1000 )
+        sbus_->sbus_state=0;
+        if( sbus_->sbus_channel[5] >= 1000 )
         {
-            robot->expect_robot_speed.x = (-(sbus->sbus_channel[1] - 992)*0.001f);
-            robot->expect_robot_speed.y = (-(sbus->sbus_channel[0] - 992)*0.001f);
-            robot->expect_robot_speed.z = (-(sbus->sbus_channel[3] - 992)*0.001f) * 3;
+            robot->expect_robot_speed.x = (-(sbus_->sbus_channel[1] - 992)*0.001f);
+            robot->expect_robot_speed.y = (-(sbus_->sbus_channel[0] - 992)*0.001f);
+            robot->expect_robot_speed.z = (-(sbus_->sbus_channel[3] - 992)*0.001f) * 3;
             hf_link_node->receive_package_renew[SET_ROBOT_SPEED]=1;
         }
-        else if( sbus->sbus_channel[5] <= 200 )
+        else if( sbus_->sbus_channel[5] <= 200 )
         {
-            robot->expect_head_state.pitch =(sbus->sbus_channel[1] - 992) * 0.05f;
-            robot->expect_head_state.yaw = -(sbus->sbus_channel[0] - 992) * 0.05f;
+            robot->expect_head_state.pitch =(sbus_->sbus_channel[1] - 992) * 0.05f;
+            robot->expect_head_state.yaw = -(sbus_->sbus_channel[0] - 992) * 0.05f;
             hf_link_node->receive_package_renew[SET_HEAD_STATE]=1;
         }
         else
