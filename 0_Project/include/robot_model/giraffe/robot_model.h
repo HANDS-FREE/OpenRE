@@ -31,15 +31,15 @@ public:
         motor_para.driver_type = MotorDriver_PWM_AND_IOAB;
         motor_para.encoder_num  = 1352 ;
         motor_para.pwm_max = 5000;
-        motor_para.pwm_dead_zone = 10;
-        motor_para.speed_low_filter = 0.3;
+        motor_para.pwm_dead_zone = 20;
+        motor_para.speed_low_filter = 1.0;
         motor_para.protect_current = 200;  // 200A means disable current  protect
-        motor_para.pid =  {0.0f  , 0.0f , 0.0f , 30.0f , 1.0f ,0.1f};
+        motor_para.pid =  {0.0f  , 0.0f , 0.0f , 30.0f , 20.0f ,0.1f};
 
         chassis_para.type =  DIFFERENTIAL2;
         chassis_para.wheel_radius = 0.06;
         chassis_para.body_radius = 0.17;
-        chassis_para.speed_low_filter = 0.4;
+        chassis_para.speed_low_filter = 1.0;
         chassis_para.motor_pid_t = 0.02;
         chassis_para.dof = 2;
         chassis_para.simulation_model = 0;

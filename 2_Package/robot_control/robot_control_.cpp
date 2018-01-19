@@ -46,6 +46,7 @@ void RobotControl::call(void)
     chassis.call();
     head.call();
     arm.call();
+    //printf("expect speed: %f\r\n", robot->expect_robot_speed.x);
 }
 
 void RobotControl::hfLinkNodeEvent(HFLink* hf_link_node_)

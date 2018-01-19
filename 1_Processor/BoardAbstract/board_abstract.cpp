@@ -66,7 +66,7 @@ void BoardAbstract::boardBasicInit(void)
 
     ledInit();
     keyInit();
-    beepInit();
+    //beepInit();
     adcInit();
     timerInit();
 
