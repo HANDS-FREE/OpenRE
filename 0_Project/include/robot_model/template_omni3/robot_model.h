@@ -1,5 +1,19 @@
-#ifndef OMNI3_PARAMETERS_H
-#define OMNI3_PARAMETERS_H
+/***********************************************************************************************************************
+* Copyright (c) Hands Free Team. All rights reserved.
+* Contact:  QQ Exchange Group -- 521037187
+*
+* LICENSING TERMS:
+* The Hands Free is licensed generally under a permissive 3-clause BSD license.
+* Contributions are requiredto be made under the same license.
+*
+* History:
+* <author>      <time>      <version>      <desc>
+*
+* Description:
+***********************************************************************************************************************/
+
+#ifndef ROBOT_MODEL_H
+#define ROBOT_MODEL_H
 
 #include "robot_abstract.h"
 
@@ -49,4 +63,4 @@ public:
     }
 };
 
-#endif // OMNI3_PARAMETERS_H
+#endif 

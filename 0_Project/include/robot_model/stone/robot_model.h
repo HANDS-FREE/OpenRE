@@ -1,8 +1,6 @@
 /***********************************************************************************************************************
 * Copyright (c) Hands Free Team. All rights reserved.
-* FileName: stone_parameters.h
 * Contact:  QQ Exchange Group -- 521037187
-* Version:  V2.0
 *
 * LICENSING TERMS:
 * The Hands Free is licensed generally under a permissive 3-clause BSD license.
@@ -14,8 +12,8 @@
 * Description:
 ***********************************************************************************************************************/
 
-#ifndef STONE_PARAMETERS_H
-#define STONE_PARAMETERS_H
+#ifndef ROBOT_MODEL_H
+#define ROBOT_MODEL_H
 
 #include "robot_abstract.h"
 
@@ -37,7 +35,7 @@ public:
         motor_para.protect_current = 200;  // 200A means disable current  protect
         motor_para.pid =  {0.0f  , 0.0f , 0.0f , 60.0f , 500.0f ,0.2f};
 
-        chassis_para.type =  DIFFERENTIAL2;
+        chassis_para.type = DIFFERENTIAL2;
         chassis_para.wheel_radius = 0.0320;
         chassis_para.body_radius = 0.1592;
         chassis_para.speed_low_filter = 0.4;
@@ -66,4 +64,4 @@ public:
     }
 };
 
-#endif // STONE_PARAMETERS_H
+#endif 

@@ -1,8 +1,6 @@
 /***********************************************************************************************************************
 * Copyright (c) 广州市星翼电子科技有限公司 2014-2024 正点原子@ALIENTEK
-* FileName: motor_top.c
 * Contact:  QQ Exchange Group -- 521037187
-* Version:  V2.0
 *
 * LICENSING TERMS:
 * The Hands Free is licensed generally under a permissive 3-clause BSD license.
