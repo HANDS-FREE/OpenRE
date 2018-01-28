@@ -15,7 +15,7 @@ private:
     RobotControl()
     {
         robot =NULL;
-        sbus = NULL;
+        sbus_node = NULL;
         hf_link_node = NULL;
         degree_to_radian = 0.017453f;
         radian_to_degree = 57.2958f;
@@ -40,11 +40,20 @@ public:
     }
     void call(void);
 
-    void setSBUSRemotePointer(SBUS* sbus_) { sbus = sbus_ ; }
+    void setSBUSRemoteNodePointer(SBUS* sbus_node_)
+    {
+        sbus_node = sbus_node_ ;
+        sbus_node_device=sbus_node->device;
+    }
     void setHFLinkNodePointer(HFLink* hf_link_node_)
     {
         hf_link_node_device = (DeviceType)hf_link_node_->port_num;
         hf_link_node = hf_link_node_ ;
+    }
+    void setHFLinkRadioNodePointer(HFLink* hf_link_node_)
+    {
+        hf_link_radio_node_device = (DeviceType)hf_link_node_->port_num;
+        hf_link_radio_node = hf_link_node_ ;
     }
 
 public:
@@ -52,14 +61,17 @@ public:
     Chassis chassis;
     Head head;
     Arm arm;
-    SBUS* sbus;
-    HFLink* hf_link_node;
+    SBUS *sbus_node;
+    DeviceType sbus_node_device;
+    HFLink *hf_link_node;
     DeviceType hf_link_node_device;
+    HFLink *hf_link_radio_node;
+    DeviceType hf_link_radio_node_device;
 
 private:
     RobotAbstract* robot;
     void hfLinkNodeEvent(HFLink* hf_link_node_);
-    void sbusEvent(void);
+    void sbusEvent(SBUS *sbus_);
     void datatUpdate(void);
     float call_frequency;
     float degree_to_radian ,  radian_to_degree;

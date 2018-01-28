@@ -1,8 +1,6 @@
 /***********************************************************************************************************************
 * Copyright (c) Hands Free Team. All rights reserved.
-* FileName: stone_parameters.h
 * Contact:  QQ Exchange Group -- 521037187
-* Version:  V2.0
 *
 * LICENSING TERMS:
 * The Hands Free is licensed generally under a permissive 3-clause BSD license.
@@ -14,8 +12,8 @@
 * Description:
 ***********************************************************************************************************************/
 
-#ifndef STONE_PARAMETERS_H
-#define STONE_PARAMETERS_H
+#ifndef ROBOT_MODEL_H
+#define ROBOT_MODEL_H
 
 #include "robot_abstract.h"
 
@@ -65,4 +63,4 @@ public:
     }
 };
 
-#endif // STONE_PARAMETERS_H
+#endif

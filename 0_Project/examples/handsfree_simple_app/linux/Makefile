@@ -1,9 +1,9 @@
 ######################################define project name, board type, and path
 
-#####BOARD_TYPE: control_unit_mini control_unit_v1 control_unit_v2
-BOARD_TYPE		?= control_unit_v2
 #####ROBOT_MODEL :  
 ROBOT_MODEL     ?= null
+#####BOARD_TYPE: control_unit_mini control_unit_v2
+BOARD_TYPE		?= control_unit_v2
 #####project name
 PROJECT			=  simple_app_$(ROBOT_MODEL)_$(BOARD_TYPE)
 TOP_PATH        =  ../../../..

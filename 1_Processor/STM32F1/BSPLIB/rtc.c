@@ -1,6 +1,5 @@
 /***********************************************************************************************************************
 * Copyright (C)  ALIENTEK Mini STM32开发板 Copyright(C) 正点原子
-* FileName:   rtc.c
 * Contact:    QQ Exchange Group -- 521037187
 * Version :   V2.0
 *

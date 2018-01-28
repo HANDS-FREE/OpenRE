@@ -32,7 +32,9 @@ public:
        Board::getInstance()->usartDeviceInit(device , 100000);
     }
 
-    void receiveByteAnl(unsigned char receive_byte);  //put this function in serial port interrupt
+    void receiveByteAnlInterrupt(unsigned char receive_byte);  //put this function in serial port interrupt
+    void receiveByteAnlState(unsigned char receive_byte);  //put this function in serial port interrupt
+
     DeviceType device;
     float sbus_frequency;
     unsigned char   sbus_rx_update;
@@ -50,7 +52,6 @@ private:
     unsigned char sbus_bufi_,sbus_mes_i_;
     float sbusFrequencyMeasure(void);
 };
-extern SBUS sbus ;
 
 class PPM
 {

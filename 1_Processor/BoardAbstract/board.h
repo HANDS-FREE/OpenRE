@@ -53,7 +53,6 @@ private:
     void keyInit(void);
     void keyStateRenew(void);  //100HZ
     void beepInit(void);
-
 };
 
 

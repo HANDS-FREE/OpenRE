@@ -1,10 +1,8 @@
 /***********************************************************************************************************************
 * Copyright (c) Hands Free Team. All rights reserved.
 *
-* FileName: motor_driver.cpp
 *
 * Contact:  QQ Exchange Group -- 521037187
-* Version:  V2.0
 *
 * LICENSING TERMS:
 * The Hands Free is licensed generally under a permissive 3-clause BSD license. 

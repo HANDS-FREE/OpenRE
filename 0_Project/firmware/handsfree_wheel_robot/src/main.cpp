@@ -1,8 +1,6 @@
 /***********************************************************************************************************************
 * Copyright (c) Hands Free Team. All rights reserved.
-* FileName: main.c
 * Contact:  QQ Exchange Group -- 521037187
-* Version:  V2.0
 *
 * LICENSING TERMS:
 * The Hands Free is licensed generally under a permissive 3-clause BSD license.
@@ -32,21 +30,39 @@ int main(void)
     RobotControl *robot_control_p = RobotControl::getInstance();
     robot_control_p->init(&robot);
 
+    SBUS sbus_node(USART_SBUS);
+    robot_control_p->setSBUSRemoteNodePointer(&sbus_node);
+
+    HFLink hf_link_radio_node(&robot , 0x11 , 0x01 , (unsigned char)USART_RADIO,115200);
+    robot_control_p->setHFLinkRadioNodePointer(&hf_link_radio_node);
+
     HFLink hf_link_pc_node(&robot , 0x11 , 0x01 , (unsigned char)USART_PC);
     robot_control_p->setHFLinkNodePointer(&hf_link_pc_node);
-    SBUS sbus(USART_SBUS);
-    robot_control_p->setSBUSRemotePointer(&sbus);
 
     printf("app start \r\n");
 
     while(1)
     {
 
-        if(board->usartDeviceReadData(robot_control_p->hf_link_node_device)->emptyCheck() == 0){
-            robot_control_p->hf_link_node->byteAnalysisCall(
-                        board->usartDeviceReadData(
-                            robot_control_p->hf_link_node_device)->getData() );
+        if(robot_control_p->sbus_node && (!board->usartDeviceReadData(robot_control_p->sbus_node_device)->emptyCheck()))
+        {
+            robot_control_p->sbus_node->receiveByteAnlState(
+                        board->usartDeviceReadData(robot_control_p->sbus_node_device)->getData()
+                        );
         }
+        if(robot_control_p->hf_link_radio_node && (!board->usartDeviceReadData(robot_control_p->hf_link_radio_node_device)->emptyCheck()))
+        {
+            robot_control_p->hf_link_radio_node->byteAnalysisCall(
+                        board->usartDeviceReadData(robot_control_p->hf_link_radio_node_device)->getData()
+                        );
+        }
+        if(robot_control_p->hf_link_node && (!board->usartDeviceReadData(robot_control_p->hf_link_node_device)->emptyCheck()))
+        {
+            robot_control_p->hf_link_node->byteAnalysisCall(
+                        board->usartDeviceReadData(robot_control_p->hf_link_node_device)->getData()
+                        );
+        }
+
         if ( board->cnt_1ms >= 1 )      // 1000hz
         {
             board->cnt_1ms=0;

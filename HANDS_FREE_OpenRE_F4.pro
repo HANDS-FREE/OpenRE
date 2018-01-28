@@ -13,11 +13,12 @@ INCLUDEPATH += . \
 		0_Project/firmware/handsfree_wheel_robot/src \
 		0_Project/firmware/handsfree_wheel_robot_ucosIII/src \
 		0_Project/include \
-		0_Project/include/robot_model/differential \
-		0_Project/include/robot_model/mecanum4 \
-		0_Project/include/robot_model/omni3 \
+		0_Project/include/robot_model/mini \
 		0_Project/include/robot_model/stone \
 		0_Project/include/robot_model/giraffe \
+		0_Project/include/robot_model/template_differential \
+		0_Project/include/robot_model/template_omni3 \
+		0_Project/include/robot_model/template_mecanum4 \
 		1_Processor/Interrupt \
 		1_Processor/BoardAbstract \
 		1_Processor/STM32F4 \
@@ -67,11 +68,12 @@ HEADERS += 0_Project/examples/handsfree_simple_app/src/main_config.h \
 		0_Project/examples/hwtest/src/main_config.h  \
 		0_Project/firmware/handsfree_wheel_robot/src/main_config.h  \
 		0_Project/firmware/handsfree_wheel_robot_ucosIII/src/main_config.h \
-		0_Project/include/robot_model/omni3/robot_model.h \
+		0_Project/include/robot_model/mini/robot_model.h \
 		0_Project/include/robot_model/stone/robot_model.h \
 		0_Project/include/robot_model/giraffe/robot_model.h \
-		0_Project/include/robot_model/mecanum4/robot_model.h \
-		0_Project/include/robot_model/differential/robot_model.h \
+		0_Project/include/robot_model/template_differential/robot_model.h \
+		0_Project/include/robot_model/template_omni3/robot_model.h \
+		0_Project/include/robot_model/template_mecanum4/robot_model.h \
 		1_Processor/Interrupt/stm32f10x_it.h \
 		1_Processor/Interrupt/stm32f4xx_it.h \
 		1_Processor/BoardAbstract/board_abstract.h \
@@ -142,22 +144,22 @@ HEADERS += 0_Project/examples/handsfree_simple_app/src/main_config.h \
 		2_Package/hf_link/hf_link_state_machine.h \
 		2_Package/iap/hf_HF_Bootloader.h \
 		2_Package/imu/imu_config.h \
-                2_Package/imu/dev_mpu6050.h \
-                2_Package/imu/dev_bmp085.h \
-                2_Package/imu/dev_ms611.h  \
-                2_Package/imu/dev_hmc5883l.h \
-                2_Package/imu/dev_gps.h \
+		2_Package/imu/dev_mpu6050.h \
+		2_Package/imu/dev_bmp085.h \
+		2_Package/imu/dev_ms611.h  \
+		2_Package/imu/dev_hmc5883l.h \
+		2_Package/imu/dev_gps.h \
 		2_Package/imu/al_fmodel_frame.h \
-                2_Package/imu/al_model_ekf.h \
-                2_Package/imu/al_model_typicalcorrect.h \
+		2_Package/imu/al_model_ekf.h \
+		2_Package/imu/al_model_typicalcorrect.h \
 		2_Package/lcd/font.h \
 		2_Package/lcd/fsmc_lcd_driver.h \
 		2_Package/math/base_math_config.h \
-                2_Package/math/base_math_top.h \
-                2_Package/math/base_math_func.h \
-                2_Package/math/base_math_matrix.h \
-                2_Package/math/base_math_trigonometric.h \
-                2_Package/math/base_math_quaternion.h \
+		2_Package/math/base_math_top.h \
+		2_Package/math/base_math_func.h \
+		2_Package/math/base_math_matrix.h \
+		2_Package/math/base_math_trigonometric.h \
+		2_Package/math/base_math_quaternion.h \
 		2_Package/motor/motor_control.h \
 		2_Package/motor/motor_top.h \
 		2_Package/motor/virtual_motor.h \
@@ -299,20 +301,20 @@ SOURCES += 0_Project/examples/handsfree_simple_app/src/main.cpp \
 		2_Package/hf_link/hf_link.cpp \
 		2_Package/iap/hf_HF_Bootloader.c \
 		2_Package/imu/dev_mpu6050.cpp \
-                2_Package/imu/dev_bmp085.cpp \
-                2_Package/imu/dev_ms611.cpp  \
-                2_Package/imu/dev_hmc5883l.cpp \
-                2_Package/imu/dev_gps.cpp \
-                2_Package/imu/al_fmodel_frame.cpp \
-                2_Package/imu/al_model_ekf.cpp \
-                2_Package/imu/al_model_typicalcorrect.cpp \
+		2_Package/imu/dev_bmp085.cpp \
+		2_Package/imu/dev_ms611.cpp  \
+		2_Package/imu/dev_hmc5883l.cpp \
+		2_Package/imu/dev_gps.cpp \
+		2_Package/imu/al_fmodel_frame.cpp \
+		2_Package/imu/al_model_ekf.cpp \
+		2_Package/imu/al_model_typicalcorrect.cpp \
 		2_Package/imu/imu_top.cpp \
 		2_Package/lcd/fsmc_lcd_driver.c \
 		2_Package/math/base_math_top.cpp \
-                2_Package/math/base_math_func.cpp \
-                2_Package/math/base_math_matrix.cpp \
+		2_Package/math/base_math_func.cpp \
+		2_Package/math/base_math_matrix.cpp \
 		2_Package/math/base_math_trigonometric.cpp \
-                2_Package/math/base_math_quaternion.cpp \
+		2_Package/math/base_math_quaternion.cpp \
 		2_Package/motor/motor_control.cpp \
 		2_Package/motor/motor_top.cpp \
 		2_Package/nrf24l01/nrf24l01_driver.cpp \

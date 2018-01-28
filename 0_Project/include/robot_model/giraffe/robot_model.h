@@ -1,8 +1,6 @@
 /***********************************************************************************************************************
 * Copyright (c) Hands Free Team. All rights reserved.
-* FileName: stone_parameters.h
 * Contact:  QQ Exchange Group -- 521037187
-* Version:  V2.0
 *
 * LICENSING TERMS:
 * The Hands Free is licensed generally under a permissive 3-clause BSD license.
@@ -14,8 +12,8 @@
 * Description:
 ***********************************************************************************************************************/
 
-#ifndef STONE_PARAMETERS_H
-#define STONE_PARAMETERS_H
+#ifndef ROBOT_MODEL_H
+#define ROBOT_MODEL_H
 
 #include "robot_abstract.h"
 
@@ -24,20 +22,21 @@ class RobotModel : public RobotParameters
 public:
     RobotModel() : RobotParameters()
     {
+
         strcpy(robot_name, "giraffe");
         strcpy(robot_description ,  "this is a differential template parameters");
 
         motor_para.motor_id = 0;
         motor_para.driver_type = MotorDriver_PWM_AND_IOAB;
-        motor_para.encoder_num  = 1352 ;
+        motor_para.encoder_num  = 1352;
         motor_para.pwm_max = 5000;
         motor_para.pwm_dead_zone = 20;
         motor_para.speed_low_filter = 1.0;
         motor_para.protect_current = 200;  // 200A means disable current  protect
-        motor_para.pid =  {0.0f  , 0.0f , 0.0f , 30.0f , 20.0f ,0.1f};
+        motor_para.pid =  {0.0f , 0.0f , 0.0f , 30.0f , 20.0f ,0.1f};
 
-        chassis_para.type =  DIFFERENTIAL2;
-        chassis_para.wheel_radius = 0.06;
+        chassis_para.type = DIFFERENTIAL2;
+        chassis_para.wheel_radius = 0.062;
         chassis_para.body_radius = 0.17;
         chassis_para.speed_low_filter = 1.0;
         chassis_para.motor_pid_t = 0.02;
