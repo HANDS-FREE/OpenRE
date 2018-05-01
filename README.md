@@ -58,19 +58,20 @@ This is a C++ embedded library for robotics base on STM32 and intended to provid
 - ├── HANDS_FREE_OpenRE_F4.pro
 - └── README.md
 
+---
+
 ## Installation
-------------------------------------------------------------------------------
 ### Resources   
-  * Download the latest code with:      
+  * Download the latest openre code:      
  
  git clone https://github.com/HANDS-FREE/OpenRE      
 
 ### OpenRE Toolchain      
    
 #### Method1:  source installation (recommended) 
-$ cd OpenRE & git clone git@github.com:HANDS-FREE/5_Development_Toolchain.git
-$ cd 5_Development_Toolchain
-$ sh auto_set_openre.sh
+$ cd OpenRE & git clone git@github.com:HANDS-FREE/5_Development_Toolchain.git    
+$ cd 5_Development_Toolchain    
+$ sh auto_set_openre.sh   
 ```
 #### Method2:  installation by deb  
 ```
