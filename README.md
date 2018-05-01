@@ -116,10 +116,8 @@ $ sudo apt-get remove modemmanager
 
 ## License
 
---- 
 OpenRE is licensed generally under a permissive 3-clause BSD license. Contributions are required to be made under the same license.            
             
 ## Contact    
 
----
 If you have any problem, or you have some suggestions for this code, please contact WenKe Ma by 315261982@qq.com, thank you very much!  
