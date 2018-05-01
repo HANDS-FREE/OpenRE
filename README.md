@@ -69,11 +69,15 @@ This is a C++ embedded library for robotics base on STM32 and intended to provid
 ### OpenRE Toolchain      
    
 #### Method1:  source installation (recommended) 
+
+```
 $ cd OpenRE & git clone git@github.com:HANDS-FREE/5_Development_Toolchain.git    
 $ cd 5_Development_Toolchain    
 $ sh auto_set_openre.sh   
 ```
-#### Method2:  installation by deb  
+
+#### Method2:  installation by deb 
+ 
 ```
 $ sudo apt-get install software-properties-common python-software-properties 
 $ sudo add-apt-repository ppa:terry.guo/gcc-arm-embedded    
