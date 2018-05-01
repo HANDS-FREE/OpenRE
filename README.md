@@ -6,15 +6,16 @@
 
 This is a C++ embedded library for robotics base on STM32 and intended to provide GNU Makefiles.    
 
-### [OpenRE Tutorial](https://github.com/HANDS-FREE/HANDS-FREE.github.io/wiki/6.-OpenRE-Tutorial)
+### [OpenRE Tutorial](http://wiki.handsfree.org.cn/docs/OpenRE/)
     
-###  Website: 
-- QQ Group: 521037187（Hands Free Community）
-- [HandsFree baiduyun](https://pan.baidu.com/s/1nuSvs7Z#list) 
-- [HandsFree Website](https://hands-free.github.io/)
-- [Introduction](http://www.rosclub.cn/post-14.html)
-- [Robot Navigation Show ](http://v.youku.com/v_show/id_XMTUyODk4NTUzNg==.htm)    
-- [HandsFree Highlight Show](http://v.youku.com/v_show/id_XMTU0NzgwNzc3Mg==.html?from=y1.7-1.2) 
+###  Community: 
+* [HandsFree Github](https://github.com/HANDS-FREE)   
+* [HandsFree Website](http://www.handsfree.org.cn/)   
+* [HandsFree Wiki](http://wiki.handsfree.org.cn/)  
+* [HandsFree baiduyun](https://pan.baidu.com/s/1WTEuCW87K9-HUubpUM5dDw#list/path=%2F)     
+* [BUY Robot](https://shop145029875.taobao.com/?spm=a1z10.3-c.0.0.zpwB3d)     
+* QQ Group: 521037187(Hands Free Community)   
+* Email: hands_free@126.com   
 
 ###  Folder structure
 - ├── ** 0_Project **   ----  some demos base on this library  
@@ -76,7 +77,7 @@ $ sudo apt-get remove modemmanager
 ```
 
 #### Method2:  source installation (recommended) 
-- get toolchain it in [Development_Toolchain](https://pan.baidu.com/s/1mjJOcIW#list/path=%2FHANDSFREE%2FHands_Free_Release%2F3_Software%2FEmbedded_Development_Toolchain&parentPath=%2FHANDSFREE) ，put these softwares in OpenRE/5_Development_Toolchain.  or  **cd OpenRE & git clone git@github.com:HANDS-FREE/5_Development_Toolchain.git**
+- get toolchain it in [Development_Toolchain](https://pan.baidu.com/s/1dekYQU#list/path=%2FHandsFree%2FHands_Free_Release%2F3_Software%2FEmbedded_Development_Toolchain&parentPath=%2FHandsFree) ，put these softwares in OpenRE/5_Development_Toolchain.  or  **cd OpenRE & git clone git@github.com:HANDS-FREE/5_Development_Toolchain.git**
 
 ```
 $ cd 5_Development_Toolchain 

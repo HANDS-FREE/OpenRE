@@ -3,9 +3,9 @@
 #####ROBOT_MODEL : null mini stone stone_omni3 giraffe   
 ROBOT_MODEL     ?= stone
 #####BOARD_TYPE: control_unit_mini control_unit_v2
-BOARD_TYPE		?= control_unit_v2
+BOARD_TYPE      ?= control_unit_v2
 #####project name
-PROJECT			=  robot_$(ROBOT_MODEL)_$(BOARD_TYPE)
+PROJECT         =  robot_$(ROBOT_MODEL)_$(BOARD_TYPE)
 TOP_PATH        =  ../../../..
 
 #############################################################parameters
@@ -17,10 +17,10 @@ BOOTLOADER_MODE ?= disable
 
 ##########################################################################source
 
-CXX_SRC			+= ../src/main.cpp 
+CXX_SRC         += ../src/main.cpp 
 
 #Includes
-INCDIR	+= -I. -I../src/ 
+INCDIR          += -I. -I../src/ 
 
 #########################################################################package
 
@@ -29,7 +29,7 @@ PAKG        = common robot_abstract math imu motor sbus_ppm servo \
               robot_control hf_link tf
               
 #OS_MODULE: UCOSII UCOSIII GUI FAT
-OS_MODULE =           
+OS_MODULE  =           
 
 #LIB_MODULE: EIGEN MATRIX  etc
 THIRDPARTY_MODULE = 
