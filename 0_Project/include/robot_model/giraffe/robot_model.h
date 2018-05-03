@@ -38,7 +38,7 @@ public:
         chassis_para.type = DIFFERENTIAL2;
         chassis_para.wheel_radius = 0.062;
         chassis_para.body_radius = 0.17;
-        chassis_para.speed_low_filter = 0.4;
+        chassis_para.speed_low_filter = 1.0;
         chassis_para.motor_pid_t = 0.02;
         chassis_para.dof = 2;
         chassis_para.simulation_model = 0;

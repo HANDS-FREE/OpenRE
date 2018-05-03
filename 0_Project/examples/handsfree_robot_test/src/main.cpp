@@ -88,7 +88,7 @@ int main(void)
         if ( board->cnt_50ms >= 50 )    // 20hz
         {
             board->cnt_50ms = 0 ;
-            robot_control_p->call();
+            robot_control_p->robot_test();
             board->setLedState(0,2);
         }
     }

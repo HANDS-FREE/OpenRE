@@ -39,6 +39,7 @@ public:
         arm.init(robot);
     }
     void call(void);
+    void robot_test(void);
 
     void setSBUSRemoteNodePointer(SBUS* sbus_node_)
     {

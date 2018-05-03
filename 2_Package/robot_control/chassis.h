@@ -33,6 +33,7 @@ public:
     }
 
     void call(void);
+    void chassisTest(void);
 
     void setParameters(ChassisParameters* para_)
     {
