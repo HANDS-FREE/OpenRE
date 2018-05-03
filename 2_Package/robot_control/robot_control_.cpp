@@ -48,6 +48,25 @@ void RobotControl::call(void)
     chassis.call();
     head.call();
     arm.call();
+    //printf("expect speed: %f\r\n", robot->expect_robot_speed.x);
+}
+
+void RobotControl::robot_test()
+{
+    datatUpdate();
+    if(sbus_node != NULL)
+    {
+        sbusEvent(sbus_node);
+    }
+    if(hf_link_radio_node != NULL)
+    {
+        hfLinkNodeEvent(hf_link_radio_node);
+    }
+    if(hf_link_node != NULL)
+    {
+        hfLinkNodeEvent(hf_link_node);
+    }
+    chassis.chassisTest();
 }
 
 void RobotControl::hfLinkNodeEvent(HFLink* hf_link_node_)
