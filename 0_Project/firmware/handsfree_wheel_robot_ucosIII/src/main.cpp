@@ -70,10 +70,14 @@ int main(void)
     RobotControl *robot_control_p = RobotControl::getInstance();
     robot_control_p->init(&robot);
 
+    SBUS sbus_node(USART_SBUS);
+    robot_control_p->setSBUSRemoteNodePointer(&sbus_node);
+
+    HFLink hf_link_radio_node(&robot , 0x11 , 0x01 , (unsigned char)USART_RADIO,115200);
+    robot_control_p->setHFLinkRadioNodePointer(&hf_link_radio_node);
+
     HFLink hf_link_pc_node(&robot , 0x11 , 0x01 , (unsigned char)USART_PC);
     robot_control_p->setHFLinkNodePointer(&hf_link_pc_node);
-    SBUS sbus(USART_SBUS);
-    robot_control_p->setSBUSRemotePointer(&sbus);
 
     printf("app start \r\n");
 
