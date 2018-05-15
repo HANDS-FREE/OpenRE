@@ -24,7 +24,7 @@ public:
             board->motorInterfaceInit((uint8_t)motor_driver_type , board->getByteHighFourBit(board->device_type[motor_id_]) , pwm_max);
         }
         else{
-            virtual_motor.init();
+            virtual_motor.init(pwm_max);
         }
     }
 
@@ -80,7 +80,7 @@ public:
 
 private:
     Board *board;
-    VirtualMotor virtual_motor;
+    SimpleVirtualMotor virtual_motor;
     uint8_t motor_simulation_model;
     MotorDriverType motor_driver_type;
 };
