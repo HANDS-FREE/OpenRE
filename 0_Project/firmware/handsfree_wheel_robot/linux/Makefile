@@ -1,6 +1,6 @@
 ######################################define project name, board type, and path
 
-#####ROBOT_MODEL : null mini stone stone_omni3 giraffe   
+#####ROBOT_MODEL : null mini stone stone_omni3 giraffe virtual
 ROBOT_MODEL     ?= stone
 #####BOARD_TYPE: control_unit_mini control_unit_v2
 BOARD_TYPE      ?= control_unit_v2
@@ -10,8 +10,6 @@ TOP_PATH        =  ../../../..
 
 #############################################################parameters
 
-#####ROBOT_SIMULATION_MODE  : enable disable . enable this mode then you don't need a real robot.
-ROBOT_SIMULATION_MODE ?= disable
 #####BOOTLOADER  : enable disable
 BOOTLOADER_MODE ?= disable
 

@@ -10,8 +10,6 @@ TOP_PATH        =  ../../../..
 
 #############################################################parameters
 
-#####ROBOT_SIMULATION_MODE  : enable disable . enable this mode then you don't need a real robot.
-ROBOT_SIMULATION_MODE ?= disable
 #####BOOTLOADER  : enable disable
 BOOTLOADER_MODE ?= disable
 
