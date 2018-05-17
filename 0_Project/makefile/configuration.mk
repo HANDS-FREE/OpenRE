@@ -1,6 +1,19 @@
 ####################################################### 
 # system parameters , the user can modify the following configurations
 
+ifeq "$(strip $(ROBOT_MODEL))" "mini"
+BOARD_TYPE      ?= control_unit_mini
+endif
+ifeq "$(strip $(ROBOT_MODEL))" "stone"
+BOARD_TYPE      ?= control_unit_v2
+endif
+ifeq "$(strip $(ROBOT_MODEL))" "stone_omni3"
+BOARD_TYPE      ?= control_unit_v2
+endif
+ifeq "$(strip $(ROBOT_MODEL))" "giraffe"
+BOARD_TYPE      ?= control_unit_v2
+endif
+
 ifeq "$(strip $(BOARD_TYPE))" "control_unit_v1"
 ####select the usartx for board debug info printf : usart_interface_x,usb_slave  
 DEBUG_PRINTF_INTERFACE ?= usart_interface_1
