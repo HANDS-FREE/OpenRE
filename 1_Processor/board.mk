@@ -5,13 +5,13 @@
 # 
 ################################################################################
 
-ifeq "$(strip $(BOARD_TYPE))" "control_unit_v1"
+ifeq "$(strip $(BOARD_TYPE))" "openre_board_v1"
 
 DDEFS           += -DCONTROL_UNIT_V1 -DSTM32F4XX 
 DDEFS           += -DHSE_VALUE=25000000 -DUSE_STDPERIPH_DRIVER 
 MCU             ?= cortex-m4  
 CPU_TYPE        ?= STM32F4
-BOARD_ABSTRACT  ?= $(TOP_PATH)/1_Processor/BoardAbstract/control_unit_v1.cpp
+BOARD_ABSTRACT  ?= $(TOP_PATH)/1_Processor/BoardAbstract/openre_board_v1.cpp
 
 endif
 
@@ -22,13 +22,13 @@ endif
 #   
 ################################################################################  
 
-ifeq "$(strip $(BOARD_TYPE))" "control_unit_v2"
+ifeq "$(strip $(BOARD_TYPE))" "openre_board_v2"
 
 DDEFS           += -DCONTROL_UNIT_V2 -DSTM32F4XX 
 DDEFS           += -DHSE_VALUE=8000000 -DUSE_STDPERIPH_DRIVER 
 MCU             ?= cortex-m4  
 CPU_TYPE        ?= STM32F4
-BOARD_ABSTRACT  += $(TOP_PATH)/1_Processor/BoardAbstract/control_unit_v2.cpp
+BOARD_ABSTRACT  += $(TOP_PATH)/1_Processor/BoardAbstract/openre_board_v2.cpp
 
 endif
 
@@ -38,13 +38,13 @@ endif
 #   
 #   
 ################################################################################  
-ifeq "$(strip $(BOARD_TYPE))" "control_unit_mini"
+ifeq "$(strip $(BOARD_TYPE))" "openre_board_mini"
 
 DDEFS           += -DCONTROL_UNIT_MINI -DSTM32F10X 
 DDEFS           += -DHSE_VALUE=8000000 -DUSE_STDPERIPH_DRIVER 
 MCU             ?= cortex-m3 
 CPU_TYPE        ?= STM32F1
-BOARD_ABSTRACT  += $(TOP_PATH)/1_Processor/BoardAbstract/control_unit_mini.cpp
+BOARD_ABSTRACT  += $(TOP_PATH)/1_Processor/BoardAbstract/openre_board_mini.cpp
 
 endif
 

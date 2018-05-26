@@ -75,6 +75,8 @@ int main(void)
         {
             board->cnt_50ms = 0 ;
             board->setLedState(0,2);
+            board->setLedState(1,2);
+            board->setLedState(2,2);
         }
     }
 

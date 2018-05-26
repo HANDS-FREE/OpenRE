@@ -2,8 +2,8 @@
 
 #####ROBOT_MODEL :  
 ROBOT_MODEL     ?= null
-#####BOARD_TYPE: control_unit_mini control_unit_v2
-BOARD_TYPE		?= control_unit_v2
+#####BOARD_TYPE: openre_board_mini openre_board_v2
+BOARD_TYPE		?= openre_board_v2
 #####project name
 PROJECT			=  imu_test_$(ROBOT_MODEL)_$(BOARD_TYPE)
 TOP_PATH        =  ../../../..

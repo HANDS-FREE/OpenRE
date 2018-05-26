@@ -10,8 +10,8 @@ This is a C++ embedded library for robotics base on STM32 and intended to provid
     
 ###  Community: 
 * [HandsFree Github](https://github.com/HANDS-FREE)   
-* [HandsFree Website](http://www.handsfree.org.cn/)   
-* [HandsFree Wiki](http://wiki.handsfree.org.cn/)  
+* [HandsFree Website](http://www.hfreetech.org/)   
+* [HandsFree Wiki](http://www.hfreetech.org/) ,  [Old Version Wiki](http://wiki.handsfree.org.cn/)  
 * [HandsFree baiduyun](https://pan.baidu.com/s/1WTEuCW87K9-HUubpUM5dDw#list/path=%2F)     
 * [BUY Robot](https://shop145029875.taobao.com/?spm=a1z10.3-c.0.0.zpwB3d)     
 * QQ Group: 521037187(Hands Free Community)   
@@ -95,7 +95,7 @@ $ sudo apt-get remove modemmanager
     * Led toggle:     
             cd 0_Project/examples/handsfree_simple_app/linux    
             
- **check the makefile config matching your main control board **      
+ **check the makefile config matching your main control board**      
              
             make clean
             make    
@@ -105,7 +105,7 @@ $ sudo apt-get remove modemmanager
 
             cd 0_Project/firmware/handsfree_wheel_robot/linux
 
- ** check the makefile config  matching your main control board **      
+ **check the makefile config  matching your main control board**      
              
             make clean
             make

@@ -2,8 +2,8 @@
 
 #####ROBOT_MODEL : null mini stone stone_omni3 giraffe virtual
 ROBOT_MODEL     ?= stone
-#####BOARD_TYPE: control_unit_mini control_unit_v2
-BOARD_TYPE      ?= control_unit_v2
+#####BOARD_TYPE: openre_board_mini openre_board_v2
+BOARD_TYPE      ?= openre_board_v2
 #####project name
 PROJECT         =  robot_$(ROBOT_MODEL)_$(BOARD_TYPE)
 TOP_PATH        =  ../../../..
