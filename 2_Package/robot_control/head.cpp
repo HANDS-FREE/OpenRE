@@ -48,8 +48,8 @@ void Head::call(void)
     if(filter.pitch <= - para->range.pitch) filter.pitch = - para->range.pitch;
     if(filter.roll >= para->range.roll) filter.roll = para->range.roll;
     if(filter.roll <= - para->range.roll) filter.roll = -para->range.roll;
-    if(filter.yaw >= para->range.yaw) filter.pitch = para->range.yaw;
-    if(filter.yaw <= - para->range.yaw) filter.pitch = -para->range.yaw;
+    if(filter.yaw >= para->range.yaw) filter.yaw = para->range.yaw;
+    if(filter.yaw <= - para->range.yaw) filter.yaw = -para->range.yaw;
 
     HeadPose  expect_head_offset;
     expect_head_offset.pitch = filter.pitch + para->offset.pitch;
@@ -67,8 +67,8 @@ void Head::set_head_pose(HeadPose pose)
     HeadPose  value;
     if(para->type ==  HFANALOG)
     {
-        value.pitch = 1500 - pose.pitch * radian_to_degree * 11.111f;
-        value.yaw = 1500 + pose.yaw * radian_to_degree * 11.111f;
+       value.pitch = 1500 - pose.pitch * radian_to_degree * 11.111f;
+       value.yaw = 1500 + pose.yaw * radian_to_degree * 11.111f;
        Board::getInstance()->setPWMInterfaceValue((unsigned char)para->id.pitch , value.pitch);
        Board::getInstance()->setPWMInterfaceValue((unsigned char)para->id.yaw , value.yaw);
 

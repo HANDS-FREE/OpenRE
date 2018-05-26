@@ -49,8 +49,8 @@ public:
         head_para.speed_low_filter = 0.3;
         head_para.range.pitch = 50 * degree_to_radian;
         head_para.range.yaw = 70 * degree_to_radian;
-        head_para.offset.pitch = -5 *degree_to_radian;
-        head_para.offset.yaw = 60 * degree_to_radian;
+        head_para.offset.pitch = 0 *degree_to_radian;
+        head_para.offset.yaw = 0 * degree_to_radian;
         head_para.id.pitch = 7;
         head_para.id.yaw = 8;
         head_para.imu_fusion_enalbe = 0;
@@ -64,4 +64,4 @@ public:
     }
 };
 
-#endif 
+#endif
