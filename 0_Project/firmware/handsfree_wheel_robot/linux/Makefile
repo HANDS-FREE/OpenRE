@@ -1,7 +1,7 @@
 ######################################define project name, board type, and path
 
-#####ROBOT_MODEL : null mini stone stone_omni3 giraffe virtual
-ROBOT_MODEL     ?= stone
+#####ROBOT_MODEL : null mini stone stone_v2 stone_v3 stone_omni giraffe virtual
+ROBOT_MODEL     ?= stone_v2
 #####BOARD_TYPE: openre_board_mini openre_board_v2
 BOARD_TYPE      ?= openre_board_v2
 #####project name
