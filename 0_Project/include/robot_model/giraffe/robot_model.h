@@ -28,18 +28,18 @@ public:
 
         motor_para.motor_id = 0;
         motor_para.driver_type = MotorDriver_PWM_AND_IOAB;
-        motor_para.encoder_num  = 1352;
+        motor_para.encoder_num  = 1300;
         motor_para.pwm_max = 5000;
         motor_para.pwm_dead_zone = 20;
-        motor_para.speed_low_filter = 1.0;
+        motor_para.speed_low_filter = 0.5;
         motor_para.protect_current = 200;  // 200A means disable current  protect
-        motor_para.pid =  {0.0f , 0.0f , 0.0f , 30.0f , 20.0f ,0.1f};
+        motor_para.pid =  {0.0f , 0.0f , 0.0f , 7.0f , 100.0f ,0.0f};
 
         chassis_para.type = DIFFERENTIAL2;
-        chassis_para.wheel_radius = 0.062;
-        chassis_para.body_radius = 0.17;
-        chassis_para.speed_low_filter = 1.0;
-        chassis_para.motor_pid_t = 0.02;
+        chassis_para.wheel_radius = 0.0625;
+        chassis_para.body_radius = 0.178;
+        chassis_para.speed_low_filter = 0.3;
+        chassis_para.motor_pid_t = 0.05;
         chassis_para.dof = 2;
         chassis_para.simulation_model = 0;
         chassis_para.imu_fusion_enalbe = 0;
@@ -49,8 +49,8 @@ public:
         head_para.speed_low_filter = 0.3;
         head_para.range.pitch = 50 * degree_to_radian;
         head_para.range.yaw = 70 * degree_to_radian;
-        head_para.offset.pitch = -5 *degree_to_radian;
-        head_para.offset.yaw = 60 * degree_to_radian;
+        head_para.offset.pitch = 0 *degree_to_radian;
+        head_para.offset.yaw = 0 * degree_to_radian;
         head_para.id.pitch = 7;
         head_para.id.yaw = 8;
         head_para.imu_fusion_enalbe = 0;
