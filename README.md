@@ -6,7 +6,7 @@
 
 This is a C++ embedded library for robotics base on STM32 and intended to provide GNU Makefiles.    
 
-### [OpenRE Tutorial](http://wiki.handsfree.org.cn/docs/OpenRE/)
+### [OpenRE Tutorial](http://wiki.hfreetech.org/docs/OpenRE/)
     
 ###  Community: 
 * [HandsFree Github](https://github.com/HANDS-FREE)   
