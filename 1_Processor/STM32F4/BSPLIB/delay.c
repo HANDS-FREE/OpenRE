@@ -113,22 +113,40 @@ float HF_Get_Dtime(void)
 
 void delay_us(uint16_t t)
 {
-    int i;
-    for( i=0 ; i<t ; i++)
+    uint32_t temp1,d;
+    temp1 = SysTick->VAL;
+    while(1)
     {
-        int a = 25 ;
-        while(a--) asm("nop");
+        d = temp1 - SysTick->VAL;
+        if(d >= (t*count_us)) return;
+        else if (d < 0) return;
     }
+
+//    int i;
+//    for( i=0 ; i<t ; i++)
+//    {
+//        int a = 29;
+//        while(a--) asm("nop");
+//    }
 }
 
 void delay_ms(uint16_t t)
 {
-    int i;
-    for( i=0 ; i<t ; i++)
+    float temp1,d;
+    temp1 = HF_Get_System_Time();
+    while(1)
     {
-        int a = 33568;
-        while(a--) asm("nop");
+        d = HF_Get_System_Time() - temp1;
+        if(d >= t*1000) return;
+        else if(d < 0) return;
     }
+
+//    int i;
+//    for( i=0 ; i<t ; i++)
+//    {
+//        int a = 33568;
+//        while(a--) asm("nop");
+//    }
 }
 
 #ifdef __cplusplus

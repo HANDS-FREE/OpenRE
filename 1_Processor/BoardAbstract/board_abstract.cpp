@@ -238,18 +238,18 @@ Queue* BoardAbstract::usartDeviceReadData(DeviceType usart_device_type)
 *
 * History:
 ***********************************************************************************************************************/
-void BoardAbstract::iicDeviceInit(DeviceType iic_device_type)
+void BoardAbstract::iicDeviceInit(DeviceType iic_device_type , I2C_Sensor_Type sensor_type)
 {
     uint8_t device_channel=0 , device_mapping=0;
     device_mapping =device_mapping;
 
     device_channel = getByteHighFourBit(device_type[iic_device_type]);
     device_mapping = getByteLowFourBit(device_type[iic_device_type]);
-    HF_Simulat_I2C_Init(device_channel) ;
+    HF_Simulat_I2C_Init(device_channel , sensor_type) ;
 }
 
 void BoardAbstract::iicDeviceWriteByte(DeviceType iic_device_type , uint8_t equipment_address,
-                                       uint8_t reg_address , uint8_t reg_data , uint8_t fastmode)
+                                       uint8_t reg_address , uint8_t reg_data)
 {
     uint8_t device_channel=0 , device_mapping=0;
     device_mapping =device_mapping;
@@ -257,11 +257,11 @@ void BoardAbstract::iicDeviceWriteByte(DeviceType iic_device_type , uint8_t equi
     device_channel = getByteHighFourBit(device_type[iic_device_type]);
     device_mapping = getByteLowFourBit(device_type[iic_device_type]);
     HF_Simulat_I2C_Write_Byte( device_channel , equipment_address , reg_address,
-                               reg_data , fastmode);
+                               reg_data);
 }
 
 uint8_t BoardAbstract::iicDeviceReadByte(DeviceType iic_device_type , uint8_t equipment_address,
-                                         uint8_t reg_address , uint8_t fastmode)
+                                         uint8_t reg_address)
 {
     uint8_t device_channel=0 , device_mapping=0;
     uint8_t temp = 0;
@@ -270,12 +270,12 @@ uint8_t BoardAbstract::iicDeviceReadByte(DeviceType iic_device_type , uint8_t eq
     device_channel = getByteHighFourBit(device_type[iic_device_type]);
     device_mapping = getByteLowFourBit(device_type[iic_device_type]);
     temp = HF_Simulat_I2C_Read_Byte( device_channel , equipment_address,
-                                     reg_address , fastmode) ;
+                                     reg_address) ;
     return temp;
 }
 
 uint8_t BoardAbstract::iicDeviceWriteBuf(DeviceType iic_device_type , uint8_t equipment_address,
-                                         uint8_t reg_address , uint8_t* pt_char , uint8_t size , uint8_t fastmode)
+                                         uint8_t reg_address , uint8_t* pt_char , uint8_t size)
 {
     uint8_t device_channel=0 , device_mapping=0;
     uint8_t temp = 0;
@@ -283,12 +283,12 @@ uint8_t BoardAbstract::iicDeviceWriteBuf(DeviceType iic_device_type , uint8_t eq
 
     device_channel = getByteHighFourBit(device_type[iic_device_type]);
     device_mapping = getByteLowFourBit(device_type[iic_device_type]);
-    temp = HF_Simulat_I2C_Write_Buf( device_channel , equipment_address , reg_address , pt_char , size , fastmode);
+    temp = HF_Simulat_I2C_Write_Buf( device_channel , equipment_address , reg_address , pt_char , size);
     return temp;
 }
 
 uint8_t BoardAbstract::iicDeviceReadBuf(DeviceType iic_device_type , uint8_t equipment_address,
-                                        uint8_t reg_address , uint8_t* pt_char , uint8_t size , uint8_t fastmode)
+                                        uint8_t reg_address , uint8_t* pt_char , uint8_t size)
 {
     uint8_t device_channel=0 , device_mapping=0;
     uint8_t temp = 0;
@@ -297,7 +297,7 @@ uint8_t BoardAbstract::iicDeviceReadBuf(DeviceType iic_device_type , uint8_t equ
     device_channel = getByteHighFourBit(device_type[iic_device_type]);
     device_mapping = getByteLowFourBit(device_type[iic_device_type]);
     temp = HF_Simulat_I2C_Read_Buf( device_channel , equipment_address , reg_address,
-                                    pt_char , size , fastmode);
+                                    pt_char , size);
     return temp;
 }
 

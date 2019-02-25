@@ -43,18 +43,15 @@ HMC5883L hmc5883l;
 
 void HMC5883L::readBuffer(void)
 {
-    unsigned char fastmode = 1;	 //1 : i2c high speed mode  0 : low speed mode
-    Board::getInstance()->iicDeviceReadBuf(IIC_IMU , HMC5883L_ADDRESS , HMC58X3_R_XM , read_buffer , 6 , fastmode);
+    Board::getInstance()->iicDeviceReadBuf(IIC_IMU , HMC5883L_ADDRESS , HMC58X3_R_XM , read_buffer , 6);
 }
 void HMC5883L::writeByte(unsigned char reg_address,unsigned char reg_data)
 {
-    unsigned char fastmode = 1;
-    Board::getInstance()->iicDeviceWriteByte(IIC_IMU , HMC5883L_ADDRESS , reg_address , reg_data , fastmode);
+    Board::getInstance()->iicDeviceWriteByte(IIC_IMU , HMC5883L_ADDRESS , reg_address , reg_data);
 }
 unsigned char HMC5883L::readByte(unsigned char reg_address)
 {
-    unsigned char fastmode = 1;
-    return( Board::getInstance()->iicDeviceReadByte(IIC_IMU , HMC5883L_ADDRESS , reg_address , fastmode) );
+    return( Board::getInstance()->iicDeviceReadByte(IIC_IMU , HMC5883L_ADDRESS , reg_address));
 }
 
 /***********************************************************************************************************************

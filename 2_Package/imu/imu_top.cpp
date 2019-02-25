@@ -39,7 +39,7 @@ void IMU::topInit(uint8_t mpu , uint8_t bmp , uint8_t hmc ,
 
     uint8_t temp;
 
-    Board::getInstance()->iicDeviceInit(IIC_IMU);
+    Board::getInstance()->iicDeviceInit(IIC_IMU , I2C_Sensor_Type_Typical_Fast);
     debug_en = debug;
 
     if(mpu == 1)

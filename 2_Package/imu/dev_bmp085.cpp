@@ -28,13 +28,11 @@ void BMP085::readBuffer(void)
 }
 void BMP085::writeByte(unsigned char reg_address,unsigned char reg_data)
 {
-    unsigned char fastmode = 1;
-    Board::getInstance()->iicDeviceWriteByte(IIC_IMU ,  BMP085_ADDRESS, reg_address, reg_data, fastmode);
+    Board::getInstance()->iicDeviceWriteByte(IIC_IMU ,  BMP085_ADDRESS, reg_address, reg_data);
 }  
 unsigned char BMP085::readByte(unsigned char reg_address)
 {
-    unsigned char fastmode = 1;
-    return(Board::getInstance()->iicDeviceReadByte(IIC_IMU , BMP085_ADDRESS, reg_address, fastmode) );
+    return(Board::getInstance()->iicDeviceReadByte(IIC_IMU , BMP085_ADDRESS, reg_address));
 }
 
 /***********************************************************************************************************************

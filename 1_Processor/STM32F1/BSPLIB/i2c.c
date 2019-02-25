@@ -5,7 +5,8 @@
 * LICENSING TERMS:  
 * The Hands Free is licensed generally under a permissive 3-clause BSD license. 
 * Contributions are requiredto be made under the same license.
-*  
+*
+*   
 * History: 
 * <author>      <time>      <version>      <desc>
 * mawenke       2015.10.1   V1.0           creat this file
@@ -20,6 +21,7 @@ extern "C" {
 
 #include "i2c.h"
 #include "nvic.h"
+#include "delay.h"
 
 /***********************************************************************************************************************
 * Function:     void HF_Hardware_I2C_Init(I2C_TypeDef *I2Cx , uint8_t GPIO_AF) 
@@ -35,7 +37,6 @@ extern "C" {
 * Cpu_Time:  
 *
 * History:
-* by   mawenke   2015.12.1   creat
 ***********************************************************************************************************************/
 void HF_Hardware_I2C_Init(I2C_TypeDef *I2Cx , uint8_t GPIO_AF)
 {
@@ -43,13 +44,14 @@ void HF_Hardware_I2C_Init(I2C_TypeDef *I2Cx , uint8_t GPIO_AF)
 }	
 
 /***********************************************************************************************************************
-* Function:     void Hardware_I2C_Write_Byte(I2C_TypeDef *I2Cx , uint8_t Equipment_Address,uint8_t REG_Address,uint8_t REG_data) 
+* Function:     void Hardware_I2C_Write_Byte(I2C_TypeDef *I2Cx ,
+*               uint8_t Equipment_Address,uint8_t REG_Address,uint8_t REG_data)
 *
 * Scope:       
 *
 * Description:  single byte write
-*               Equipment_Address IIC :equipment address   REG_Address :register write address  REG_data :write address
-
+*               Equipment_Address IIC :equipment address   REG_Address :register write address
+*               REG_data :write address
 *
 * Arguments:
 *
@@ -58,9 +60,8 @@ void HF_Hardware_I2C_Init(I2C_TypeDef *I2Cx , uint8_t GPIO_AF)
 * Cpu_Time:  
 *
 * History:
-* by   mawenke   2015.12.1   creat
 ***********************************************************************************************************************/
-void Hardware_I2C_Write_Byte(I2C_TypeDef *I2Cx , uint8_t Equipment_Address,uint8_t REG_Address,uint8_t REG_data)
+void HF_Hardware_I2C_Write_Byte(I2C_TypeDef *I2Cx , uint8_t Equipment_Address,uint8_t REG_Address,uint8_t REG_data)
 {
     
 }
@@ -83,17 +84,17 @@ void Hardware_I2C_Write_Byte(I2C_TypeDef *I2Cx , uint8_t Equipment_Address,uint8
 * Cpu_Time:  
 *
 * History:
-* by   mawenke   2015.12.1   creat
 ***********************************************************************************************************************/
 
-uint8_t Hardware_I2C_Read_Byte(I2C_TypeDef *I2Cx , uint8_t Equipment_Address,uint8_t REG_Address)
+uint8_t HF_Hardware_I2C_Read_Byte(I2C_TypeDef *I2Cx , uint8_t Equipment_Address,uint8_t REG_Address)
 {
     return 0;
 }
 
 
 /***********************************************************************************************************************
-* Function:     int Hardware_I2C_Write_Buf(I2C_TypeDef *I2Cx , uint8_t Equipment_Address,uint8_t REG_Address,uint8_t *ptChar,uint8_t size) 
+* Function:     int Hardware_I2C_Write_Buf(I2C_TypeDef *I2Cx , uint8_t Equipment_Address
+*                                          ,uint8_t REG_Address,uint8_t *ptChar,uint8_t size)
 *
 * Scope: 
 *
@@ -108,15 +109,16 @@ uint8_t Hardware_I2C_Read_Byte(I2C_TypeDef *I2Cx , uint8_t Equipment_Address,uin
 * Cpu_Time:  
 *
 * History:
-* by   mawenke   2015.12.1   creat
 ***********************************************************************************************************************/
-int Hardware_I2C_Write_Buf(I2C_TypeDef *I2Cx , uint8_t Equipment_Address,uint8_t REG_Address,uint8_t *ptChar,uint8_t size)
+int HF_Hardware_I2C_Write_Buf(I2C_TypeDef *I2Cx , uint8_t Equipment_Address
+                              ,uint8_t REG_Address,uint8_t *ptChar,uint8_t size)
 {
     return 0;
 }
 
 /***********************************************************************************************************************
-* Function:     int Hardware_I2C_Read_Buf(I2C_TypeDef *I2Cx , uint8_t Equipment_Address,uint8_t REG_Address,uint8_t * ptChar,uint8_t size)
+* Function:     int Hardware_I2C_Read_Buf(I2C_TypeDef *I2Cx , uint8_t Equipment_Address
+*                                         ,uint8_t REG_Address,uint8_t * ptChar,uint8_t size)
 *
 * Scope: 
 *
@@ -131,342 +133,362 @@ int Hardware_I2C_Write_Buf(I2C_TypeDef *I2Cx , uint8_t Equipment_Address,uint8_t
 * Cpu_Time:  
 *
 * History:
-* by   mawenke   2015.12.1   creat
 ***********************************************************************************************************************/
-int Hardware_I2C_Read_Buf(I2C_TypeDef *I2Cx , uint8_t Equipment_Address,uint8_t REG_Address,uint8_t * ptChar,uint8_t size)
+int HF_Hardware_I2C_Read_Buf(I2C_TypeDef *I2Cx , uint8_t Equipment_Address
+                             ,uint8_t REG_Address,uint8_t * ptChar,uint8_t size)
 {
     return 0;
 }
 
+
 /***********************************************************************************************************************
 ***                                                                                                                  ***
-***                                          HF_Simulation_IIC_INIT                                                  ***
+***                                                  Simulation IIC                                        ***
 ***                                                                                                                  ***
-************************************************************************************************************************/
+***********************************************************************************************************************/
 
-static void I2C_delay(uint8_t I2C_FastMode)
-{	
-//   uint8_t i = 5;
-//	 while(i--){};
+I2C_Sensor_Type iic_sensor_type[3];
+
+static void iic_delay_us(uint8_t HF_I2Cx , uint8_t t)
+{
+    if(iic_sensor_type[HF_I2Cx-1] == I2C_Sensor_Type_Typical_Fast) delay_us(t);
+    else if (iic_sensor_type[HF_I2Cx-1] == I2C_Sensor_Type_Typical_Slow) delay_us(2*t);
+    else if(iic_sensor_type[HF_I2Cx-1] == I2C_Sensor_Type_KS103) delay_us(t);
+    else delay_us(t);
 }
 
 static void SDA_H(uint8_t HF_I2Cx)
 {
     if(HF_I2Cx == 1){
-        SDA1_H;
+        IIC1_SDA=1;
     }
     else if(HF_I2Cx == 2){
-        SDA2_H;
+        IIC2_SDA=1;
     }
     else if(HF_I2Cx == 3){
-        SDA3_H;
+        IIC3_SDA=1;
     }
 }
 
 static void SDA_L(uint8_t HF_I2Cx)
 {
     if(HF_I2Cx == 1){
-        SDA1_L;
+        IIC1_SDA=0;
     }
     else if(HF_I2Cx == 2){
-        SDA2_L;
+        IIC2_SDA=0;
     }
     else if(HF_I2Cx == 3){
-        SDA3_L;
+        IIC3_SDA=0;
     }
 }
 
 static void SCL_H(uint8_t HF_I2Cx)
 {
     if(HF_I2Cx == 1){
-        SCL1_H;
+        IIC1_SCL=1;
     }
     else if(HF_I2Cx == 2){
-        SCL2_H;
+        IIC2_SCL=1;
     }
     else if(HF_I2Cx == 3){
-        SCL3_H;
+        IIC3_SCL=1;
     }
 }
 
 static void SCL_L(uint8_t HF_I2Cx)
 {
     if(HF_I2Cx == 1){
-        SCL1_L;
+        IIC1_SCL=0;
     }
     else if(HF_I2Cx == 2){
-        SCL2_L;
+        IIC2_SCL=0;
     }
     else if(HF_I2Cx == 3){
-        SCL3_L;
+        IIC3_SCL=0;
     }
-}
-
-static uint8_t SCL_Read(uint8_t HF_I2Cx)
-{
-    if(HF_I2Cx == 1){
-        return (uint8_t)SCL1_Read;
-    }
-    else if(HF_I2Cx == 2){
-        return (uint8_t)SCL2_Read;
-    }
-    else if(HF_I2Cx == 3){
-        return (uint8_t)SCL3_Read;
-    }
-    return 0;
 }
 
 static uint8_t SDA_Read(uint8_t HF_I2Cx)
 {
     if(HF_I2Cx == 1){
-        return (uint8_t)SDA1_Read;
+        return (uint8_t)IIC1_READ_SDA;
     }
     else if(HF_I2Cx == 2){
-        return (uint8_t)SDA2_Read;
+        return (uint8_t)IIC2_READ_SDA;
     }
     else if(HF_I2Cx == 3){
-        return (uint8_t)SDA3_Read;
+        return (uint8_t)IIC3_READ_SDA;
     }
     return 0;
+}
+
+static void SDA_IN(uint8_t HF_I2Cx)
+{
+    if(HF_I2Cx == 1){
+        IIC1_SDA_IN();
+    }
+    else if(HF_I2Cx == 2){
+        IIC2_SDA_IN();
+    }
+    else if(HF_I2Cx == 3){
+        IIC3_SDA_IN();
+    }
+}
+
+static void SDA_OUT(uint8_t HF_I2Cx)
+{
+    if(HF_I2Cx == 1){
+        IIC1_SDA_OUT();
+    }
+    else if(HF_I2Cx == 2){
+        IIC2_SDA_OUT();
+    }
+    else if(HF_I2Cx == 3){
+        IIC3_SDA_OUT();
+    }
 }
 
 /***********************************************************************************************************************
 ***                                                                                                                  ***
 ***                                                                                                                  ***
 ***                                                                                                                  ***
-************************************************************************************************************************/
-static int I2C_Start(uint8_t HF_I2Cx , uint8_t I2C_FastMode)
+***********************************************************************************************************************/
+static void I2C_Start(uint8_t HF_I2Cx)
 {
+    SDA_OUT(HF_I2Cx);
     SDA_H(HF_I2Cx);
     SCL_H(HF_I2Cx);
-    I2C_delay(I2C_FastMode);
-    if(!SDA_Read(HF_I2Cx))return 0;
+    iic_delay_us(HF_I2Cx , 4);
     SDA_L(HF_I2Cx);
-    I2C_delay(I2C_FastMode);
-    if(SDA_Read(HF_I2Cx)) return 0;
+    iic_delay_us(HF_I2Cx , 4);
     SDA_L(HF_I2Cx);
-    I2C_delay(I2C_FastMode);
+}
+
+static void I2C_Stop(uint8_t HF_I2Cx)
+{
+    SDA_OUT(HF_I2Cx);
+    SCL_L(HF_I2Cx);
+    SDA_L(HF_I2Cx);
+    iic_delay_us(HF_I2Cx , 4);
+    SCL_H(HF_I2Cx);
+    SDA_H(HF_I2Cx);
+    iic_delay_us(HF_I2Cx , 4);
+} 
+
+static int I2C_WaitAck(uint8_t HF_I2Cx)
+{
+
+    uint8_t ucErrTime=0;
+    SDA_IN(HF_I2Cx);
+    SCL_H(HF_I2Cx);iic_delay_us(HF_I2Cx , 1);
+    SDA_H(HF_I2Cx);iic_delay_us(HF_I2Cx , 1);
+
+    while(SDA_Read(HF_I2Cx))
+    {
+        ucErrTime++;
+        if(ucErrTime>250)
+        {
+            I2C_Stop(HF_I2Cx);
+            return 0;
+        }
+    }
+
+    SCL_L(HF_I2Cx);
     return 1;
 }
 
-static void I2C_Stop(uint8_t HF_I2Cx , uint8_t I2C_FastMode)
-{
-    SCL_L(HF_I2Cx);
-    I2C_delay(I2C_FastMode);
-    SDA_L(HF_I2Cx);
-    I2C_delay(I2C_FastMode);
-    SCL_H(HF_I2Cx);
-    I2C_delay(I2C_FastMode);
-    SDA_H(HF_I2Cx);
-    I2C_delay(I2C_FastMode);
-} 
-
-static void I2C_Ack(uint8_t HF_I2Cx , uint8_t I2C_FastMode)
+static void I2C_Ack(uint8_t HF_I2Cx)
 {	
     SCL_L(HF_I2Cx);
-    I2C_delay(I2C_FastMode);
+    SDA_OUT(HF_I2Cx);
     SDA_L(HF_I2Cx);
-    I2C_delay(I2C_FastMode);
+    iic_delay_us(HF_I2Cx , 2);
     SCL_H(HF_I2Cx);
-    I2C_delay(I2C_FastMode);
+    iic_delay_us(HF_I2Cx , 2);
     SCL_L(HF_I2Cx);
-    I2C_delay(I2C_FastMode);
 }   
 
-static void I2C_NoAck(uint8_t HF_I2Cx , uint8_t I2C_FastMode)
+static void I2C_NoAck(uint8_t HF_I2Cx)
 {	
     SCL_L(HF_I2Cx);
-    I2C_delay(I2C_FastMode);
+    SDA_OUT(HF_I2Cx);
     SDA_H(HF_I2Cx);
-    I2C_delay(I2C_FastMode);
+    iic_delay_us(HF_I2Cx , 2);
     SCL_H(HF_I2Cx);
-    I2C_delay(I2C_FastMode);
+    iic_delay_us(HF_I2Cx , 2);
     SCL_L(HF_I2Cx);
-    I2C_delay(I2C_FastMode);
 } 
 
-static int I2C_WaitAck(uint8_t HF_I2Cx , uint8_t I2C_FastMode) 	
-{
-    SCL_L(HF_I2Cx);
-    I2C_delay(I2C_FastMode);
-    SDA_H(HF_I2Cx);
-    I2C_delay(I2C_FastMode);
-    SCL_H(HF_I2Cx);
-    I2C_delay(I2C_FastMode);
-    if(SDA_Read(HF_I2Cx))
-    {
-        SCL_L(HF_I2Cx);
-        I2C_delay(I2C_FastMode);
-        return 0;
-    }
-    SCL_L(HF_I2Cx);
-    I2C_delay(I2C_FastMode);
-    return 1;
-}
-
-static void I2C_SendByte(uint8_t HF_I2Cx , uint8_t SendByte, uint8_t I2C_FastMode) 
+static void I2C_SendByte(uint8_t HF_I2Cx , uint8_t SendByte)
 {
     uint8_t i=8;
+    SDA_OUT(HF_I2Cx);
+    SCL_L(HF_I2Cx);
     while(i--)
     {
-        SCL_L(HF_I2Cx);
-        I2C_delay(I2C_FastMode);
         if(SendByte&0x80)
             SDA_H(HF_I2Cx);
         else
             SDA_L(HF_I2Cx);
         SendByte<<=1;
-        I2C_delay(I2C_FastMode);
+
+        iic_delay_us(HF_I2Cx , 2);
         SCL_H(HF_I2Cx);
-        I2C_delay(I2C_FastMode);
+        iic_delay_us(HF_I2Cx , 2);
+        SCL_L(HF_I2Cx);
+        iic_delay_us(HF_I2Cx , 2);
     }
-    SCL_L(HF_I2Cx);
 }  
 
-
-static uint8_t I2C_ReadByte(uint8_t HF_I2Cx , uint8_t I2C_FastMode)  
+static uint8_t I2C_ReadByte(uint8_t HF_I2Cx , uint8_t ack)
 { 
     uint8_t i=8;
     uint8_t ReceiveByte=0;
-    SDA_H(HF_I2Cx);
-    while(i--)
+
+    SDA_IN(HF_I2Cx);
+
+    for(i=0;i<8;i++ )
     {
-        ReceiveByte<<=1;
         SCL_L(HF_I2Cx);
-        I2C_delay(I2C_FastMode);
+        iic_delay_us(HF_I2Cx , 2);
         SCL_H(HF_I2Cx);
-        I2C_delay(I2C_FastMode);
-        if(SDA_Read(HF_I2Cx))
-        {
-            ReceiveByte|=0x01;
-        }
+
+        ReceiveByte<<=1;
+        if(SDA_Read(HF_I2Cx))ReceiveByte++;
+        iic_delay_us(HF_I2Cx , 1);
     }
-    SCL_L(HF_I2Cx);
+    if (!ack)
+        I2C_NoAck(HF_I2Cx);
+    else
+        I2C_Ack(HF_I2Cx);
+
     return ReceiveByte;
 } 
 
 void HF_Simulat_I2C_Write_Byte(uint8_t HF_I2Cx , uint8_t Equipment_Address ,
-                            uint8_t REG_Address , uint8_t REG_data , uint8_t I2C_FastMode)
+                               uint8_t REG_Address , uint8_t REG_data)
 {
-    if(!I2C_Start(HF_I2Cx , I2C_FastMode))return ;
-    I2C_SendByte(HF_I2Cx , Equipment_Address,I2C_FastMode);
-    if(!I2C_WaitAck(HF_I2Cx , I2C_FastMode)){I2C_Stop(HF_I2Cx , I2C_FastMode); return ;}
-    I2C_SendByte(HF_I2Cx , REG_Address,I2C_FastMode);
-    I2C_WaitAck(HF_I2Cx , I2C_FastMode);
-    I2C_SendByte(HF_I2Cx , REG_data , I2C_FastMode);
-    I2C_WaitAck(HF_I2Cx , I2C_FastMode);
-    I2C_Stop(HF_I2Cx , I2C_FastMode);
+    I2C_Start(HF_I2Cx);
+    I2C_SendByte(HF_I2Cx , Equipment_Address);
+    if(!I2C_WaitAck(HF_I2Cx)){I2C_Stop(HF_I2Cx); return ;}
+    I2C_SendByte(HF_I2Cx , REG_Address);
+    I2C_WaitAck(HF_I2Cx);
+    I2C_SendByte(HF_I2Cx , REG_data);
+    I2C_WaitAck(HF_I2Cx);
+    I2C_Stop(HF_I2Cx);
 }
 
-uint8_t HF_Simulat_I2C_Read_Byte(uint8_t HF_I2Cx , uint8_t Equipment_Address , uint8_t REG_Address , uint8_t I2C_FastMode)
+uint8_t HF_Simulat_I2C_Read_Byte(uint8_t HF_I2Cx , uint8_t Equipment_Address
+                                 , uint8_t REG_Address)
 {   	
     uint8_t REG_data;
-    if(!I2C_Start(HF_I2Cx , I2C_FastMode))return 0;
-    I2C_SendByte(HF_I2Cx , Equipment_Address , I2C_FastMode);
-    if(!I2C_WaitAck(HF_I2Cx , I2C_FastMode))
+    I2C_Start(HF_I2Cx);
+    I2C_SendByte(HF_I2Cx , Equipment_Address);
+    if(!I2C_WaitAck(HF_I2Cx))
     {
-        I2C_Stop(HF_I2Cx , I2C_FastMode);
+        I2C_Stop(HF_I2Cx);
         return 0;
     }
-    I2C_SendByte(HF_I2Cx , (uint8_t)REG_Address , I2C_FastMode);
-    I2C_WaitAck(HF_I2Cx , I2C_FastMode);
-    I2C_Start(HF_I2Cx , I2C_FastMode);
-    I2C_SendByte(HF_I2Cx , Equipment_Address+1 , I2C_FastMode);
-    I2C_WaitAck(HF_I2Cx , I2C_FastMode);
-    REG_data = I2C_ReadByte(HF_I2Cx , I2C_FastMode);
-    I2C_NoAck(HF_I2Cx , I2C_FastMode);
-    I2C_Stop(HF_I2Cx , I2C_FastMode);
+    I2C_SendByte(HF_I2Cx , (uint8_t)REG_Address);
+    I2C_WaitAck(HF_I2Cx);
+    I2C_Start(HF_I2Cx);
+    I2C_SendByte(HF_I2Cx , Equipment_Address+1);
+    I2C_WaitAck(HF_I2Cx);
+    if(iic_sensor_type[HF_I2Cx-1] == I2C_Sensor_Type_KS103) delay_us(70);
+    REG_data = I2C_ReadByte(HF_I2Cx,0);
+    I2C_Stop(HF_I2Cx);
     return REG_data;
 }	
 
-int HF_Simulat_I2C_Write_Buf(uint8_t HF_I2Cx , uint8_t Equipment_Address,uint8_t REG_Address,
-                          uint8_t *ptChar , uint8_t size , uint8_t I2C_FastMode)
+uint8_t HF_Simulat_I2C_Write_Buf(uint8_t HF_I2Cx , uint8_t Equipment_Address,uint8_t REG_Address,
+                                 uint8_t *ptChar , uint8_t size)
 {
     uint8_t i;
     if(size < 1)
         return 0;
-    if(!I2C_Start(HF_I2Cx , I2C_FastMode))
-        return 0;
-    I2C_SendByte(HF_I2Cx , Equipment_Address,I2C_FastMode);
-    if(!I2C_WaitAck(HF_I2Cx , I2C_FastMode))
+    I2C_Start(HF_I2Cx);
+    I2C_SendByte(HF_I2Cx , Equipment_Address);
+    if(!I2C_WaitAck(HF_I2Cx))
     {
-        I2C_Stop(HF_I2Cx , I2C_FastMode);
+        I2C_Stop(HF_I2Cx);
         return 0;
     }
-    I2C_SendByte(HF_I2Cx , REG_Address,I2C_FastMode);
-    I2C_WaitAck(HF_I2Cx , I2C_FastMode);
+    I2C_SendByte(HF_I2Cx , REG_Address);
+    I2C_WaitAck(HF_I2Cx);
 
     for(i=1;i<size; i++)
     {
-        I2C_SendByte(HF_I2Cx , *ptChar++,I2C_FastMode);
-        I2C_Ack(HF_I2Cx , I2C_FastMode);
+        I2C_SendByte(HF_I2Cx , *ptChar++);
+        I2C_Ack(HF_I2Cx);
     }
-    I2C_SendByte(HF_I2Cx , *ptChar++,I2C_FastMode);
-    I2C_NoAck(HF_I2Cx , I2C_FastMode);
-    I2C_Stop(HF_I2Cx , I2C_FastMode);
+    I2C_SendByte(HF_I2Cx , *ptChar++);
+    I2C_NoAck(HF_I2Cx);
+    I2C_Stop(HF_I2Cx);
     return 1;
 }	
 
-int HF_Simulat_I2C_Read_Buf(uint8_t HF_I2Cx , uint8_t Equipment_Address,uint8_t REG_Address,
-                         uint8_t * ptChar , uint8_t size , uint8_t I2C_FastMode)
+uint8_t HF_Simulat_I2C_Read_Buf(uint8_t HF_I2Cx , uint8_t Equipment_Address,uint8_t REG_Address,
+                                uint8_t * ptChar , uint8_t size)
 {
     uint8_t i;
     if(size < 1)
         return 0;
-    if(!I2C_Start(HF_I2Cx , I2C_FastMode))
-        return 0;
-    I2C_SendByte(HF_I2Cx , Equipment_Address,I2C_FastMode);
-    if(!I2C_WaitAck(HF_I2Cx , I2C_FastMode))
+    I2C_Start(HF_I2Cx);
+    I2C_SendByte(HF_I2Cx , Equipment_Address);
+    if(!I2C_WaitAck(HF_I2Cx))
     {
-        I2C_Stop(HF_I2Cx , I2C_FastMode);
+        I2C_Stop(HF_I2Cx);
         return 0;
     }
-    I2C_SendByte(HF_I2Cx , REG_Address,I2C_FastMode);
-    I2C_WaitAck(HF_I2Cx , I2C_FastMode);
+    I2C_SendByte(HF_I2Cx , REG_Address);
+    I2C_WaitAck(HF_I2Cx);
     
-    I2C_Start(HF_I2Cx , I2C_FastMode);
-    I2C_SendByte(HF_I2Cx , Equipment_Address+1,I2C_FastMode);
-    I2C_WaitAck(HF_I2Cx , I2C_FastMode);
+    I2C_Start(HF_I2Cx);
+    I2C_SendByte(HF_I2Cx , Equipment_Address+1);
+    I2C_WaitAck(HF_I2Cx);
     for(i=1;i<size; i++)
     {
-        *ptChar++ = I2C_ReadByte(HF_I2Cx , I2C_FastMode);
-        I2C_Ack(HF_I2Cx , I2C_FastMode);
+        *ptChar++ = I2C_ReadByte(HF_I2Cx,1);
     }
-    *ptChar++ = I2C_ReadByte(HF_I2Cx , I2C_FastMode);
-    I2C_NoAck(HF_I2Cx , I2C_FastMode);
-    I2C_Stop(HF_I2Cx , I2C_FastMode);
+    *ptChar++ = I2C_ReadByte(HF_I2Cx,0);
+    I2C_Stop(HF_I2Cx);
     return 1;
 }	
 
-void HF_Simulat_I2C_Init(uint8_t HF_I2Cx)
+void HF_Simulat_I2C_Init(uint8_t HF_I2Cx , I2C_Sensor_Type sensor_type)
 {
     GPIO_InitTypeDef  GPIO_InitStructure;
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_OD; 
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
     if(HF_I2Cx ==1 ){
+        iic_sensor_type[0] = sensor_type;
         RCC_APB2PeriphClockCmd(RCC_I2C1_SCL|RCC_I2C1_SDA , ENABLE );
-        GPIO_InitStructure.GPIO_Pin =  I2C1_Pin_SCL;
+        GPIO_InitStructure.GPIO_Pin =  I2C1_PIN_SCL;
         GPIO_Init(GPIO_I2C1_SCL	, &GPIO_InitStructure);
-        GPIO_InitStructure.GPIO_Pin =  I2C1_Pin_SDA;
+        GPIO_InitStructure.GPIO_Pin =  I2C1_PIN_SDA;
         GPIO_Init(GPIO_I2C1_SDA	, &GPIO_InitStructure);
     }
     else if(HF_I2Cx ==2){
+        iic_sensor_type[1] = sensor_type;
         RCC_APB2PeriphClockCmd(RCC_I2C2_SCL|RCC_I2C2_SDA , ENABLE );
-        GPIO_InitStructure.GPIO_Pin =  I2C2_Pin_SCL;
+        GPIO_InitStructure.GPIO_Pin =  I2C2_PIN_SCL;
         GPIO_Init(GPIO_I2C2_SCL	, &GPIO_InitStructure);
-        GPIO_InitStructure.GPIO_Pin =  I2C2_Pin_SDA;
+        GPIO_InitStructure.GPIO_Pin =  I2C2_PIN_SDA;
         GPIO_Init(GPIO_I2C2_SDA	, &GPIO_InitStructure);
 
     }
     else if(HF_I2Cx ==3){
+        iic_sensor_type[2] = sensor_type;
         RCC_APB2PeriphClockCmd(RCC_I2C3_SCL|RCC_I2C3_SDA , ENABLE );
-        GPIO_InitStructure.GPIO_Pin =  I2C3_Pin_SCL;
+        GPIO_InitStructure.GPIO_Pin =  I2C3_PIN_SCL;
         GPIO_Init(GPIO_I2C3_SCL	, &GPIO_InitStructure);
-        GPIO_InitStructure.GPIO_Pin =  I2C3_Pin_SDA;
+        GPIO_InitStructure.GPIO_Pin =  I2C3_PIN_SDA;
         GPIO_Init(GPIO_I2C3_SDA	, &GPIO_InitStructure);
     }
-
-}	 
+    SCL_H(HF_I2Cx);
+    SDA_H(HF_I2Cx);
+}
 
 #ifdef __cplusplus
 }

@@ -108,15 +108,15 @@ public:
     Queue* usartDeviceReadData(DeviceType usart_device_type);
 
     /********device -- for iic device or interface***********************************************************************************/
-    void iicDeviceInit(DeviceType iic_device_type);
+    void iicDeviceInit(DeviceType iic_device_type , I2C_Sensor_Type sensor_type);
     void iicDeviceWriteByte(DeviceType iic_device_type , uint8_t equipment_address,
-                            uint8_t reg_address , uint8_t reg_data , uint8_t fastmode);
+                            uint8_t reg_address , uint8_t reg_data);
     uint8_t iicDeviceReadByte(DeviceType iic_device_type , uint8_t equipment_address,
-                              uint8_t reg_address , uint8_t fastmode);
+                              uint8_t reg_address);
     uint8_t iicDeviceWriteBuf(DeviceType iic_device_type , uint8_t equipment_address,
-                              uint8_t reg_address , uint8_t* pt_char , uint8_t size , uint8_t fastmode);
+                              uint8_t reg_address , uint8_t* pt_char , uint8_t size);
     uint8_t iicDeviceReadBuf(DeviceType iic_device_type , uint8_t equipment_address,
-                             uint8_t reg_address , uint8_t* pt_char , uint8_t size , uint8_t fastmode);
+                             uint8_t reg_address , uint8_t* pt_char , uint8_t size);
 
     /******device -- for spi device or interface*************************************************************************************/
     void spiDeviceInit(DeviceType spi_device_type);
