@@ -9,6 +9,7 @@ extern "C" {
 #include "main_config.h"
 
 /**********************************************************************************************************************/
+void delay_init(void);
 void delay_ms(uint16_t t);    //using timer to delay time, max delay time is 1864ms
 void delay_us(uint16_t t);    //using timer to delay time, max delay time is 1864ms
 /**********************************************************************************************************************/

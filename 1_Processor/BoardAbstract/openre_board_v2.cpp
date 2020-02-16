@@ -55,7 +55,7 @@ Board::Board() : BoardAbstract()
     else if(PC_INTERFACE == 3){
         device_type[USART_PC] = 0x30;
     }
-    if(PC_INTERFACE == 4){
+    else if(PC_INTERFACE == 4){
         device_type[USART_PC] = 0x40;
     }
     else if(PC_INTERFACE == 5){
@@ -207,6 +207,11 @@ void Board::ledInit(void)
     RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC,ENABLE);
     GPIO_InitStruct.GPIO_Pin = GPIO_Pin_13;
     GPIO_Init(GPIOC , &GPIO_InitStruct);
+
+    setLedState(0,0);
+    setLedState(1,0);
+    setLedState(2,0);
+    setLedState(3,0);
 }
 
 void Board::setLedState(uint8_t led_id, uint8_t operation){
@@ -909,6 +914,11 @@ uint16_t Board::readPWMInterfaceValue(uint8_t channel_x)
 void Board::adcInit(void)
 {
     HF_ADC_Moder_Init(0X3E00 , 5 , 2.5f);   //ADC init
+}
+
+float Board::getADCInterfaceValue(uint8_t channel_x)
+{
+    return 0;
 }
 
 void Board::timerInit(void)

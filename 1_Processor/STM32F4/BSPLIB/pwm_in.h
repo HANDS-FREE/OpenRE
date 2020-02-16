@@ -3,7 +3,7 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif 
+#endif
 
 #include "stm32f4xx.h"
 
@@ -39,6 +39,6 @@ float HF_Get_PWM_Value(uint8_t channel_x); //current input value of PWM (Unit:us
 
 #ifdef __cplusplus
 }
-#endif 
+#endif
 
 #endif // #ifndef PWM_IN_H

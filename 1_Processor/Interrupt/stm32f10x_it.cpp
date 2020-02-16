@@ -3,13 +3,13 @@
 * Contact:  QQ Exchange Group -- 521037187
 *
 * LICENSING TERMS:
-* The Hands Free is licensed generally under a permissive 3-clause BSD license. 
+* The Hands Free is licensed generally under a permissive 3-clause BSD license.
 * Contributions are requiredto be made under the same license.
 *
 * History:
 * <author>      <time>      <version>      <desc>
 *
-* Description:   
+* Description:
 ***********************************************************************************************************************/
 
 #include "board.h"
@@ -23,7 +23,7 @@ extern "C" {
 
 void USART1_IRQHandler(void)
 {
-    unsigned char data;
+    unsigned char data = 0;
 #if SYSTEM_SUPPORT_OS == 1
     OSIntEnter();
 #endif
@@ -129,6 +129,10 @@ void TIM6_IRQHandler(void)
         Board::getInstance()->cnt_10ms++;
         Board::getInstance()->cnt_20ms++;
         Board::getInstance()->cnt_50ms++;
+        Board::getInstance()->cnt_100ms++;
+        Board::getInstance()->cnt_500ms++;
+        Board::getInstance()->cnt_1000ms++;
+        Board::getInstance()->cnt_2000ms++;
         TIM_ClearITPendingBit(TIM6 , TIM_FLAG_Update);     // clear interrupt flag
     }
 #if SYSTEM_SUPPORT_OS == 1

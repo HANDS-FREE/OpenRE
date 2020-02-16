@@ -1,6 +1,9 @@
 ######################################define project name, board type, and path
+#####ROBOT_MODEL : mini
+#####ROBOT_MODEL : stone stone_v2 stone_v3 stone_v3_omni3 
+#####ROBOT_MODEL : giraffe 
+#####ROBOT_MODEL : null virtual
 
-#####ROBOT_MODEL : null mini stone stone_v2 stone_v3 stone_v3_omni virtual
 ROBOT_MODEL     ?= stone_v3
 #####BOARD_TYPE: openre_board_mini openre_board_v2
 BOARD_TYPE      ?= openre_board_v2
@@ -24,10 +27,10 @@ INCDIR          += -I. -I../src/
 
 #PAKG: common robot_abstract math imu .....
 PAKG        = common robot_abstract math imu motor sbus_ppm servo \
-              robot_control hf_link tf
+              robot_control robolink tf sensors
               
 #OS_MODULE: UCOSII UCOSIII GUI FAT
-OS_MODULE  =           
+OS_MODULE =           
 
 #LIB_MODULE: EIGEN MATRIX  etc
 THIRDPARTY_MODULE = 
@@ -35,4 +38,3 @@ THIRDPARTY_MODULE =
 ###################################################################include rules
 
 include $(TOP_PATH)/0_Project/makefile/compiler.mk
-

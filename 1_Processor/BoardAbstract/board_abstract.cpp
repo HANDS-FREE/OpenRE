@@ -7,15 +7,19 @@ BoardAbstract::BoardAbstract()
     date_year = date_month = date_day = date_week = 0;
     time_hour = time_min = time_sec = time_ampm = 0;
     system_init = 0;
-    cnt_1ms = cnt_2ms = cnt_10ms = cnt_20ms = cnt_50ms = cnt_500ms = 0;
+    cnt_1ms = cnt_2ms = cnt_10ms = cnt_20ms = cnt_50ms = cnt_100ms = cnt_500ms = cnt_1000ms = cnt_2000ms = 0;
     flashSize = 0;
+    feed_dog_enable = 1;
 
-    battery_voltage_ = cpu_temperature_ = 0;
-    battery_voltage_alarm_ = 10.50 ;
+    battery_series_ = 3;
+    power_remain = battery_voltage_ = battery_voltage_windown_cnt_ =  0;
+    battery_voltage_windown_[0] = battery_voltage_windown_[1] = battery_voltage_windown_[2] = battery_voltage_windown_[3] = battery_voltage_windown_[4] =
+            battery_voltage_windown_[5] = battery_voltage_windown_[6] = battery_voltage_windown_[7] = battery_voltage_windown_[8] = battery_voltage_windown_[9] = 0;
     battery_proportion_ = 11.00 ;
-    cpu_temperature_alarm_ = 0;
-    beep_model = beep_alarm_cnt_ = 0;
+    cpu_temperature_ = cpu_temperature_alarm_ = 0;
+    beep_model = beep_toggle_cnt_ = 0;
     board_call_5ms = board_call_20ms = board_call_1s = board_call_2s =  0 ;
+    key_state[0]=key_state[1]=key_state[2]=key_state[3]=key_state[4]=0;
 
     device_type[USART_DEBUG] = 0x10;
     device_type[USART_PC] = 0x10;
@@ -74,8 +78,10 @@ void BoardAbstract::boardBasicInit(void)
     //HF_IWDG_Init();               //Initialize the independed watch dog, system will reset if not feeding dog over 1s
 
     setBeepState(1);
+    setLedState(0,1);
     delay_ms(500);
     setBeepState(0);
+    setLedState(0,0);
 }
 
 /***********************************************************************************************************************
@@ -106,7 +112,7 @@ void BoardAbstract::boardBasicCall(void)   //100HZ
     if(board_call_5ms >= 5) //20hz
     {
         board_call_5ms = 0;
-        //HF_IWDG_Feed(); //feed dog
+        //if(feed_dog_enable) HF_IWDG_Feed(); //feed dog
         system_time = getClock();  //system working time (unit:us)
         battery_voltage = getBatteryVoltage();
         cpu_usage = getCPUUsage();
@@ -119,6 +125,7 @@ void BoardAbstract::boardBasicCall(void)   //100HZ
     if(board_call_1s >= 100) //1hz
     {
         board_call_1s=0;
+        power_remain = voltage_to_capacity(battery_voltage/battery_series_);
         //updateLocalTime()
     }
     if(board_call_2s >= 200) //wait 2s for a stable battery_voltage
@@ -388,24 +395,42 @@ void BoardAbstract::canDeviceSendMessage(DeviceType can_device_type , uint8_t se
 * History:
 ***********************************************************************************************************************/
 //100HZ
-void BoardAbstract::beepStateRenew(void){
+void BoardAbstract::beepStateRenew(void)
+{
     uint16_t toggle_cnt_;
-    beep_alarm_cnt_ ++ ;
+    if(beep_tweet_nx10ms > 0)
+    {
+        setBeepState(1);
+        beep_tweet_nx10ms--;
+        return;
+    }
+    if(beep_tweet_nx10ms == 0)
+    {
+        beep_tweet_nx10ms = -1;
+        setBeepState(0);
+    }
+
     if(beep_model <= 2){
         setBeepState(beep_model);
         return;
     }
-    else if(beep_model == 3) toggle_cnt_ = 5;
-    else if(beep_model == 4) toggle_cnt_ = 25;
-    else if (beep_model == 5) toggle_cnt_ = 100;
-    else if(beep_model == 6){
-        setBeepState(1);
-        return;
+    else if(beep_model == 3)
+    {
+        toggle_cnt_ = 5;
+    }
+    else if(beep_model == 4)
+    {
+        toggle_cnt_ = 25;
+    }
+    else if (beep_model == 5)
+    {
+        toggle_cnt_ = 100;
     }
     else return;
-    if(beep_alarm_cnt_ >= toggle_cnt_)
+    beep_toggle_cnt_++;
+    if(beep_toggle_cnt_ >= toggle_cnt_)
     {
-        beep_alarm_cnt_ = 0;
+        beep_toggle_cnt_ = 0;
         setBeepState(2);
     }
 }

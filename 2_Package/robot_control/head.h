@@ -22,17 +22,18 @@ public:
         memset(&expect_head , 0 , sizeof(expect_head));
     }
 
-    void init(RobotAbstract* robot_)
+    void init(RobotAbstract *robot_)
     {
         robot = robot_;
         setParameters(&robot->para.head_para);
     }
-    void setParameters(HeadParameters* para_);
+    void loopCall(void);
+
+    void setParameters(HeadParameters *para_);
     void updataHeadPose(void)
     {
-        expect_head = robot->expect_head_state; // radian
+        expect_head = robot->head.expect_head_state; // radian
     }
-    void call(void);
 
 private:
     void set_head_pose(HeadPose pose);

@@ -1,11 +1,14 @@
 ######################################define project name, board type, and path
+#####ROBOT_MODEL : mini
+#####ROBOT_MODEL : stone stone_v2 stone_v3 stone_v3_omni3 
+#####ROBOT_MODEL : giraffe 
+#####ROBOT_MODEL : null virtual
 
-#####ROBOT_MODEL : null mini stone stone_v2 stone_v3 stone_v3_omni giraffe virtual   
 ROBOT_MODEL     ?= stone_v3
 #####BOARD_TYPE: openre_board_mini openre_board_v2
-BOARD_TYPE		?= openre_board_v2
+BOARD_TYPE      ?= openre_board_v2
 #####project name
-PROJECT			=  robot_ucosIII_$(ROBOT_MODEL)_$(BOARD_TYPE)
+PROJECT         =  robot_ucosIII_$(ROBOT_MODEL)_$(BOARD_TYPE)
 TOP_PATH        =  ../../../..
 
 #############################################################parameters
@@ -15,16 +18,16 @@ BOOTLOADER_MODE ?= disable
 
 ##########################################################################source
 
-CXX_SRC			+= ../src/main.cpp
+CXX_SRC         += ../src/main.cpp 
 
 #Includes
-INCDIR	+= -I. -I../src/ 
-	
+INCDIR          += -I. -I../src/ 
+
 #########################################################################package
 
 #PAKG: common robot_abstract math imu .....
 PAKG        = common robot_abstract math imu motor sbus_ppm servo \
-              robot_control hf_link tf
+              robot_control robolink tf
               
 #OS_MODULE: UCOSII UCOSIII GUI FAT
 OS_MODULE = UCOSIII            
@@ -35,5 +38,3 @@ THIRDPARTY_MODULE =
 ###################################################################include rules
 
 include $(TOP_PATH)/0_Project/makefile/compiler.mk
-
-

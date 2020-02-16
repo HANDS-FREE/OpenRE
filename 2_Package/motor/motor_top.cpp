@@ -31,43 +31,22 @@
 *
 * History:
 ***********************************************************************************************************************/
-void MotorTop::motorTopInit(uint8_t motor_enable_num_   ,  float pid_t_ ,
-                            const MotorParameters*  motor_init_structure , uint8_t simulation_model_)
+void MotorTop::init(RobotAbstract *robot_)
 {
-    MotorParameters para;
-    para = *motor_init_structure;
-    motor_enable_num = motor_enable_num_;
-    pid_t = pid_t_;
-    simulation_model = simulation_model_;
+    if(robot_->para.motor_para.driver_type == MotorDriver_PWM12_AND_IO || robot_->para.motor_para.driver_type == MotorDriver_PWM_AND_IOAB)
+    {
+        typical_dc_motors = TypicalDCMotors();
+        motors = &typical_dc_motors;
+    }
+    else if(robot_->para.motor_para.driver_type == MotorDriver_ZLAC706)
+    {
 
-    if(motor_enable_num >= 1)
-    {
-        para.motor_id = (unsigned char)MOTOR1;
-        motor1 = DCMotor(para.driver_type , simulation_model_);
-        motor1.controlInit(pid_t_ , &para);
-        motor1.setAngleSpeed(0);
     }
-    if(motor_enable_num >= 2)
+    else
     {
-        para.motor_id = (unsigned char)MOTOR2;
-        motor2 = DCMotor(para.driver_type , simulation_model_);
-        motor2.controlInit(pid_t_ , &para);
-        motor2.setAngleSpeed(0);
+        return;
     }
-    if(motor_enable_num >= 3)
-    {
-        para.motor_id = (unsigned char)MOTOR3;
-        motor3 = DCMotor(para.driver_type , simulation_model_);
-        motor3.controlInit(pid_t_ , &para);
-        motor3.setAngleSpeed(0);
-    }
-    if(motor_enable_num >= 4)
-    {
-        para.motor_id = (unsigned char)MOTOR4;
-        motor4 = DCMotor(para.driver_type , simulation_model_);
-        motor4.controlInit(pid_t_ , &para);
-        motor4.setAngleSpeed(0);
-    }
+    motors->init(robot_);
 }
 
 /***********************************************************************************************************************
@@ -85,24 +64,12 @@ void MotorTop::motorTopInit(uint8_t motor_enable_num_   ,  float pid_t_ ,
 *
 * History:
 ***********************************************************************************************************************/
-void MotorTop::motorTopCall(void)
+void MotorTop::loopCall(void)
 {
-    if(motor_enable_num >= 1)
-    {
-        motor1.speedControlCall(  );
-    }
-    if(motor_enable_num >= 2)
-    {
-        motor2.speedControlCall();
-    }
-    if(motor_enable_num >= 3)
-    {
-        motor3.speedControlCall(  );
-    }
-    if(motor_enable_num >= 4)
-    {
-        motor4.speedControlCall( );
-    }
+    float pid_t = motors->getParameters(0)->pid_t;
+    if(loop_cnt >= (unsigned int)(pid_t/d_loop_time)) loop_cnt = 0;
+    if(loop_cnt == 0) motors->loopCall();
+    loop_cnt++;
 }
 
 void MotorTop::motorTest(void)
@@ -112,28 +79,19 @@ void MotorTop::motorTest(void)
     i++;
     j++;
 
-    if(i <= 250)
+    if(i <= 500)
     {
-        motor1.setAngleSpeed(1000);
-        motor2.setAngleSpeed(1000);
-        motor3.setAngleSpeed(1000);
-        motor4.setAngleSpeed(1000);
+        motors->setAngleSpeed(0,1000);
     }
-    else if (i > 250 && i < 500)
+    else if (i > 500 && i < 1000)
     {
-        motor1.setAngleSpeed(-1000);
-        motor2.setAngleSpeed(-1000);
-        motor3.setAngleSpeed(-1000);
-        motor4.setAngleSpeed(-1000);
+        motors->setAngleSpeed(0,-1000);
     }
     else i = 0;
 
-    if(j >= 35)
+    if(j >= 25)
     {
         j = 0;
-        printf("measure motor speed:  motor1=%.4f  motor2=%.4f  motor3=%.4f  motor4=%.4f \r\n",
-               motor1.getControlData()->measure_angle_speed , motor2.getControlData()->measure_angle_speed,
-               motor3.getControlData()->measure_angle_speed , motor4.getControlData()->measure_angle_speed);
+        motors->printInfo(1);
     }
 }
-

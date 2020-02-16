@@ -23,7 +23,7 @@ extern "C" {
 
 void USART1_IRQHandler(void)
 {
-    unsigned char data =0;
+    unsigned char data = 0;
 #if SYSTEM_SUPPORT_OS == 1
     OSIntEnter();
 #endif
@@ -148,6 +148,10 @@ void TIM6_DAC_IRQHandler(void)
         Board::getInstance()->cnt_10ms++;
         Board::getInstance()->cnt_20ms++;
         Board::getInstance()->cnt_50ms++;
+        Board::getInstance()->cnt_100ms++;
+        Board::getInstance()->cnt_500ms++;
+        Board::getInstance()->cnt_1000ms++;
+        Board::getInstance()->cnt_2000ms++;
         TIM_ClearITPendingBit(TIM6 , TIM_FLAG_Update);     // clear interrupt flag
     }
 #if SYSTEM_SUPPORT_OS == 1

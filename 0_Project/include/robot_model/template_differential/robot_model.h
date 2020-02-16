@@ -22,25 +22,25 @@ class RobotModel : public RobotParameters
 public:
     RobotModel() : RobotParameters()
     {
-        strcpy(robot_name, "differential");
-        strcpy(robot_description ,  "this is a differential template parameters");
 
-        motor_para.motor_id = 0;
+        strcpy(robot_info.robot_name, "template_differential2");
+        strcpy(robot_info.robot_description ,  "this is a differential2 template parameters");
+
         motor_para.driver_type = MotorDriver_PWM12_AND_IO;
-        motor_para.encoder_num  = 1560 ;
+        motor_para.motor_enable_num = 2;
+        motor_para.simulation_model = 0;
+        motor_para.pid_t = 0.02;
+        motor_para.encoder_num  = 1560;
         motor_para.pwm_max = 5000;
         motor_para.pwm_dead_zone = 10;
         motor_para.speed_low_filter = 0.3;
         motor_para.protect_current = 200;  // 200A means disable current  protect
-        motor_para.pid =  {0.0f  , 0.0f , 0.0f , 60.0f , 500.0f ,0.2f};
+        motor_para.pid =  {0.0f  , 0.0f , 0.0f , 100.0f , 300.0f , 0.2f , 0.0f  , 0.0f , 0.0f};
 
-        chassis_para.type =  DIFFERENTIAL2;
+        chassis_para.type = DIFFERENTIAL2;
         chassis_para.wheel_radius = 0.0320;
         chassis_para.body_radius = 0.1592;
         chassis_para.speed_low_filter = 0.4;
-        chassis_para.motor_pid_t = 0.02;
-        chassis_para.dof = 2;
-        chassis_para.simulation_model = 0;
         chassis_para.imu_fusion_enalbe = 0;
         chassis_para.control_enable = 1;
 
@@ -48,17 +48,15 @@ public:
         head_para.speed_low_filter = 0.3;
         head_para.range.pitch = 50 * degree_to_radian;
         head_para.range.yaw = 70 * degree_to_radian;
-        head_para.offset.pitch = -5 *degree_to_radian;
-        head_para.offset.yaw = 60 * degree_to_radian;
+        head_para.offset.pitch = 0 *degree_to_radian;
+        head_para.offset.yaw = 0 * degree_to_radian;
         head_para.id.pitch = 7;
         head_para.id.yaw = 8;
-        head_para.imu_fusion_enalbe = 0;
         head_para.control_enable = 1;
 
         arm_para.type = DOBOT2;
         arm_para.speed_low_filter = 1;
         arm_para.dof = 4;
-        arm_para.imu_fusion_enalbe = 0;
         arm_para.control_enable = 1;
     }
 };

@@ -21,7 +21,6 @@
 #include "main_config.h"
 #include "board.h"
 #include "stdlib.h"
-
 #include "imu_top.h"
 
 int main(void)
@@ -31,42 +30,37 @@ int main(void)
 
     HF_USART_printf(USART1, " >> welcome to the graduation projection of cyb \r\n");
 
-    IMU imu_top;
-    imu_top.topInit(1, 0, 1, 0, 0, 1);
+    IMU imu;
+    imu.topInit(1, 0, 1, 0, 0, 1);
 
     HF_USART_printf(USART1, ">> task begin \r\n");
 
     while(1)
     {
-        if ( board->cnt_1ms >= 1 )    // 1000hz
+
+        if ( board->cnt_1ms >= 1 )      // 1000hz
         {
-            imu_top.topCall();
-
             board->cnt_1ms=0;
+            imu.topCall();
         }
-
-        if ( board->cnt_2ms >= 2 )    // 500hz
+        if ( board->cnt_2ms >= 2 )      // 500hz
         {
             board->cnt_2ms=0;
         }
-
-        if ( board->cnt_5ms >= 5 )    // 200hz
+        if ( board->cnt_5ms >= 5 )      // 200hz
         {
             board->cnt_5ms=0;
         }
-
-        if ( board->cnt_10ms >= 10 )  // 100hz
+        if ( board->cnt_10ms >= 10 )    // 100hz
         {
             board->cnt_10ms=0;
-            board->boardBasicCall();   // need time stm32f1 35us
+            board->boardBasicCall();    // need time stm32f1 35us
         }
-
-        if ( board->cnt_20ms >= 20 )  // 50hz
+        if ( board->cnt_20ms >= 20 )    // 50hz
         {
             board->cnt_20ms = 0 ;
         }
-
-        if ( board->cnt_50ms >= 50 )  // 20hz
+        if ( board->cnt_50ms >= 50 )    // 20hz
         {
             board->cnt_50ms = 0 ;
 
@@ -84,8 +78,24 @@ int main(void)
                 // ttt =  HF_Get_Dtime() / 1000;
                 // printf("[debug]: %f ms \r\n", ttt);
             }
-
+        }
+        if ( board->cnt_100ms >= 100 )    // 10hz
+        {
+            board->cnt_100ms = 0 ;
+        }
+        if ( board->cnt_500ms >= 500 )    // 2hz
+        {
+            board->cnt_500ms = 0;
+        }
+        if ( board->cnt_1000ms >= 1000 )  // 1hz
+        {
+            board->cnt_1000ms = 0;
+        }
+        if ( board->cnt_2000ms >= 2000 )  // 0.5hz
+        {
+            board->cnt_2000ms = 0;
         }
     }
 
+    return 0;
 }

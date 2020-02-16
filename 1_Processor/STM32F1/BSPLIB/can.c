@@ -40,7 +40,7 @@ extern "C" {
 * by   mawenke    2015.12.1                             creat
 * by   LiuDong    2016.1.8       V1.57       update the name of function
 ***********************************************************************************************************************/
-void HF_CAN_Init(uint8_t CAN_Channel  , unsigned char GPIO_AF)     //  CAN1_TX_RX--PA12_PA11  CAN2_TX_RX--PB13_PA12
+void HF_CAN_Init(uint8_t CAN_Channel  , uint8_t GPIO_AF)     //  CAN1_TX_RX--PA12_PA11  CAN2_TX_RX--PB13_PA12
 {
      CAN_TypeDef *CANx;
      CAN_InitTypeDef        CAN_InitStructure;
@@ -281,7 +281,7 @@ void HF_CAN_Init(uint8_t CAN_Channel  , unsigned char GPIO_AF)     //  CAN1_TX_R
 * History:
 * by   mawenke    2015.12.1     creat
 ***********************************************************************************************************************/
-void HF_CANTX_Message(uint8_t CAN_Channel , uint8_t Sender_ID  , uint8_t Receiver_ID , uint8_t *TxBuf , uint8_t Length)
+void HF_CANTX_Message(uint8_t CAN_Channel , uint8_t StdId  , uint8_t ExtId  ,  uint8_t *TxBuf , uint8_t Length)
 {
     CAN_TypeDef *CANx;
     CanTxMsg TxMessageBuffer;
@@ -297,21 +297,19 @@ void HF_CANTX_Message(uint8_t CAN_Channel , uint8_t Sender_ID  , uint8_t Receive
         return;
     }
 
-    TxMessageBuffer.StdId=0x00;	 
-    TxMessageBuffer.ExtId=( (Sender_ID << 8) | Receiver_ID ); //Sender ID | Receiver ID
-    TxMessageBuffer.RTR=CAN_RTR_DATA;	     // 传输消息的帧类型为数据帧（还有远程帧）
-    TxMessageBuffer.IDE=CAN_ID_EXT;		     // 消息标志符实验标准标识符
-    
-    TxMessageBuffer.DLC=Length;					   // 发送两帧，一帧8位
-    
+    TxMessageBuffer.StdId=StdId;
+    TxMessageBuffer.ExtId=ExtId;
+    TxMessageBuffer.RTR=CAN_RTR_DATA;
+    TxMessageBuffer.IDE=CAN_ID_EXT;
+    TxMessageBuffer.DLC=Length;
+
     for(i=0;i<Length;i++)
     {
         TxMessageBuffer.Data[i]=*(TxBuf+i);
     }
-    
-    CAN_Transmit(CANx, &TxMessageBuffer);  
-    
-}	
+
+    CAN_Transmit(CANx, &TxMessageBuffer);
+}
 
 #ifdef __cplusplus
 }

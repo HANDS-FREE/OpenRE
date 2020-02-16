@@ -10,8 +10,8 @@ extern "C" {
 void HF_IWDG_Init(void);
 void HF_IWDG_Feed(void);
 
-void HF_WWDG_Init(uint8_t tr, uint8_t wr, uint32_t fprer);//Initialize WDG
-void HF_WWDG_Set_Counter(uint8_t cnt);          //Set the counter of WDG
+void HF_WWDG_Init(uint8_t tr, uint8_t wr, uint32_t fprer); //Initialize WDG
+void HF_WWDG_Set_Counter(uint8_t cnt); //Set the counter of WDG
 void HF_WKUP_Init(void);
 
 #ifdef __cplusplus
@@ -19,5 +19,3 @@ void HF_WKUP_Init(void);
 #endif 
 
 #endif // #ifndef WDG_WKUP_H
-
-

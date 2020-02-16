@@ -12,8 +12,8 @@ private:
 public:
     static Board* getInstance()
     {
-       static Board instance;
-       return &instance;
+        static Board instance;
+        return &instance;
     }
 
     /*****system support functions*********************************************************************************************/
@@ -39,6 +39,7 @@ public:
     void pwmInterfaceInit(uint8_t channel_x , uint8_t mode);
     void setPWMInterfaceValue(uint8_t channel_x , uint16_t pwm_value);
     uint16_t readPWMInterfaceValue(uint8_t channel_x);
+    float getADCInterfaceValue(uint8_t channel_x);
 
 public:
     void ioDeviceInit(DeviceType io_device_type) {return;}

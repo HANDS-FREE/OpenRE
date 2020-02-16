@@ -117,7 +117,7 @@ float HF_Get_Dtime(void)
     return temp2;
 }
 
-void delay_us(unsigned short int t)
+void delay_us(uint16_t t)
 {
     uint32_t temp1,d;
     temp1 = SysTick->VAL;
@@ -136,7 +136,7 @@ void delay_us(unsigned short int t)
 //    }   
 }
 
-void delay_ms(unsigned short int t)
+void delay_ms(uint16_t t)
 {
     float temp1,d;
     temp1 = HF_Get_System_Time();

@@ -1,5 +1,5 @@
-#ifndef __pwm_in_H__
-#define __pwm_in_H__
+#ifndef PWM_IN_H
+#define PWM_IN_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -22,6 +22,4 @@ float HF_Get_PWM_Value(uint8_t channel_x); //current input value of PWM (Unit:us
 }
 #endif
 
-#endif //__pwm_in_H__
-
-
+#endif // #ifndef PWM_IN_H

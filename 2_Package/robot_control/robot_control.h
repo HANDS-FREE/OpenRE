@@ -7,7 +7,7 @@
 #include "head.h"
 #include "arm.h"
 #include "sbus_ppm.h"
-#include "hf_link.h"
+#include "robolink.h"
 
 class RobotControl
 {
@@ -16,7 +16,7 @@ private:
     {
         robot =NULL;
         sbus_node = NULL;
-        hf_link_node = NULL;
+        robolink_node = NULL;
         degree_to_radian = 0.017453f;
         radian_to_degree = 57.2958f;
         call_frequency = 20;
@@ -32,29 +32,27 @@ public:
     void init(RobotAbstract* robot_)
     {
         robot = robot_;
-        motor_top.motorTopInit(robot->para.chassis_para.dof , robot->para.chassis_para.motor_pid_t ,
-                               &robot->para.motor_para  ,  robot->para.chassis_para.simulation_model);
+        motor_top.init(robot);
         chassis.init(robot , &motor_top);
         head.init(robot);
         arm.init(robot);
     }
-    void call(void);
-    void robot_test(void);
+    void loopCall(void); //20HZ
 
-    void setSBUSRemoteNodePointer(SBUS* sbus_node_)
+    void setSBUSRemoteNodePointer(SBUS *node_)
     {
-        sbus_node = sbus_node_ ;
+        sbus_node = node_;
         sbus_node_device=sbus_node->device;
     }
-    void setHFLinkNodePointer(HFLink* hf_link_node_)
+    void setRobolinkNodePointer(RoboLink *node_)
     {
-        hf_link_node_device = (DeviceType)hf_link_node_->port_num;
-        hf_link_node = hf_link_node_ ;
+        robolink_node_device = (DeviceType)node_->port_num;
+        robolink_node = node_;
     }
-    void setHFLinkRadioNodePointer(HFLink* hf_link_node_)
+    void setRobolinkRadioNodePointer(RoboLink *node_)
     {
-        hf_link_radio_node_device = (DeviceType)hf_link_node_->port_num;
-        hf_link_radio_node = hf_link_node_ ;
+        robolink_radio_node_device = (DeviceType)node_->port_num;
+        robolink_radio_node = node_;
     }
 
 public:
@@ -64,18 +62,19 @@ public:
     Arm arm;
     SBUS *sbus_node;
     DeviceType sbus_node_device;
-    HFLink *hf_link_node;
-    DeviceType hf_link_node_device;
-    HFLink *hf_link_radio_node;
-    DeviceType hf_link_radio_node_device;
+    RoboLink *robolink_node;
+    DeviceType robolink_node_device;
+    RoboLink *robolink_radio_node;
+    DeviceType robolink_radio_node_device;
 
 private:
-    RobotAbstract* robot;
-    void hfLinkNodeEvent(HFLink* hf_link_node_);
-    void sbusEvent(SBUS *sbus_);
+    RobotAbstract *robot;
+    void robolinkNodeEvent(RoboLink *node_);
+    void sbusEvent(SBUS *node_);
     void datatUpdate(void);
+    void printInfo(unsigned char type_);
     float call_frequency;
-    float degree_to_radian ,  radian_to_degree;
+    float degree_to_radian , radian_to_degree;
 };
 
 #endif  // #ifndef ROBOT_TOP_H

@@ -53,7 +53,7 @@ extern "C" {
 * by   mawenke    2015.12.1                           creat
 * by   LiuDong    2016.1.8       V1.57       update the name of function
 ***********************************************************************************************************************/
-void HF_SPI_Init(uint8_t SPI_Channel , unsigned char GPIO_AF)    //SPI interface initialization, input parameter SPI1 SPI2
+void HF_SPI_Init(uint8_t SPI_Channel ,  uint8_t GPIO_AF)    //SPI interface initialization, input parameter SPI1 SPI2
 {	 
     SPI_TypeDef *SPIx;
     SPI_InitTypeDef  SPI_InitStructure;

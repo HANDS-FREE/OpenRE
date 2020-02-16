@@ -93,7 +93,6 @@ int HF_Hardware_I2C_Read_Buf(I2C_TypeDef *I2Cx , uint8_t Equipment_Address
 #define PIin(n)    BIT_ADDR(GPIOI_IDR_Addr,n)
 
 /*************************HF_Simulation_I2C1**************************************************************************/
-
 #define RCC_I2C1_SCL       RCC_AHB1Periph_GPIOB
 #define GPIO_I2C1_SCL      GPIOB
 #define I2C1_PIN_SCL       GPIO_Pin_6
@@ -141,6 +140,57 @@ int HF_Hardware_I2C_Read_Buf(I2C_TypeDef *I2Cx , uint8_t Equipment_Address
 #define IIC3_SCL           PAout(8)
 #define IIC3_SDA           PCout(9)
 #define IIC3_READ_SDA      PCin(9)
+
+/*********************************************************************************************************************/
+
+/*************************HF_Simulation_I2C4**************************************************************************/
+#define RCC_I2C4_SCL       RCC_AHB1Periph_GPIOD
+#define GPIO_I2C4_SCL      GPIOD
+#define I2C4_PIN_SCL       GPIO_Pin_12
+
+#define RCC_I2C4_SDA       RCC_AHB1Periph_GPIOD
+#define GPIO_I2C4_SDA      GPIOD
+#define I2C4_PIN_SDA       GPIO_Pin_13
+
+#define IIC4_SDA_IN()      {GPIOD->MODER&=~(3<<(13*2));GPIOD->MODER|=0<<13*2;}
+#define IIC4_SDA_OUT()     {GPIOD->MODER&=~(3<<(13*2));GPIOD->MODER|=1<<13*2;}
+#define IIC4_SCL           PDout(12)
+#define IIC4_SDA           PDout(13)
+#define IIC4_READ_SDA      PDin(13)
+
+/*********************************************************************************************************************/
+
+/*************************HF_Simulation_I2C5**************************************************************************/
+#define RCC_I2C5_SCL       RCC_AHB1Periph_GPIOD
+#define GPIO_I2C5_SCL      GPIOD
+#define I2C5_PIN_SCL       GPIO_Pin_14
+
+#define RCC_I2C5_SDA       RCC_AHB1Periph_GPIOD
+#define GPIO_I2C5_SDA      GPIOD
+#define I2C5_PIN_SDA       GPIO_Pin_15
+
+#define IIC5_SDA_IN()      {GPIOD->MODER&=~(3<<(15*2));GPIOD->MODER|=0<<15*2;}
+#define IIC5_SDA_OUT()     {GPIOD->MODER&=~(3<<(15*2));GPIOD->MODER|=1<<15*2;}
+#define IIC5_SCL           PDout(14)
+#define IIC5_SDA           PDout(15)
+#define IIC5_READ_SDA      PDin(15)
+
+/*********************************************************************************************************************/
+
+/*************************HF_Simulation_I2C6**************************************************************************/
+#define RCC_I2C6_SCL       RCC_AHB1Periph_GPIOB
+#define GPIO_I2C6_SCL      GPIOB
+#define I2C6_PIN_SCL       GPIO_Pin_4
+
+#define RCC_I2C6_SDA       RCC_AHB1Periph_GPIOB
+#define GPIO_I2C6_SDA      GPIOB
+#define I2C6_PIN_SDA       GPIO_Pin_5
+
+#define IIC6_SDA_IN()      {GPIOB->MODER&=~(3<<(5*2));GPIOB->MODER|=0<<5*2;}
+#define IIC6_SDA_OUT()     {GPIOB->MODER&=~(3<<(5*2));GPIOB->MODER|=1<<5*2;}
+#define IIC6_SCL           PBout(4)
+#define IIC6_SDA           PBout(5)
+#define IIC6_READ_SDA      PBin(5)
 
 /*********************************************************************************************************************/
 

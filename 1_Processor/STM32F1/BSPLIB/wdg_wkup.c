@@ -121,7 +121,7 @@ u8 WWDG_CNT=0x7f;
 * History:
 * by   mawenke   2015.12.1   creat
 ***********************************************************************************************************************/
-void HF_WWDG_Init(u8 tr,u8 wr,u32 fprer)
+void HF_WWDG_Init(uint8_t tr , uint8_t wr , uint32_t fprer)
 { 
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_WWDG, ENABLE);  // enable  WWDG clock
     WWDG_SetPrescaler(fprer);  //set IWDG Prescaler
@@ -148,7 +148,7 @@ void HF_WWDG_Init(u8 tr,u8 wr,u32 fprer)
 * History:
 * by   mawenke   2015.12.1   creat
 ***********************************************************************************************************************/
-void HF_WWDG_Set_Counter(u8 cnt)
+void HF_WWDG_Set_Counter(uint8_t cnt)
 {
     WWDG_Enable(cnt);	 
 }

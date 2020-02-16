@@ -12,6 +12,7 @@
 * mawenke       2015.7.1     V2.0          update this file
 * Description:
 ***********************************************************************************************************************/
+
 #include "robot_control.h"
 
 /***********************************************************************************************************************
@@ -30,113 +31,99 @@
 *
 * History:
 ***********************************************************************************************************************/
-void RobotControl::call(void)
+//20HZ
+void RobotControl::loopCall(void)
 {
     datatUpdate();
     if(sbus_node != NULL)
     {
         sbusEvent(sbus_node);
     }
-    if(hf_link_radio_node != NULL)
+    if(robolink_radio_node != NULL)
     {
-        hfLinkNodeEvent(hf_link_radio_node);
+        robolinkNodeEvent(robolink_radio_node);
     }
-    if(hf_link_node != NULL)
+    if(robolink_node != NULL)
     {
-        hfLinkNodeEvent(hf_link_node);
+        robolinkNodeEvent(robolink_node);
     }
-    chassis.call();
-    head.call();
-    arm.call();
-    //printf("expect speed: %f\r\n", robot->expect_robot_speed.x);
+    chassis.loopCall();
+    head.loopCall();
+    arm.loopCall();
 }
 
-void RobotControl::robot_test()
+void RobotControl::robolinkNodeEvent(RoboLink *node_)
 {
-    datatUpdate();
-    if(sbus_node != NULL)
+    if(node_->receive_package_renew[WRITE_MOTOR_PARAMETERS]==1)
     {
-        sbusEvent(sbus_node);
+        node_->receive_package_renew[WRITE_MOTOR_PARAMETERS]=0;
+        motor_top.motors->setParameters(0, &robot->para.motor_para);
     }
-    if(hf_link_radio_node != NULL)
+    if(node_->receive_package_renew[SAVE_MOTOR_PARAMETERS]==1)
     {
-        hfLinkNodeEvent(hf_link_radio_node);
-    }
-    if(hf_link_node != NULL)
-    {
-        hfLinkNodeEvent(hf_link_node);
-    }
-    chassis.chassisTest();
-}
-
-void RobotControl::hfLinkNodeEvent(HFLink* hf_link_node_)
-{
-
-    if(hf_link_node_->receive_package_renew[SET_MOTOR_PARAMETERS]==1)
-    {
-        hf_link_node_->receive_package_renew[SET_MOTOR_PARAMETERS]=0;
-        motor_top.setParameters(&robot->para.motor_para);
-    }
-    if(hf_link_node_->receive_package_renew[SAVE_MOTOR_PARAMETERS]==1)
-    {
-        hf_link_node_->receive_package_renew[SAVE_MOTOR_PARAMETERS]=0;
+        node_->receive_package_renew[SAVE_MOTOR_PARAMETERS]=0;
 
     }
-    if(hf_link_node_->receive_package_renew[SET_CHASSIS_PARAMETERS]==1)
+    if(node_->receive_package_renew[WRITE_CHASSIS_PARAMETERS]==1)
     {
-        hf_link_node_->receive_package_renew[SET_CHASSIS_PARAMETERS]=0;
+        node_->receive_package_renew[WRITE_CHASSIS_PARAMETERS]=0;
         chassis.setParameters(&robot->para.chassis_para);
     }
-    if(hf_link_node_->receive_package_renew[SAVE_CHASSIS_PARAMETERS]==1)
+    if(node_->receive_package_renew[SAVE_CHASSIS_PARAMETERS]==1)
     {
-        hf_link_node_->receive_package_renew[SAVE_CHASSIS_PARAMETERS]=0;
+        node_->receive_package_renew[SAVE_CHASSIS_PARAMETERS]=0;
 
     }
-    if(hf_link_node_->receive_package_renew[SET_HEAD_PARAMETERS]==1)
+    if(node_->receive_package_renew[WRITE_HEAD_PARAMETERS]==1)
     {
-        hf_link_node_->receive_package_renew[SET_HEAD_PARAMETERS]=0;
+        node_->receive_package_renew[WRITE_HEAD_PARAMETERS]=0;
         head.setParameters(&robot->para.head_para);
     }
-    if(hf_link_node_->receive_package_renew[SAVE_HEAD_PARAMETERS]==1)
+    if(node_->receive_package_renew[SAVE_HEAD_PARAMETERS]==1)
     {
-        hf_link_node_->receive_package_renew[SAVE_HEAD_PARAMETERS]=0;
+        node_->receive_package_renew[SAVE_HEAD_PARAMETERS]=0;
 
     }
-    if(hf_link_node_->receive_package_renew[SET_ARM_PARAMETERS]==1)
+    if(node_->receive_package_renew[WRITE_ARM_PARAMETERS]==1)
     {
-        hf_link_node_->receive_package_renew[SET_ARM_PARAMETERS]=0;
+        node_->receive_package_renew[WRITE_ARM_PARAMETERS]=0;
         arm.setParameters(&robot->para.arm_para);
     }
-    if(hf_link_node_->receive_package_renew[SAVE_ARM_PARAMETERS]==1)
+    if(node_->receive_package_renew[SAVE_ARM_PARAMETERS]==1)
     {
-        hf_link_node_->receive_package_renew[SAVE_ARM_PARAMETERS]=0;
+        node_->receive_package_renew[SAVE_ARM_PARAMETERS]=0;
 
     }
-    if( hf_link_node_->receive_package_renew[SET_GLOBAL_SPEED]==1 ){
-        hf_link_node_->receive_package_renew[SET_GLOBAL_SPEED]=0;
+    if( node_->receive_package_renew[SET_GLOBAL_SPEED]==1 ){
+        node_->receive_package_renew[SET_GLOBAL_SPEED]=0;
         chassis.updataGlobalSpeed();
     }
-    if( hf_link_node_->receive_package_renew[SET_ROBOT_SPEED]==1 ){
-        hf_link_node_->receive_package_renew[SET_ROBOT_SPEED ]=0;
+    if( node_->receive_package_renew[SET_ROBOT_SPEED]==1 ){
+        node_->receive_package_renew[SET_ROBOT_SPEED ]=0;
         chassis.updataRobotSpeed();
     }
-    if( hf_link_node_->receive_package_renew[SET_MOTOR_SPEED]==1 ){
-        hf_link_node_->receive_package_renew[SET_MOTOR_SPEED] = 0;
+    if( node_->receive_package_renew[SET_MOTOR_SPEED]==1 ){
+        node_->receive_package_renew[SET_MOTOR_SPEED] = 0;
         chassis.updataMotorSpeed();
     }
-    if(hf_link_node_->receive_package_renew[CLEAR_COORDINATE_DATA]==1)
+    if(node_->receive_package_renew[CLEAR_COORDINATE_DATA]==1)
     {
-        hf_link_node_->receive_package_renew[CLEAR_COORDINATE_DATA]=0;
+        node_->receive_package_renew[CLEAR_COORDINATE_DATA]=0;
         chassis.clearCoordData();
     }
-    if(hf_link_node_->receive_package_renew[SET_HEAD_STATE]==1)
+    if(node_->receive_package_renew[SET_HEAD_STATE]==1)
     {
-        hf_link_node_->receive_package_renew[SET_HEAD_STATE]=0;
+        node_->receive_package_renew[SET_HEAD_STATE]=0;
         head.updataHeadPose();
     }
-    if( hf_link_node_->receive_package_renew[SET_ARM_STATE]==1 ){
-        hf_link_node_->receive_package_renew[SET_ARM_STATE]=0;
-        arm.updataHeadPose();
+    if( node_->receive_package_renew[SET_ARM_STATE]==1 ){
+        node_->receive_package_renew[SET_ARM_STATE]=0;
+        arm.updataArmPose();
+    }
+    if( node_->receive_package_renew[GET_SENSOR_DIS_DATA]==1 ){
+        node_->receive_package_renew[GET_SENSOR_DIS_DATA]=0;
+        robot->sensors.disio_data.button1 = Board::getInstance()->getKeyState(1);
+        robot->sensors.disio_data.button2 = Board::getInstance()->getKeyState(2);
     }
 }
 
@@ -146,7 +133,6 @@ void RobotControl::hfLinkNodeEvent(HFLink* hf_link_node_)
 * Scope:        private
 *
 * Description:  update the robot RobotAbstract ,only need a low call frequency , 20HZ is recommended
-*
 *
 * Arguments:
 *
@@ -163,8 +149,9 @@ void RobotControl::datatUpdate(void)
     robot->system_info.cpu_temperature = Board::getInstance()->cpu_temperature;
     robot->system_info.cpu_usage = Board::getInstance()->cpu_usage;
     robot->system_info.system_time = Board::getInstance()->system_time;
-    robot->system_info.power_remain = 1;
+    robot->system_info.power_remain = Board::getInstance()->power_remain;
 
+    //printf("robot->system_info.power_remain =%f \r\n", robot->system_info.power_remain);
     //    //IMU
     //    //    robot->measure_imu_euler_angle.pitch = imu_arithmetic_model.Fus_Angle.pitch * degree_to_radian;
     //    //    robot->measure_imu_euler_angle.roll = imu_arithmetic_model.Fus_Angle.roll * degree_to_radian;
@@ -185,7 +172,6 @@ void RobotControl::datatUpdate(void)
 *
 * Description:
 *
-*
 * Arguments:
 *
 * Return:
@@ -194,27 +180,35 @@ void RobotControl::datatUpdate(void)
 *
 * History:
 ***********************************************************************************************************************/
-void RobotControl::sbusEvent(SBUS *sbus_)
+void RobotControl::sbusEvent(SBUS *node_)
 {
-    if ( sbus_->sbus_state == 1)
+    if ( node_->sbus_state == 1)
     {
-        sbus_->sbus_state=0;
-        if( sbus_->sbus_channel[5] >= 1000 )
+        node_->sbus_state=0;
+        if( node_->sbus_channel[5] >= 1000 )
         {
-            robot->expect_robot_speed.x = (-(sbus_->sbus_channel[1] - 992)*0.001f);
-            robot->expect_robot_speed.y = (-(sbus_->sbus_channel[0] - 992)*0.001f);
-            robot->expect_robot_speed.z = (-(sbus_->sbus_channel[3] - 992)*0.001f) * 3;
-            hf_link_node->receive_package_renew[SET_ROBOT_SPEED]=1;
+            robot->chassis.expect_robot_speed.x = (-(node_->sbus_channel[1] - 992)*0.001f);
+            robot->chassis.expect_robot_speed.y = (-(node_->sbus_channel[0] - 992)*0.001f);
+            robot->chassis.expect_robot_speed.z = (-(node_->sbus_channel[3] - 992)*0.001f) * 3;
+            robolink_node->receive_package_renew[SET_ROBOT_SPEED]=1;
         }
-        else if( sbus_->sbus_channel[5] <= 200 )
+        else if( node_->sbus_channel[5] <= 200 )
         {
-            robot->expect_head_state.pitch =(sbus_->sbus_channel[1] - 992) * 0.05f;
-            robot->expect_head_state.yaw = -(sbus_->sbus_channel[0] - 992) * 0.05f;
-            hf_link_node->receive_package_renew[SET_HEAD_STATE]=1;
+            robot->head.expect_head_state.pitch =(node_->sbus_channel[1] - 992) * 0.05f;
+            robot->head.expect_head_state.yaw = -(node_->sbus_channel[0] - 992) * 0.05f;
+            robolink_node->receive_package_renew[SET_HEAD_STATE]=1;
         }
         else
         {
 
         }
+    }
+}
+
+void RobotControl::printInfo(unsigned char type_)
+{
+    if(type_ ==1)
+    {
+        printf("expect speed: %f\r\n", robot->chassis.expect_robot_speed.x);
     }
 }

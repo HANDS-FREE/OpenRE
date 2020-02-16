@@ -15,7 +15,7 @@
 
 #include "head.h"
 
-void Head::setParameters(HeadParameters* para_)
+void Head::setParameters(HeadParameters *para_)
 {
     para = para_;
     HeadPose pose;
@@ -35,7 +35,7 @@ void Head::setParameters(HeadParameters* para_)
     set_head_pose(pose);
 }
 
-void Head::call(void)
+void Head::loopCall(void)
 {
     if(robot == NULL ||    para == NULL) return;
 
@@ -61,7 +61,6 @@ void Head::call(void)
    // printf(" pitch = %f  yaw=%f  \n " , robot->measure_head_state.pitch * 57.2958f  ,  robot->measure_head_state.yaw * 57.2958f);
 }
 
-
 void Head::set_head_pose(HeadPose pose)
 {
     HeadPose  value;
@@ -82,7 +81,6 @@ void Head::set_head_pose(HeadPose pose)
     }
 }
 
-
 void Head::datatUpdate(void)
 {
     HeadPose  value;
@@ -90,15 +88,15 @@ void Head::datatUpdate(void)
     {
         value.pitch =Board::getInstance()->readPWMInterfaceValue((unsigned char)para->id.pitch);
         value.yaw =Board::getInstance()->readPWMInterfaceValue((unsigned char)para->id.yaw);
-        robot->measure_head_state.pitch  =  degree_to_radian * (float)(1500 - value.pitch)/11.111f - para->offset.pitch;
-        robot->measure_head_state.yaw =   degree_to_radian * (float)(value.yaw -1500)/11.111f  - para->offset.yaw;
+        robot->head.measure_head_state.pitch  =  degree_to_radian * (float)(1500 - value.pitch)/11.111f - para->offset.pitch;
+        robot->head.measure_head_state.yaw =   degree_to_radian * (float)(value.yaw -1500)/11.111f  - para->offset.yaw;
     }
     else if(para->type == HFDIGITAL)
     {
         value.pitch = servo_digital.axReadPosition((unsigned char)para->id.pitch) ;
         value.yaw = servo_digital.axReadPosition((unsigned char)para->id.yaw) ;
-        robot->measure_head_state.pitch =  degree_to_radian * (float)value.pitch * 300 / 1024 - para->offset.pitch;
-        robot->measure_head_state.yaw = degree_to_radian * (float)value.yaw * 300 / 1024 - para->offset.yaw;
+        robot->head.measure_head_state.pitch =  degree_to_radian * (float)value.pitch * 300 / 1024 - para->offset.pitch;
+        robot->head.measure_head_state.yaw = degree_to_radian * (float)value.yaw * 300 / 1024 - para->offset.yaw;
     }
 }
 

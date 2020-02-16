@@ -58,3 +58,14 @@ unsigned char Queue::fullCheck(void)
     else
         return 0;
 }
+
+unsigned int Queue::size(void)
+{
+    if(tail >= head ) return tail - head ;
+    else return QUEUE_SIZE - head + tail;
+}
+
+void Queue::clear(void)
+{
+    head = tail;
+}

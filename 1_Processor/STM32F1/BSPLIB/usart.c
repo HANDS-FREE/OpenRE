@@ -50,7 +50,7 @@ extern "C" {
 * by   mawenke    2015.12.1                           creat
 * by   LiuDong    2016.1.8       V1.57       update the name of function
 ***********************************************************************************************************************/
-void HF_USART_Init(uint8_t USART_Channel ,unsigned int BaudRate,unsigned char GPIO_AF)
+void HF_USART_Init(uint8_t USART_Channel , uint32_t BaudRate , uint8_t GPIO_AF)
 {
     //GPIO config
     USART_TypeDef* USARTx;
@@ -235,7 +235,7 @@ void HF_USART_Init(uint8_t USART_Channel ,unsigned int BaudRate,unsigned char GP
 * History:
 * by   mawenke   2015.12.1   creat
 ***********************************************************************************************************************/
-void HF_USART_Put_Char(uint8_t USART_Channel  , unsigned char Tx_Byte)
+void HF_USART_Put_Char(uint8_t USART_Channel  , uint8_t Tx_Byte)
 {
     USART_TypeDef* USARTx;
 
@@ -353,7 +353,7 @@ static char *itoa(int value, char *string, int radix)
 * History:
 * by   mawenke   2015.12.1   creat
 ***********************************************************************************************************************/
-void HF_USART_printf(USART_TypeDef* USARTx, uint8_t *Data,...)
+void HF_USART_printf(USART_TypeDef* USARTx, const char *Data,...)
 {
     const char *s;
     int d;

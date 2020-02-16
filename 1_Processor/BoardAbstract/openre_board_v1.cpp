@@ -55,7 +55,7 @@ Board::Board() : BoardAbstract()
     else if(PC_INTERFACE == 3){
         device_type[USART_PC] = 0x30;
     }
-    if(PC_INTERFACE == 4){
+    else if(PC_INTERFACE == 4){
         device_type[USART_PC] = 0x40;
     }
     else if(PC_INTERFACE == 5){
@@ -724,6 +724,11 @@ uint16_t Board::readPWMInterfaceValue(uint8_t channel_x)
 void Board::adcInit(void)
 {
     HF_ADC_Moder_Init(0X3C00 , 4 , 3.3f);  //ADC init
+}
+
+float Board::getADCInterfaceValue(uint8_t channel_x)
+{
+    return 0;
 }
 
 void Board::timerInit(void)

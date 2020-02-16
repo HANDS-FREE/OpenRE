@@ -268,7 +268,7 @@ void RTC_IRQHandler(void)
 *
 * History:
 **************************************************************************************************************************/
-unsigned char HF_RTC_Init(void)
+uint8_t HF_RTC_Init(void)
 {
     
     //check if is first configuration of RTC

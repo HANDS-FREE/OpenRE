@@ -3,7 +3,7 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif 
+#endif
 
 #include "stm32f4xx.h"
 
@@ -18,7 +18,6 @@ void HF_DAC_Set_Vol(uint8_t channel_x , uint16_t vol);
 
 #ifdef __cplusplus
 }
-#endif 
+#endif
 
 #endif // #ifndef ADC_DAC_H
-

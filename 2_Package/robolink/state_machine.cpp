@@ -11,10 +11,10 @@
 * mawenke       2015.10.1   V1.0           creat this file
 *
 * Description: This file defined hands_free_robot simple communications protocol
-*              please read Hands Free Link Manua.doc for detail
+*              please read HandsFree Robolink manua for detail
 ***********************************************************************************************************************/
 
-#include "hf_link_state_machine.h"
+#include <state_machine.h>
 
 unsigned char StateMachine::receiveStates(const unsigned char rx_data)
 {
@@ -51,8 +51,8 @@ unsigned char StateMachine::receiveStates(const unsigned char rx_data)
         }
         else
         {
-#if HF_LINK_NODE_MODEL == 1
-            printf("error , the sender_ID is not my friend \n");
+#if ROBOLINK_NODE_MODEL == 1
+            printf("master_warning : the sender_id is not my friend \n");
 #endif
             receive_state_ = WAITING_FF1;
         }
@@ -67,8 +67,8 @@ unsigned char StateMachine::receiveStates(const unsigned char rx_data)
         }
         else
         {
-#if HF_LINK_NODE_MODEL == 1
-            printf("error , the reciver_ID is not my_ID \n");
+#if ROBOLINK_NODE_MODEL == 1
+            printf("master_warning : the reciver_id is not my_id \n");
 #endif
             receive_state_ = WAITING_FF1;
         }
@@ -102,16 +102,16 @@ unsigned char StateMachine::receiveStates(const unsigned char rx_data)
         {
             receive_check_sum_=0;
             receive_state_ = WAITING_FF1;
-#if HF_LINK_NODE_MODEL == 1
-            printf("receive a message \n");
+#if ROBOLINK_NODE_MODEL == 1
+            printf("master_info : receive a message \n");
 #endif
             receive_message_count ++ ;
             return 1 ;
         }
         else
         {
-#if HF_LINK_NODE_MODEL == 1
-            printf("check sum error \n");
+#if ROBOLINK_NODE_MODEL == 1
+            printf("master_error : check sum error \n");
 #endif
             receive_state_ = WAITING_FF1;
         }
@@ -128,7 +128,7 @@ unsigned char StateMachine::receiveStates(const unsigned char rx_data)
 *
 * Scope:
 *
-* Description:  send a message to hf_link node
+* Description:  send a message to robolink node
 *
 * Arguments:
 *
@@ -138,7 +138,7 @@ unsigned char StateMachine::receiveStates(const unsigned char rx_data)
 *
 * History:
 ***********************************************************************************************************************/
-void StateMachine::sendMessage(const HFMessage* tx_message_)
+void StateMachine::sendMessage(const RobotMessage* tx_message_)
 {
 
     unsigned int check_sum_=0;
@@ -173,8 +173,8 @@ void StateMachine::sendMessage(const HFMessage* tx_message_)
 
     tx_buffer_length = 6 + tx_message_->length + 1;
 
-#if HF_LINK_NODE_MODEL==0
-    HFLinkSendBuffer(port_num , tx_buffer , tx_buffer_length);
+#if ROBOLINK_NODE_MODEL==0
+    RoboLinkSendBuffer(port_num , tx_buffer , tx_buffer_length);
 #endif
 
     send_message_count++;

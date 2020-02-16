@@ -14,6 +14,8 @@ public:
     void putData(unsigned char ch);
     unsigned char  emptyCheck(void);
     unsigned char  fullCheck(void);
+    unsigned int size(void);
+    void clear(void);
 private:
 };
 

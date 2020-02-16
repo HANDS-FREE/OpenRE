@@ -127,7 +127,7 @@ void HF_CAN_Init(uint8_t CAN_Channel , uint8_t GPIO_AF)
     CAN_FilterInitStructure.CAN_FilterNumber=0;
     CAN_FilterInitStructure.CAN_FilterMode=CAN_FilterMode_IdMask;
     CAN_FilterInitStructure.CAN_FilterScale=CAN_FilterScale_32bit;
-    CAN_FilterInitStructure.CAN_FilterIdHigh=0x0000;////32位ID
+    CAN_FilterInitStructure.CAN_FilterIdHigh=0x0000;  //32位ID
     CAN_FilterInitStructure.CAN_FilterIdLow=0x0000;
     CAN_FilterInitStructure.CAN_FilterMaskIdHigh=0x0000;
     CAN_FilterInitStructure.CAN_FilterMaskIdLow=0x0000;
@@ -135,9 +135,8 @@ void HF_CAN_Init(uint8_t CAN_Channel , uint8_t GPIO_AF)
     CAN_FilterInitStructure.CAN_FilterActivation=ENABLE;
     CAN_FilterInit(&CAN_FilterInitStructure);
 
-    CAN_ITConfig(CANx, CAN_IT_FMP1, ENABLE);  // interrupt enable
+    CAN_ITConfig(CANx, CAN_IT_FMP1, ENABLE);  //interrupt enable
     CAN_ITConfig(CANx, CAN_IT_TME, ENABLE);
-    
 }	
 
 /***********************************************************************************************************************
@@ -155,7 +154,7 @@ void HF_CAN_Init(uint8_t CAN_Channel , uint8_t GPIO_AF)
 *
 * History:
 ***********************************************************************************************************************/
-void HF_CANTX_Message(uint8_t CAN_Channel  , uint8_t Sender_ID  , uint8_t Receiver_ID , uint8_t *TxBuf , uint8_t Length)
+void HF_CANTX_Message(uint8_t CAN_Channel , uint8_t StdId  , uint8_t ExtId  ,  uint8_t *TxBuf , uint8_t Length)
 {   
     CAN_TypeDef *CANx;
     CanTxMsg TxMessageBuffer;
@@ -171,8 +170,8 @@ void HF_CANTX_Message(uint8_t CAN_Channel  , uint8_t Sender_ID  , uint8_t Receiv
         return;
     }
 
-    TxMessageBuffer.StdId=0x00;
-    TxMessageBuffer.ExtId=( (Sender_ID << 8) | Receiver_ID ); //Sender ID | Receiver ID
+    TxMessageBuffer.StdId=StdId;
+    TxMessageBuffer.ExtId=ExtId;
     TxMessageBuffer.RTR=CAN_RTR_DATA;
     TxMessageBuffer.IDE=CAN_ID_EXT;
     TxMessageBuffer.DLC=Length;

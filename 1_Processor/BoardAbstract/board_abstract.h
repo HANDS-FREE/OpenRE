@@ -11,9 +11,11 @@ extern "C" {
 
 #include "string.h"
 #include "queue.h"
+#include <math.h>
 
 //device type
-enum DeviceType{
+enum DeviceType : unsigned char
+{
     USART_DEBUG,
     USART_PC,
     USART_RADIO,
@@ -46,10 +48,11 @@ public:
     float cpu_usage;
     float battery_voltage;
     float system_time;   //system working time (unit:us), start after power-on
+    float power_remain;
     uint8_t date_year , date_month , date_day , date_week;
     uint8_t time_hour , time_min , time_sec , time_ampm;
     uint8_t system_init; //state of system: 0-->not initialize  1-->initialized
-    uint16_t cnt_1ms , cnt_2ms ,  cnt_5ms , cnt_10ms , cnt_20ms , cnt_50ms , cnt_500ms;
+    uint16_t cnt_1ms , cnt_2ms ,  cnt_5ms , cnt_10ms , cnt_20ms , cnt_50ms , cnt_100ms, cnt_500ms, cnt_1000ms, cnt_2000ms;
     uint32_t chipUniqueID[3];
     uint16_t flashSize;    //Unit: KB
     //the device id 's high 4 bit means which channel , low 4 bit means the channel mapping interface
@@ -80,10 +83,17 @@ public:
     virtual void pwmInterfaceInit(uint8_t channel_x , uint8_t mode) = 0;
     virtual void setPWMInterfaceValue(uint8_t channel_x , uint16_t pwm_value) = 0;
     virtual uint16_t readPWMInterfaceValue(uint8_t channel_x) = 0;
+    virtual float getADCInterfaceValue(uint8_t channel_x) = 0;
 
 public:
     void boardBasicInit(void);
     void boardBasicCall(void);
+    void softwareReset(void)
+    {
+        //feed_dog_enable = 0;
+        HF_IWDG_Init();
+        delay_ms(1000);
+    }
     float getClock(void)
     {
         return HF_Get_System_Time();
@@ -96,10 +106,26 @@ public:
     {
         usartDeviceWriteByte(USART_DEBUG , tx_byte);
     }
-    //model : 0 off , 1 on , 2 toggle , 3 -- 10hz , 4 -- 2hz , 5 -- 0.5hz , 6 -- 0hz
+    //model : 0 off , 1 on , 2 toggle , 3 -- 10hz , 4 -- 2hz , 5 -- 0.5hz
     void setBeepModel(uint8_t model){ beep_model = model;}
+    uint8_t getBeepModel(void){return beep_model;}
+    //tweet n * 10ms by timer
+    void setBeepTweet(uint16_t nx10ms){ beep_tweet_nx10ms = nx10ms;}
+    //operation: 0 off , 1 click , 2 double-click, 3 press
+    uint8_t getKeyState(uint8_t key_id)
+    {
+        if(key_id <= 5)
+        {
+            unsigned char state = key_state[key_id -1];
+            if(state == 1 || state == 2 || state == 3) //if click or double-click or long press
+            {
+                key_state[key_id -1] = 0;
+            }
 
-    uint8_t getKeyState(uint8_t key_id){ return key_state[key_id];}  //state=1 press
+            return state;
+        }
+        else return 0;
+    }
 
     /******device -- for usart device or interface***********************************************************************************/
     Queue* getUsartQueue(uint8_t channel);
@@ -137,14 +163,18 @@ public:
     uint8_t getByteLowFourBit(uint8_t data){ return data&0x0f;}
 
 protected:
+    unsigned char battery_series_;
     float battery_voltage_;
-    float battery_voltage_alarm_ ;
     float battery_proportion_ ;
+    float battery_voltage_windown_[10];
+    int battery_voltage_windown_cnt_;
+
     float cpu_temperature_;
     float cpu_temperature_alarm_;
 
     uint8_t beep_model;
-    uint16_t beep_alarm_cnt_ ;
+    int16_t beep_tweet_nx10ms;
+    uint8_t beep_toggle_cnt_ ;
 
     uint16_t board_call_5ms , board_call_20ms , board_call_1s , board_call_2s;
     uint8_t key_state[5];
@@ -160,12 +190,40 @@ private:
     virtual void keyStateRenew(void) = 0;  //100HZ
     virtual void beepInit(void) = 0;
 
+    float voltage_to_capacity(float voltage) //lithium cell capacity = 0~1 voltage = 3 ~ 4.2
+    {
+        if(voltage >=4.2) return 1;
+        if(voltage <=3 && voltage >=1.5) return 0;
+        if(voltage <=0.5 ) return -1;
+        float A = 1.0136017772655;
+        float B = -38.6694358844531;
+        float C = 3.84067378865132;
+        float capacity = A/(1+pow((voltage/C),B));
+        return capacity;
+    }
+    float capacity_to_voltage(float capacity) //lithium cell capacity = 0~1 voltage = 3 ~ 4.2
+    {
+        if(capacity <= 0.01) return 2.5;
+        if(capacity <= 0.05) return 3.5;
+        if(capacity >= 1) return 4.2;
+        float a = 3.40486290747938;
+        float b = 2.98683529266958;
+        float c = -8.49035538952372;
+        float d = 10.418086187689;
+        float e = -4.1298884360942;
+        float voltage = a +capacity*(b+capacity*(c+capacity*(d+capacity*e)));
+        return voltage;
+    }
+
     void beepStateRenew(void); //100HZ
     //Initialize the measurement systemm
     void systemClockInit(void);
     void updateLocalTime(void);
     float getCPUUsage(void);
     float getCPUTemperature(void);
+
+private:
+    uint8_t feed_dog_enable;
 };
 
 #endif // BOARD_ABSTRACT_H

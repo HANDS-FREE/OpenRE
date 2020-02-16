@@ -7,8 +7,8 @@ extern "C" {
 
 #include "stm32f10x.h"
 
-void HF_CAN_Init(uint8_t CAN_Channel , unsigned char GPIO_AF);     //  CAN1_TX_RX--PA12_PA11  CAN2_TX_RX--PB13_PA12
-void HF_CANTX_Message(uint8_t CAN_Channel , uint8_t Sender_ID  , uint8_t Receiver_ID , uint8_t *TxBuf , uint8_t Length);
+void HF_CAN_Init(uint8_t CAN_Channel , uint8_t GPIO_AF);
+void HF_CANTX_Message(uint8_t CAN_Channel , uint8_t StdId  , uint8_t ExtId  ,  uint8_t *TxBuf , uint8_t Length);
 
 #ifdef __cplusplus
 }

@@ -147,13 +147,13 @@ int HF_Hardware_I2C_Read_Buf(I2C_TypeDef *I2Cx , uint8_t Equipment_Address
 ***                                                                                                                  ***
 ***********************************************************************************************************************/
 
-I2C_Sensor_Type iic_sensor_type[3];
+I2C_Sensor_Type iic_sensor_type[6];
 
 static void iic_delay_us(uint8_t HF_I2Cx , uint8_t t)
 {
     if(iic_sensor_type[HF_I2Cx-1] == I2C_Sensor_Type_Typical_Fast) delay_us(t);
     else if (iic_sensor_type[HF_I2Cx-1] == I2C_Sensor_Type_Typical_Slow) delay_us(2*t);
-    else if(iic_sensor_type[HF_I2Cx-1] == I2C_Sensor_Type_KS103) delay_us(t);
+    else if(iic_sensor_type[HF_I2Cx-1] == I2C_Sensor_Type_KS103) delay_us(2*t);
     else delay_us(t);
 }
 
@@ -168,6 +168,15 @@ static void SDA_H(uint8_t HF_I2Cx)
     else if(HF_I2Cx == 3){
         IIC3_SDA=1;
     }
+    else if(HF_I2Cx == 4){
+        IIC4_SDA=1;
+    }
+    else if(HF_I2Cx == 5){
+        IIC5_SDA=1;
+    }
+    else if(HF_I2Cx == 6){
+        IIC6_SDA=1;
+    }
 }
 
 static void SDA_L(uint8_t HF_I2Cx)
@@ -180,6 +189,15 @@ static void SDA_L(uint8_t HF_I2Cx)
     }
     else if(HF_I2Cx == 3){
         IIC3_SDA=0;
+    }
+    else if(HF_I2Cx == 4){
+        IIC4_SDA=0;
+    }
+    else if(HF_I2Cx == 5){
+        IIC5_SDA=0;
+    }
+    else if(HF_I2Cx == 6){
+        IIC6_SDA=0;
     }
 }
 
@@ -194,6 +212,15 @@ static void SCL_H(uint8_t HF_I2Cx)
     else if(HF_I2Cx == 3){
         IIC3_SCL=1;
     }
+    else if(HF_I2Cx == 4){
+        IIC4_SCL=1;
+    }
+    else if(HF_I2Cx == 5){
+        IIC5_SCL=1;
+    }
+    else if(HF_I2Cx == 6){
+        IIC6_SCL=1;
+    }
 }
 
 static void SCL_L(uint8_t HF_I2Cx)
@@ -207,6 +234,15 @@ static void SCL_L(uint8_t HF_I2Cx)
     else if(HF_I2Cx == 3){
         IIC3_SCL=0;
     }
+    else if(HF_I2Cx == 4){
+        IIC4_SCL=0;
+    }
+    else if(HF_I2Cx == 5){
+        IIC5_SCL=0;
+    }
+    else if(HF_I2Cx == 6){
+        IIC6_SCL=0;
+    }
 }
 
 static uint8_t SDA_Read(uint8_t HF_I2Cx)
@@ -219,6 +255,15 @@ static uint8_t SDA_Read(uint8_t HF_I2Cx)
     }
     else if(HF_I2Cx == 3){
         return (uint8_t)IIC3_READ_SDA;
+    }
+    else if(HF_I2Cx == 4){
+        return (uint8_t)IIC4_READ_SDA;
+    }
+    else if(HF_I2Cx == 5){
+        return (uint8_t)IIC5_READ_SDA;
+    }
+    else if(HF_I2Cx == 6){
+        return (uint8_t)IIC6_READ_SDA;
     }
     return 0;
 }
@@ -234,6 +279,15 @@ static void SDA_IN(uint8_t HF_I2Cx)
     else if(HF_I2Cx == 3){
         IIC3_SDA_IN();
     }
+    else if(HF_I2Cx == 4){
+        IIC4_SDA_IN();
+    }
+    else if(HF_I2Cx == 5){
+        IIC5_SDA_IN();
+    }
+    else if(HF_I2Cx == 6){
+        IIC6_SDA_IN();
+    }
 }
 
 static void SDA_OUT(uint8_t HF_I2Cx)
@@ -246,6 +300,15 @@ static void SDA_OUT(uint8_t HF_I2Cx)
     }
     else if(HF_I2Cx == 3){
         IIC3_SDA_OUT();
+    }
+    else if(HF_I2Cx == 4){
+        IIC4_SDA_OUT();
+    }
+    else if(HF_I2Cx == 5){
+        IIC5_SDA_OUT();
+    }
+    else if(HF_I2Cx == 6){
+        IIC6_SDA_OUT();
     }
 }
 
@@ -487,6 +550,30 @@ void HF_Simulat_I2C_Init(uint8_t HF_I2Cx , I2C_Sensor_Type sensor_type)
         GPIO_Init(GPIO_I2C3_SCL	, &GPIO_InitStructure);
         GPIO_InitStructure.GPIO_Pin =  I2C3_PIN_SDA;
         GPIO_Init(GPIO_I2C3_SDA	, &GPIO_InitStructure);
+    }
+    else if(HF_I2Cx ==4){
+        iic_sensor_type[3] = sensor_type;
+        RCC_AHB1PeriphClockCmd(RCC_I2C4_SCL|RCC_I2C4_SDA , ENABLE );
+        GPIO_InitStructure.GPIO_Pin =  I2C4_PIN_SCL;
+        GPIO_Init(GPIO_I2C4_SCL	, &GPIO_InitStructure);
+        GPIO_InitStructure.GPIO_Pin =  I2C4_PIN_SDA;
+        GPIO_Init(GPIO_I2C4_SDA	, &GPIO_InitStructure);
+    }
+    else if(HF_I2Cx ==5){
+        iic_sensor_type[4] = sensor_type;
+        RCC_AHB1PeriphClockCmd(RCC_I2C5_SCL|RCC_I2C5_SDA , ENABLE );
+        GPIO_InitStructure.GPIO_Pin =  I2C5_PIN_SCL;
+        GPIO_Init(GPIO_I2C5_SCL	, &GPIO_InitStructure);
+        GPIO_InitStructure.GPIO_Pin =  I2C5_PIN_SDA;
+        GPIO_Init(GPIO_I2C5_SDA	, &GPIO_InitStructure);
+    }
+    else if(HF_I2Cx ==6){
+        iic_sensor_type[5] = sensor_type;
+        RCC_AHB1PeriphClockCmd(RCC_I2C6_SCL|RCC_I2C6_SDA , ENABLE );
+        GPIO_InitStructure.GPIO_Pin =  I2C6_PIN_SCL;
+        GPIO_Init(GPIO_I2C6_SCL	, &GPIO_InitStructure);
+        GPIO_InitStructure.GPIO_Pin =  I2C6_PIN_SDA;
+        GPIO_Init(GPIO_I2C6_SDA	, &GPIO_InitStructure);
     }
     SCL_H(HF_I2Cx);
     SDA_H(HF_I2Cx);

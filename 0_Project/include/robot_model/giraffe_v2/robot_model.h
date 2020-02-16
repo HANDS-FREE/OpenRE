@@ -23,25 +23,24 @@ public:
     RobotModel() : RobotParameters()
     {
 
-        strcpy(robot_name, "giraffe");
-        strcpy(robot_description ,  "this is a differential template parameters");
+        strcpy(robot_info.robot_name, "giraffe_v2");
+        strcpy(robot_info.robot_description ,  "this is a differential2 robot of handsfree");
 
-        motor_para.motor_id = 0;
         motor_para.driver_type = MotorDriver_PWM_AND_IOAB;
-        motor_para.encoder_num  = 20000;
+        motor_para.motor_enable_num = 2;
+        motor_para.simulation_model = 0;
+        motor_para.pid_t = 0.01;
+        motor_para.encoder_num  = 94000;
         motor_para.pwm_max = 5000;
         motor_para.pwm_dead_zone = 20;
         motor_para.speed_low_filter = 1;
         motor_para.protect_current = 200;  // 200A means disable current  protect
-        motor_para.pid =  {0.0f , 0.0f , 0.0f , 10.0f , 40.0f ,0.0f};
+        motor_para.pid =  {0.0f , 0.0f , 0.0f , 11.0f , 15.0f , 0.0f , 0.0f  , 0.0f , 0.0f};
 
         chassis_para.type = DIFFERENTIAL2;
         chassis_para.wheel_radius = 0.0625;
         chassis_para.body_radius = 0.176;
-        chassis_para.speed_low_filter = 0.4;
-        chassis_para.motor_pid_t = 0.01;
-        chassis_para.dof = 2;
-        chassis_para.simulation_model = 0;
+        chassis_para.speed_low_filter = 0.7;
         chassis_para.imu_fusion_enalbe = 0;
         chassis_para.control_enable = 1;
 
@@ -53,13 +52,11 @@ public:
         head_para.offset.yaw = 0 * degree_to_radian;
         head_para.id.pitch = 7;
         head_para.id.yaw = 8;
-        head_para.imu_fusion_enalbe = 0;
         head_para.control_enable = 1;
 
         arm_para.type = DOBOT2;
         arm_para.speed_low_filter = 1;
         arm_para.dof = 4;
-        arm_para.imu_fusion_enalbe = 0;
         arm_para.control_enable = 1;
     }
 };

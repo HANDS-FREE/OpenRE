@@ -42,7 +42,7 @@ extern "C" {
 * History:
 * by   mawenke    2015.12.1     creat
 ***********************************************************************************************************************/
-void HF_Encoder_Init(TIM_TypeDef* TIMx , unsigned char GPIO_AF)	      //Initialize encoder mode, input parameter TIM1 TIM2 TIM3
+void HF_Encoder_Init(TIM_TypeDef* TIMx , uint8_t GPIO_AF)	      //Initialize encoder mode, input parameter TIM1 TIM2 TIM3
 {
     TIM_ICInitTypeDef TIM_ICInitStructure;
     GPIO_InitTypeDef GPIO_InitStructure;

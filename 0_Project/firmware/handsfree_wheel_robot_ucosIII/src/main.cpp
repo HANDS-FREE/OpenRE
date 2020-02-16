@@ -73,11 +73,11 @@ int main(void)
     SBUS sbus_node(USART_SBUS);
     robot_control_p->setSBUSRemoteNodePointer(&sbus_node);
 
-    HFLink hf_link_radio_node(&robot , 0x11 , 0x01 , (unsigned char)USART_RADIO,115200);
-    robot_control_p->setHFLinkRadioNodePointer(&hf_link_radio_node);
+    RoboLink robolink_pc_node(&robot , 0x11 , 0x01 , (unsigned char)USART_PC);
+    robot_control_p->setRobolinkNodePointer(&robolink_pc_node);
 
-    HFLink hf_link_pc_node(&robot , 0x11 , 0x01 , (unsigned char)USART_PC);
-    robot_control_p->setHFLinkNodePointer(&hf_link_pc_node);
+    RoboLink robolink_radio_node(&robot , 0x11 , 0x01 , (unsigned char)USART_RADIO,115200);
+    robot_control_p->setRobolinkRadioNodePointer(&robolink_radio_node);
 
     printf("app start \r\n");
 
@@ -217,7 +217,7 @@ void bsp_task(void *p_arg)
         if(bsp_task_i >= 5)
         {
             bsp_task_i=0;
-            board->setLedState(0,2);
+            board->setLedState(2,2);
         }
         OSTimeDlyHMSM(0,0,0,10,OS_OPT_TIME_HMSM_STRICT,&err); //delay 10ms   100hz
     }
@@ -231,8 +231,8 @@ void motor_task(void *p_arg)
 
     while(1)
     {
-        robot_control_p->motor_top.motorTopCall(); //motor speed control
-        OSTimeDlyHMSM(0,0,0,20,OS_OPT_TIME_HMSM_STRICT,&err); //delay 20ms 50hz
+        robot_control_p->motor_top.loopCall(); //motor speed control
+        OSTimeDlyHMSM(0,0,0,5,OS_OPT_TIME_HMSM_STRICT,&err); //delay 5ms 200hz
     }
 }
 
@@ -246,7 +246,7 @@ void robot_wheel_task(void *p_arg)
 
     while(1)
     {
-        robot_control_p->call();
+        robot_control_p->loopCall();
 
         //       OS_CRITICAL_ENTER();
         //        printf("battery_voltage = %.4f  cpu_usage = %.4f cpu_temperature = %.4f\r\n",
@@ -281,10 +281,10 @@ void hf_link_task(void *p_arg)
 
     while(1)
     {
-        if(board->usartDeviceReadData(robot_control_p->hf_link_node_device)->emptyCheck() == 0){
-            robot_control_p->hf_link_node->byteAnalysisCall(
+        if(board->usartDeviceReadData(robot_control_p->robolink_node_device)->emptyCheck() == 0){
+            robot_control_p->robolink_node->byteAnalysisCall(
                         board->usartDeviceReadData(
-                            robot_control_p->hf_link_node_device)->getData() );
+                            robot_control_p->robolink_node_device)->getData() );
         }
         else {
             OSTimeDlyHMSM(0,0,0,5,OS_OPT_TIME_HMSM_STRICT,&err); //delay 5ms 200hz

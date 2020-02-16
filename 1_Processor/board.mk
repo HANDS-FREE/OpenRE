@@ -33,6 +33,22 @@ BOARD_ABSTRACT  += $(TOP_PATH)/1_Processor/BoardAbstract/openre_board_v2.cpp
 endif
 
 ################################################################################  
+# mallbot_board_v1:
+#   STM32F407VE ...
+#   
+#   
+################################################################################  
+
+ifeq "$(strip $(BOARD_TYPE))" "mallbot_board_v1"
+
+DDEFS           += -DCONTROL_UNIT_V2 -DSTM32F4XX 
+DDEFS           += -DHSE_VALUE=8000000 -DUSE_STDPERIPH_DRIVER 
+MCU             ?= cortex-m4  
+CPU_TYPE        ?= STM32F4
+BOARD_ABSTRACT  += $(TOP_PATH)/1_Processor/BoardAbstract/mallbot_board_v1.cpp
+
+endif
+################################################################################  
 # CONTROL_UNIT_V3:
 #   
 #   

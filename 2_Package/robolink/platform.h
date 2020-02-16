@@ -1,13 +1,13 @@
-#ifndef HF_LINK_PLATFORM_H
-#define HF_LINK_PLATFORM_H
+#ifndef ROBOLINK_PLATFORM_H
+#define ROBOLINK_PLATFORM_H
 
-#define HF_LINK_NODE_MODEL  0    //1:master(PC)  0 :slave(MCU)
+#define ROBOLINK_NODE_MODEL  0    //1:master(PC)  0 :slave(MCU)
 
-#if HF_LINK_NODE_MODEL==0
+#if ROBOLINK_NODE_MODEL == 0
 
 #include "board.h"
 
-inline unsigned char HFLinkSendBuffer(unsigned char port_num , unsigned char* buffer, unsigned short int size)
+inline unsigned char RoboLinkSendBuffer(unsigned char port_num , unsigned char* buffer, unsigned short int size)
 {
 
     while(size--)  Board::getInstance()->usartDeviceWriteByte((DeviceType)port_num , *buffer++);
@@ -30,9 +30,10 @@ inline unsigned char HFLinkSendBuffer(unsigned char port_num , unsigned char* bu
     //        return 1;
     //    }
     //    return 0;
+
 }
 
 #endif
 
-#endif // HF_LINK_PLATFORM_H
+#endif // ROBOLINK_PLATFORM_H
 
