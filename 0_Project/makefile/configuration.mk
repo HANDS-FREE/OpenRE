@@ -19,45 +19,45 @@ ifeq "$(strip $(BOARD_TYPE))" "openre_board_v1"
 DEBUG_PRINTF_INTERFACE ?= usart_interface_1
 #### Tips: this means to map the usart_interface_1 on the board to an debug printf interface
 
-####select the usartxfor pc communications (hf_link) : usart_interface_x,usb_slave 
+####select the usartxfor pc communications (robolink) : usart_interface_x,usb_slave 
 PC_INTERFACE ?= usart_interface_1
-####select the usartx for remote control (hf_link) : usart_interface_x  
+####select the usartx for remote control (robolink) : usart_interface_x  
 RADIO_INTERFACE ?= usart_interface_4
 endif
 
 ifeq "$(strip $(BOARD_TYPE))" "openre_board_v2"
 ####select the usartx for board debug info printf : usart_interface_x,usb_slave  
 DEBUG_PRINTF_INTERFACE ?= usart_interface_1
-####select the usartxfor pc communications (hf_link) : usart_interface_x,usb_slave 
+####select the usartxfor pc communications (robolink) : usart_interface_x,usb_slave 
 PC_INTERFACE ?= usart_interface_1
-####select the usartx for remote control (hf_link) : usart_interface_x  
+####select the usartx for remote control (robolink) : usart_interface_x  
 RADIO_INTERFACE ?= usart_interface_4
 endif
 
 ifeq "$(strip $(BOARD_TYPE))" "mallbot_board_v1"
 ####select the usartx for board debug info printf : usart_interface_x,usb_slave  
 DEBUG_PRINTF_INTERFACE ?= usart_interface_1
-####select the usartxfor pc communications (hf_link) : usart_interface_x,usb_slave 
+####select the usartxfor pc communications (robolink) : usart_interface_x,usb_slave 
 PC_INTERFACE ?= usart_interface_1
-####select the usartx for remote control (hf_link) : usart_interface_x  
+####select the usartx for remote control (robolink) : usart_interface_x  
 RADIO_INTERFACE ?= usart_interface_4
 endif
 
 ifeq "$(strip $(BOARD_TYPE))" "openre_board_mini"
 ####select the usartx for board debug info printf : usart_interface_x,usb_slave  
 DEBUG_PRINTF_INTERFACE ?= usart_interface_4
-####select the usartxfor pc communications (hf_link) : usart_interface_x,usb_slave 
+####select the usartxfor pc communications (robolink) : usart_interface_x,usb_slave 
 PC_INTERFACE ?= usart_interface_4
-####select the usartx for remote control (hf_link) : usart_interface_x  
+####select the usartx for remote control (robolink) : usart_interface_x  
 RADIO_INTERFACE ?= usart_interface_5
 endif
 
 ifeq "$(strip $(BOARD_TYPE))" "alientek_mini"
 ####select the usartx for board debug info printf : usart_interface_x,usb_slave  
 DEBUG_PRINTF_INTERFACE ?= usart_interface_4
-####select the usartxfor pc communications (hf_link) : usart_interface_x,usb_slave 
+####select the usartxfor pc communications (robolink) : usart_interface_x,usb_slave 
 PC_INTERFACE ?= usart_interface_4
-####select the usartx for remote control (hf_link) : usart_interface_x  
+####select the usartx for remote control (robolink) : usart_interface_x  
 RADIO_INTERFACE ?= usart_interface_2
 endif
 

@@ -49,11 +49,11 @@ OS_TCB  IMU_TASK_TCB;
 CPU_STK IMU_TASK_STK[IMU_TASK_STK_SIZE];
 void imu_task(void *p_arg);
 
-#define HF_LINK_TASK_PRIO		8
-#define HF_LINK_TASK_STK_SIZE 		256
-OS_TCB  HF_LINK_TASK_TCB;
-CPU_STK HF_LINK_TASK_STK[HF_LINK_TASK_STK_SIZE];
-void hf_link_task(void *p_arg);
+#define ROBOLINK_TASK_PRIO		8
+#define ROBOLINK_TASK_STK_SIZE 		256
+OS_TCB  ROBOLINK_TASK_TCB;
+CPU_STK ROBOLINK_TASK_STK[ROBOLINK_TASK_STK_SIZE];
+void robolink_task(void *p_arg);
 
 
 int main(void)
@@ -184,14 +184,14 @@ void start_task(void *p_arg)
             (OS_OPT      )OS_OPT_TASK_STK_CHK|OS_OPT_TASK_STK_CLR,
             (OS_ERR 	* )&err);
 
-    OSTaskCreate((OS_TCB 	* )&HF_LINK_TASK_TCB,
-                 (CPU_CHAR	* )"hf_link task",
-                 (OS_TASK_PTR )hf_link_task,
+    OSTaskCreate((OS_TCB 	* )&ROBOLINK_TASK_TCB,
+                 (CPU_CHAR	* )"robolink task",
+                 (OS_TASK_PTR )robolink_task,
                  (void		* )0,
-                 (OS_PRIO	  )HF_LINK_TASK_PRIO,
-                 (CPU_STK   * )&HF_LINK_TASK_STK[0],
-            (CPU_STK_SIZE)HF_LINK_TASK_STK_SIZE/10,
-            (CPU_STK_SIZE)HF_LINK_TASK_STK_SIZE,
+                 (OS_PRIO	  )ROBOLINK_TASK_PRIO,
+                 (CPU_STK   * )&ROBOLINK_TASK_STK[0],
+            (CPU_STK_SIZE)ROBOLINK_TASK_STK_SIZE/10,
+            (CPU_STK_SIZE)ROBOLINK_TASK_STK_SIZE,
             (OS_MSG_QTY  )0,
             (OS_TICK	  )0,
             (void   	* )0,
@@ -203,6 +203,7 @@ void start_task(void *p_arg)
     OS_CRITICAL_EXIT();
 }
 
+//100HZ
 void bsp_task(void *p_arg)
 {
     OS_ERR err;
@@ -219,10 +220,11 @@ void bsp_task(void *p_arg)
             bsp_task_i=0;
             board->setLedState(1,2);
         }
-        OSTimeDlyHMSM(0,0,0,10,OS_OPT_TIME_HMSM_STRICT,&err); //delay 10ms   100hz
+        OSTimeDlyHMSM(0,0,0,10,OS_OPT_TIME_HMSM_STRICT,&err); //delay 10ms 100hz
     }
 }
 
+//200HZ
 void motor_task(void *p_arg)
 {
     OS_ERR err;
@@ -236,6 +238,7 @@ void motor_task(void *p_arg)
     }
 }
 
+//20HZ
 void robot_wheel_task(void *p_arg)
 {
 
@@ -258,6 +261,7 @@ void robot_wheel_task(void *p_arg)
     }
 }
 
+//1000HZ
 void imu_task(void *p_arg)
 {
     OS_ERR err;
@@ -272,7 +276,8 @@ void imu_task(void *p_arg)
     }
 }
 
-void hf_link_task(void *p_arg)
+//100HZ
+void robolink_task(void *p_arg)
 {
     OS_ERR err;
     p_arg = p_arg;
@@ -287,7 +292,7 @@ void hf_link_task(void *p_arg)
                             robot_control_p->robolink_node_device)->getData() );
         }
         else {
-            OSTimeDlyHMSM(0,0,0,5,OS_OPT_TIME_HMSM_STRICT,&err); //delay 5ms 200hz
+            OSTimeDlyHMSM(0,0,0,5,OS_OPT_TIME_HMSM_STRICT,&err); //delay 5ms 100hz
         }
     }
 }
