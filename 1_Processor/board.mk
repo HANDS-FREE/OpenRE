@@ -1,5 +1,5 @@
 ################################################################################  
-# CONTROL_UNIT_V1:
+# openre_board_v1:
 #   STM32F407VG ...
 #  
 # 
@@ -7,7 +7,7 @@
 
 ifeq "$(strip $(BOARD_TYPE))" "openre_board_v1"
 
-DDEFS           += -DCONTROL_UNIT_V1 -DSTM32F4XX 
+DDEFS           += -DOPENRE_BOARD_V1 -DSTM32F4XX 
 DDEFS           += -DHSE_VALUE=25000000 -DUSE_STDPERIPH_DRIVER 
 MCU             ?= cortex-m4  
 CPU_TYPE        ?= STM32F4
@@ -16,7 +16,7 @@ BOARD_ABSTRACT  ?= $(TOP_PATH)/1_Processor/BoardAbstract/openre_board_v1.cpp
 endif
 
 ################################################################################  
-# CONTROL_UNIT_V2:
+# openre_board_v2:
 #   STM32F407VE ...
 #   
 #   
@@ -24,7 +24,7 @@ endif
 
 ifeq "$(strip $(BOARD_TYPE))" "openre_board_v2"
 
-DDEFS           += -DCONTROL_UNIT_V2 -DSTM32F4XX 
+DDEFS           += -DOPENRE_BOARD_V2 -DSTM32F4XX 
 DDEFS           += -DHSE_VALUE=8000000 -DUSE_STDPERIPH_DRIVER 
 MCU             ?= cortex-m4  
 CPU_TYPE        ?= STM32F4
@@ -41,22 +41,23 @@ endif
 
 ifeq "$(strip $(BOARD_TYPE))" "mallbot_board_v1"
 
-DDEFS           += -DCONTROL_UNIT_V2 -DSTM32F4XX 
+DDEFS           += -DMALLBOT_BOARD_V1 -DSTM32F4XX 
 DDEFS           += -DHSE_VALUE=8000000 -DUSE_STDPERIPH_DRIVER 
 MCU             ?= cortex-m4  
 CPU_TYPE        ?= STM32F4
 BOARD_ABSTRACT  += $(TOP_PATH)/1_Processor/BoardAbstract/mallbot_board_v1.cpp
 
 endif
+
 ################################################################################  
-# CONTROL_UNIT_V3:
+# openre_board_mini:
 #   
 #   
 #   
 ################################################################################  
 ifeq "$(strip $(BOARD_TYPE))" "openre_board_mini"
 
-DDEFS           += -DCONTROL_UNIT_MINI -DSTM32F10X 
+DDEFS           += -DOPENRE_BOARD_MINI -DSTM32F10X 
 DDEFS           += -DHSE_VALUE=8000000 -DUSE_STDPERIPH_DRIVER 
 MCU             ?= cortex-m3 
 CPU_TYPE        ?= STM32F1
@@ -64,6 +65,21 @@ BOARD_ABSTRACT  += $(TOP_PATH)/1_Processor/BoardAbstract/openre_board_mini.cpp
 
 endif
 
+################################################################################  
+# alientek_mini:
+#   
+#   
+#   
+################################################################################  
+ifeq "$(strip $(BOARD_TYPE))" "alientek_mini"
+
+DDEFS           += -DALIENTEK_MINI -DSTM32F10X 
+DDEFS           += -DHSE_VALUE=8000000 -DUSE_STDPERIPH_DRIVER 
+MCU             ?= cortex-m3 
+CPU_TYPE        ?= STM32F1
+BOARD_ABSTRACT  += $(TOP_PATH)/1_Processor/BoardAbstract/openre_board_mini.cpp
+
+endif
 
 ################################################################################  
 # :

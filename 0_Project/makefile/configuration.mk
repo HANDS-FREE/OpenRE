@@ -34,6 +34,15 @@ PC_INTERFACE ?= usart_interface_1
 RADIO_INTERFACE ?= usart_interface_4
 endif
 
+ifeq "$(strip $(BOARD_TYPE))" "mallbot_board_v1"
+####select the usartx for board debug info printf : usart_interface_x,usb_slave  
+DEBUG_PRINTF_INTERFACE ?= usart_interface_1
+####select the usartxfor pc communications (hf_link) : usart_interface_x,usb_slave 
+PC_INTERFACE ?= usart_interface_1
+####select the usartx for remote control (hf_link) : usart_interface_x  
+RADIO_INTERFACE ?= usart_interface_4
+endif
+
 ifeq "$(strip $(BOARD_TYPE))" "openre_board_mini"
 ####select the usartx for board debug info printf : usart_interface_x,usb_slave  
 DEBUG_PRINTF_INTERFACE ?= usart_interface_4
@@ -43,13 +52,13 @@ PC_INTERFACE ?= usart_interface_4
 RADIO_INTERFACE ?= usart_interface_5
 endif
 
-ifeq "$(strip $(BOARD_TYPE))" "mallbot_board_v1"
+ifeq "$(strip $(BOARD_TYPE))" "alientek_mini"
 ####select the usartx for board debug info printf : usart_interface_x,usb_slave  
-DEBUG_PRINTF_INTERFACE ?= usart_interface_1
+DEBUG_PRINTF_INTERFACE ?= usart_interface_4
 ####select the usartxfor pc communications (hf_link) : usart_interface_x,usb_slave 
-PC_INTERFACE ?= usart_interface_1
+PC_INTERFACE ?= usart_interface_4
 ####select the usartx for remote control (hf_link) : usart_interface_x  
-RADIO_INTERFACE ?= usart_interface_4
+RADIO_INTERFACE ?= usart_interface_5
 endif
 
 ####select the motor interface of the openre_board_board for robot motor id : motor1, motor2, motor3, motor4  
