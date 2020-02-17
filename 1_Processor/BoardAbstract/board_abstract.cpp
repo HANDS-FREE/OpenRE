@@ -12,6 +12,7 @@ BoardAbstract::BoardAbstract()
     feed_dog_enable = 1;
 
     battery_series_ = 3;
+    battery_voltage_alarm_ = 10.50 ;
     power_remain = battery_voltage_ = battery_voltage_windown_cnt_ =  0;
     battery_voltage_windown_[0] = battery_voltage_windown_[1] = battery_voltage_windown_[2] = battery_voltage_windown_[3] = battery_voltage_windown_[4] =
             battery_voltage_windown_[5] = battery_voltage_windown_[6] = battery_voltage_windown_[7] = battery_voltage_windown_[8] = battery_voltage_windown_[9] = 0;

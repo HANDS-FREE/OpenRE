@@ -165,6 +165,7 @@ public:
 protected:
     unsigned char battery_series_;
     float battery_voltage_;
+    float battery_voltage_alarm_ ;
     float battery_proportion_ ;
     float battery_voltage_windown_[10];
     int battery_voltage_windown_cnt_;

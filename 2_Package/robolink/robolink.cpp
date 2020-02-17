@@ -23,7 +23,7 @@ unsigned char RoboLink::byteAnalysisCall(const unsigned char rx_byte)
     if( receiveStates(rx_byte) )
     {
         //receive a new message
-        unsigned char package_update = packageAnalysis();
+        unsigned char package_update=packageAnalysis();
         if(package_update == 1) analysis_package_count++;
         return package_update;
     }
@@ -53,7 +53,7 @@ unsigned char RoboLink::packageAnalysis(void)
         return 0;
     }
 
-    command_state_ = (Command)rx_message.data[0];
+    command_state_=(Command)rx_message.data[0];
 
     if (robolink_node_model == 0)  //the slave need to check the SHAKING_HANDS"s state
     {
@@ -197,7 +197,7 @@ unsigned char RoboLink::packageAnalysis(void)
         break;
 
     default :
-        analysis_state = 0;
+        analysis_state=0;
         break;
 
     }
@@ -241,7 +241,7 @@ unsigned char RoboLink::masterSendCommand(const Command command_state)
     }
     if(command_state >= LAST_COMMAND_FLAG)  return 0; //error
 
-    receive_package_renew[(unsigned char)command_state] = 0 ;
+    receive_package_renew[(unsigned char)command_state]=0;
 
     switch (command_state)
     {
@@ -395,7 +395,7 @@ unsigned char RoboLink::masterSendCommand(const Command command_state)
 *
 * History:
 ***********************************************************************************************************************/
-unsigned char RoboLink::readCommandAnalysis(Command command_state , unsigned char *p ,  unsigned short int len)
+unsigned char RoboLink::readCommandAnalysis(const Command command_state , unsigned char *p , const unsigned short int len)
 {
     if (robolink_node_model == 1)
     {   // master, means the slave feedback a package to master , and the master save this package
@@ -405,45 +405,47 @@ unsigned char RoboLink::readCommandAnalysis(Command command_state , unsigned cha
             printf("master_error : expect len is %d,measure len is %d , command is %d \n" , len , rx_message.length -1 , command_state);
             return 0;
         }
-        //printf("master_info : received a read type command data , command is %d" , command_state);
+        printf("master_info : received a read type command data , command is %d \n" , command_state);
         memcpy(p , &rx_message.data[1] , len);
-        receive_package_renew[(unsigned char)command_state] = 1 ;
+        receive_package_renew[(unsigned char)command_state]=1;
     }
     else if(robolink_node_model == 0)
     {   //slave , means the master pub a read command to slave ,and the slave feedback the a specific info to him
         //printf("slave_info : received a read type command , command is %d" , command_state);
         sendStruct(command_state , p , len);
-        receive_package_renew[(unsigned char)command_state] = 1 ;
+        receive_package_renew[(unsigned char)command_state]=1;
     }
     return 1;
 }
 
-unsigned char RoboLink::setCommandAnalysis(Command command_state , unsigned char *p ,  unsigned short int len)
+unsigned char RoboLink::setCommandAnalysis(const Command command_state , unsigned char *p , const unsigned short int len)
 {
     if (robolink_node_model == 1)
-    {   //master , the slave can set the master's data ,so this code means received the slave's ack
+    {   //master , the slave can not set the master's data ,so this code means received the slave's ack
         if(command_state == SHAKING_HANDS)
         {
-            shaking_hands_state = 1;   //wait the master send SHAKING_HANDS
-            printf("master_info : received a SHAKING_HANDS request and the slave is waiting master send SHAKING_HANDS commmand ");
+            shaking_hands_state=1;   //wait the master send SHAKING_HANDS
+            printf("master_info : received a SHAKING_HANDS request and the slave is waiting master send SHAKING_HANDS commmand \n");
         }
         else
         {
-           //printf("master_info : received a set type command ack , command is %d" , command_state);
+            printf("master_info : received a set type command ack , command is %d \n" , command_state);
         }
-        receive_package_renew[(unsigned char)command_state] = 1 ;
+        receive_package_renew[(unsigned char)command_state]=1;
     }
     else if(robolink_node_model == 0)
     {   //slave  , means the master pub a set command to slave ,and the slave save this package then feed back a ack
-        receive_package_renew[(unsigned char)command_state] = 1 ;   //update receive flag , and wait the cpu to deal
         if(len > 0)
         {
-            if( (rx_message.length-1) != len)
+            if((rx_message.length-1) != len)
             {
                 printf("slave_error: can not read the message from master , the length is not mathcing \n");
                 printf("slave_error: expect len is %d , measure len is %d , command is %d \n" , len , rx_message.length -1 , command_state);
+                return 0;
             }
-            else memcpy(p , &rx_message.data[1] , len);
+            //printf("slave_info : received a set type command data , command is %d \n" , command_state);
+            memcpy(p , &rx_message.data[1] , len);
+            receive_package_renew[(unsigned char)command_state]=1;   //update receive flag , and wait the cpu to deal
         }
         if(command_state == SHAKING_HANDS) shaking_hands_state=1;   //SHAKING_HANDS not need ack to master
         else sendStruct(command_state  , NULL , 0); //returns a ack to master , i receive your set package
@@ -473,12 +475,12 @@ unsigned char RoboLink::setCommandAnalysis(Command command_state , unsigned char
 *
 * History:
 ***********************************************************************************************************************/
-void RoboLink::sendStruct(const Command command_type , unsigned char *p ,  unsigned short int len)
+void RoboLink::sendStruct(const Command command_type , unsigned char *p , const unsigned short int len)
 {
-    tx_message.sender_id = my_id;
-    tx_message.receiver_id = friend_id;
+    tx_message.sender_id=my_id;
+    tx_message.receiver_id=friend_id;
     tx_message.length=len+1;
-    tx_message.data[0] = (unsigned char)command_type;
+    tx_message.data[0]=(unsigned char)command_type;
     if(len > 0)
     {
         memcpy(&tx_message.data[1] , p , len);

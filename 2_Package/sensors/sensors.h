@@ -1,6 +1,8 @@
 #ifndef SENSORS
 #define SENSORS
 
+#include "robot_abstract.h"
+
 class Sensors
 {
 public:
