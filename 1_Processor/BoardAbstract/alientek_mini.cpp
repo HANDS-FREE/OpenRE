@@ -307,6 +307,10 @@ void Board::motorEnable(uint8_t mode , uint8_t motor_id)
 
 }
 
+void Board::motorDisable(uint8_t mode , uint8_t motor_id)
+{
+
+}
 
 /***********************************************************************************************************************
 * Function:

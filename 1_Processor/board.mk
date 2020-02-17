@@ -77,7 +77,7 @@ DDEFS           += -DALIENTEK_MINI -DSTM32F10X
 DDEFS           += -DHSE_VALUE=8000000 -DUSE_STDPERIPH_DRIVER 
 MCU             ?= cortex-m3 
 CPU_TYPE        ?= STM32F1
-BOARD_ABSTRACT  += $(TOP_PATH)/1_Processor/BoardAbstract/openre_board_mini.cpp
+BOARD_ABSTRACT  += $(TOP_PATH)/1_Processor/BoardAbstract/alientek_mini.cpp
 
 endif
 
