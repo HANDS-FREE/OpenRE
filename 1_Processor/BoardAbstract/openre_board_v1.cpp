@@ -204,15 +204,31 @@ void Board::ledInit(void)
     RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOG,ENABLE);
     GPIO_InitStruct.GPIO_Pin = GPIO_Pin_15 ;
     GPIO_Init(GPIOG , &GPIO_InitStruct);
+
+    setLedState(0,0); //set all led
 }
 
 void Board::setLedState(uint8_t led_id, uint8_t operation){
-    if ( led_id == 0){
+    if(led_id == 0){
+        if(operation == 0)
+        {
+            setLedState(1,0);
+        }
+        else if(operation == 1)
+        {
+            setLedState(1,1);
+        }
+        else if(operation == 2)
+        {
+            setLedState(1,2);
+        }
+    }
+    if ( led_id == 1){
         if(operation == 0){ GPIO_SetBits(GPIOG , GPIO_Pin_15);}
         else if(operation == 1) { GPIO_ResetBits(GPIOG , GPIO_Pin_15);}
         else if(operation == 2) { GPIO_ToggleBits(GPIOG , GPIO_Pin_15);}
     }
-    else if(led_id == 1){
+    else if(led_id == 2){
 
     }
 }

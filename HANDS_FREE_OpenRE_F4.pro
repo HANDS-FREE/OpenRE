@@ -248,6 +248,7 @@ SOURCES += 0_Project/examples/handsfree_simple_app/src/main.cpp \
                 1_Processor/BoardAbstract/openre_board_v1.cpp \
                 1_Processor/BoardAbstract/openre_board_v2.cpp \
                 1_Processor/BoardAbstract/openre_board_mini.cpp \
+                1_Processor/BoardAbstract/alientek_mini.cpp \
                 1_Processor/STM32F4/BSPLIB/adc_dac.c \
                 1_Processor/STM32F4/BSPLIB/can.c \
                 1_Processor/STM32F4/BSPLIB/delay.c \

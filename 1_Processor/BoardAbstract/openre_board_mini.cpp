@@ -206,23 +206,37 @@ void Board::ledInit(void)
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC , ENABLE);
     GPIO_InitStruct.GPIO_Pin = GPIO_Pin_13 | GPIO_Pin_14;
     GPIO_Init(GPIOC , &GPIO_InitStruct);
+
+    setLedState(0,0); //set all led
 }
 
 void Board::setLedState(uint8_t led_id, uint8_t operation)
 {
-    if ( led_id == 0){
+    if(led_id == 0){
+        if(operation == 0)
+        {
+            setLedState(1,0);setLedState(2,0);setLedState(3,0);
+        }
+        else if(operation == 1)
+        {
+            setLedState(1,1);setLedState(2,1);setLedState(3,1);
+        }
+        else if(operation == 2)
+        {
+            setLedState(1,2);setLedState(2,2);setLedState(3,2);
+        }
+    }
+    if ( led_id == 1){
         if(operation == 0) { GPIO_SetBits(GPIOA , GPIO_Pin_2);}
         else if(operation == 1) { GPIO_ResetBits(GPIOA , GPIO_Pin_2);}
         else if(operation == 2){GPIO_ToggleBits(GPIOA , GPIO_Pin_2);}
     }
-
-    if ( led_id == 1){
+    else if ( led_id == 2){
         if(operation == 0) { GPIO_SetBits(GPIOC , GPIO_Pin_13);}
         else if(operation == 1) { GPIO_ResetBits(GPIOC , GPIO_Pin_13);}
         else if(operation == 2) { GPIO_ToggleBits(GPIOC , GPIO_Pin_13);}
     }
-
-    if ( led_id == 2){
+    else if ( led_id == 3){
         if(operation == 0) { GPIO_SetBits(GPIOC , GPIO_Pin_14);}
         if(operation == 1) { GPIO_ResetBits(GPIOC , GPIO_Pin_14);}
         else if(operation == 2) { GPIO_ToggleBits(GPIOC , GPIO_Pin_14);}

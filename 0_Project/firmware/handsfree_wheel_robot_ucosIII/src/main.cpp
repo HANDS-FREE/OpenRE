@@ -217,7 +217,7 @@ void bsp_task(void *p_arg)
         if(bsp_task_i >= 5)
         {
             bsp_task_i=0;
-            board->setLedState(2,2);
+            board->setLedState(1,2);
         }
         OSTimeDlyHMSM(0,0,0,10,OS_OPT_TIME_HMSM_STRICT,&err); //delay 10ms   100hz
     }

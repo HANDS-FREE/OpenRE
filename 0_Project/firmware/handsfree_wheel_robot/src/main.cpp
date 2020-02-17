@@ -93,7 +93,7 @@ int main(void)
         {
             board->cnt_50ms = 0 ;
             robot_control_p->loopCall();
-            board->setLedState(0,2);
+            board->setLedState(1,2);
         }
         if ( board->cnt_100ms >= 100 )    // 10hz
         {

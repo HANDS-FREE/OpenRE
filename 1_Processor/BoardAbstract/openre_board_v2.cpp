@@ -208,29 +208,40 @@ void Board::ledInit(void)
     GPIO_InitStruct.GPIO_Pin = GPIO_Pin_13;
     GPIO_Init(GPIOC , &GPIO_InitStruct);
 
-    setLedState(0,0);
-    setLedState(1,0);
-    setLedState(2,0);
-    setLedState(3,0);
+    setLedState(0,0); //set all led
 }
 
 void Board::setLedState(uint8_t led_id, uint8_t operation){
-    if ( led_id == 0){
+    if(led_id == 0){
+        if(operation == 0)
+        {
+            setLedState(1,0);setLedState(2,0);setLedState(3,0);setLedState(4,0);
+        }
+        else if(operation == 1)
+        {
+            setLedState(1,1);setLedState(2,1);setLedState(3,1);setLedState(4,1);
+        }
+        else if(operation == 2)
+        {
+            setLedState(1,2);setLedState(2,2);setLedState(3,2);setLedState(4,2);
+        }
+    }
+    if ( led_id == 1){
         if(operation == 0){ GPIO_SetBits(GPIOE , GPIO_Pin_2);}
         else if(operation == 1) { GPIO_ResetBits(GPIOE , GPIO_Pin_2);}
         else if(operation == 2) { GPIO_ToggleBits(GPIOE , GPIO_Pin_2);}
     }
-    else if(led_id == 1){
+    else if(led_id == 2){
         if(operation == 0){ GPIO_SetBits(GPIOE , GPIO_Pin_3);}
         else if(operation == 1) { GPIO_ResetBits(GPIOE , GPIO_Pin_3);}
         else if(operation == 2) { GPIO_ToggleBits(GPIOE , GPIO_Pin_3);}
     }
-    else if(led_id == 2){
+    else if(led_id == 3){
         if(operation == 0){ GPIO_SetBits(GPIOC , GPIO_Pin_13);}
         else if(operation == 1) { GPIO_ResetBits(GPIOC , GPIO_Pin_13);}
         else if(operation == 2) { GPIO_ToggleBits(GPIOC , GPIO_Pin_13);}
     }
-    else if(led_id == 3){
+    else if(led_id == 4){
         if(operation == 0){ GPIO_SetBits(GPIOE , GPIO_Pin_0);}
         else if(operation == 1) { GPIO_ResetBits(GPIOE , GPIO_Pin_0);}
         else if(operation == 2) { GPIO_ToggleBits(GPIOE , GPIO_Pin_0);}
