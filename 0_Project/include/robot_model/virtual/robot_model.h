@@ -43,6 +43,7 @@ public:
         chassis_para.speed_low_filter = 1;
         chassis_para.imu_fusion_enalbe = 0;
         chassis_para.control_enable = 1;
+        chassis_para.max_speed_limit.x=2;
 
         head_para.type = HFANALOG;
         head_para.speed_low_filter = 0.3;
