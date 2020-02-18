@@ -29,11 +29,17 @@ void USART1_IRQHandler(void)
 #endif
     if(USART1->SR&(1<<5))
     {
-        data=USART1->DR;
+        USART_ClearITPendingBit(USART1, USART_IT_RXNE);   // clear interrupt flag
+        data = USART1->DR;
         if( Board::getInstance()->getUsartQueue(1)->fullCheck() ==0 ){
             Board::getInstance()->getUsartQueue(1)->putData(data);
         }
-        USART_ClearITPendingBit(USART1, USART_IT_RXNE);   // clear interrupt flag
+
+    }
+    if(USART_GetFlagStatus(USART1, USART_FLAG_ORE) != RESET)
+    {
+        USART_ClearFlag(USART1,USART_FLAG_ORE);
+        USART_ReceiveData(USART1); // need this line
     }
 #if SYSTEM_SUPPORT_OS == 1
     OSIntExit();
@@ -48,11 +54,16 @@ void USART2_IRQHandler(void)
 #endif
     if(USART_GetITStatus(USART2, USART_IT_RXNE) != RESET)
     {
+        USART_ClearITPendingBit(USART2, USART_IT_RXNE);  // clear interrupt flag
         data = USART_ReceiveData(USART2);
         if( Board::getInstance()->getUsartQueue(2)->fullCheck() ==0 ){
             Board::getInstance()->getUsartQueue(2)->putData(data);
         }
-        USART_ClearITPendingBit(USART2, USART_IT_RXNE);  // clear interrupt flag
+    }
+    if(USART_GetFlagStatus(USART2, USART_FLAG_ORE) != RESET)
+    {
+        USART_ClearFlag(USART2,USART_FLAG_ORE);
+        USART_ReceiveData(USART2); // need this line
     }
 #if SYSTEM_SUPPORT_OS == 1
     OSIntExit();
@@ -67,11 +78,16 @@ void USART3_IRQHandler(void)
 #endif
     if (USART_GetITStatus(USART3, USART_IT_RXNE) != RESET)
     {
-        data=USART_ReceiveData(USART3);
+        USART_ClearITPendingBit(USART3,USART_IT_RXNE);  //clear interrupt flag
+        data = USART_ReceiveData(USART3);
         if( Board::getInstance()->getUsartQueue(3)->fullCheck() ==0 ){
             Board::getInstance()->getUsartQueue(3)->putData(data);
         }
-        USART_ClearITPendingBit(USART3,USART_IT_RXNE);  //clear interrupt flag
+    }
+    if(USART_GetFlagStatus(USART3, USART_FLAG_ORE) != RESET)
+    {
+        USART_ClearFlag(USART3,USART_FLAG_ORE);
+        USART_ReceiveData(USART3); // need this line
     }
 #if SYSTEM_SUPPORT_OS == 1
     OSIntExit();
@@ -86,11 +102,16 @@ void UART4_IRQHandler(void)
 #endif
     if(USART_GetITStatus(UART4, USART_IT_RXNE) != RESET)
     {
+        USART_ClearITPendingBit(UART4, USART_IT_RXNE);     //clear interrupt flag
         data = USART_ReceiveData(UART4);
         if( Board::getInstance()->getUsartQueue(4)->fullCheck() ==0 ){
             Board::getInstance()->getUsartQueue(4)->putData(data);
         }
-        USART_ClearITPendingBit(UART4, USART_IT_RXNE);     //clear interrupt flag
+    }
+    if(USART_GetFlagStatus(UART4, USART_FLAG_ORE) != RESET)
+    {
+        USART_ClearFlag(UART4,USART_FLAG_ORE);
+        USART_ReceiveData(UART4); // need this line
     }
 #if SYSTEM_SUPPORT_OS == 1
     OSIntExit();
@@ -105,11 +126,16 @@ void UART5_IRQHandler(void)
 #endif
     if(USART_GetITStatus(UART5, USART_IT_RXNE) != RESET)
     {
+        USART_ClearITPendingBit(UART5 , USART_IT_RXNE);   //clear interrupt flag
         data = USART_ReceiveData(UART5);
         if( Board::getInstance()->getUsartQueue(5)->fullCheck() ==0 ){
             Board::getInstance()->getUsartQueue(5)->putData(data);
         }
-        USART_ClearITPendingBit(UART5 , USART_IT_RXNE);   //clear interrupt flag
+    }
+    if(USART_GetFlagStatus(UART5, USART_FLAG_ORE) != RESET)
+    {
+        USART_ClearFlag(UART5,USART_FLAG_ORE);
+        USART_ReceiveData(UART5); // need this line
     }
 #if SYSTEM_SUPPORT_OS == 1
     OSIntExit();

@@ -73,7 +73,7 @@ int main(void)
     SBUS sbus_node(USART_SBUS);
     robot_control_p->setSBUSRemoteNodePointer(&sbus_node);
 
-    RoboLink robolink_pc_node(&robot , 0x11 , 0x01 , (unsigned char)USART_PC);
+    RoboLink robolink_pc_node(&robot , 0x11 , 0x01 , (unsigned char)USART_PC,230400);
     robot_control_p->setRobolinkNodePointer(&robolink_pc_node);
 
     RoboLink robolink_radio_node(&robot , 0x11 , 0x01 , (unsigned char)USART_RADIO,115200);
@@ -251,11 +251,11 @@ void robot_wheel_task(void *p_arg)
     {
         robot_control_p->loopCall();
 
-        //       OS_CRITICAL_ENTER();
-        //        printf("battery_voltage = %.4f  cpu_usage = %.4f cpu_temperature = %.4f\r\n",
-        //               board.battery_voltage , board.cpu_usage , board.cpu_temperature
-        //               );
-        //        OS_CRITICAL_EXIT();
+        //OS_CRITICAL_ENTER();
+        //printf("battery_voltage = %.4f  cpu_usage = %.4f cpu_temperature = %.4f\r\n",
+        //       board.battery_voltage , board.cpu_usage , board.cpu_temperature
+        //       );
+        //OS_CRITICAL_EXIT();
 
         OSTimeDlyHMSM(0,0,0,50,OS_OPT_TIME_HMSM_STRICT,&err); //delay 50ms  20hz
     }
@@ -271,12 +271,12 @@ void imu_task(void *p_arg)
     while(1)
     {
         //imu.topCall();
-        OSTimeDly(1,OS_OPT_TIME_PERIODIC,&err);
-        //OSTimeDlyHMSM(0,0,0,1,OS_OPT_TIME_HMSM_STRICT,&err); //delay 1ms  1000hz
+        //OSTimeDly(1,OS_OPT_TIME_PERIODIC,&err);
+        OSTimeDlyHMSM(0,0,0,1,OS_OPT_TIME_HMSM_STRICT,&err); //delay 1ms  1000hz
     }
 }
 
-//100HZ
+//1000HZ
 void robolink_task(void *p_arg)
 {
     OS_ERR err;
@@ -292,7 +292,7 @@ void robolink_task(void *p_arg)
                             robot_control_p->robolink_node_device)->getData() );
         }
         else {
-            OSTimeDlyHMSM(0,0,0,5,OS_OPT_TIME_HMSM_STRICT,&err); //delay 5ms 100hz
+            OSTimeDlyHMSM(0,0,0,1,OS_OPT_TIME_HMSM_STRICT,&err); //delay 1ms 1000hz
         }
     }
 }

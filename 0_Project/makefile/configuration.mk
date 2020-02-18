@@ -54,7 +54,7 @@ endif
 
 ifeq "$(strip $(BOARD_TYPE))" "alientek_mini"
 ####select the usartx for board debug info printf : usart_interface_x,usb_slave  
-DEBUG_PRINTF_INTERFACE ?= usart_interface_4
+DEBUG_PRINTF_INTERFACE ?= usart_interface_1
 ####select the usartxfor pc communications (robolink) : usart_interface_x,usb_slave 
 PC_INTERFACE ?= usart_interface_4
 ####select the usartx for remote control (robolink) : usart_interface_x  

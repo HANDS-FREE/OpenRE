@@ -19,7 +19,7 @@ CXX_SRC			+= ../src/main.cpp ../src/stm32f4xx_it.cpp
 INCDIR	+= -I. -I../src/ 
 	
 #########################################################################package
-#PAKG: common robot_abstract math imu motor sbus_ppm servo robot_wheel hf_link
+#PAKG: common robot_abstract math imu motor sbus_ppm servo robot_wheel robolink
 PAKG    =
 
 #OS_MODULE: UCOSII UCOSIII GUI FAT

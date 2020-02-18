@@ -441,11 +441,11 @@ float BoardAbstract::getCPUUsage(void)
     float cpu_usage_ = 0;
 #if  SYSTEM_SUPPORT_OS > 0u
 #ifdef 	OS_CRITICAL_METHOD        //support UCOSII
-    cpu_usage_ = 0.001 * OSCPUUsage;
+    cpu_usage_ = 0.01 * OSCPUUsage;
 #endif
 
 #ifdef 	CPU_CFG_CRITICAL_METHOD   //support UCOSIII
-    cpu_usage_ = 0.001 * OSStatTaskCPUUsage;
+    cpu_usage_ = 0.0001 * OSStatTaskCPUUsage;
 #endif
 #endif
     return cpu_usage_;

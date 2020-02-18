@@ -16,6 +16,7 @@
 
 Board::Board() : BoardAbstract()
 {
+    battery_series_ = 3;
     battery_voltage_alarm_ = 10.20 ;
     battery_proportion_ = 11.00 ;
 
