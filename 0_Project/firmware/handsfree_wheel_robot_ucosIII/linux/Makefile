@@ -27,7 +27,7 @@ INCDIR          += -I. -I../src/
 
 #PAKG: common robot_abstract math imu .....
 PAKG        = common robot_abstract math imu motor sbus_ppm servo \
-              robot_control robolink tf
+              robot_control robolink tf sensors
               
 #OS_MODULE: UCOSII UCOSIII GUI FAT
 OS_MODULE = UCOSIII            
