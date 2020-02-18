@@ -32,11 +32,11 @@ extern "C" {
 
 #include "adc_dac.h"
 
-#define ADC1_DR_Address    ((u32)0x40012400+0x4c)
 volatile unsigned int ADC_Sample_Value[32];
 float Reference_Voltage;
-float cpu_temperature;
 uint8_t ADC_EN_NUM;
+
+#define ADC1_DR_Address    ((u32)0x40012400+0x4c)
 
 /***********************************************************************************************************************
 * Function:     void HF_ADC_Moder_Init(uint16_t hf_adc_channel , uint8_t adc_num)
@@ -261,13 +261,11 @@ float HF_Get_ADC_Output(uint8_t n)
     return ADC_Standard_Value;
 }
 
-#define ADC1_DR_Address    ((u32)0x40012400+0x4c)
-#define V25  0x6EE
-#define AVG_SLOPE 0x05
-
+float cpu_temperature;
+// °C
 float HF_Get_CPU_Temperature(void)
 {
-    cpu_temperature = 0.8f*cpu_temperature + 0.2f*(((float)V25- HF_Get_ADC_Output(ADC_EN_NUM + 1)) / (float)AVG_SLOPE+25) ;
+    cpu_temperature = 0.8f*cpu_temperature + 0.2f*((1.43-HF_Get_ADC_Output(ADC_EN_NUM + 1))/0.0043+25);
     return cpu_temperature;
 }
 

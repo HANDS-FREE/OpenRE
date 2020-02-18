@@ -38,8 +38,6 @@ float Reference_Voltage;
 uint8_t ADC_EN_NUM;
 
 #define ADC1_DR_Address   ((u32)0x4001204c)
-#define V25  0x6EE    //4.3mV every temperature degree, correspond 0x05 every temperture degree
-#define AVG_SLOPE 0x05 
 
 /***********************************************************************************************************************
 * Function:     void HF_ADC_Moder_Init(uint16_t hf_adc_channel , uint8_t adc_num)
@@ -272,10 +270,12 @@ float HF_Get_ADC_Output(uint8_t n)
     return ADC_Standard_Value;
 }
 
+float cpu_temperature;
 // °C
 float HF_Get_CPU_Temperature(void)
 {
-    return (HF_Get_ADC_Output( ADC_EN_NUM + 1) - 0.76f ) / 0.0025f +25 ;
+    cpu_temperature = 0.8f*cpu_temperature + 0.2f*((HF_Get_ADC_Output( ADC_EN_NUM + 1) - 0.76f ) / 0.0025f +25) ;
+    return cpu_temperature;
 }
 
 /***********************************************************************************************************************
