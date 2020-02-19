@@ -251,9 +251,9 @@ void MPU6050::renewLastDate(void)
 void MPU6050::gyroDateNormalize(void)
 {
     // 250deg/s--131   500deg/s--65.5 1000deg/s--32.8 2000deg/s--16.4
-    gyro_normal.x = (float)gyro_last.x * 0.00106f;// /16.4 * 57.3f;
-    gyro_normal.y = (float)gyro_last.y * 0.00106f;// /16.4 * 57.3f;
-    gyro_normal.z = (float)gyro_last.z * 0.00106f;// /16.4 * 57.3f;
+    gyro_normal.x = (float)gyro_last.x * 0.001064225f;// /16.4 * 57.295779513f;
+    gyro_normal.y = (float)gyro_last.y * 0.001064225f;// /16.4 * 57.295779513f;
+    gyro_normal.z = (float)gyro_last.z * 0.001064225f;// /16.4 * 57.295779513f;
 
 }
 

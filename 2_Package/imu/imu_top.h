@@ -21,9 +21,13 @@ public:
         imu_call_4 = 0;
         imu_call_5 = 0;
     }
-    void topInit(uint8_t mpu , uint8_t bmp , uint8_t hmc ,
+    void init(uint8_t mpu , uint8_t bmp , uint8_t hmc ,
                  uint8_t ms6 , uint8_t gps , uint8_t debug);
-    void topCall(void);  //1000HZ
+    void loopCall(void);  //1000HZ
+
+public:
+    IMU_MODEL imu_fmodel_frame;
+
 private:
     uint8_t mpu6050_en , bmp085_en , ms611_en , hmc085_en , gps_en , debug_en ;
     uint8_t imu_call_1 , imu_call_2 , imu_call_3 , imu_call_4 , imu_call_5;

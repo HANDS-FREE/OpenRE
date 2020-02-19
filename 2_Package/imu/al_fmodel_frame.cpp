@@ -124,9 +124,14 @@ void IMU_MODEL::model_update_sta(void)
     Eigen::Vector3f out_euler;
     func_quaternion2euler(x_q, out_euler);
 
+    q_x = x_q.x();
+    q_y = x_q.y();
+    q_z = x_q.z();
+    q_w = x_q.w();
+
     s_pryaw.pitch = out_euler.data()[0] * radian2degree,
-     s_pryaw.roll = out_euler.data()[1] * radian2degree,
-      s_pryaw.yaw = out_euler.data()[2] * radian2degree;
+    s_pryaw.roll = out_euler.data()[1] * radian2degree,
+    s_pryaw.yaw = out_euler.data()[2] * radian2degree;
 }
 
 /// >-----------------------------------------------------------------------------------------------------------------------------

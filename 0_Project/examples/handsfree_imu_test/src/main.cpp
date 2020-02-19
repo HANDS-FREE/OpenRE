@@ -29,7 +29,7 @@ int main(void)
     board->boardBasicInit();
 
     IMU imu;
-    imu.topInit(1, 0, 0, 0, 0, 1);
+    imu.init(1, 0, 0, 0, 0, 1);
 
     printf("handsfree imu package test \r\n");
 
@@ -39,7 +39,7 @@ int main(void)
         if ( board->cnt_1ms >= 1 )      // 1000hz
         {
             board->cnt_1ms=0;
-            imu.topCall();
+            imu.loopCall();
         }
         if ( board->cnt_2ms >= 2 )      // 500hz
         {

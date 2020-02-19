@@ -51,6 +51,7 @@
 
         /// system port **************************************
         FLOAT_PRY s_pryaw;                // {pitch, roll, yaw}
+        float q_x,q_y,q_z,q_w;
 
         void debug(void);
 

@@ -33,7 +33,7 @@
 *
 * History:
 ***********************************************************************************************************************/
-void IMU::topInit(uint8_t mpu , uint8_t bmp , uint8_t hmc ,
+void IMU::init(uint8_t mpu , uint8_t bmp , uint8_t hmc ,
                   uint8_t ms6 , uint8_t gps ,uint8_t debug)
 {
 
@@ -99,10 +99,8 @@ void IMU::topInit(uint8_t mpu , uint8_t bmp , uint8_t hmc ,
 * mawenke       2015.10.1   V1.0           creat 
 * chenyingbing  2015.12.1   V1.6           update
 ***********************************************************************************************************************/
-void IMU::topCall(void)
+void IMU::loopCall(void)
 {
-    static IMU_MODEL imu_fmodel_frame;
-
     imu_call_1++;
     imu_call_2++;
     imu_call_3++;
@@ -152,7 +150,7 @@ void IMU::topCall(void)
                                       mpu6050.acc_covariance_long_fliter.y,
                                       mpu6050.acc_covariance_long_fliter.z);    */
 
-            printf("pitch: %f roll: %f yaw: %f \r\n", imu_fmodel_frame.s_pryaw.pitch,
+            printf("time: %f pitch: %f roll: %f yaw: %f \r\n", HF_Get_System_Time(), imu_fmodel_frame.s_pryaw.pitch,
                    imu_fmodel_frame.s_pryaw.roll,
                    imu_fmodel_frame.s_pryaw.yaw);
 
