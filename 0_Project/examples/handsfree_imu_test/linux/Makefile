@@ -29,7 +29,7 @@ PAKG        = common math imu
 OS_MODULE =           
 
 #LIB_MODULE: EIGEN MATRIX  etc
-THIRDPARTY_MODULE = Eigen3
+THIRDPARTY_MODULE = 
 
 ###################################################################include rules
 

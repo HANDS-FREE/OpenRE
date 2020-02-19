@@ -28,12 +28,10 @@ int main(void)
     Board *board = Board::getInstance();
     board->boardBasicInit();
 
-    HF_USART_printf(USART1, " >> welcome to the graduation projection of cyb \r\n");
-
     IMU imu;
-    imu.topInit(1, 0, 1, 0, 0, 1);
+    imu.topInit(1, 0, 0, 0, 0, 1);
 
-    HF_USART_printf(USART1, ">> task begin \r\n");
+    printf("handsfree imu package test \r\n");
 
     while(1)
     {
@@ -63,21 +61,7 @@ int main(void)
         if ( board->cnt_50ms >= 50 )    // 20hz
         {
             board->cnt_50ms = 0 ;
-
-            {   /// running the leds. lalalala....
-                static char led_turns = 0;
-                board->setLedState(led_turns, 2);
-                if(led_turns >= 2)
-                    led_turns = 0;
-                else
-                    ++led_turns;
-            }
-
-            {
-                // float ttt;
-                // ttt =  HF_Get_Dtime() / 1000;
-                // printf("[debug]: %f ms \r\n", ttt);
-            }
+            board->setLedState(0,2);
         }
         if ( board->cnt_100ms >= 100 )    // 10hz
         {
