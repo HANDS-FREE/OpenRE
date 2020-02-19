@@ -164,12 +164,12 @@ Board::Board() : BoardAbstract()
     else { device_type[MOTOR4] = 0x40;}
 #endif
 
-    device_type[USART_GPS] = 0x32;
-    device_type[USART_SBUS] = 0x21;
-    device_type[USART_DIGITAL_SERVO] = 0x32;
-    device_type[USART_IMU] = 0x50;
-    device_type[IIC_IMU] = 0x10;
-    device_type[IIC_AT24CXX] = 0x10;
+    device_type[USART_GPS] = 0x00;
+    device_type[USART_SBUS] = 0x00;
+    device_type[USART_DIGITAL_SERVO] = 0x00;
+    device_type[USART_IMU] = 0x00;
+    device_type[IIC_IMU] = 0x20;
+    device_type[IIC_AT24CXX] = 0x00;
     device_type[IIC_OLED] = 0x00;
     device_type[SPI_IMU] = 0x00;
     device_type[SPI_NRF24L01] = 0x00;

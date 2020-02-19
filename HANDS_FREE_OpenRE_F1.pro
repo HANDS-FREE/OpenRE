@@ -7,7 +7,6 @@ TARGET = HNADS-FREE-F1
 
 INCLUDEPATH += . \
                 0_Project/examples/handsfree_simple_app/src \
-                0_Project/examples/handsfree_robot_test/src \
                 0_Project/examples/handsfree_ucosII/src \
                 0_Project/examples/handsfree_ucosIII/src \
                 0_Project/examples/hwtest/src \
@@ -68,7 +67,6 @@ INCLUDEPATH += . \
 # Input
 HEADERS += 0_Project/examples/handsfree_simple_app/src/main_config.h \
                 0_Project/examples/handsfree_imu_test/src/main_config.h \
-                0_Project/examples/handsfree_robot_test/src/main_config.h \
                 0_Project/examples/handsfree_ucosII/src/main_config.h  \
                 0_Project/examples/handsfree_ucosIII/src/main_config.h  \
                 0_Project/examples/hwtest/src/main_config.h  \
@@ -228,7 +226,6 @@ HEADERS += 0_Project/examples/handsfree_simple_app/src/main_config.h \
 
 SOURCES += 0_Project/examples/handsfree_simple_app/src/main.cpp \
                 0_Project/examples/handsfree_imu_test/src/main.cpp \
-                0_Project/examples/handsfree_robot_test/src/main.cpp \
                 0_Project/examples/handsfree_ucosII/src/main.cpp  \
                 0_Project/examples/handsfree_ucosIII/src/main.cpp \
                 0_Project/examples/hwtest/src/main.cpp  \

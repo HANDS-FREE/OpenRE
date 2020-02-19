@@ -26,7 +26,7 @@ public:
         device_state = 0;
         data_update_i = 0;
         gyro_offset_read_enable = 1;
-        acc_offset_read_enable =1 ;
+        acc_offset_read_enable = 0;
     }
 
     unsigned char deviceInit(void);

@@ -485,7 +485,7 @@ unsigned char MPU6050::deviceInit(void)
 void MPU6050::dataUpdate(void)
 {
 
-    if( data_update_i <= 500)  //上电开始前500次读的数据无效
+    if( data_update_i <= 250)  //上电1S读的数据无效
     {
         data_update_i++;
         renewLastDate();

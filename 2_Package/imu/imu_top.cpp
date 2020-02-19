@@ -153,8 +153,8 @@ void IMU::topCall(void)
                                       mpu6050.acc_covariance_long_fliter.z);    */
 
             printf("pitch: %f roll: %f yaw: %f \r\n", imu_fmodel_frame.s_pryaw.pitch,
-                                                      imu_fmodel_frame.s_pryaw.roll,
-                                                      imu_fmodel_frame.s_pryaw.yaw);
+                   imu_fmodel_frame.s_pryaw.roll,
+                   imu_fmodel_frame.s_pryaw.yaw);
 
             // imu_fmodel_frame.test();
             // printf("mpuaccx = %f  mpuaccy = %f mpuaccz = %f \r\n" , mpu6050.acc_normal.x , mpu6050.acc_normal.y,mpu6050.acc_normal.z);
