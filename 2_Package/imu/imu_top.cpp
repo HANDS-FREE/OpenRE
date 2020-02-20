@@ -34,7 +34,7 @@
 * History:
 ***********************************************************************************************************************/
 void IMU::init(uint8_t mpu , uint8_t bmp , uint8_t hmc ,
-                  uint8_t ms6 , uint8_t gps ,uint8_t debug)
+               uint8_t ms6 , uint8_t gps ,uint8_t debug)
 {
 
     uint8_t temp;
@@ -106,6 +106,7 @@ void IMU::loopCall(void)
     imu_call_3++;
     imu_call_4++;
     imu_call_5++;
+    static float last_time = 0;
 
     if( imu_call_1 >= 4 ) //250HZ
     {   // mup6050 filters require sample_acc_hz, sample_gyro_hz <= 256hz.
@@ -125,12 +126,17 @@ void IMU::loopCall(void)
         if(bmp085_en == 1) bmp085.dataUpdate();
         if(ms611_en == 1) ms611.dataUpdate();
 
+        float d_time = (HF_Get_System_Time() - last_time)/1000000;
+        last_time = HF_Get_System_Time();
+        if (d_time > 0.02) return;
+
         imu_fmodel_frame.model_data_update(mpu6050.mpu_data_ready,
                                            mpu6050.acc_normal_long_filter, mpu6050.acc_covariance_long_fliter,
                                            mpu6050.gyro_normal, mpu6050.gyro_covariance,
                                            hmc5883l.hmc_normal);
 
-        imu_fmodel_frame.model_updates(0.01);
+        //imu_fmodel_frame.model_updates(0.01);
+        imu_fmodel_frame.model_updates(d_time);
 
     }
 

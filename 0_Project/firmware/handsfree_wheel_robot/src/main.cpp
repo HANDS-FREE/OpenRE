@@ -68,7 +68,7 @@ int main(void)
         if ( board->cnt_1ms >= 1 )      // 1000hz
         {
             board->cnt_1ms=0;
-            //imu.topCall();
+            sensors.loopCall();
         }
         if ( board->cnt_2ms >= 2 )      // 500hz
         {
@@ -78,7 +78,7 @@ int main(void)
         {
             board->cnt_5ms=0;
             robot_control_p->motor_top.loopCall(); //motor speed control
-            sensors.loopCall();
+
         }
         if ( board->cnt_10ms >= 10 )    // 100hz
         {
