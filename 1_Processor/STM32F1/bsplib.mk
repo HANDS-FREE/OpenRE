@@ -8,8 +8,6 @@ STM32F1_PATH    = $(TOP_PATH)/1_Processor/STM32F1
 STLIB_PATH      = $(STM32F1_PATH)/STM32F10x_StdPeriph_Lib_V3.5.0
 BSPLIB_PATH     = $(STM32F1_PATH)/BSPLIB
 
-$(warning info: STM32_CPU_TYPE = $(findstring STM32F10X_HD,$(DDEFS)))
-
 ifeq "$(findstring STM32F10X_CL,$(DDEFS))" "STM32F10X_CL"
 ASM_SRC        	+= $(STLIB_PATH)/Libraries/CMSIS/CM3/DeviceSupport/ST/STM32F10x/startup/gcc_ride7/startup_stm32f10x_cl.s
 endif

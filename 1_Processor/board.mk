@@ -7,8 +7,8 @@
 
 ifeq "$(strip $(BOARD_TYPE))" "openre_board_v1"
 
-DDEFS           += -DOPENRE_BOARD_V1 -DSTM32F4XX 
-DDEFS           += -DHSE_VALUE=25000000 -DUSE_STDPERIPH_DRIVER 
+DDEFS           += -DOPENRE_BOARD_V1 -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER 
+DDEFS           += -DHSE_VALUE=25000000 
 MCU             ?= cortex-m4  
 CPU_TYPE        ?= STM32F4
 BOARD_ABSTRACT  ?= $(TOP_PATH)/1_Processor/BoardAbstract/openre_board_v1.cpp
@@ -24,8 +24,8 @@ endif
 
 ifeq "$(strip $(BOARD_TYPE))" "openre_board_v2"
 
-DDEFS           += -DOPENRE_BOARD_V2 -DSTM32F4XX 
-DDEFS           += -DHSE_VALUE=8000000 -DUSE_STDPERIPH_DRIVER 
+DDEFS           += -DOPENRE_BOARD_V2 -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER 
+DDEFS           += -DHSE_VALUE=8000000  
 MCU             ?= cortex-m4  
 CPU_TYPE        ?= STM32F4
 BOARD_ABSTRACT  += $(TOP_PATH)/1_Processor/BoardAbstract/openre_board_v2.cpp
@@ -41,8 +41,8 @@ endif
 
 ifeq "$(strip $(BOARD_TYPE))" "mallbot_board_v1"
 
-DDEFS           += -DMALLBOT_BOARD_V1 -DSTM32F4XX 
-DDEFS           += -DHSE_VALUE=8000000 -DUSE_STDPERIPH_DRIVER 
+DDEFS           += -DMALLBOT_BOARD_V1 -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER 
+DDEFS           += -DHSE_VALUE=8000000 
 MCU             ?= cortex-m4  
 CPU_TYPE        ?= STM32F4
 BOARD_ABSTRACT  += $(TOP_PATH)/1_Processor/BoardAbstract/mallbot_board_v1.cpp

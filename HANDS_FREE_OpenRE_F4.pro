@@ -24,10 +24,10 @@ INCLUDEPATH += . \
                 1_Processor/BoardAbstract \
                 1_Processor/STM32F4 \
                 1_Processor/STM32F4/BSPLIB \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/CMSIS/ST/STM32F4xx/Include \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/CMSIS/Include \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/inc \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/CMSIS/Device/ST/STM32F4xx/Include \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/CMSIS/Include \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/inc \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver \
                 2_Package \
                 2_Package/24cxx \
                 2_Package/common \
@@ -98,44 +98,44 @@ HEADERS += 0_Project/examples/handsfree_simple_app/src/main_config.h \
                 1_Processor/STM32F4/BSPLIB/timer.h \
                 1_Processor/STM32F4/BSPLIB/usart.h \
                 1_Processor/STM32F4/BSPLIB/wdg_wkup.h \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/stm32f4xx_conf.h \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/CMSIS/core_cm4.h \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/CMSIS/core_cm4_simd.h \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/CMSIS/core_cmFunc.h \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/CMSIS/core_cmInstr.h \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/CMSIS/stm32f4xx.h \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/CMSIS/system_stm32f4xx.h \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/misc.h \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_adc.h \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_can.h \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_crc.h \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_cryp.h \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_dac.h \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_dbgmcu.h \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_dcmi.h \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_dma.h \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_dma2d.h \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_exti.h \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_flash.h \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_flash_ramfunc.h \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_fmc.h \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_fsmc.h \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_gpio.h \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_hash.h \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_i2c.h \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_iwdg.h \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_ltdc.h \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_pwr.h \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_rcc.h \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_rng.h \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_rtc.h \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_sai.h \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_sdio.h \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_spi.h \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_syscfg.h \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_tim.h \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_usart.h \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_wwdg.h \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/stm32f4xx_conf.h \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/CMSIS/core_cm4.h \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/CMSIS/core_cm4_simd.h \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/CMSIS/core_cmFunc.h \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/CMSIS/core_cmInstr.h \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/CMSIS/stm32f4xx.h \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/CMSIS/system_stm32f4xx.h \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/misc.h \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_adc.h \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_can.h \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_crc.h \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_cryp.h \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_dac.h \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_dbgmcu.h \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_dcmi.h \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_dma.h \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_dma2d.h \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_exti.h \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_flash.h \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_flash_ramfunc.h \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_fmc.h \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_fsmc.h \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_gpio.h \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_hash.h \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_i2c.h \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_iwdg.h \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_ltdc.h \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_pwr.h \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_rcc.h \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_rng.h \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_rtc.h \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_sai.h \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_sdio.h \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_spi.h \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_syscfg.h \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_tim.h \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_usart.h \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_wwdg.h \
                 2_Package/package_include.h \
                 2_Package/24cxx/24cxx_config.h \
                 2_Package/24cxx/24cxx_driver.h \
@@ -264,43 +264,43 @@ SOURCES += 0_Project/examples/handsfree_simple_app/src/main.cpp \
                 1_Processor/STM32F4/BSPLIB/timer.c \
                 1_Processor/STM32F4/BSPLIB/usart.c \
                 1_Processor/STM32F4/BSPLIB/wdg_wkup.c \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/CMSIS/ST/STM32F4xx/Source/Templates/system_stm32f4xx.c \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/src/misc.c \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.c \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_crc.c \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_des.c \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_tdes.c \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.c \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.c \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma2d.c \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash_ramfunc.c \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fmc.c \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.c \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_sha1.c \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.c \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_ltdc.c \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.c \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sai.c \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.c \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.c \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c \
-                1_Processor/STM32F4/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.c \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/CMSIS/Device/ST/STM32F4xx/Source/Templates/system_stm32f4xx.c \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/src/misc.c \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.c \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_crc.c \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.c \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_des.c \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_tdes.c \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.c \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.c \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.c \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma2d.c \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.c \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.c \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash_ramfunc.c \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fmc.c \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.c \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.c \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_sha1.c \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.c \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.c \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_ltdc.c \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.c \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.c \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sai.c \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.c \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.c \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.c \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.c \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.c \
+                1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.c \
                 2_Package/24cxx/24cxx_driver.cpp \
                 2_Package/24cxx/24cxx_iic_bsp.cpp \
                 2_Package/24cxx/24cxx_test.cpp \
