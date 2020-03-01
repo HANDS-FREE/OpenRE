@@ -422,7 +422,7 @@ void GPIO_Write(GPIO_TypeDef* GPIOx, uint16_t PortVal)
   GPIOx->ODR = PortVal;
 }
 
-//add by mawenke
+//add by handsfree
 /**
   * @brief  Toggles the specified GPIO pins..
   * @param  GPIOx: where x can be (A..I) to select the GPIO peripheral.

@@ -57,8 +57,10 @@ endif
 ################################################################################  
 ifeq "$(strip $(BOARD_TYPE))" "openre_board_mini"
 
-DDEFS           += -DOPENRE_BOARD_MINI -DSTM32F10X 
-DDEFS           += -DHSE_VALUE=8000000 -DUSE_STDPERIPH_DRIVER 
+DDEFS           += -DOPENRE_BOARD_MINI -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER 
+DDEFS           += -DHSE_VALUE=8000000 -DSYSCLK_FREQ_72MHz=72000000 
+#-DSYSCLK_FREQ_24MHz=24000000 -DSYSCLK_FREQ_36MHz=36000000 -Ddefine SYSCLK_FREQ_48MHz=48000000 
+#-DSYSCLK_FREQ_56MHz=56000000 -DSYSCLK_FREQ_72MHz=72000000 
 MCU             ?= cortex-m3 
 CPU_TYPE        ?= STM32F1
 BOARD_ABSTRACT  += $(TOP_PATH)/1_Processor/BoardAbstract/openre_board_mini.cpp
@@ -73,8 +75,10 @@ endif
 ################################################################################  
 ifeq "$(strip $(BOARD_TYPE))" "alientek_mini"
 
-DDEFS           += -DALIENTEK_MINI -DSTM32F10X 
-DDEFS           += -DHSE_VALUE=8000000 -DUSE_STDPERIPH_DRIVER 
+DDEFS           += -DALIENTEK_MINI -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER 
+DDEFS           += -DHSE_VALUE=8000000 -DSYSCLK_FREQ_72MHz=72000000 
+#-DSYSCLK_FREQ_24MHz=24000000 -DSYSCLK_FREQ_36MHz=36000000 -Ddefine SYSCLK_FREQ_48MHz=48000000 
+#-DSYSCLK_FREQ_56MHz=56000000 -DSYSCLK_FREQ_72MHz=72000000 
 MCU             ?= cortex-m3 
 CPU_TYPE        ?= STM32F1
 BOARD_ABSTRACT  += $(TOP_PATH)/1_Processor/BoardAbstract/alientek_mini.cpp
@@ -89,22 +93,22 @@ endif
 ################################################################################  
 
 BOARD_ABSTRACT += $(TOP_PATH)/1_Processor/BoardAbstract/board_abstract.cpp
-CXX_SRC   	+= $(BOARD_ABSTRACT) 
-INCDIR    	+= -I$(TOP_PATH)/1_Processor/BoardAbstract/ 
+CXX_SRC        += $(BOARD_ABSTRACT) 
+INCDIR         += -I$(TOP_PATH)/1_Processor/BoardAbstract/ 
 
 ################################################################################  
 
 ifeq "$(strip $(CPU_TYPE))" "STM32F1"
 
-include	  	$(TOP_PATH)/1_Processor/STM32F1/bsplib.mk
-CXX_SRC		+=$(TOP_PATH)/1_Processor/Interrupt/stm32f10x_it.cpp
+include         $(TOP_PATH)/1_Processor/STM32F1/bsplib.mk
+CXX_SRC         +=$(TOP_PATH)/1_Processor/Interrupt/stm32f10x_it.cpp
 
 endif
 
 ifeq "$(strip $(CPU_TYPE))" "STM32F4"
 
-include	  	$(TOP_PATH)/1_Processor/STM32F4/bsplib.mk
-CXX_SRC		+=$(TOP_PATH)/1_Processor/Interrupt/stm32f4xx_it.cpp
+include         $(TOP_PATH)/1_Processor/STM32F4/bsplib.mk
+CXX_SRC         +=$(TOP_PATH)/1_Processor/Interrupt/stm32f4xx_it.cpp
 
 endif
 

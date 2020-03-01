@@ -23,12 +23,12 @@ INCLUDEPATH += . \
                 1_Processor/BoardAbstract \
                 1_Processor/STM32F1 \
                 1_Processor/STM32F1/BSPLIB \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/  \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/CMSIS/CM3/CoreSupport  \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/CMSIS/CM3/DeviceSupport/ST/STM32F10x  \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/CMSIS/CM3/DeviceSupport/ST/STM32F10x/startup/gccride7  \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/inc \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/src \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/  \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/CMSIS/CM3/CoreSupport  \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/CMSIS/CM3/DeviceSupport/ST/STM32F10x  \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/CMSIS/CM3/DeviceSupport/ST/STM32F10x/startup/gccride7  \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/inc \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/src \
                 2_Package \
                 2_Package/24cxx \
                 2_Package/common \
@@ -98,33 +98,33 @@ HEADERS += 0_Project/examples/handsfree_simple_app/src/main_config.h \
                 1_Processor/STM32F1/BSPLIB/timer.h \
                 1_Processor/STM32F1/BSPLIB/usart.h \
                 1_Processor/STM32F1/BSPLIB/wdg_wkup.h \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/stm32f10x_conf.h \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/CMSIS/CM3/CoreSupport/core_cm3.h \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/CMSIS/CM3/DeviceSupport/ST/STM32F10x/stm32f10x.h \
-                1_Processor/STM32F1/STM32F1/STM32F10x_StdPeriph_Driver/CMSIS/CM3/DeviceSupport/ST/STM32F10x/system_stm32f10x.h \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/inc/misc.h \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/inc/stm32f10x_adc.h \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/inc/stm32f10x_bkp.h \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/inc/stm32f10x_can.h \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/inc/stm32f10x_cec.h \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/inc/stm32f10x_crc.h \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/inc/stm32f10x_dac.h \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/inc/stm32f10x_dbgmcu.h \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/inc/stm32f10x_dma.h \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/inc/stm32f10x_exti.h \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/inc/stm32f10x_flash.h \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/inc/stm32f10x_fsmc.h \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/inc/stm32f10x_gpio.h \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/inc/stm32f10x_i2c.h \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/inc/stm32f10x_iwdg.h \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/inc/stm32f10x_pwr.h \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/inc/stm32f10x_rcc.h \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/inc/stm32f10x_rtc.h \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/inc/stm32f10x_sdio.h \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/inc/stm32f10x_spi.h \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/inc/stm32f10x_tim.h \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/inc/stm32f10x_usart.h \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/inc/stm32f10x_wwdg.h \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/stm32f10x_conf.h \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/CMSIS/CM3/CoreSupport/core_cm3.h \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/CMSIS/CM3/DeviceSupport/ST/STM32F10x/stm32f10x.h \
+                1_Processor/STM32F1/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/CMSIS/CM3/DeviceSupport/ST/STM32F10x/system_stm32f10x.h \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/inc/misc.h \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/inc/stm32f10x_adc.h \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/inc/stm32f10x_bkp.h \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/inc/stm32f10x_can.h \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/inc/stm32f10x_cec.h \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/inc/stm32f10x_crc.h \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/inc/stm32f10x_dac.h \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/inc/stm32f10x_dbgmcu.h \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/inc/stm32f10x_dma.h \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/inc/stm32f10x_exti.h \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/inc/stm32f10x_flash.h \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/inc/stm32f10x_fsmc.h \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/inc/stm32f10x_gpio.h \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/inc/stm32f10x_i2c.h \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/inc/stm32f10x_iwdg.h \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/inc/stm32f10x_pwr.h \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/inc/stm32f10x_rcc.h \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/inc/stm32f10x_rtc.h \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/inc/stm32f10x_sdio.h \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/inc/stm32f10x_spi.h \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/inc/stm32f10x_tim.h \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/inc/stm32f10x_usart.h \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/inc/stm32f10x_wwdg.h \
                 2_Package/package_include.h \
                 2_Package/24cxx/24cxx_config.h \
                 2_Package/24cxx/24cxx_driver.h \
@@ -252,31 +252,31 @@ SOURCES += 0_Project/examples/handsfree_simple_app/src/main.cpp \
                 1_Processor/STM32F1/BSPLIB/timer.c \
                 1_Processor/STM32F1/BSPLIB/usart.c \
                 1_Processor/STM32F1/BSPLIB/wdg_wkup.c \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/CMSIS/CM3/CoreSupport/core_cm3.c \
-                1_Processor/STM32F1/STM32F1/STM32F10x_StdPeriph_Driver/CMSIS/CM3/DeviceSupport/ST/STM32F10x/system_stm32f10x.c \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/src/misc.c \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/src/stm32f10x_adc.c \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/src/stm32f10x_bkp.c \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/src/stm32f10x_can.c \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/src/stm32f10x_cec.c \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/src/stm32f10x_crc.c \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/src/stm32f10x_dac.c \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/src/stm32f10x_dbgmcu.c \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/src/stm32f10x_dma.c \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/src/stm32f10x_exti.c \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/src/stm32f10x_flash.c \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/src/stm32f10x_fsmc.c \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/src/stm32f10x_gpio.c \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/src/stm32f10x_i2c.c \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/src/stm32f10x_iwdg.c \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/src/stm32f10x_pwr.c \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/src/stm32f10x_rcc.c \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/src/stm32f10x_rtc.c \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/src/stm32f10x_spi.c \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/src/stm32f10x_tim.c \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/src/stm32f10x_usart.c \
-                1_Processor/STM32F1/STM32F10x_StdPeriph_Driver/src/stm32f10x_wwdg.c \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/CMSIS/CM3/CoreSupport/core_cm3.c \
+                1_Processor/STM32F1/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/CMSIS/CM3/DeviceSupport/ST/STM32F10x/system_stm32f10x.c \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/src/misc.c \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/src/stm32f10x_adc.c \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/src/stm32f10x_bkp.c \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/src/stm32f10x_can.c \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/src/stm32f10x_cec.c \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/src/stm32f10x_crc.c \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/src/stm32f10x_dac.c \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/src/stm32f10x_dbgmcu.c \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/src/stm32f10x_dma.c \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/src/stm32f10x_exti.c \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/src/stm32f10x_flash.c \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/src/stm32f10x_fsmc.c \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/src/stm32f10x_gpio.c \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/src/stm32f10x_i2c.c \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/src/stm32f10x_iwdg.c \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/src/stm32f10x_pwr.c \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/src/stm32f10x_rcc.c \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/src/stm32f10x_rtc.c \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/src/stm32f10x_spi.c \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/src/stm32f10x_tim.c \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/src/stm32f10x_usart.c \
+                1_Processor/STM32F1/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/src/stm32f10x_wwdg.c \
                 2_Package/24cxx/24cxx_driver.cpp \
                 2_Package/24cxx/24cxx_iic_bsp.cpp \
                 2_Package/24cxx/24cxx_test.cpp \
