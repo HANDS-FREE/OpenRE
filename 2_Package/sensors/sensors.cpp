@@ -26,7 +26,7 @@ void Sensors::loopCall(void)
         loop_500hz = 0;
     }
 
-    if(loop_250hz >= 4) //1250HZ
+    if(loop_250hz >= 4) //250HZ
     {
         loop_250hz = 0;
     }

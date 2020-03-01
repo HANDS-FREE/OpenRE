@@ -19,14 +19,14 @@ public:
     }
     void init(RobotAbstract *robot_)
     {
-        imu.init(1,0,0,0,0,0);
         robot = robot_;
         sensors = &robot_->sensors;
+        imu.init(1,0,0,0,0,0);
     }
     void loopCall(void); //1000HZ
 
 private:
-    void chassisDataUpdate(void); //20HZ
+    void chassisDataUpdate(void);   //20HZ
     void imuSensorDataUpdate(void); //50HZ
 
 private:

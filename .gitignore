@@ -1,5 +1,9 @@
 *.o
+build/
+devel/
 /OpenRE.wiki/*
+.catkin_workspace
+*.txt.user
 /5_Development_Toolchain/gcc-arm-none-eabi-5_4-2016q2.tar.bz2
 /5_Development_Toolchain/openocd.tar.bz2
 /5_Development_Toolchain/stlink.tar.bz2
