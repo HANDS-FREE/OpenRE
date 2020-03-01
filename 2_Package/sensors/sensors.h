@@ -6,9 +6,16 @@
 
 class Sensors
 {
-public:
+private:
     Sensors() {
         loop_500hz=loop_250hz=loop_100hz=loop_50hz=loop_20hz=loop_10hz=loop_1hz=0;
+    }
+
+public:
+    static Sensors* getInstance()
+    {
+        static Sensors instance;
+        return &instance;
     }
     void init(RobotAbstract *robot_)
     {

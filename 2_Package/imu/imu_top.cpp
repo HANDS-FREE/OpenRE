@@ -133,11 +133,10 @@ void IMU::loopCall(void)
         imu_fmodel_frame.model_data_update(mpu6050.mpu_data_ready,
                                            mpu6050.acc_normal_long_filter, mpu6050.acc_covariance_long_fliter,
                                            mpu6050.gyro_normal, mpu6050.gyro_covariance,
-                                           hmc5883l.hmc_normal);
+                                           hmc5883l.hmc_normal); //60us(stm32f1) 15us(stm32f4 nofpu)
 
         //imu_fmodel_frame.model_updates(0.01);
-        imu_fmodel_frame.model_updates(d_time);
-
+        imu_fmodel_frame.model_updates(d_time); //1316us(stm32f1) 410us(stm32f4 nofpu)
     }
 
     if( imu_call_4 >= 20 ) //50HZ

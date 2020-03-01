@@ -500,12 +500,11 @@ void MPU6050::dataUpdate(void)
         if(acc_offset_flag != 1) { readAccDrift(250); return;}
     }
 
-    renewLastDate();            //stm32f1 170us	stm32f4 78us
-    gyroDateNormalize();        //stm32f1 20us stm32f4 1us
-    accDateNormalize();         //stm32f1 20us stm32f4 1us
+    renewLastDate();            //400us(stm32f1) 100us(stm32f4)  (stm32f1 170us stm32f4 78us)
+    gyroDateNormalize();        //20us(stm32f1) 6us(stm32f4 nofpu) 1us(stm32 fpu)
+    accDateNormalize();         //20us(stm32f1) 6us(stm32f4 nofpu) 1us(stm32 fpu)
 
-    accDateNormalizeFilter();   //stm32f4 2us/16us
-    gyroDateNormalizeFilter();  //stm32f4 2us
-
+    accDateNormalizeFilter();   //778us(stm32f1) 200us(stm32f4 nofpu) 2us/16us(stm32 fpu)
+    gyroDateNormalizeFilter();  //20us(stm32f1) 5us(stm32f4 nofpu) 1us(stm32 fpu)
     mpu_data_ready = true;
 }

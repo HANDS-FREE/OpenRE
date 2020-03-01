@@ -68,7 +68,7 @@ void MotorTop::loopCall(void)
 {
     float pid_t = motors->getParameters(0)->pid_t;
     if(loop_cnt >= (unsigned int)(pid_t/d_loop_time)) loop_cnt = 0;
-    if(loop_cnt == 0) motors->loopCall();
+    if(loop_cnt == 0) motors->loopCall(); //TypicalDCMotors need time: 32us(stm32f4 nofpu)
     loop_cnt++;
 }
 

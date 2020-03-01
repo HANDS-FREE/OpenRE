@@ -151,7 +151,7 @@ I2C_Sensor_Type iic_sensor_type[6];
 
 static void iic_delay_us(uint8_t HF_I2Cx , uint8_t t)
 {
-    if(iic_sensor_type[HF_I2Cx-1] == I2C_Sensor_Type_Typical_Fast) delay_us(t);
+    if(iic_sensor_type[HF_I2Cx-1] == I2C_Sensor_Type_Typical_Fast) {return;}
     else if (iic_sensor_type[HF_I2Cx-1] == I2C_Sensor_Type_Typical_Slow) delay_us(2*t);
     else if(iic_sensor_type[HF_I2Cx-1] == I2C_Sensor_Type_KS103) delay_us(2*t);
     else delay_us(t);

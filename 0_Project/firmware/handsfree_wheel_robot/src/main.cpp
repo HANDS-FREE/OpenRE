@@ -39,8 +39,8 @@ int main(void)
     RoboLink robolink_radio_node(&robot , 0x11 , 0x01 , (unsigned char)USART_RADIO,115200);
     robot_control_p->setRobolinkRadioNodePointer(&robolink_radio_node);
 
-    Sensors sensors;
-    sensors.init(&robot);
+    Sensors *sensors = Sensors::getInstance();
+    sensors->init(&robot);
 
     printf("app start \r\n");
 
@@ -68,7 +68,7 @@ int main(void)
         if ( board->cnt_1ms >= 1 )      // 1000hz
         {
             board->cnt_1ms=0;
-            sensors.loopCall();
+            sensors->loopCall();        //need time: 400us~1700us(stm32f4 nofpu)
         }
         if ( board->cnt_2ms >= 2 )      // 500hz
         {
@@ -77,13 +77,12 @@ int main(void)
         if ( board->cnt_5ms >= 5 )      // 200hz
         {
             board->cnt_5ms=0;
-            robot_control_p->motor_top.loopCall(); //motor speed control
-
+            robot_control_p->motor_top.loopCall(); //need time: 70us(stm32f1) 32us(stm32f4 nofpu)
         }
         if ( board->cnt_10ms >= 10 )    // 100hz
         {
             board->cnt_10ms=0;
-            board->boardBasicCall();    // need time stm32f1 35us
+            board->boardBasicCall();    //need time: 35us(stm32f1) 7us(stm32f4 nofpu)
         }
         if ( board->cnt_20ms >= 20 )    // 50hz
         {
@@ -92,7 +91,7 @@ int main(void)
         if ( board->cnt_50ms >= 50 )    // 20hz
         {
             board->cnt_50ms = 0 ;
-            robot_control_p->loopCall();
+            robot_control_p->loopCall();  //need time:280(stm32f1) 70us(stm32f4 nofpu)
             board->setLedState(1,2);
         }
         if ( board->cnt_100ms >= 100 )    // 10hz

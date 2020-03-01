@@ -17,40 +17,40 @@
 #include "os_include.h"
 #include "robot_control.h"
 #include "robot_model.h"
+#include "sensors.h"
 
-
-#define START_TASK_PRIO		3
-#define START_TASK_STK_SIZE 		512
+#define START_TASK_PRIO            3
+#define START_TASK_STK_SIZE        512
 OS_TCB  START_TASK_TCB;
 CPU_STK START_TASK_STK[START_TASK_STK_SIZE];
 void start_task(void *p_arg);
 
-#define BSP_TASK_PRIO		4
-#define BSP_TASK_STK_SIZE 		256
+#define BSP_TASK_PRIO              4
+#define BSP_TASK_STK_SIZE          512
 OS_TCB  BSP_TASK_TCB;
 CPU_STK BSP_TASK_STK[BSP_TASK_STK_SIZE];
 void bsp_task(void *p_arg);
 
-#define MOTOR_TASK_PRIO		5
-#define MOTOR_TASK_STK_SIZE 		256
+#define MOTOR_TASK_PRIO             5
+#define MOTOR_TASK_STK_SIZE         512
 OS_TCB  MOTOR_TASK_TCB;
 CPU_STK MOTOR_TASK_STK[MOTOR_TASK_STK_SIZE];
 void motor_task(void *p_arg);
 
-#define ROBOT_WHEEL_TASK_PRIO		6
-#define ROBOT_WHEEL_TASK_STK_SIZE 		512
+#define ROBOT_WHEEL_TASK_PRIO       6
+#define ROBOT_WHEEL_TASK_STK_SIZE   512
 OS_TCB  ROBOT_WHEEL_TASK_TCB;
 __attribute((aligned (8))) CPU_STK ROBOT_WHEEL_TASK_STK[ROBOT_WHEEL_TASK_STK_SIZE];
 void robot_wheel_task(void *p_arg);
 
-#define IMU_TASK_PRIO		7
-#define IMU_TASK_STK_SIZE 		256
-OS_TCB  IMU_TASK_TCB;
-CPU_STK IMU_TASK_STK[IMU_TASK_STK_SIZE];
-void imu_task(void *p_arg);
+#define SENSORS_TASK_PRIO           7
+#define SENSORS_TASK_STK_SIZE       512
+OS_TCB  SENSORS_TASK_TCB;
+CPU_STK SENSORS_TASK_STK[SENSORS_TASK_STK_SIZE];
+void sensors_task(void *p_arg);
 
-#define ROBOLINK_TASK_PRIO		8
-#define ROBOLINK_TASK_STK_SIZE 		256
+#define ROBOLINK_TASK_PRIO          8
+#define ROBOLINK_TASK_STK_SIZE      512
 OS_TCB  ROBOLINK_TASK_TCB;
 CPU_STK ROBOLINK_TASK_STK[ROBOLINK_TASK_STK_SIZE];
 void robolink_task(void *p_arg);
@@ -73,11 +73,14 @@ int main(void)
     SBUS sbus_node(USART_SBUS);
     robot_control_p->setSBUSRemoteNodePointer(&sbus_node);
 
-    RoboLink robolink_pc_node(&robot , 0x11 , 0x01 , (unsigned char)USART_PC,230400);
+    RoboLink robolink_pc_node(&robot , 0x11 , 0x01 , (unsigned char)USART_PC);
     robot_control_p->setRobolinkNodePointer(&robolink_pc_node);
 
     RoboLink robolink_radio_node(&robot , 0x11 , 0x01 , (unsigned char)USART_RADIO,115200);
     robot_control_p->setRobolinkRadioNodePointer(&robolink_radio_node);
+
+    Sensors *sensors = Sensors::getInstance();
+    sensors->init(&robot);
 
     printf("app start \r\n");
 
@@ -170,14 +173,14 @@ void start_task(void *p_arg)
             (OS_OPT      )OS_OPT_TASK_STK_CHK|OS_OPT_TASK_STK_CLR,
             (OS_ERR 	* )&err);
 
-    OSTaskCreate((OS_TCB 	* )&IMU_TASK_TCB,
-                 (CPU_CHAR	* )"imu task",
-                 (OS_TASK_PTR )imu_task,
+    OSTaskCreate((OS_TCB 	* )&SENSORS_TASK_TCB,
+                 (CPU_CHAR	* )"sensors task",
+                 (OS_TASK_PTR )sensors_task,
                  (void		* )0,
-                 (OS_PRIO	  )IMU_TASK_PRIO,
-                 (CPU_STK   * )&IMU_TASK_STK[0],
-            (CPU_STK_SIZE)IMU_TASK_STK_SIZE/10,
-            (CPU_STK_SIZE)IMU_TASK_STK_SIZE,
+                 (OS_PRIO	  )SENSORS_TASK_PRIO,
+                 (CPU_STK   * )&SENSORS_TASK_STK[0],
+            (CPU_STK_SIZE)SENSORS_TASK_STK_SIZE/10,
+            (CPU_STK_SIZE)SENSORS_TASK_STK_SIZE,
             (OS_MSG_QTY  )0,
             (OS_TICK	  )0,
             (void   	* )0,
@@ -214,7 +217,7 @@ void bsp_task(void *p_arg)
     while(1)
     {
         bsp_task_i++;
-        board->boardBasicCall();            // need time stm32f1  35us
+        board->boardBasicCall(); //need time: 35us(stm32f1) 7us(stm32f4 nofpu)
         if(bsp_task_i >= 5)
         {
             bsp_task_i=0;
@@ -233,7 +236,7 @@ void motor_task(void *p_arg)
 
     while(1)
     {
-        robot_control_p->motor_top.loopCall(); //motor speed control
+        robot_control_p->motor_top.loopCall(); //need time: 70us(stm32f1) 32us(stm32f4 nofpu)
         OSTimeDlyHMSM(0,0,0,5,OS_OPT_TIME_HMSM_STRICT,&err); //delay 5ms 200hz
     }
 }
@@ -249,30 +252,29 @@ void robot_wheel_task(void *p_arg)
 
     while(1)
     {
-        robot_control_p->loopCall();
-
+        robot_control_p->loopCall(); //need time:280(stm32f1) 70us(stm32f4 nofpu)
         //OS_CRITICAL_ENTER();
         //printf("battery_voltage = %.4f  cpu_usage = %.4f cpu_temperature = %.4f\r\n",
         //       board.battery_voltage , board.cpu_usage , board.cpu_temperature
         //       );
         //OS_CRITICAL_EXIT();
-
         OSTimeDlyHMSM(0,0,0,50,OS_OPT_TIME_HMSM_STRICT,&err); //delay 50ms  20hz
     }
 }
 
 //1000HZ
-void imu_task(void *p_arg)
+void sensors_task(void *p_arg)
 {
     OS_ERR err;
     //CPU_SR_ALLOC();
     p_arg = p_arg;
+    Sensors *sensors = Sensors::getInstance();
 
     while(1)
     {
-        //imu.topCall();
-        //OSTimeDly(1,OS_OPT_TIME_PERIODIC,&err);
+        sensors->loopCall(); //need time: 400us~1700us(stm32f4 nofpu)
         OSTimeDlyHMSM(0,0,0,1,OS_OPT_TIME_HMSM_STRICT,&err); //delay 1ms  1000hz
+        //OSTimeDly(1,OS_OPT_TIME_PERIODIC,&err);
     }
 }
 
