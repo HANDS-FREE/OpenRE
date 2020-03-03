@@ -29,13 +29,29 @@ void mallcotest(void)
     }
     else
     {
-        printf("malloc test succsess p = %x \r\n" , (unsigned int)p);
+        printf("malloc test succsess p = %x \r\n\r\n" , (unsigned int)p);
     }
 
     free(p);
 
 }
 
+void fputest(void)
+{
+    float a=1.1,b=1.2,c=1.3,d=1.4;
+    int i = 0;
+    HF_Get_Dtime();
+    while( i<= 1000000)
+    {
+        i++;
+        c+=b/d;
+    }
+    float d_time = HF_Get_Dtime();
+    printf("fpu test d_time = %f , c= %f\r\n" , d_time,c);
+#ifdef __FPU_PRESENT
+    printf("__FPU_PRESENT = %d __FPU_USED = %d\r\n" , __FPU_PRESENT,__FPU_USED);
+#endif
+}
 
 int main(void)
 {
@@ -45,6 +61,7 @@ int main(void)
     printf("welcome to handsfree \r\n");
 
     mallcotest();
+    fputest();
 
     while(1)
     {

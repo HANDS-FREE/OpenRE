@@ -28,21 +28,21 @@ DDEFS           += -DBOOTLOADER_ENABLE
 endif
 
 ############################################################### compiler settings
-ARMGCC		= $(TOP_PATH)/5_Development_Toolchain/gcc-arm-none-eabi-5_4-2016q2/bin/arm-none-eabi-gcc
+ARMGCC          = $(TOP_PATH)/5_Development_Toolchain/gcc-arm-none-eabi-5_4-2016q2/bin/arm-none-eabi-gcc
 
 ifeq ($(ARMGCC),$(wildcard $(ARMGCC)))
-CCPREFIX	?= $(TOP_PATH)/5_Development_Toolchain/gcc-arm-none-eabi-5_4-2016q2/bin/arm-none-eabi-
+CCPREFIX        ?= $(TOP_PATH)/5_Development_Toolchain/gcc-arm-none-eabi-5_4-2016q2/bin/arm-none-eabi-
 else
-CCPREFIX	?= arm-none-eabi-
+CCPREFIX        ?= arm-none-eabi-
 endif
 
-CC   		= $(CCPREFIX)gcc
+CC          = $(CCPREFIX)gcc
 CXX         = $(CCPREFIX)g++
-CP   		= $(CCPREFIX)objcopy
-AS   		= $(CCPREFIX)gcc -x assembler-with-cpp
-GDB		    = $(CCPREFIX)gdb
-HEX  		= $(CP) -O ihex
-BIN  		= $(CP) -O binary -S
+CP          = $(CCPREFIX)objcopy
+AS          = $(CCPREFIX)gcc -x assembler-with-cpp
+GDB         = $(CCPREFIX)gdb
+HEX         = $(CP) -O ihex
+BIN         = $(CP) -O binary -S
 
 # Define optimisation level here
 OPT += -Os
