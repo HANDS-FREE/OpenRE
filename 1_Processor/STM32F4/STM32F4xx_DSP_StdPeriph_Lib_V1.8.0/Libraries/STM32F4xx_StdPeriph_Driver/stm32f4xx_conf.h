@@ -87,13 +87,7 @@
 #endif /* STM32F40_41xxx */
 
 #if defined(STM32F401xx)
-#include "stm32f4xx_cryp.h"
-#include "stm32f4xx_hash.h"
-#include "stm32f4xx_rng.h"
-#include "stm32f4xx_can.h"
-#include "stm32f4xx_dac.h"
-#include "stm32f4xx_dcmi.h"
-#include "stm32f4xx_fsmc.h"
+
 #endif /* STM32F401xx */
 
 #if defined(STM32F410xx)

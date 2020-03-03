@@ -23,7 +23,7 @@ INCLUDEPATH += . \
                 1_Processor/Interrupt \
                 1_Processor/BoardAbstract \
                 1_Processor/STM32F4 \
-                1_Processor/STM32F4/BSPLIB \
+                1_Processor/STM32F4/BSPLIB/inc \
                 1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/CMSIS/Device/ST/STM32F4xx/Include \
                 1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/CMSIS/Include \
                 1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/inc \
@@ -83,21 +83,21 @@ HEADERS += 0_Project/examples/handsfree_simple_app/src/main_config.h \
                 1_Processor/BoardAbstract/board_abstract.h \
                 1_Processor/BoardAbstract/board.h \
                 1_Processor/STM32F4/bsplib.h \
-                1_Processor/STM32F4/BSPLIB/adc_dac.h \
-                1_Processor/STM32F4/BSPLIB/can.h \
-                1_Processor/STM32F4/BSPLIB/delay.h \
-                1_Processor/STM32F4/BSPLIB/encoder.h \
-                1_Processor/STM32F4/BSPLIB/flash.h \
-                1_Processor/STM32F4/BSPLIB/i2c.h \
-                1_Processor/STM32F4/BSPLIB/nvic.h \
-                1_Processor/STM32F4/BSPLIB/pwm_in.h \
-                1_Processor/STM32F4/BSPLIB/pwm_out.h \
-                1_Processor/STM32F4/BSPLIB/rtc.h \
-                1_Processor/STM32F4/BSPLIB/spi.h \
-                1_Processor/STM32F4/BSPLIB/sram.h \
-                1_Processor/STM32F4/BSPLIB/timer.h \
-                1_Processor/STM32F4/BSPLIB/usart.h \
-                1_Processor/STM32F4/BSPLIB/wdg_wkup.h \
+                1_Processor/STM32F4/BSPLIB/inc/adc_dac.h \
+                1_Processor/STM32F4/BSPLIB/inc/can.h \
+                1_Processor/STM32F4/BSPLIB/inc/delay.h \
+                1_Processor/STM32F4/BSPLIB/inc/encoder.h \
+                1_Processor/STM32F4/BSPLIB/inc/flash.h \
+                1_Processor/STM32F4/BSPLIB/inc/i2c.h \
+                1_Processor/STM32F4/BSPLIB/inc/nvic.h \
+                1_Processor/STM32F4/BSPLIB/inc/pwm_in.h \
+                1_Processor/STM32F4/BSPLIB/inc/pwm_out.h \
+                1_Processor/STM32F4/BSPLIB/inc/rtc.h \
+                1_Processor/STM32F4/BSPLIB/inc/spi.h \
+                1_Processor/STM32F4/BSPLIB/inc/sram.h \
+                1_Processor/STM32F4/BSPLIB/inc/timer.h \
+                1_Processor/STM32F4/BSPLIB/inc/usart.h \
+                1_Processor/STM32F4/BSPLIB/inc/wdg_wkup.h \
                 1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/stm32f4xx_conf.h \
                 1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/CMSIS/core_cm4.h \
                 1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/CMSIS/core_cm4_simd.h \
@@ -249,21 +249,21 @@ SOURCES += 0_Project/examples/handsfree_simple_app/src/main.cpp \
                 1_Processor/BoardAbstract/openre_board_v2.cpp \
                 1_Processor/BoardAbstract/openre_board_mini.cpp \
                 1_Processor/BoardAbstract/alientek_mini.cpp \
-                1_Processor/STM32F4/BSPLIB/adc_dac.c \
-                1_Processor/STM32F4/BSPLIB/can.c \
-                1_Processor/STM32F4/BSPLIB/delay.c \
-                1_Processor/STM32F4/BSPLIB/encoder.c \
-                1_Processor/STM32F4/BSPLIB/flash.c \
-                1_Processor/STM32F4/BSPLIB/i2c.c \
-                1_Processor/STM32F4/BSPLIB/nvic.c \
-                1_Processor/STM32F4/BSPLIB/pwm_in.c \
-                1_Processor/STM32F4/BSPLIB/pwm_out.c \
-                1_Processor/STM32F4/BSPLIB/rtc.c \
-                1_Processor/STM32F4/BSPLIB/spi.c \
-                1_Processor/STM32F4/BSPLIB/sram.c \
-                1_Processor/STM32F4/BSPLIB/timer.c \
-                1_Processor/STM32F4/BSPLIB/usart.c \
-                1_Processor/STM32F4/BSPLIB/wdg_wkup.c \
+                1_Processor/STM32F4/BSPLIB/src/407/adc_dac.c \
+                1_Processor/STM32F4/BSPLIB/src/407/can.c \
+                1_Processor/STM32F4/BSPLIB/src/407/delay.c \
+                1_Processor/STM32F4/BSPLIB/src/407/encoder.c \
+                1_Processor/STM32F4/BSPLIB/src/407/flash.c \
+                1_Processor/STM32F4/BSPLIB/src/407/i2c.c \
+                1_Processor/STM32F4/BSPLIB/src/407/nvic.c \
+                1_Processor/STM32F4/BSPLIB/src/407/pwm_in.c \
+                1_Processor/STM32F4/BSPLIB/src/407/pwm_out.c \
+                1_Processor/STM32F4/BSPLIB/src/407/rtc.c \
+                1_Processor/STM32F4/BSPLIB/src/407/spi.c \
+                1_Processor/STM32F4/BSPLIB/src/407/sram.c \
+                1_Processor/STM32F4/BSPLIB/src/407/timer.c \
+                1_Processor/STM32F4/BSPLIB/src/407/usart.c \
+                1_Processor/STM32F4/BSPLIB/src/407/wdg_wkup.c \
                 1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/CMSIS/Device/ST/STM32F4xx/Source/Templates/system_stm32f4xx.c \
                 1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/src/misc.c \
                 1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.c \
@@ -390,5 +390,6 @@ SOURCES += 0_Project/examples/handsfree_simple_app/src/main.cpp \
                 3_OS/STM32F4/RTOS/uCOS-III/uCOS-III/Source/os_tmr.c \
                 3_OS/STM32F4/RTOS/uCOS-III/uCOS-III/Source/os_var.c \
                 3_OS/STM32F4/RTOS/uCOS-III/uC-CPU/ARM-Cortex-M4/GNU/cpu_c.c \
-                3_OS/STM32F4/RTOS/uCOS-III/uCOS-III/Ports/ARM-Cortex-M4/Generic/GNU/os_cpu_c.c
+                3_OS/STM32F4/RTOS/uCOS-III/uCOS-III/Ports/ARM-Cortex-M4/Generic/GNU/os_cpu_c.c \
+    1_Processor/BoardAbstract/weact_coreboard_401.cpp
 

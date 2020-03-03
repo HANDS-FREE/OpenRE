@@ -86,6 +86,22 @@ BOARD_ABSTRACT  += $(TOP_PATH)/1_Processor/BoardAbstract/alientek_mini.cpp
 endif
 
 ################################################################################  
+# mallbot_board_v1:
+#   STM32F407VE ...
+#   
+#   
+################################################################################  
+ifeq "$(strip $(BOARD_TYPE))" "weact_coreboard_401"
+
+DDEFS           += -DWEACT_COREBOARD_401 -DSTM32F401xx -DUSE_STDPERIPH_DRIVER 
+DDEFS           += -DHSE_VALUE=25000000 
+MCU             ?= cortex-m4  
+CPU_TYPE        ?= STM32F4
+BOARD_ABSTRACT  += $(TOP_PATH)/1_Processor/BoardAbstract/weact_coreboard_401.cpp
+
+endif
+
+################################################################################  
 # :
 #   
 #   

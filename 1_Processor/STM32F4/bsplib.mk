@@ -87,19 +87,16 @@ C_SRC          	+= $(STLIB_PATH)/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f
 C_SRC          	+= $(STLIB_PATH)/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.c
 
 LINKERSCRIPT   	= $(STM32F4_PATH)/LinkScript/stm32f407xx_flash.ld
+
+C_SRC          	+= $(wildcard $(BSPLIB_PATH)/src/407/*.c)
 endif
 ################################################################################
 ifeq "$(findstring STM32F401xx,$(DDEFS))" "STM32F401xx"
-ASM_SRC        	+= $(STLIB_PATH)/Libraries/CMSIS/Device/ST/STM32F4xx/Source/Templates/gcc_ride7/startup_stm32f40_41xxx.s
-C_SRC          	+= $(STLIB_PATH)/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.c
-C_SRC          	+= $(STLIB_PATH)/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.c
-C_SRC          	+= $(STLIB_PATH)/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.c
-C_SRC          	+= $(STLIB_PATH)/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.c
-C_SRC          	+= $(STLIB_PATH)/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.c
-C_SRC          	+= $(STLIB_PATH)/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.c
-C_SRC          	+= $(STLIB_PATH)/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.c
+ASM_SRC        	+= $(STLIB_PATH)/Libraries/CMSIS/Device/ST/STM32F4xx/Source/Templates/gcc_ride7/startup_stm32f401xx.s
 
 LINKERSCRIPT   	= $(STM32F4_PATH)/LinkScript/stm32f401xx_flash.ld
+
+C_SRC          	+= $(wildcard $(BSPLIB_PATH)/src/401/*.c)
 endif
 ################################################################################
 ifeq "$(findstring STM32F410xx,$(DDEFS))" "STM32F410xx"
@@ -166,11 +163,10 @@ C_SRC          	+= $(STLIB_PATH)/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f
 C_SRC          	+= $(STLIB_PATH)/Libraries/STM32F4xx_StdPeriph_Driver/src/misc.c
 
 C_SRC          	+= $(STLIB_PATH)/Libraries/CMSIS/Device/ST/STM32F4xx/Source/Templates/system_stm32f4xx.c
-C_SRC          	+= $(wildcard $(BSPLIB_PATH)/*.c)
 
 #Includes
 INCDIR += -I$(STM32F4_PATH)/ \
-  -I$(BSPLIB_PATH)/ \
+  -I$(BSPLIB_PATH)/inc/ \
   -I$(STLIB_PATH)/Libraries/CMSIS/Device/ST/STM32F4xx/Include/ \
   -I$(STLIB_PATH)/Libraries/CMSIS/Include/ \
   -I$(STLIB_PATH)/Libraries/STM32F4xx_StdPeriph_Driver/ \

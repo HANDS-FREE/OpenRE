@@ -24,20 +24,20 @@
 #ifndef BSPLIB_H
 #define	BSPLIB_H
 
-#include "BSPLIB/nvic.h"
-#include "BSPLIB/delay.h"
-#include "BSPLIB/rtc.h"	 	
-#include "BSPLIB/wdg_wkup.h"
-#include "BSPLIB/flash.h"
-#include "BSPLIB/usart.h"
-#include "BSPLIB/adc_dac.h"
-#include "BSPLIB/timer.h"
-#include "BSPLIB/pwm_in.h" 
-#include "BSPLIB/pwm_out.h"
-#include "BSPLIB/encoder.h"
-#include "BSPLIB/i2c.h"
-#include "BSPLIB/can.h"
-#include "BSPLIB/spi.h"
+#include "BSPLIB/inc/nvic.h"
+#include "BSPLIB/inc/delay.h"
+#include "BSPLIB/inc/rtc.h"	 	
+#include "BSPLIB/inc/wdg_wkup.h"
+#include "BSPLIB/inc/flash.h"
+#include "BSPLIB/inc/usart.h"
+#include "BSPLIB/inc/adc_dac.h"
+#include "BSPLIB/inc/timer.h"
+#include "BSPLIB/inc/pwm_in.h" 
+#include "BSPLIB/inc/pwm_out.h"
+#include "BSPLIB/inc/encoder.h"
+#include "BSPLIB/inc/i2c.h"
+#include "BSPLIB/inc/can.h"
+#include "BSPLIB/inc/spi.h"
 
 /**********************************************************************************************************************/
 //compilation function
