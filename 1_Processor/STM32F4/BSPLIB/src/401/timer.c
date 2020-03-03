@@ -32,7 +32,7 @@ extern "C" {
 *
 * Description: Initialize timer interrupt. Input parameter :TIMx and delay time(us), *timer2--7     1ms
 *              TIM2 TIM5 32BIT     others are 16BITS timer
-*              TIM1 TIM8 TIM9 TIM10 TIM11   84Mclock   others are 42 Mhz clock
+*              TIM1 TIM8 TIM9 TIM10 TIM11   84Mclock   others are 84 Mhz clock
 *
 * Arguments:
 *
@@ -55,32 +55,32 @@ void HF_Timer_Init(TIM_TypeDef* TIMx , uint32_t Time_us)
     else if( TIMx == TIM2){
         RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2 , ENABLE);
         TIM2_NVIC_Configuration();
-        TIM_TimeBaseStructure.TIM_Prescaler= (42 - 1);
+        TIM_TimeBaseStructure.TIM_Prescaler= (84 - 1);
     }
     else if( TIMx == TIM3){
         RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3 , ENABLE);
         TIM3_NVIC_Configuration();
-        TIM_TimeBaseStructure.TIM_Prescaler= (42 - 1);
+        TIM_TimeBaseStructure.TIM_Prescaler= (84 - 1);
     }
     else if( TIMx == TIM4){
         RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4 , ENABLE);
         TIM4_NVIC_Configuration();
-        TIM_TimeBaseStructure.TIM_Prescaler= (42 - 1);
+        TIM_TimeBaseStructure.TIM_Prescaler= (84 - 1);
     }
     else if( TIMx == TIM5){
         RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM5 , ENABLE);
         TIM5_NVIC_Configuration();
-        TIM_TimeBaseStructure.TIM_Prescaler= (42 - 1);
+        TIM_TimeBaseStructure.TIM_Prescaler= (84 - 1);
     }
     else if( TIMx == TIM6){
         RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM6 , ENABLE);
         TIM6_NVIC_Configuration();
-        TIM_TimeBaseStructure.TIM_Prescaler= (42 - 1);
+        TIM_TimeBaseStructure.TIM_Prescaler= (84 - 1);
     }
     else if( TIMx == TIM7){
         RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM7 , ENABLE);
         TIM7_NVIC_Configuration();
-        TIM_TimeBaseStructure.TIM_Prescaler= (42 - 1);
+        TIM_TimeBaseStructure.TIM_Prescaler= (84 - 1);
     }
     else if( TIMx == TIM8){
         RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM8 , ENABLE);
@@ -105,17 +105,17 @@ void HF_Timer_Init(TIM_TypeDef* TIMx , uint32_t Time_us)
     else if( TIMx == TIM12){
         RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM12 , ENABLE);
         TIM12_NVIC_Configuration();
-        TIM_TimeBaseStructure.TIM_Prescaler= (42 - 1);
+        TIM_TimeBaseStructure.TIM_Prescaler= (84 - 1);
     }
     else if( TIMx == TIM13){
         RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM13 , ENABLE);
         TIM13_NVIC_Configuration();
-        TIM_TimeBaseStructure.TIM_Prescaler= (42 - 1);
+        TIM_TimeBaseStructure.TIM_Prescaler= (84 - 1);
     }
     else if( TIMx == TIM14){
         RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM14 , ENABLE);
         TIM14_NVIC_Configuration();
-        TIM_TimeBaseStructure.TIM_Prescaler= (42 - 1);
+        TIM_TimeBaseStructure.TIM_Prescaler= (84 - 1);
     }
 
     TIM_TimeBaseStructure.TIM_Period= Time_us-1 ;               /* the value of auto reload register  */
