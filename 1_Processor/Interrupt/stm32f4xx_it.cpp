@@ -159,6 +159,30 @@ void TIM6_DAC_IRQHandler(void)
 #endif
 }
 
+void TIM5_IRQHandler(void)
+{
+#if SYSTEM_SUPPORT_OS == 1
+    OSIntEnter();
+#endif
+    if(TIM_GetITStatus(TIM5 , TIM_IT_Update)== SET  )
+    {
+        Board::getInstance()->cnt_1ms++;
+        Board::getInstance()->cnt_2ms++;
+        Board::getInstance()->cnt_5ms++;
+        Board::getInstance()->cnt_10ms++;
+        Board::getInstance()->cnt_20ms++;
+        Board::getInstance()->cnt_50ms++;
+        Board::getInstance()->cnt_100ms++;
+        Board::getInstance()->cnt_500ms++;
+        Board::getInstance()->cnt_1000ms++;
+        Board::getInstance()->cnt_2000ms++;
+        TIM_ClearITPendingBit(TIM5 , TIM_FLAG_Update);     // clear interrupt flag
+    }
+#if SYSTEM_SUPPORT_OS == 1
+    OSIntExit();
+#endif
+}
+
 void HardFault_Handler(void)
 {
 #if SYSTEM_SUPPORT_OS == 1

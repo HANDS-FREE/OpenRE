@@ -198,7 +198,7 @@ void Board::ledInit(void)
     GPIO_InitTypeDef  GPIO_InitStruct;
     GPIO_InitStruct.GPIO_Mode = GPIO_Mode_OUT;
     GPIO_InitStruct.GPIO_OType = GPIO_OType_PP;
-    GPIO_InitStruct.GPIO_Speed = GPIO_Speed_100MHz;
+    GPIO_InitStruct.GPIO_Speed = GPIO_Speed_2MHz;
     GPIO_InitStruct.GPIO_PuPd = GPIO_PuPd_UP;
 
     RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOE,ENABLE);
@@ -254,7 +254,7 @@ void Board::beepInit(void)
     GPIO_InitTypeDef  GPIO_InitStruct;
     GPIO_InitStruct.GPIO_Mode = GPIO_Mode_OUT;
     GPIO_InitStruct.GPIO_OType = GPIO_OType_PP;
-    GPIO_InitStruct.GPIO_Speed = GPIO_Speed_100MHz;
+    GPIO_InitStruct.GPIO_Speed = GPIO_Speed_2MHz;
     GPIO_InitStruct.GPIO_PuPd = GPIO_PuPd_UP;
     RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOE,ENABLE);
     GPIO_InitStruct.GPIO_Pin = GPIO_Pin_1 ;
@@ -300,7 +300,7 @@ void Board::motorInterfaceInit(uint8_t mode , uint8_t motor_id , float motor_pwm
     GPIO_StructInit(&GPIO_InitStructure);
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
     GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
     GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_DOWN;
 
     if(mode == 0)
@@ -716,7 +716,7 @@ void Board::axServoInterfaceInit(void)
     RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOD , ENABLE);
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
     GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
     GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_DOWN;
     GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10;
     GPIO_Init(GPIOD , &GPIO_InitStructure);

@@ -21,10 +21,10 @@ Board::Board() : BoardAbstract()
     battery_proportion_ = 11.00 ;
 
 #ifndef DEBUG_PRINTF_INTERFACE
-    device_type[USART_DEBUG] = 0x10;
+    device_type[USART_DEBUG] = 0x11;
 #else
     if(DEBUG_PRINTF_INTERFACE == 1){
-        device_type[USART_DEBUG] = 0x10;
+        device_type[USART_DEBUG] = 0x11;
     }
     else if(DEBUG_PRINTF_INTERFACE == 2){
         device_type[USART_DEBUG] = 0x20;
@@ -45,10 +45,10 @@ Board::Board() : BoardAbstract()
 #endif
 
 #ifndef PC_INTERFACE
-    device_type[USART_PC] = 0x10;
+    device_type[USART_PC] = 0x11;
 #else
     if(PC_INTERFACE == 1){
-        device_type[USART_PC] = 0x10;
+        device_type[USART_PC] = 0x11;
     }
     else if(PC_INTERFACE == 2){
         device_type[USART_PC] = 0x20;
@@ -72,7 +72,7 @@ Board::Board() : BoardAbstract()
     device_type[USART_RADIO] = 0x40;
 #else
     if(RADIO_INTERFACE == 1){
-        device_type[USART_RADIO] = 0x10;
+        device_type[USART_RADIO] = 0x11;
     }
     else if(RADIO_INTERFACE == 2){
         device_type[USART_RADIO] = 0x20;
@@ -164,10 +164,10 @@ Board::Board() : BoardAbstract()
     else { device_type[MOTOR4] = 0x40;}
 #endif
 
-    device_type[USART_GPS] = 0x32;
-    device_type[USART_SBUS] = 0x21;
-    device_type[USART_DIGITAL_SERVO] = 0x32;
-    device_type[USART_IMU] = 0x60;
+    device_type[USART_GPS] = 0x00;
+    device_type[USART_SBUS] = 0x00;
+    device_type[USART_DIGITAL_SERVO] = 0x00;
+    device_type[USART_IMU] = 0x00;
     device_type[IIC_IMU] = 0x10;
     device_type[IIC_AT24CXX] = 0x10;
     device_type[IIC_OLED] = 0x00;
@@ -198,7 +198,7 @@ void Board::ledInit(void)
     GPIO_InitTypeDef  GPIO_InitStruct;
     GPIO_InitStruct.GPIO_Mode = GPIO_Mode_OUT;
     GPIO_InitStruct.GPIO_OType = GPIO_OType_PP;
-    GPIO_InitStruct.GPIO_Speed = GPIO_Speed_100MHz;
+    GPIO_InitStruct.GPIO_Speed = GPIO_Speed_2MHz;
     GPIO_InitStruct.GPIO_PuPd = GPIO_PuPd_UP;
 
     RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC,ENABLE);
@@ -434,7 +434,7 @@ float Board::getADCInterfaceValue(uint8_t channel_x)
 
 void Board::timerInit(void)
 {
-    HF_Timer_Init(TIM6 , 1000);  //timer6 init , 1000us
+    HF_Timer_Init(TIM5 , 1000);  //timer6 init , 1000us
 }
 
 float Board::getBatteryVoltage(void)

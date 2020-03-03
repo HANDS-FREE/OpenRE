@@ -198,7 +198,7 @@ void Board::ledInit(void)
 {
     GPIO_InitTypeDef  GPIO_InitStruct;
     GPIO_InitStruct.GPIO_Mode = GPIO_Mode_Out_PP;
-    GPIO_InitStruct.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_InitStruct.GPIO_Speed = GPIO_Speed_2MHz;
 
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA , ENABLE);
     GPIO_InitStruct.GPIO_Pin = GPIO_Pin_2;
@@ -250,7 +250,7 @@ void Board::beepInit(void)
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA , ENABLE);
     GPIO_InitStruct.GPIO_Pin = GPIO_Pin_12 ;
     GPIO_InitStruct.GPIO_Mode = GPIO_Mode_Out_PP;
-    GPIO_InitStruct.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_InitStruct.GPIO_Speed = GPIO_Speed_2MHz;
     GPIO_Init(GPIOA , &GPIO_InitStruct);
 }
 
@@ -291,7 +291,7 @@ void Board::motorInterfaceInit(uint8_t mode , uint8_t motor_id , float motor_pwm
 {
     GPIO_InitTypeDef  GPIO_InitStructure;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
 
     if(mode == 0)
     {

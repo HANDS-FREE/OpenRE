@@ -264,6 +264,21 @@ SOURCES += 0_Project/examples/handsfree_simple_app/src/main.cpp \
                 1_Processor/STM32F4/BSPLIB/src/407/timer.c \
                 1_Processor/STM32F4/BSPLIB/src/407/usart.c \
                 1_Processor/STM32F4/BSPLIB/src/407/wdg_wkup.c \
+                1_Processor/STM32F4/BSPLIB/src/401/adc_dac.c \
+                1_Processor/STM32F4/BSPLIB/src/401/can.c \
+                1_Processor/STM32F4/BSPLIB/src/401/delay.c \
+                1_Processor/STM32F4/BSPLIB/src/401/encoder.c \
+                1_Processor/STM32F4/BSPLIB/src/401/flash.c \
+                1_Processor/STM32F4/BSPLIB/src/401/i2c.c \
+                1_Processor/STM32F4/BSPLIB/src/401/nvic.c \
+                1_Processor/STM32F4/BSPLIB/src/401/pwm_in.c \
+                1_Processor/STM32F4/BSPLIB/src/401/pwm_out.c \
+                1_Processor/STM32F4/BSPLIB/src/401/rtc.c \
+                1_Processor/STM32F4/BSPLIB/src/401/spi.c \
+                1_Processor/STM32F4/BSPLIB/src/401/sram.c \
+                1_Processor/STM32F4/BSPLIB/src/401/timer.c \
+                1_Processor/STM32F4/BSPLIB/src/401/usart.c \
+                1_Processor/STM32F4/BSPLIB/src/401/wdg_wkup.c \
                 1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/CMSIS/Device/ST/STM32F4xx/Source/Templates/system_stm32f4xx.c \
                 1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/src/misc.c \
                 1_Processor/STM32F4/STM32F4xx_DSP_StdPeriph_Lib_V1.8.0/Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.c \
