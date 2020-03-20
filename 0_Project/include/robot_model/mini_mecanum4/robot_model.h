@@ -39,7 +39,7 @@ public:
 
         chassis_para.type = MECANUM4;
         chassis_para.wheel_radius = 0.0485;
-        chassis_para.body_radius = 0.099;
+        chassis_para.body_radius = 0.199; // a + b  0.099 + 0.100
         chassis_para.speed_low_filter = 0.4;
         chassis_para.imu_fusion_enalbe = 0;
         chassis_para.control_enable = 1;

@@ -24,10 +24,10 @@ public:
 private:
     void robotToMotorTF(const float* robot , float* motor )
     {
-        *motor = -1 * (*robot) - 1 * (*(robot+1)) + body_radius * (*(robot+2)) ;
-        *(motor+1) =  1 * (*robot) - 1 * (*(robot+1)) + body_radius * (*(robot+2)) ;
-        *(motor+2) =  1 * (*robot) + 1 * (*(robot+1)) + body_radius * (*(robot+2)) ;
-        *(motor+3) = -1 * (*robot) + 1 * (*(robot+1)) +  body_radius * (*(robot+2)) ;
+        *motor = -1 * (*robot) + 1 * (*(robot+1)) + body_radius * (*(robot+2)) ;
+        *(motor+1) =  1 * (*robot) + 1 * (*(robot+1)) + body_radius * (*(robot+2)) ;
+        *(motor+2) =  1 * (*robot) - 1 * (*(robot+1)) + body_radius * (*(robot+2)) ;
+        *(motor+3) = -1 * (*robot) - 1 * (*(robot+1)) +  body_radius * (*(robot+2)) ;
     }
     void motorToRobotTF(const float* motor , float* robot)
     {
