@@ -1,9 +1,18 @@
-#ifndef TF_3OMNI_H
-#define TF_3OMNI_H
+#ifndef TF_OMNI3_H
+#define TF_OMNI3_H
 
 #include "tfrobot.h"
 
 //support for 3 wheel omni robots
+
+/*******************************************************************************
+3wd (Top view)
+
+    1
+  X   X
+    X
+ 2     3
+*******************************************************************************/
 
 class TFOmni3 : public TFRobot
 {
@@ -51,4 +60,4 @@ private:
 
 };
 
-#endif // TF_3OMNI_H
+#endif // TF_OMNI3_H

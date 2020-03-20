@@ -38,5 +38,4 @@ private:
 
 };
 
-
 #endif // TF_CARLIKE_H

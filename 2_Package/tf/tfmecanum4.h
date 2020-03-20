@@ -1,9 +1,19 @@
-#ifndef TF_4MECANUM_H
-#define TF_4MECANUM_H
+#ifndef TF_MECANUM4_H
+#define TF_MECANUM4_H
 
 #include "tfrobot.h"
 
 //support for 4 wheel mecanum robots
+
+/*******************************************************************************
+4wd (Top view)
+
+1       2
+  X   X
+    X
+  X   X
+4       3
+*******************************************************************************/
 
 class TFMecanum : public TFRobot
 {
@@ -15,15 +25,15 @@ private:
     void robotToMotorTF(const float* robot , float* motor )
     {
         *motor = -1 * (*robot) - 1 * (*(robot+1)) + body_radius * (*(robot+2)) ;
-        *(motor + 1) =  1 * (*robot) - 1 * (*(robot+1)) + body_radius * (*(robot+2)) ;
-        *(motor + 2) = -1 * (*robot) + 1 * (*(robot+1)) +  body_radius * (*(robot+2)) ;
-        *(motor + 3) =  1 * (*robot) +1 * (*(robot+1)) + body_radius * (*(robot+2)) ;
+        *(motor+1) =  1 * (*robot) - 1 * (*(robot+1)) + body_radius * (*(robot+2)) ;
+        *(motor+2) =  1 * (*robot) + 1 * (*(robot+1)) + body_radius * (*(robot+2)) ;
+        *(motor+3) = -1 * (*robot) + 1 * (*(robot+1)) +  body_radius * (*(robot+2)) ;
     }
     void motorToRobotTF(const float* motor , float* robot)
     {
-        *robot = -0.25f * (*motor) + 0.25f* (*(motor+1)) - 0.25 * (*(motor+2)) + 0.25f * (*(motor+3));
-        *(robot + 1) =  0.25f * (*motor) + 0.25f * (*(motor+1)) - 0.25f * (*(motor+2)) - 0.25f * (*(motor+3));
-        *(robot + 2) =  (0.25f/body_radius) * (*motor) + (0.25f/body_radius) * (*(motor+1)) + (0.25f/body_radius) * (*(motor+2)) + (0.25f/body_radius) * (*(motor+3));
+        *robot = -0.25f * (*motor) + 0.25f* (*(motor+1)) - 0.25 * (*(motor+3)) + 0.25f * (*(motor+2));
+        *(robot + 1) =  0.25f * (*motor) + 0.25f * (*(motor+1)) - 0.25f * (*(motor+3)) - 0.25f * (*(motor+2));
+        *(robot + 2) =  (0.25f/body_radius) * (*motor) + (0.25f/body_radius) * (*(motor+1)) + (0.25f/body_radius) * (*(motor+3)) + (0.25f/body_radius) * (*(motor+2));
     }
     void globalToRobotTF(const float* global , float* robot , float R_theta)
     {
@@ -51,4 +61,4 @@ private:
     }
 };
 
-#endif // TF_4MECANUM_H
+#endif // TF_MECANUM4_H

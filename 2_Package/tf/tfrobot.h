@@ -93,7 +93,7 @@ private:
     *
     * Scope:
     *
-    * Description:  机器人坐标到2个轮子的变换
+    * Description:  机器人坐标到轮子的变换
     *
     * Arguments:
     * Robot   为机器人坐标的速度向量XYZ
@@ -113,7 +113,7 @@ private:
     *
     * Scope:        public
     *
-    * Description:  三个轮子到机器人坐标的变换
+    * Description:  轮子到机器人坐标的变换
     *
     * Arguments:
     * Motor   为输出的三个电机的线速度v1  v2 ... vn
