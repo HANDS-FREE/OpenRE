@@ -29,18 +29,18 @@ public:
         motor_para.driver_type = MotorDriver_PWM_AND_IOAB;
         motor_para.motor_enable_num = 2;
         motor_para.simulation_model = 0;
-        motor_para.pid_t = 0.05;
-        motor_para.encoder_num  = 1300;
+        motor_para.pid_t = 0.01;
+        motor_para.encoder_num  = 94000;
         motor_para.pwm_max = 5000;
         motor_para.pwm_dead_zone = 20;
         motor_para.speed_low_filter = 0.5;
         motor_para.protect_current = 200;  // 200A means disable current  protect
-        motor_para.pid =  {0.0f , 0.0f , 0.0f , 7.0f , 100.0f ,0.0f , 0.0f , 0.0f , 0.0f};
+        motor_para.pid =  {0.0f , 0.0f , 0.0f , 11.0f , 15.0f , 0.0f , 0.0f , 0.0f , 0.0f};
 
         chassis_para.type = DIFFERENTIAL2;
         chassis_para.wheel_radius = 0.0625;
-        chassis_para.body_radius = 0.178;
-        chassis_para.speed_low_filter = 0.3;
+        chassis_para.body_radius = 0.176;
+        chassis_para.speed_low_filter = 0.7;
         chassis_para.imu_fusion_enalbe = 0;
         chassis_para.control_enable = 1;
         chassis_para.max_speed_limit.x = 2;
@@ -62,4 +62,4 @@ public:
     }
 };
 
-#endif // STONE_PARAMETERS_H
+#endif

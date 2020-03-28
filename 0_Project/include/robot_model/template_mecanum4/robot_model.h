@@ -24,7 +24,7 @@ public:
     {
 
         strcpy(robot_info.robot_name, "template_mecanum4");
-        strcpy(robot_info.robot_description ,  "this is a mecanum4 template parameters");
+        strcpy(robot_info.robot_description ,  "this is a mecanum4 template robot of handsfree");
 
         motor_para.driver_type = MotorDriver_PWM12_AND_IO;
         motor_para.motor_enable_num = 4;
@@ -35,7 +35,7 @@ public:
         motor_para.pwm_dead_zone = 10;
         motor_para.speed_low_filter = 0.3;
         motor_para.protect_current = 200;  // 200A means disable current  protect
-        motor_para.pid =  {0.0f  , 0.0f , 0.0f , 100.0f , 300.0f , 0.2f , 0.0f  , 0.0f , 0.0f};
+        motor_para.pid =  {0.0f , 0.0f , 0.0f , 100.0f , 300.0f , 0.2f , 0.0f , 0.0f , 0.0f};
 
         chassis_para.type = MECANUM4;
         chassis_para.wheel_radius = 0.0320;
@@ -62,4 +62,4 @@ public:
     }
 };
 
-#endif 
+#endif

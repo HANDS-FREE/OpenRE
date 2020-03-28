@@ -30,12 +30,12 @@ public:
         motor_para.motor_enable_num = 2;
         motor_para.simulation_model = 0;
         motor_para.pid_t = 0.02;
-        motor_para.encoder_num  = 1560 ;
+        motor_para.encoder_num  = 1560;
         motor_para.pwm_max = 5000;
         motor_para.pwm_dead_zone = 10;
         motor_para.speed_low_filter = 0.3;
         motor_para.protect_current = 200;  // 200A means disable current  protect
-        motor_para.pid =  {0.0f  , 0.0f , 0.0f , 60.0f , 500.0f , 0.2f , 0.0f  , 0.0f , 0.0f};
+        motor_para.pid =  {0.0f , 0.0f , 0.0f , 60.0f , 500.0f , 0.2f , 0.0f , 0.0f , 0.0f};
 
         chassis_para.type = DIFFERENTIAL2;
         chassis_para.wheel_radius = 0.0320;
@@ -49,8 +49,8 @@ public:
         head_para.speed_low_filter = 0.3;
         head_para.range.pitch = 50 * degree_to_radian;
         head_para.range.yaw = 70 * degree_to_radian;
-        head_para.offset.pitch = -5 *degree_to_radian;
-        head_para.offset.yaw = 60 * degree_to_radian;
+        head_para.offset.pitch = 0 *degree_to_radian;
+        head_para.offset.yaw = 0 * degree_to_radian;
         head_para.id.pitch = 7;
         head_para.id.yaw = 8;
         head_para.control_enable = 1;
@@ -62,4 +62,4 @@ public:
     }
 };
 
-#endif // MINI_PARAMETERS_H
+#endif

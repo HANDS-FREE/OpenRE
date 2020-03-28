@@ -30,12 +30,12 @@ public:
         motor_para.motor_enable_num = 2;
         motor_para.simulation_model = 0;
         motor_para.pid_t = 0.02;
-        motor_para.encoder_num  = 1560 ;
+        motor_para.encoder_num  = 1560;
         motor_para.pwm_max = 5000;
         motor_para.pwm_dead_zone = 10;
         motor_para.speed_low_filter = 0.3;
         motor_para.protect_current = 200;  // 200A means disable current  protect
-        motor_para.pid =  {0.0f  , 0.0f , 0.0f , 60.0f , 600.0f , 0.2f , 0.0f  , 0.0f , 0.0f};
+        motor_para.pid =  {0.0f , 0.0f , 0.0f , 60.0f , 600.0f , 0.2f , 0.0f , 0.0f , 0.0f};
 
         chassis_para.type = DIFFERENTIAL2;
         chassis_para.wheel_radius = 0.0320;

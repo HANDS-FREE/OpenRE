@@ -33,7 +33,6 @@ void mallcotest(void)
     }
 
     free(p);
-
 }
 
 void fputest(void)
