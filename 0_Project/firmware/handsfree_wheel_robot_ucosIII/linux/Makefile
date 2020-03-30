@@ -18,12 +18,13 @@ BOARD_TYPE      ?= openre_board_v2
 #####: If you're not a OpenRE developer, you don't need to change the following settings
 #############################################################parameters
 #####project name
-PROJECT         =  robot_$(ROBOT_MODEL)_$(BOARD_TYPE)
+PROJECT         =  robot_ucosIII_$(ROBOT_MODEL)_$(BOARD_TYPE)
 
 TOP_PATH        =  ../../../..
 
 #####BOOTLOADER  : enable disable
 BOOTLOADER_MODE ?= disable
+
 ##########################################################################source
 
 CXX_SRC         += ../src/main.cpp 

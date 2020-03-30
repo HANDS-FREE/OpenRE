@@ -83,7 +83,7 @@ void MotorTop::motorTest(void)
     {
         motors->setAngleSpeed(0,360);
     }
-    else if (i > 500 && i < 360)
+    else if (i > 500 && i < 1000)
     {
         motors->setAngleSpeed(0,-360);
     }

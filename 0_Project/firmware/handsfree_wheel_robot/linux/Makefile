@@ -24,6 +24,7 @@ TOP_PATH        =  ../../../..
 
 #####BOOTLOADER  : enable disable
 BOOTLOADER_MODE ?= disable
+
 ##########################################################################source
 
 CXX_SRC         += ../src/main.cpp 

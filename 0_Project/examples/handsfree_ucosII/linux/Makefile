@@ -8,7 +8,7 @@
 #####Giraffe Series: giraffe 
 #####Other Options : null virtual ("virtual" It's a semi physical simulation model , you don't need a real robot)
 
-ROBOT_MODEL     ?= stone_v3
+ROBOT_MODEL     ?= null
 
 #####BOARD_TYPE: support all HandsFree robot boards (you need to know your robot board type)
 #####openre_board_mini , openre_board_v1 , openre_board_v2
@@ -18,12 +18,13 @@ BOARD_TYPE      ?= openre_board_v2
 #####: If you're not a OpenRE developer, you don't need to change the following settings
 #############################################################parameters
 #####project name
-PROJECT         =  robot_$(ROBOT_MODEL)_$(BOARD_TYPE)
+PROJECT         =  ucosII_$(ROBOT_MODEL)_$(BOARD_TYPE)
 
 TOP_PATH        =  ../../../..
 
 #####BOOTLOADER  : enable disable
 BOOTLOADER_MODE ?= disable
+
 ##########################################################################source
 
 CXX_SRC         += ../src/main.cpp 

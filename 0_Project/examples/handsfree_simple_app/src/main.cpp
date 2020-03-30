@@ -23,13 +23,15 @@ void mallcotest(void)
 
     p = (char *)malloc(sizeof(char)*1024*20); //20KB
 
+    printf("malloc test .... \r\n");
+
     if(p== NULL)
     {
-        printf("malloc test error\r\n");
+        printf("malloc test error !!! \r\n");
     }
     else
     {
-        printf("malloc test succsess p = %x \r\n\r\n" , (unsigned int)p);
+        printf("malloc test succsess !!! p = %x \r\n" , (unsigned int)p);
     }
 
     free(p);
@@ -39,6 +41,9 @@ void fputest(void)
 {
     float a=1.1,b=1.2,c=1.3,d=1.4;
     int i = 0;
+
+    printf("FPU test .... \r\n");
+
     HF_Get_Dtime();
     while( i<= 1000000)
     {
@@ -46,9 +51,12 @@ void fputest(void)
         c+=b/d;
     }
     float d_time = HF_Get_Dtime();
-    printf("fpu test d_time = %f , c= %f\r\n" , d_time,c);
+
+    printf("FPU function execution time = %f us , sum = %f\r\n" , d_time , c);
 #ifdef __FPU_PRESENT
-    printf("__FPU_PRESENT = %d __FPU_USED = %d\r\n" , __FPU_PRESENT,__FPU_USED);
+    printf("__FPU_PRESENT = %d    __FPU_USED = %d \r\n" , __FPU_PRESENT , __FPU_USED);
+#else
+    printf("__FPU_PRESENT = %d    __FPU_USED = %d \r\n" , 0 , 0);
 #endif
 }
 
@@ -57,9 +65,12 @@ int main(void)
     Board *board = Board::getInstance();
     board->boardBasicInit();
 
+    printf("\r\n-------------------------------------\r\n");
     printf("welcome to handsfree \r\n");
-
+    printf("\r\n-------------------------------------\r\n");
+    
     mallcotest();
+    printf("\r\n-------------------------------------\r\n");
     fputest();
 
     while(1)

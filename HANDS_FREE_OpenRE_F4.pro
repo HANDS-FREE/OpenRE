@@ -249,6 +249,7 @@ SOURCES += 0_Project/examples/handsfree_simple_app/src/main.cpp \
                 1_Processor/BoardAbstract/openre_board_v2.cpp \
                 1_Processor/BoardAbstract/openre_board_mini.cpp \
                 1_Processor/BoardAbstract/alientek_mini.cpp \
+                1_Processor/BoardAbstract/weact_coreboard_401.cpp \
                 1_Processor/STM32F4/BSPLIB/src/407/adc_dac.c \
                 1_Processor/STM32F4/BSPLIB/src/407/can.c \
                 1_Processor/STM32F4/BSPLIB/src/407/delay.c \
@@ -405,6 +406,5 @@ SOURCES += 0_Project/examples/handsfree_simple_app/src/main.cpp \
                 3_OS/STM32F4/RTOS/uCOS-III/uCOS-III/Source/os_tmr.c \
                 3_OS/STM32F4/RTOS/uCOS-III/uCOS-III/Source/os_var.c \
                 3_OS/STM32F4/RTOS/uCOS-III/uC-CPU/ARM-Cortex-M4/GNU/cpu_c.c \
-                3_OS/STM32F4/RTOS/uCOS-III/uCOS-III/Ports/ARM-Cortex-M4/Generic/GNU/os_cpu_c.c \
-    1_Processor/BoardAbstract/weact_coreboard_401.cpp
+                3_OS/STM32F4/RTOS/uCOS-III/uCOS-III/Ports/ARM-Cortex-M4/Generic/GNU/os_cpu_c.c 
 

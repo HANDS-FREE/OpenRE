@@ -195,7 +195,7 @@ private:
     {
         if(voltage >=4.2) return 1;
         if(voltage <=3 && voltage >=1.5) return 0;
-        if(voltage <=0.5 ) return -1;
+        if(voltage < 1.5 ) return -1;
         float A = 1.0136017772655;
         float B = -38.6694358844531;
         float C = 3.84067378865132;
