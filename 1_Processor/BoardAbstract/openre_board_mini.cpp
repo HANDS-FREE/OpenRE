@@ -258,7 +258,7 @@ void Board::setBeepState(uint8_t operation)
 {
     if(operation == 0) { GPIO_ResetBits(GPIOA , GPIO_Pin_12);}
     else if(operation == 1) { GPIO_SetBits(GPIOA , GPIO_Pin_12);}
-    else if(operation == 2) { GPIO_SetBits(GPIOA , GPIO_Pin_12);}
+    else if(operation == 2) { GPIO_ToggleBits(GPIOA , GPIO_Pin_12);}
 }
 
 void Board::keyInit(void)
