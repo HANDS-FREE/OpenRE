@@ -75,20 +75,20 @@ void Sensors::chassisDataUpdate(void)
 
 void Sensors::imuSensorDataUpdate(void)
 {
-    sensors->imu_data.angular_velocity.x = mpu6050.gyro_normal.x; //rad/sec
-    sensors->imu_data.angular_velocity.y = mpu6050.gyro_normal.y;
-    sensors->imu_data.angular_velocity.z = mpu6050.gyro_normal.z;
+    sensors->imu_data.imu1.angular_velocity.x = mpu6050.gyro_normal.x; //rad/sec
+    sensors->imu_data.imu1.angular_velocity.y = mpu6050.gyro_normal.y;
+    sensors->imu_data.imu1.angular_velocity.z = mpu6050.gyro_normal.z;
 
-    sensors->imu_data.linear_acceleration.x = mpu6050.acc_normal.x;
-    sensors->imu_data.linear_acceleration.y = mpu6050.acc_normal.y;
-    sensors->imu_data.linear_acceleration.z = mpu6050.acc_normal.z;
+    sensors->imu_data.imu1.linear_acceleration.x = mpu6050.acc_normal.x;
+    sensors->imu_data.imu1.linear_acceleration.y = mpu6050.acc_normal.y;
+    sensors->imu_data.imu1.linear_acceleration.z = mpu6050.acc_normal.z;
 
-    sensors->imu_data.orientation_quaternion.x = imu.imu_fmodel_frame.q_x;
-    sensors->imu_data.orientation_quaternion.y = imu.imu_fmodel_frame.q_y;
-    sensors->imu_data.orientation_quaternion.z = imu.imu_fmodel_frame.q_z;
-    sensors->imu_data.orientation_quaternion.w = imu.imu_fmodel_frame.q_w;
+    sensors->imu_data.imu1.orientation_quaternion.x = imu.imu_fmodel_frame.q_x;
+    sensors->imu_data.imu1.orientation_quaternion.y = imu.imu_fmodel_frame.q_y;
+    sensors->imu_data.imu1.orientation_quaternion.z = imu.imu_fmodel_frame.q_z;
+    sensors->imu_data.imu1.orientation_quaternion.w = imu.imu_fmodel_frame.q_w;
 
-    sensors->imu_data.orientation_euler_rpy.pitch = imu.imu_fmodel_frame.s_pryaw.pitch * 0.017453f ; //rad
-    sensors->imu_data.orientation_euler_rpy.roll = imu.imu_fmodel_frame.s_pryaw.roll * 0.017453f;
-    sensors->imu_data.orientation_euler_rpy.yaw = imu.imu_fmodel_frame.s_pryaw.yaw * 0.017453f;
+    sensors->imu_data.imu1.orientation_euler_rpy.pitch = imu.imu_fmodel_frame.s_pryaw.pitch * 0.017453f ; //rad
+    sensors->imu_data.imu1.orientation_euler_rpy.roll = imu.imu_fmodel_frame.s_pryaw.roll * 0.017453f;
+    sensors->imu_data.imu1.orientation_euler_rpy.yaw = imu.imu_fmodel_frame.s_pryaw.yaw * 0.017453f;
 }

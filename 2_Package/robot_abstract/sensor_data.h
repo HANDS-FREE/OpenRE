@@ -10,19 +10,6 @@ typedef struct{
     unsigned char sec;
 }__attribute__((packed)) UtcTime;
 
-typedef struct{
-    unsigned char online;
-    float frequency;     //GPSData update frequency(1~10HZ)
-    UtcTime uct_time;
-    unsigned char satellite_num;
-    float altitude;      //unit : m
-    float ground_speed;  //unit: m/s
-    unsigned int latitude;          //纬度 分扩大100000倍,实际要除以100000
-    unsigned char nshemi;           //北纬/南纬,N:北纬;S:南纬
-    unsigned int longitude;         //经度 分扩大100000倍,实际要除以100000
-    unsigned char ewhemi;           //东经/西经,E:东经;W:西经
-}__attribute__((packed)) GPSData;
-
 typedef struct {
     float x;
     float y;
@@ -42,19 +29,39 @@ typedef struct{
     float yaw;
 }__attribute__((packed)) EulerPose;
 
-/*****************************************************************************************/
-//10HZ ~ 50HZ
 typedef struct{
     unsigned char online; //0bit: 6DOF  1bit: magnetometer 2bit: bar
-    float frequency;     //IMUSensorData update frequency(50~1000HZ)
+    unsigned short int frequency[3];  //IMUSensorData update frequency(50~1000HZ) [0]: 6DOF , [1]: magnetometer , [2]: bar
     Vector3 angular_velocity;     //rad/sec , Row major about x, y, z axes
-    Vector3 linear_acceleration;  //should be in m/s^2 (not in g's) , Row major about x, y, z axes
+    Vector3 linear_acceleration;  //g's Row major about x, y, z axes
     Vector3 magnetometer_xyz;
+    float bar_pressure;
     Quaternion orientation_quaternion; //IMU 6DOF
     EulerPose orientation_euler_rpy;   //rad IMU 6DOF
     float magnetometer_angle;
     float magnetometer_angle_fusion_gyro; //AHRS 9DOF
     float bar_altitude;   //unit: m 10DOF
+}__attribute__((packed)) IMU10DOF;
+
+/*****************************************************************************************/
+
+typedef struct{
+    unsigned char online;
+    float frequency;     //GPSData update frequency(1~10HZ)
+    UtcTime uct_time;
+    unsigned char satellite_num;
+    float altitude;      //unit : m
+    float ground_speed;  //unit: m/s
+    unsigned int latitude;          //dimension * 100000
+    unsigned char nshemi;           //N/S
+    unsigned int longitude;         //longitude * 100000
+    unsigned char ewhemi;           //E/W
+}__attribute__((packed)) GPSData;
+
+//10HZ ~ 50HZ
+typedef struct{
+    IMU10DOF imu1;
+    IMU10DOF imu2;
 }__attribute__((packed)) IMUSensorData;
 
 //10HZ
