@@ -11,7 +11,9 @@
 ROBOT_MODEL     ?= stone_v3
 
 #####BOARD_TYPE: support all HandsFree robot boards (you need to know your robot board type)
-#####openre_board_mini , openre_board_v1 , openre_board_v2
+#####openre_board_mini (for handsfree mini series robots)
+#####openre_board_v1   (for handsfree stone_v1 series robots)
+#####openre_board_v2   (for handsfree stone_v3 series robots)
 #####alientek_mini weact_coreboard_401 (other open source control boards)
 BOARD_TYPE      ?= openre_board_v2
 
