@@ -4,6 +4,7 @@
 
 TEMPLATE = app
 TARGET = HNADS-FREE-F4
+DEFINES += STM32F40_41xxx 
 
 INCLUDEPATH += . \
                 0_Project/examples/handsfree_simple_app/src \
@@ -240,6 +241,7 @@ SOURCES += 0_Project/examples/handsfree_simple_app/src/main.cpp \
                 0_Project/examples/handsfree_ucosII/src/main.cpp  \
                 0_Project/examples/handsfree_ucosIII/src/main.cpp \
                 0_Project/examples/hwtest/src/main.cpp  \
+                0_Project/examples/handsfree_can_test/src/main.cpp \
                 0_Project/firmware/handsfree_wheel_robot/src/main.cpp  \
                 0_Project/firmware/handsfree_wheel_robot_ucosIII/src/main.cpp  \
                 1_Processor/Interrupt/stm32f10x_it.cpp \
@@ -406,5 +408,5 @@ SOURCES += 0_Project/examples/handsfree_simple_app/src/main.cpp \
                 3_OS/STM32F4/RTOS/uCOS-III/uCOS-III/Source/os_tmr.c \
                 3_OS/STM32F4/RTOS/uCOS-III/uCOS-III/Source/os_var.c \
                 3_OS/STM32F4/RTOS/uCOS-III/uC-CPU/ARM-Cortex-M4/GNU/cpu_c.c \
-                3_OS/STM32F4/RTOS/uCOS-III/uCOS-III/Ports/ARM-Cortex-M4/Generic/GNU/os_cpu_c.c 
+                3_OS/STM32F4/RTOS/uCOS-III/uCOS-III/Ports/ARM-Cortex-M4/Generic/GNU/os_cpu_c.c \ 
 

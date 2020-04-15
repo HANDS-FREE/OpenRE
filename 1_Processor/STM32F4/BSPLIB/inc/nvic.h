@@ -18,6 +18,7 @@ void USART3_NVIC_Configuration(void);
 void UART4_NVIC_Configuration(void);
 void UART5_NVIC_Configuration(void);
 void USART6_NVIC_Configuration(void);
+
 void TIM1_NVIC_Configuration(void);
 void TIM2_NVIC_Configuration(void);
 void TIM3_NVIC_Configuration(void);
@@ -40,7 +41,6 @@ void EXTI3_NVIC_Configuration(void);
 void EXTI4_NVIC_Configuration(void);
 void EXTI9_5_NVIC_Configuration(void);
 void EXTI15_10_NVIC_Configuration(void);
-
 
 #ifdef __cplusplus
 }

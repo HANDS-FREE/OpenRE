@@ -7,13 +7,18 @@ extern "C" {
 
 #include "stm32f10x.h"
 
-void CAN1_NVIC_Configuration(void);
-void CAN2_NVIC_Configuration(void);
+void CAN1_RX0_NVIC_Configuration(void);
+void CAN1_RX1_NVIC_Configuration(void);
+void CAN2_RX0_NVIC_Configuration(void);
+void CAN2_RX1_NVIC_Configuration(void);
+
 void USART1_NVIC_Configuration(void);
 void USART2_NVIC_Configuration(void);
 void USART3_NVIC_Configuration(void);
 void UART4_NVIC_Configuration(void);
 void UART5_NVIC_Configuration(void);
+
+void TIM1_NVIC_Configuration(void);
 void TIM2_NVIC_Configuration(void);
 void TIM3_NVIC_Configuration(void);
 void TIM4_NVIC_Configuration(void);
@@ -21,6 +26,7 @@ void TIM5_NVIC_Configuration(void);
 void TIM6_NVIC_Configuration(void);
 void TIM7_NVIC_Configuration(void);
 void TIM8_NVIC_Configuration(void);
+
 void EXTI0_NVIC_Configuration(void);
 void EXTI1_NVIC_Configuration(void);
 void EXTI2_NVIC_Configuration(void);

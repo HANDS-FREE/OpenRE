@@ -364,7 +364,7 @@ void BoardAbstract::canDeviceInit(DeviceType can_device_type)
 
     device_channel = getByteHighFourBit(device_type[can_device_type]);
     device_mapping = getByteLowFourBit(device_type[can_device_type]);
-    HF_CAN_Init(device_channel , device_mapping);
+    //HF_CAN_Init(device_channel , device_mapping);
 }
 
 void BoardAbstract::canDeviceSendMessage(DeviceType can_device_type , uint8_t sender_id, uint8_t receiver_id,

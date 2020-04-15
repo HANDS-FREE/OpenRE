@@ -4,6 +4,7 @@
 
 TEMPLATE = app
 TARGET = HNADS-FREE-F1
+DEFINES += STM32F10X_HD 
 
 INCLUDEPATH += . \
                 0_Project/examples/handsfree_simple_app/src \
@@ -70,6 +71,7 @@ HEADERS += 0_Project/examples/handsfree_simple_app/src/main_config.h \
                 0_Project/examples/handsfree_ucosII/src/main_config.h  \
                 0_Project/examples/handsfree_ucosIII/src/main_config.h  \
                 0_Project/examples/hwtest/src/main_config.h  \
+                0_Project/examples/handsfree_can_test/src/main_config.h \
                 0_Project/firmware/handsfree_wheel_robot/src/main_config.h  \
                 0_Project/firmware/handsfree_wheel_robot_ucosIII/src/main_config.h \
                 0_Project/include/robot_model/mini/robot_model.h \
@@ -221,7 +223,8 @@ HEADERS += 0_Project/examples/handsfree_simple_app/src/main_config.h \
                 3_OS/STM32F1/RTOS/uCOS-III/uCOS-III/Source/os_type.h \
                 3_OS/STM32F1/RTOS/uCOS-III/uC-CPU/ARM-Cortex-M3/GNU/cpu.h \
                 3_OS/STM32F1/RTOS/uCOS-III/uCOS-III/Ports/ARM-Cortex-M3/Generic/GNU/os_cpu.h \
-                4_Thirdparty/libs_include.h
+                4_Thirdparty/libs_include.h \
+
 
 
 SOURCES += 0_Project/examples/handsfree_simple_app/src/main.cpp \
@@ -229,6 +232,7 @@ SOURCES += 0_Project/examples/handsfree_simple_app/src/main.cpp \
                 0_Project/examples/handsfree_ucosII/src/main.cpp  \
                 0_Project/examples/handsfree_ucosIII/src/main.cpp \
                 0_Project/examples/hwtest/src/main.cpp  \
+                0_Project/examples/handsfree_can_test/src/main.cpp \
                 0_Project/firmware/handsfree_wheel_robot/src/main.cpp  \
                 0_Project/firmware/handsfree_wheel_robot_ucosIII/src/main.cpp  \
                 1_Processor/Interrupt/stm32f10x_it.cpp \
@@ -367,3 +371,4 @@ SOURCES += 0_Project/examples/handsfree_simple_app/src/main.cpp \
                 3_OS/STM32F1/RTOS/uCOS-III/uCOS-III/Source/os_var.c \
                 3_OS/STM32F1/RTOS/uCOS-III/uC-CPU/ARM-Cortex-M3/GNU/cpu_c.c \
                 3_OS/STM32F1/RTOS/uCOS-III/uCOS-III/Ports/ARM-Cortex-M3/Generic/GNU/os_cpu_c.c \
+
