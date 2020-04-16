@@ -39,7 +39,12 @@ void CAN1_RX0_IRQHandler(void)
     }
     //CAN_ClearITPendingBit(CAN1, CAN_IT_TME);
     //CAN_FIFORelease(CAN1,CAN_FIFO0);
+#ifdef __STM32F10x_CONF_H
+    NVIC_ClearPendingIRQ(USB_LP_CAN1_RX0_IRQn);
+#endif
+#ifdef __STM32F4xx_CONF_H
     NVIC_ClearPendingIRQ(CAN1_RX0_IRQn);
+#endif
 #if SYSTEM_SUPPORT_OS == 1
     OSIntExit();
 #endif
@@ -140,8 +145,6 @@ int main(void)
         if ( board->cnt_20ms >= 20 )    // 50hz
         {
             board->cnt_20ms = 0 ;
-            can1_send_data();
-            can2_send_data();
         }
         if ( board->cnt_50ms >= 50 )    // 20hz
         {
@@ -151,10 +154,12 @@ int main(void)
         if ( board->cnt_100ms >= 100 )    // 10hz
         {
             board->cnt_100ms = 0 ;
+            can1_send_data();
         }
         if ( board->cnt_500ms >= 500 )    // 2hz
         {
             board->cnt_500ms = 0;
+            can2_send_data();
         }
         if ( board->cnt_1000ms >= 1000 )  // 1hz
         {

@@ -108,9 +108,9 @@ void HF_CAN_Init(uint8_t CAN_Channel , uint8_t GPIO_AF , uint8_t Mode ,
     CAN_InitStructure.CAN_TTCM = DISABLE;
     CAN_InitStructure.CAN_ABOM = DISABLE;
     CAN_InitStructure.CAN_AWUM = DISABLE;
-    CAN_InitStructure.CAN_NART = DISABLE;
+    CAN_InitStructure.CAN_NART = ENABLE;
     CAN_InitStructure.CAN_RFLM = DISABLE;
-    CAN_InitStructure.CAN_TXFP = ENABLE;
+    CAN_InitStructure.CAN_TXFP = DISABLE;
     CAN_InitStructure.CAN_Mode = Mode;
     CAN_InitStructure.CAN_SJW = T_SJW;
     CAN_InitStructure.CAN_BS1 = T_BS1;
@@ -130,7 +130,7 @@ void HF_CAN_Init(uint8_t CAN_Channel , uint8_t GPIO_AF , uint8_t Mode ,
     CAN_FilterInit(&CAN_FilterInitStructure);
 
     CAN_ITConfig(CANx, CAN_IT_FMP0, ENABLE);  //interrupt enable
-    CAN_ITConfig(CANx, CAN_IT_TME, ENABLE);
+    //CAN_ITConfig(CANx, CAN_IT_TME, ENABLE);
 }
 
 /***********************************************************************************************************************
