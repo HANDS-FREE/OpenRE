@@ -70,7 +70,7 @@ HEADERS += 0_Project/examples/handsfree_simple_app/src/main_config.h \
                 0_Project/examples/handsfree_robot_test/src/main_config.h \
                 0_Project/examples/handsfree_ucosII/src/main_config.h  \
                 0_Project/examples/handsfree_ucosIII/src/main_config.h  \
-                0_Project/examples/hwtest/src/main_config.h  \
+                0_Project/examples/handsfree_can_test/src/main_config.h \
                 0_Project/firmware/handsfree_wheel_robot/src/main_config.h  \
                 0_Project/firmware/handsfree_wheel_robot_ucosIII/src/main_config.h \
                 0_Project/include/robot_model/mini/robot_model.h \
@@ -240,7 +240,6 @@ SOURCES += 0_Project/examples/handsfree_simple_app/src/main.cpp \
                 0_Project/examples/handsfree_robot_test/src/main.cpp \
                 0_Project/examples/handsfree_ucosII/src/main.cpp  \
                 0_Project/examples/handsfree_ucosIII/src/main.cpp \
-                0_Project/examples/hwtest/src/main.cpp  \
                 0_Project/examples/handsfree_can_test/src/main.cpp \
                 0_Project/firmware/handsfree_wheel_robot/src/main.cpp  \
                 0_Project/firmware/handsfree_wheel_robot_ucosIII/src/main.cpp  \
@@ -408,5 +407,5 @@ SOURCES += 0_Project/examples/handsfree_simple_app/src/main.cpp \
                 3_OS/STM32F4/RTOS/uCOS-III/uCOS-III/Source/os_tmr.c \
                 3_OS/STM32F4/RTOS/uCOS-III/uCOS-III/Source/os_var.c \
                 3_OS/STM32F4/RTOS/uCOS-III/uC-CPU/ARM-Cortex-M4/GNU/cpu_c.c \
-                3_OS/STM32F4/RTOS/uCOS-III/uCOS-III/Ports/ARM-Cortex-M4/Generic/GNU/os_cpu_c.c \ 
+                3_OS/STM32F4/RTOS/uCOS-III/uCOS-III/Ports/ARM-Cortex-M4/Generic/GNU/os_cpu_c.c \
 

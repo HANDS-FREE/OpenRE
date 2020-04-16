@@ -15,7 +15,6 @@
 #ifndef __main_config_H__
 #define __main_config_H__
 
-#define HANDS_FREE_EMBEDDED_VERSION  2.0
 //Whether or not printf DEBUG info to usart1
 #define DEBUG 0
 //Whether or not include RTOS  UCOSII or UCOSIII

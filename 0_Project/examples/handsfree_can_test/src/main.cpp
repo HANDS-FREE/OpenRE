@@ -79,6 +79,7 @@ uint8_t can2_send_data(void)
     uint8_t Data[8]={'c','a','n','t','e','s','t','!'};
     return HF_CANTX_Message(2,0x02,0x01,Data,8);
 #endif
+    return 0;
 }
 
 void can1_inquire_data(void)
