@@ -32,13 +32,14 @@ void CAN1_RX0_IRQHandler(void)
     if (CAN_GetITStatus(CAN1,CAN_IT_FMP0)!= RESET)
     {
         CanRxMsg RxMessage;
-
         CAN_Receive(CAN1, CAN_FIFO0, &RxMessage);
-        printf("CAN1 IRQHandler Receive Data: %s \r\n",RxMessage.Data);
-
         Board::getInstance()->setLedState(2,2);
+        printf("CAN1 IRQHandler Receive Data: %s \r\n",RxMessage.Data);
         CAN_ClearITPendingBit(CAN1, CAN_IT_FMP0);
     }
+    //CAN_ClearITPendingBit(CAN1, CAN_IT_TME);
+    //CAN_FIFORelease(CAN1,CAN_FIFO0);
+    NVIC_ClearPendingIRQ(CAN1_RX0_IRQn);
 #if SYSTEM_SUPPORT_OS == 1
     OSIntExit();
 #endif
@@ -53,13 +54,14 @@ void CAN2_RX0_IRQHandler(void)
     if (CAN_GetITStatus(CAN2,CAN_IT_FMP0)!= RESET)
     {
         CanRxMsg RxMessage;
-
         CAN_Receive(CAN2, CAN_FIFO0, &RxMessage);
-        printf("CAN2 IRQHandler Receive Data: %s \r\n",RxMessage.Data);
-
         Board::getInstance()->setLedState(3,2);
+        printf("CAN2 IRQHandler Receive Data: %s \r\n",RxMessage.Data);
         CAN_ClearITPendingBit(CAN2, CAN_IT_FMP0);
     }
+    //CAN_ClearITPendingBit(CAN2, CAN_IT_TME);
+    //CAN_FIFORelease(CAN2,CAN_FIFO0);
+    NVIC_ClearPendingIRQ(CAN2_RX0_IRQn);
 #if SYSTEM_SUPPORT_OS == 1
     OSIntExit();
 #endif
@@ -138,6 +140,8 @@ int main(void)
         if ( board->cnt_20ms >= 20 )    // 50hz
         {
             board->cnt_20ms = 0 ;
+            can1_send_data();
+            can2_send_data();
         }
         if ( board->cnt_50ms >= 50 )    // 20hz
         {
@@ -151,8 +155,6 @@ int main(void)
         if ( board->cnt_500ms >= 500 )    // 2hz
         {
             board->cnt_500ms = 0;
-            can1_send_data();
-            can2_send_data();
         }
         if ( board->cnt_1000ms >= 1000 )  // 1hz
         {
@@ -166,5 +168,3 @@ int main(void)
 
     return 0;
 }
-
-
