@@ -148,7 +148,7 @@ void HF_CAN_Init(uint8_t CAN_Channel , uint8_t GPIO_AF , uint8_t Mode ,
 *
 * History:
 ***********************************************************************************************************************/
-uint8_t HF_CANTX_Message(uint8_t CAN_Channel , uint8_t StdId  , uint8_t ExtId  ,  uint8_t *TxBuf , uint8_t Length)
+uint8_t HF_CANTX_Message(uint8_t CAN_Channel , uint32_t StdId  , uint32_t ExtId  ,  uint8_t *TxBuf , uint8_t Length)
 {
     CAN_TypeDef *CANx;
     CanTxMsg TxMessage;
@@ -167,7 +167,7 @@ uint8_t HF_CANTX_Message(uint8_t CAN_Channel , uint8_t StdId  , uint8_t ExtId  ,
     TxMessage.StdId=StdId;
     TxMessage.ExtId=ExtId;
     TxMessage.RTR=CAN_RTR_DATA;
-    TxMessage.IDE=CAN_ID_EXT;
+    TxMessage.IDE=CAN_ID_STD;
     TxMessage.DLC=Length;
 
     for(i=0;i<Length;i++)
