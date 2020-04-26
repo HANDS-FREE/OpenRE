@@ -35,7 +35,7 @@ public:
         motor_para.pwm_dead_zone = 10;
         motor_para.speed_low_filter = 0.3;
         motor_para.protect_current = 200;  // 200A means disable current  protect
-        motor_para.pid =  {0.0f , 0.0f , 0.0f , 60.0f , 500.0f , 0.2f , 0.0f , 0.0f , 0.0f};
+        motor_para.pid =  {0.0f , 0.0f , 0.0f , 30.0f , 100.0f , 0.05f , 0.0f , 0.0f , 0.0f};
 
         chassis_para.type = DIFFERENTIAL2;
         chassis_para.wheel_radius = 0.0320;
