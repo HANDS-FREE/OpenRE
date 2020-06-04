@@ -135,8 +135,29 @@ void MotorControl::pidSeriesCall(float outside_expect , float outside_measure ,
 ***********************************************************************************************************************/
 void MotorControl::loopCall(void)
 {
-    control_data->expect_angle_speed_filter = (1 - para->speed_low_filter) * control_data->measure_angle_speed +
-            para->speed_low_filter * control_data->expect_angle_speed;
+    motor_static_damping = 0;
+    if(control_data->expect_angle_speed > 0 && control_data->expect_angle_speed < 58) //1 radians
+    {
+        motor_static_damping = 0.1 * para->pwm_max;
+        control_data->expect_angle_speed_filter = control_data->expect_angle_speed;
+    }
+    else if(control_data->expect_angle_speed < 0 && control_data->expect_angle_speed > -58)
+    {
+        motor_static_damping = -0.1 * para->pwm_max;
+        control_data->expect_angle_speed_filter = control_data->expect_angle_speed;
+    }
+    else if((control_data->expect_angle_speed >= 58 && control_data->expect_angle_speed <= 180)
+            || (control_data->expect_angle_speed <= -58 && control_data->expect_angle_speed >= -180)
+            ) //3.14 radians/s
+    {
+        control_data->expect_angle_speed_filter = control_data->expect_angle_speed;
+    }
+    else
+    {
+        control_data->expect_angle_speed_filter = (1 - para->speed_low_filter) * control_data->measure_angle_speed +
+                para->speed_low_filter * control_data->expect_angle_speed;
+    }
+
     control_data->measure_unit_encoder =  motor_interface.getEncoderdata(driver_type_id);
 
     //expect unit encoder num in one cycle to pid
@@ -171,7 +192,7 @@ void MotorControl::loopCall(void)
         motor_interface.IOEnable(driver_type_id);
     }
 
-    if(control_data->pwm_output > 0.1 * para->pwm_max)
+    if(control_data->pwm_output > 0.3 * para->pwm_max || control_data->pwm_output < -0.3 * para->pwm_max)
     {
         float temp_ = control_data->measure_angle_speed / control_data->pwm_output;
         if(temp_ < 50/para->pwm_max) encoder_error_cnt++;
@@ -189,5 +210,8 @@ void MotorControl::loopCall(void)
         }
     }
 
-    motor_interface.setPWM(driver_type_id , control_data->pwm_output);
+    //printf("i_error_now=%f i_error_p=%f , i_error_i=%f , i_error_d=%f motor_static_damping=%f\r\n" , pid_data.i_error_now ,
+    //       pid_data.i_error_p , pid_data.i_error_i ,pid_data.i_error_d , motor_static_damping);
+
+    motor_interface.setPWM(driver_type_id , control_data->pwm_output + motor_static_damping);
 }

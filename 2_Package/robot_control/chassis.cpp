@@ -28,7 +28,7 @@ void Chassis::loopCall(void)
         //ifcontrol_quality is too low or unsafe
         //set motor Expect Speed 0 , motor_id_ = 0 means for all motors
         motor_top->motors->setAngleSpeed(0,0);
-        motor_top->motors->controlDisable(0);
+        //motor_top->motors->controlDisable(0);
     }
     else if(system_info->chassis_online == 1){
         //motor_id_ = 0 means for all motors

@@ -33,6 +33,7 @@ public:
         encoder_error_cnt = 0;
         degree_to_radian = 0.017453f;
         radian_to_degree = 57.2958f;
+        motor_static_damping = 0;
         para = para_;
         control_data = control_data_;
         init(para);
@@ -87,6 +88,7 @@ private:
     unsigned char driver_type_id;
     unsigned short int encoder_error_cnt;
     float degree_to_radian , radian_to_degree;
+    float motor_static_damping;
     float dataLimit(float data , float range);
     float deadZoneLimit(float data , float dead_zone);
     void pidOrdinaryCall(float outside_expect , float outside_measure
