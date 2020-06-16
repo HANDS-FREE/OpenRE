@@ -12,6 +12,7 @@ devel/
 /5_Development_Toolchain/openocd/*
 /5_Development_Toolchain/stlink/*
 /6_Tools/0_private_data/*
+/8_Firmware_Bin/test/*
 *.uvguix.mawenke
 *.uvoptx
 *~

@@ -54,6 +54,7 @@ typedef struct {
     float pwm_dead_zone;     //when the pwm in this zone , the motor disable
     float speed_low_filter;  //0~1;  default = 0.3
     float protect_current;   //unit : A default = 1
+    float static_damping_coefficient;  //0~0.3;  default = 0.05
     MotorPID pid;
 }__attribute__((packed)) MotorParameters;
 

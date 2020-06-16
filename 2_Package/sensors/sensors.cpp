@@ -79,9 +79,9 @@ void Sensors::imuSensorDataUpdate(void)
     sensors->imu_data.imu1.angular_velocity.y = mpu6050.gyro_normal.y;
     sensors->imu_data.imu1.angular_velocity.z = mpu6050.gyro_normal.z;
 
-    sensors->imu_data.imu1.linear_acceleration.x = mpu6050.acc_normal.x;
-    sensors->imu_data.imu1.linear_acceleration.y = mpu6050.acc_normal.y;
-    sensors->imu_data.imu1.linear_acceleration.z = mpu6050.acc_normal.z;
+    sensors->imu_data.imu1.linear_acceleration.x = mpu6050.acc_normal.x * 9.8; //m/s^2
+    sensors->imu_data.imu1.linear_acceleration.y = mpu6050.acc_normal.y * 9.8;
+    sensors->imu_data.imu1.linear_acceleration.z = mpu6050.acc_normal.z * 9.8;
 
     sensors->imu_data.imu1.orientation_quaternion.x = imu.imu_fmodel_frame.q_x;
     sensors->imu_data.imu1.orientation_quaternion.y = imu.imu_fmodel_frame.q_y;

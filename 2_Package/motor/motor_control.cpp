@@ -136,14 +136,14 @@ void MotorControl::pidSeriesCall(float outside_expect , float outside_measure ,
 void MotorControl::loopCall(void)
 {
     motor_static_damping = 0;
-    if(control_data->expect_angle_speed > 0 && control_data->expect_angle_speed < 58) //1 radians
+    if(control_data->expect_angle_speed > 2.58 && control_data->expect_angle_speed < 58) //0.05 ~ 1 radians
     {
-        motor_static_damping = 0.1 * para->pwm_max;
+        motor_static_damping = para->static_damping_coefficient * para->pwm_max;
         control_data->expect_angle_speed_filter = control_data->expect_angle_speed;
     }
-    else if(control_data->expect_angle_speed < 0 && control_data->expect_angle_speed > -58)
+    else if(control_data->expect_angle_speed < -2.58 && control_data->expect_angle_speed > -58)
     {
-        motor_static_damping = -0.1 * para->pwm_max;
+        motor_static_damping = -para->static_damping_coefficient * para->pwm_max;
         control_data->expect_angle_speed_filter = control_data->expect_angle_speed;
     }
     else if((control_data->expect_angle_speed >= 58 && control_data->expect_angle_speed <= 180)

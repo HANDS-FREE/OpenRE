@@ -35,7 +35,8 @@ public:
         motor_para.pwm_dead_zone = 10;
         motor_para.speed_low_filter = 0.5; // when motor speed > 3.14 radians/s
         motor_para.protect_current = 200;  // 200A means disable current  protect
-        motor_para.pid =  {0.0f , 0.0f , 0.0f , 100.0f , 300.0f , 0.2f , 0.0f , 0.0f , 0.0f};
+        motor_para.static_damping_coefficient = 0.1;  //0~0.3;  default = 0.05
+        motor_para.pid =  {0.0f , 0.0f , 0.0f , 50.0f , 300.0f , 0.2f , 0.0f , 0.0f , 0.0f};
 
         chassis_para.type = DIFFERENTIAL2;
         chassis_para.wheel_radius = 0.03296; //0.0320

@@ -30,17 +30,18 @@ public:
         motor_para.motor_enable_num = 2;
         motor_para.simulation_model = 0;
         motor_para.pid_t = 0.02;
-        motor_para.encoder_num  = 1560;
+        motor_para.encoder_num  = 1500; //1560
         motor_para.pwm_max = 5000;
         motor_para.pwm_dead_zone = 10;
-        motor_para.speed_low_filter = 0.3;
+        motor_para.speed_low_filter = 1;
         motor_para.protect_current = 200;  // 200A means disable current  protect
-        motor_para.pid =  {0.0f , 0.0f , 0.0f , 30.0f , 100.0f , 0.05f , 0.0f , 0.0f , 0.0f};
+        motor_para.static_damping_coefficient = 0.025;  //0~0.3;  default = 0.05
+        motor_para.pid =  {0.0f , 0.0f , 0.0f , 30.0f , 300.0f , 0.05f , 0.0f , 0.0f , 0.0f};
 
         chassis_para.type = DIFFERENTIAL2;
-        chassis_para.wheel_radius = 0.0320;
-        chassis_para.body_radius = 0.1025;
-        chassis_para.speed_low_filter = 0.4;
+        chassis_para.wheel_radius = 0.0325;
+        chassis_para.body_radius = 0.10075;
+        chassis_para.speed_low_filter = 1;
         chassis_para.imu_fusion_enalbe = 0;
         chassis_para.control_enable = 1;
         chassis_para.max_speed_limit.x = 2;
