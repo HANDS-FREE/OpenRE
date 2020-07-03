@@ -16,7 +16,8 @@ devel/
 *.uvguix.mawenke
 *.uvoptx
 *~
-/0_Project/*.bin
+*.bin
+!/8_Firmware_Bin/*.bin
 *.elf
 *.map
 *.hex
