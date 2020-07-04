@@ -26,6 +26,9 @@ public:
         strcpy(robot_info.robot_name, "stone_v2");
         strcpy(robot_info.robot_description ,  "this is a differential2 robot of handsfree");
 
+        system_para.battery_series = 3; //series number of batteries
+        system_para.battery_voltage_alarm_ = 10.2; //low voltage alarm(V)
+
         motor_para.driver_type = MotorDriver_PWM12_AND_IO;
         motor_para.motor_enable_num = 2;
         motor_para.simulation_model = 0;

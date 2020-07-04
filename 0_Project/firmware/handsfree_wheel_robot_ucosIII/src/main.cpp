@@ -61,10 +61,13 @@ int main(void)
     OS_ERR err;
     CPU_SR_ALLOC();
 
+    RobotModel robot_model;
+
     Board *board = Board::getInstance();
     board->boardBasicInit();
+    //set battery low voltage alarm
+    board->setBatteryPara(robot_model.system_para.battery_series , robot_model.system_para.battery_voltage_alarm_);
 
-    RobotModel robot_model;
     RobotAbstract robot;
     robot.para = robot_model;
     RobotControl *robot_control_p = RobotControl::getInstance();

@@ -126,6 +126,11 @@ public:
         }
         else return 0;
     }
+    void setBatteryPara(unsigned char series_ , float voltage_alarm_)
+    {
+        battery_series_ = series_;
+        battery_voltage_alarm_ = voltage_alarm_;
+    }
 
     /******device -- for usart device or interface***********************************************************************************/
     Queue* getUsartQueue(uint8_t channel);
@@ -167,8 +172,6 @@ protected:
     float battery_voltage_;
     float battery_voltage_alarm_ ;
     float battery_proportion_ ;
-    float battery_voltage_windown_[10];
-    int battery_voltage_windown_cnt_;
 
     float cpu_temperature_;
     float cpu_temperature_alarm_;

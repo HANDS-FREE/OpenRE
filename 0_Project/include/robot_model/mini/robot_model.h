@@ -26,6 +26,9 @@ public:
         strcpy(robot_info.robot_name, "mini");
         strcpy(robot_info.robot_description ,  "this is a differential2 robot of handsfree");
 
+        system_para.battery_series = 3; //series number of batteries
+        system_para.battery_voltage_alarm_ = 10.2; //low voltage alarm(V)
+
         motor_para.driver_type = MotorDriver_PWM_AND_IOAB;
         motor_para.motor_enable_num = 2;
         motor_para.simulation_model = 0;
@@ -44,7 +47,7 @@ public:
         chassis_para.speed_low_filter = 1;
         chassis_para.imu_fusion_enalbe = 0;
         chassis_para.control_enable = 1;
-        chassis_para.max_speed_limit.x = 2;
+        chassis_para.max_speed_limit.x = 1.2;
 
         head_para.type = HFANALOG;
         head_para.speed_low_filter = 0.3;

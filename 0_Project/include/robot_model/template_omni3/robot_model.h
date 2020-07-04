@@ -26,6 +26,9 @@ public:
         strcpy(robot_info.robot_name, "template_omni3");
         strcpy(robot_info.robot_description ,  "this is a omni3 template parameters");
 
+        system_para.battery_series = 3; //series number of batteries
+        system_para.battery_voltage_alarm_ = 10.2; //low voltage alarm(V)
+
         motor_para.driver_type = MotorDriver_PWM12_AND_IO;
         motor_para.motor_enable_num = 3;
         motor_para.simulation_model = 0;
@@ -33,17 +36,18 @@ public:
         motor_para.encoder_num  = 1560;
         motor_para.pwm_max = 5000;
         motor_para.pwm_dead_zone = 10;
-        motor_para.speed_low_filter = 0.3;
+        motor_para.speed_low_filter = 0.5;
         motor_para.protect_current = 200;  // 200A means disable current  protect
-        motor_para.pid =  {0.0f  , 0.0f , 0.0f , 100.0f , 300.0f , 0.2f , 0.0f  , 0.0f , 0.0f};
+        motor_para.static_damping_coefficient = 0.1;  //0~0.3;  default = 0.05
+        motor_para.pid =  {0.0f , 0.0f , 0.0f , 50.0f , 300.0f , 0.2f , 0.0f , 0.0f , 0.0f};
 
         chassis_para.type = OMNI3;
         chassis_para.wheel_radius = 0.0320;
         chassis_para.body_radius = 0.1592;
-        chassis_para.speed_low_filter = 0.4;
+        chassis_para.speed_low_filter = 0.5;
         chassis_para.imu_fusion_enalbe = 0;
         chassis_para.control_enable = 1;
-        chassis_para.max_speed_limit.x = 2;
+        chassis_para.max_speed_limit.x = 1.2;
 
         head_para.type = HFANALOG;
         head_para.speed_low_filter = 0.3;
@@ -62,4 +66,4 @@ public:
     }
 };
 
-#endif 
+#endif

@@ -26,6 +26,9 @@ public:
         strcpy(robot_info.robot_name, "giraffe");
         strcpy(robot_info.robot_description ,  "this is a differential2 robot of handsfree");
 
+        system_para.battery_series = 6; //series number of batteries
+        system_para.battery_voltage_alarm_ = 20.4; //low voltage alarm(V)
+
         motor_para.driver_type = MotorDriver_PWM_AND_IOAB;
         motor_para.motor_enable_num = 2;
         motor_para.simulation_model = 0;
@@ -35,6 +38,7 @@ public:
         motor_para.pwm_dead_zone = 20;
         motor_para.speed_low_filter = 0.5;
         motor_para.protect_current = 200;  // 200A means disable current  protect
+        motor_para.static_damping_coefficient = 0;  //0~0.3;  default = 0.05
         motor_para.pid =  {0.0f , 0.0f , 0.0f , 11.0f , 15.0f , 0.0f , 0.0f , 0.0f , 0.0f};
 
         chassis_para.type = DIFFERENTIAL2;
@@ -43,7 +47,7 @@ public:
         chassis_para.speed_low_filter = 0.7;
         chassis_para.imu_fusion_enalbe = 0;
         chassis_para.control_enable = 1;
-        chassis_para.max_speed_limit.x = 2;
+        chassis_para.max_speed_limit.x = 1.2;
 
         head_para.type = HFANALOG;
         head_para.speed_low_filter = 0.3;

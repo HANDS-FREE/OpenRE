@@ -21,6 +21,12 @@ INCLUDEPATH += . \
                 0_Project/include/robot_model/template_differential \
                 0_Project/include/robot_model/template_omni3 \
                 0_Project/include/robot_model/template_mecanum4 \
+                0_Project/include/robot_model/mini_mecanum4/robot_model.h \
+                0_Project/include/robot_model/mini_omni3/robot_model.h \
+                0_Project/include/robot_model/stone_v2/robot_model.h \
+                0_Project/include/robot_model/stone_v3/robot_model.h \
+                0_Project/include/robot_model/stone_v3_omni3/robot_model.h \
+                0_Project/include/robot_model/virtual/robot_model.h \
                 1_Processor/Interrupt \
                 1_Processor/BoardAbstract \
                 1_Processor/STM32F4 \
