@@ -2,7 +2,9 @@
    如果使用的是MINI机器人,还需要接上Jlink烧写器
    Stone和Giraffe主控器上已经带有Jlink烧写器,无需另外接.
 
-2. 在ubuntu下打开重点运行固件升级命令:
-   给Mini升级固件: sh swd_mini.sh robot_mini_xxx.bin
-   给Stone升级固件: sh swd_stone.sh robot_stone_xxx.bin
-   给Giraffe升级固件: sh swd_giraffe.sh robot_girafee_xxx.bin
+2. 在当前目录下(8_Firmware_Bin)，点击"右键->在终端打开"，在ubuntu下打开终端，输入以下固件升级命令:
+   命令输入: sh + 对应型号的脚本 + 对应固件的文件名(固件文件就存储在当前目录)
+   举例:
+	   给Mini升级固件: sh swd_mini.sh robot_mini_xxx.bin    (xxx替换成对应的固件文件)
+	   给Stone升级固件: sh swd_stone.sh robot_stone_xxx.bin   (xxx替换成对应的固件文件)
+	   给Giraffe升级固件: sh swd_giraffe.sh robot_girafee_xxx.bin  (xxx替换成对应的固件文件)

@@ -33,7 +33,7 @@ public:
         motor_para.motor_enable_num = 2;
         motor_para.simulation_model = 0;
         motor_para.pid_t = 0.02;
-        motor_para.encoder_num  = 1500; //1560
+        motor_para.encoder_num  = 1560;
         motor_para.pwm_max = 5000;
         motor_para.pwm_dead_zone = 10;
         motor_para.speed_low_filter = 1;
