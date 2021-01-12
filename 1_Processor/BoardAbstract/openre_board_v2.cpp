@@ -941,7 +941,7 @@ void Board::timerInit(void)
 float Board::getBatteryVoltage(void)
 {
     //0.33 is the loss voltage of diode
-    battery_voltage_ = 0.8f * battery_voltage_+ 0.2f*(float)(0.33f + HF_Get_ADC_Output(1) * battery_proportion_);
+    battery_voltage_ = 0.8f * battery_voltage_+ 0.2f*(float)(HF_Get_ADC_Output(1) * battery_proportion_);
     return battery_voltage_ ;
 }
 
