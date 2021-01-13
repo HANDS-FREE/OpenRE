@@ -5,7 +5,8 @@ enum MotorDriverType : unsigned char
 {
     MotorDriver_PWM12_AND_IO = 0,
     MotorDriver_PWM_AND_IOAB = 1,
-    MotorDriver_ZLAC706 = 2
+    MotorDriver_ZLAC706 = 2,
+    MotorDriver_TDE124 = 3,
 };
 
 typedef struct{

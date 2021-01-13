@@ -43,6 +43,11 @@ void MotorTop::init(RobotAbstract *robot_)
         zlac706_motors = ZLAC706Motors();
         motors = &zlac706_motors;
     }
+    else if(robot_->para.motor_para.driver_type == MotorDriver_TDE124)
+    {
+        tde124_motors = TDE124Motors();
+        motors = &tde124_motors;
+    }
     else
     {
         return;

@@ -179,6 +179,7 @@ HEADERS += 0_Project/examples/handsfree_simple_app/src/main_config.h \
                 2_Package/motor/motor_abstract.h \
                 2_Package/motor/typical_dc_motor.h \
                 2_Package/motor/zlac706_motor.h \
+                2_Package/motor/tde124_motor.h \
                 2_Package/nrf24l01/nrf24l01_config.h \
                 2_Package/nrf24l01/nrf24l01_driver.h \
                 2_Package/nrf24l01/nrf24l01_stack.h \
@@ -354,6 +355,7 @@ SOURCES += 0_Project/examples/handsfree_simple_app/src/main.cpp \
                 2_Package/motor/motor_top.cpp \
                 2_Package/motor/typical_dc_motor.cpp \
                 2_Package/motor/zlac706_motor.cpp \
+                2_Package/motor/tde124_motor.cpp \
                 2_Package/nrf24l01/nrf24l01_driver.cpp \
                 2_Package/nrf24l01/nrf24l01_stack.cpp \
                 2_Package/nrf24l01/nrf24l01_test.cpp \
