@@ -21,6 +21,7 @@ INCLUDEPATH += . \
                 0_Project/include/robot_model/template_differential \
                 0_Project/include/robot_model/template_omni3 \
                 0_Project/include/robot_model/template_mecanum4 \
+                0_Project/include/robot_model/giraffe_v2/robot_model.h \
                 0_Project/include/robot_model/mini_mecanum4/robot_model.h \
                 0_Project/include/robot_model/mini_omni3/robot_model.h \
                 0_Project/include/robot_model/stone_v2/robot_model.h \
@@ -177,6 +178,7 @@ HEADERS += 0_Project/examples/handsfree_simple_app/src/main_config.h \
                 2_Package/motor/motor_interface.h \
                 2_Package/motor/motor_abstract.h \
                 2_Package/motor/typical_dc_motor.h \
+                2_Package/motor/zlac706_motor.h \
                 2_Package/nrf24l01/nrf24l01_config.h \
                 2_Package/nrf24l01/nrf24l01_driver.h \
                 2_Package/nrf24l01/nrf24l01_stack.h \
@@ -351,6 +353,7 @@ SOURCES += 0_Project/examples/handsfree_simple_app/src/main.cpp \
                 2_Package/motor/motor_control.cpp \
                 2_Package/motor/motor_top.cpp \
                 2_Package/motor/typical_dc_motor.cpp \
+                2_Package/motor/zlac706_motor.cpp \
                 2_Package/nrf24l01/nrf24l01_driver.cpp \
                 2_Package/nrf24l01/nrf24l01_stack.cpp \
                 2_Package/nrf24l01/nrf24l01_test.cpp \

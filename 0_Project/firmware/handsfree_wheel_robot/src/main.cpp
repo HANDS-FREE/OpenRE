@@ -33,14 +33,14 @@ int main(void)
     RobotControl *robot_control_p = RobotControl::getInstance();
     robot_control_p->init(&robot);
 
-    SBUS sbus_node(USART_SBUS);
-    robot_control_p->setSBUSRemoteNodePointer(&sbus_node);
+    //SBUS sbus_node(USART_SBUS);
+    //robot_control_p->setSBUSRemoteNodePointer(&sbus_node);
 
     RoboLink robolink_pc_node(&robot , 0x11 , 0x01 , (unsigned char)USART_PC);
     robot_control_p->setRobolinkNodePointer(&robolink_pc_node);
 
-    RoboLink robolink_radio_node(&robot , 0x11 , 0x01 , (unsigned char)USART_RADIO,115200);
-    robot_control_p->setRobolinkRadioNodePointer(&robolink_radio_node);
+    //RoboLink robolink_radio_node(&robot , 0x11 , 0x01 , (unsigned char)USART_RADIO,115200);
+    //robot_control_p->setRobolinkRadioNodePointer(&robolink_radio_node);
 
     Sensors *sensors = Sensors::getInstance();
     sensors->init(&robot);
@@ -49,24 +49,26 @@ int main(void)
 
     while(1)
     {
-        if(robot_control_p->sbus_node && (!board->usartDeviceReadData(robot_control_p->sbus_node_device)->emptyCheck()))
-        {
-            robot_control_p->sbus_node->receiveByteAnlState(
-                        board->usartDeviceReadData(robot_control_p->sbus_node_device)->getData()
-                        );
-        }
+        //if(robot_control_p->sbus_node && (!board->usartDeviceReadData(robot_control_p->sbus_node_device)->emptyCheck()))
+        //{
+        //    robot_control_p->sbus_node->receiveByteAnlState(
+        //                board->usartDeviceReadData(robot_control_p->sbus_node_device)->getData()
+        //                );
+        //}
+
         if(robot_control_p->robolink_node && (!board->usartDeviceReadData(robot_control_p->robolink_node_device)->emptyCheck()))
         {
             robot_control_p->robolink_node->byteAnalysisCall(
                         board->usartDeviceReadData(robot_control_p->robolink_node_device)->getData()
                         );
         }
-        if(robot_control_p->robolink_radio_node && (!board->usartDeviceReadData(robot_control_p->robolink_radio_node_device)->emptyCheck()))
-        {
-            robot_control_p->robolink_radio_node->byteAnalysisCall(
-                        board->usartDeviceReadData(robot_control_p->robolink_radio_node_device)->getData()
-                        );
-        }
+
+        //if(robot_control_p->robolink_radio_node && (!board->usartDeviceReadData(robot_control_p->robolink_radio_node_device)->emptyCheck()))
+        //{
+        //    robot_control_p->robolink_radio_node->byteAnalysisCall(
+        //                board->usartDeviceReadData(robot_control_p->robolink_radio_node_device)->getData()
+        //                );
+        //}
 
         if ( board->cnt_1ms >= 1 )      // 1000hz
         {

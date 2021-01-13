@@ -5,7 +5,7 @@
 #ROBOT_MODEL: support all HandsFree open source robots
 #####Mini Series: mini mini_omni3 mini_mecanum4 mini_carlike
 #####Stone Series: stone stone_v2 stone_v3 stone_v3_omni3 
-#####Giraffe Series: giraffe 
+#####Giraffe Series: giraffe giraffe_v2 
 #####Other Options : null virtual ("virtual" It's a semi physical simulation model , you don't need a real robot)
 
 ROBOT_MODEL     ?= stone_v3

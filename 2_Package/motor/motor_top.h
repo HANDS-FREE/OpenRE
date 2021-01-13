@@ -2,6 +2,7 @@
 #define MOTOR_TOP_H
 
 #include "typical_dc_motor.h"
+#include "zlac706_motor.h"
 
 class MotorTop
 {
@@ -24,6 +25,7 @@ public:
 public:
     MotorAbstract *motors;
     TypicalDCMotors typical_dc_motors;
+    ZLAC706Motors zlac706_motors;
 
 private:
     float d_loop_time;

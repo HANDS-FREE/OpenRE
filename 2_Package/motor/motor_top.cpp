@@ -40,7 +40,8 @@ void MotorTop::init(RobotAbstract *robot_)
     }
     else if(robot_->para.motor_para.driver_type == MotorDriver_ZLAC706)
     {
-
+        zlac706_motors = ZLAC706Motors();
+        motors = &zlac706_motors;
     }
     else
     {
