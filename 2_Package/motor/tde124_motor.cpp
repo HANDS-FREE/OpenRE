@@ -88,7 +88,7 @@ void CAN2_RX0_IRQHandler(void)
         if(i>=100)
         {
             i=0;
-                    Board::getInstance()->setLedState(2,2);
+            Board::getInstance()->setLedState(2,2);
         }
 
         //Board::getInstance()->setBeepTweet(10);
@@ -251,8 +251,8 @@ float TDE124Motors::getDPastAngel(unsigned char motor_id_){
     motor_id_--;
 
     float delta=motor[motor_id_].position - motor[motor_id_].pos_last;
-    if(delta < -32768.0)  delta = delta + 63356;
-    if(delta > 32768.0) delta = delta - 63356;
+    if(delta < -32768.0)  delta = delta + 65536;
+    if(delta > 32768.0) delta = delta - 65536;
     motor[motor_id_].pos_last=motor[motor_id_].position;
 
     delta = delta * 360 / 65536.0;
