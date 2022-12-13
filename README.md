@@ -121,8 +121,6 @@ We are now sharing two different performance openre boards : OpenRE Board Mini,O
 
 ### OpenRE Board V2
 
-[BUY OpenRE Board](https://item.taobao.com/item.htm?spm=a1z10.1-c-s.w4004-13256568658.6.75a944b8JqilvB&id=540531985871)
-
 ![OpenRE Board V2](7_Documentation/HandsFree_ControlUnit/OpenRE_Board.jpg)
 ![OpenRE Board V2 Resource](7_Documentation/HandsFree_ControlUnit/OpenRE_Board_Resource.jpg)
 
