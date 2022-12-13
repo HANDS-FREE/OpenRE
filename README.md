@@ -12,8 +12,6 @@ This is a C++ embedded library for robotics base on STM32 and intended to provid
 * [HandsFree Github](https://github.com/HANDS-FREE)   
 * [HandsFree Website](http://www.zonewander.com/)   
 * [HandsFree Wiki](http://wiki.hfreetech.org/) ,  [Old Version Wiki](http://wiki.handsfree.org.cn/)  
-* [BUY Robot](https://shop145029875.taobao.com/?spm=a1z10.3-c.0.0.zpwB3d)     
-* QQ Group: 521037187(Hands Free Community)   
 * Email: hands_free@126.com   
 
 ###  Folder structure
